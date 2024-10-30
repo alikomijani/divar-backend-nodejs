@@ -1,27 +1,15 @@
-export enum Role {
-  User,
-  Admin,
-}
-export interface CreateUser {
-  id: number;
-  username: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  role: Role;
-}
-export interface UserInfo {
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  role: Role;
-}
-export interface LoginUserBody {
-  username: string;
-  password: string;
-}
+import { hash } from '@/utils/hash';
+import type { CreateUser } from './users.schema';
+import { userModel } from './users.schema';
 
-export const users: CreateUser[] = [];
+export async function createUserDB(userData: CreateUser) {
+  const user = new userModel({
+    ...userData,
+    password: hash(userData.password),
+  });
+  await user.save();
+  return user;
+}
+export async function findUser(query: Partial<CreateUser>) {
+  return await userModel.findOne(query);
+}

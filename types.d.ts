@@ -1,4 +1,4 @@
-import { Role } from '@/users/users.models';
+import { Role } from '@/users/users.schema';
 import express from 'express';
 import { Request, Response, NextFunction } from 'express';
 

@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '../utils/jwt';
-import type { Role } from '@/users/users.models';
+import type { Role } from '@/users/users.schema';
 import type { Controller } from 'types';
 
 export const loginMiddleware: Controller = async (
