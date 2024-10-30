@@ -14,14 +14,7 @@ export interface CreateUser {
   lastName: string;
   role: Role;
 }
-export interface UserInfo {
-  id: number;
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  role: Role;
-}
+
 export interface LoginUserBody {
   username: string;
   password: string;
