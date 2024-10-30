@@ -1,6 +1,7 @@
-import { JwtPayload, sign, verify } from 'jsonwebtoken';
+import type { JwtPayload } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config';
-import { Role } from '@/users/users.models';
+import type { Role } from '@/users/users.models';
 
 type TokenPayload = JwtPayload & { id: number; username: string; role: Role };
 

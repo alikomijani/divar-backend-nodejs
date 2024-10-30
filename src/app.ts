@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import express from 'express';
 import { generalErrorHandler } from './middlewares/general-error-middleware';
 import morgan from 'morgan';
 import usersRouter from './users/users.routes';

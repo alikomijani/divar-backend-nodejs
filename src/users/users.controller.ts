@@ -1,11 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
-import { CreateUser, LoginUserBody, Role, users } from './users.models';
+import type { CreateUser, LoginUserBody } from './users.models';
+import { Role, users } from './users.models';
 import { createAuthToken } from '../utils/jwt';
 import { StatusCodes } from 'http-status-codes';
 import { checkHash, hash } from '../utils/hash';
-import { Controller } from '../../types';
+import type { Controller } from '../../types';
 
-export const registerUser: Controller<{}, CreateUser> = async (
+export const registerUser: Controller<object, CreateUser> = async (
   req,
   res,
   next,
@@ -36,7 +36,7 @@ export const registerUser: Controller<{}, CreateUser> = async (
     return next(err);
   }
 };
-export const getUser: Controller<{ username: string }, {}> = async (
+export const getUser: Controller<{ username: string }, object> = async (
   req,
   res,
   next,
@@ -55,7 +55,7 @@ export const getUser: Controller<{ username: string }, {}> = async (
   }
 };
 
-export const loginUser: Controller<{}, LoginUserBody> = async (
+export const loginUser: Controller<object, LoginUserBody> = async (
   req,
   res,
   next,

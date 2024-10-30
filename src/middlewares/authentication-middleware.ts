@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '../utils/jwt';
-import { Role, UserInfo } from '@/users/users.models';
-import { Controller } from 'types';
+import type { Role } from '@/users/users.models';
+import type { Controller } from 'types';
 
 export const loginMiddleware: Controller = async (
   req: Request,
@@ -34,7 +34,7 @@ export const loginMiddleware: Controller = async (
     } else {
       throw new Error('Invalid token structure');
     }
-  } catch (error) {
+  } catch {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       success: false,
       message: 'Error! Token is invalid.',
