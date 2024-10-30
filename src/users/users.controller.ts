@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateUser, LoginUserBody, users } from './users.models';
+import { CreateUser, LoginUserBody, Role, users } from './users.models';
 import { createAuthToken } from '../utils/jwt';
 import { StatusCodes } from 'http-status-codes';
 import { checkHash, hash } from '../utils/hash';
@@ -19,10 +19,15 @@ export const registerUser: Controller<{}, CreateUser> = async (
       lastName: req.body.lastName,
       password,
       email: req.body.email.toLowerCase(),
+      role: Role.User,
     };
 
     users.push(user);
-    const token = createAuthToken({ id: user.id, username: user.username });
+    const token = createAuthToken({
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    });
     return res.status(201).json({
       ...token,
       user,
@@ -68,7 +73,11 @@ export const loginUser: Controller<{}, LoginUserBody> = async (
         .status(StatusCodes.BAD_REQUEST)
         .json({ messages: ['Invalid credential'] });
     }
-    const token = createAuthToken({ id: user.id, username: user.username });
+    const token = createAuthToken({
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    });
     return res.json({ token });
   } catch (err) {
     next(err);

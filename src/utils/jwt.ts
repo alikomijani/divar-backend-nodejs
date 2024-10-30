@@ -1,7 +1,8 @@
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '../config';
+import { Role } from '@/users/users.models';
 
-type TokenPayload = JwtPayload & { id: number; username: string };
+type TokenPayload = JwtPayload & { id: number; username: string; role: Role };
 
 export function createAuthToken(payload: TokenPayload) {
   const accessToken = sign(payload, SECRET_KEY, { expiresIn: '1h' });

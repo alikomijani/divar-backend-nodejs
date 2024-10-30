@@ -1,3 +1,4 @@
+import { Role } from '@/users/users.models';
 import express from 'express';
 import { Request, Response, NextFunction } from 'express';
 
@@ -7,6 +8,7 @@ declare global {
       user?: {
         id: number;
         username: string;
+        role: Role;
       };
     }
   }
