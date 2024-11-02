@@ -22,7 +22,7 @@ export interface CreateUser {
 }
 interface IUser extends CreateUser, Document {
   setPassword: (rawPassword: string) => Promise<void>;
-  checkPassword: (rawPassword: string) => boolean;
+  checkPassword: (rawPassword: string) => Promise<boolean>;
   createToken: () => {
     accessToken: string;
     refreshToken: string;
@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema<IUser>({
   role: { type: Number, default: 0 },
 });
 
+userSchema.virtual('id').get(function () {
+  return String(this._id);
+});
+
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     this.password = await hash(this.password);
@@ -45,6 +49,12 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+userSchema.set('toJSON', {
+  virtuals: true,
+});
+userSchema.set('toObject', {
+  virtuals: true,
+});
 userSchema.methods.checkPassword = async function (rawPassword: string) {
   return await checkHash(rawPassword, this.password);
 };
