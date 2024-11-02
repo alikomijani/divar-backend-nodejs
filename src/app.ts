@@ -1,11 +1,21 @@
+import cors from 'cors';
 import type { Request, Response } from 'express';
 import express from 'express';
-import { generalErrorHandler } from './middlewares/general-error-middleware';
 import morgan from 'morgan';
+
+import { generalErrorHandler } from './middlewares/general-error-middleware';
 import usersRouter from './users/users.routes';
 
 const app = express();
 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/auth', usersRouter);
 app.use(
   morgan('combined', {
     skip: function (req, res) {
@@ -13,14 +23,8 @@ app.use(
     },
   }),
 );
-
-app.use(express.json());
-
-app.use('/auth', usersRouter);
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, TypeScript Express!');
 });
-
 app.use(generalErrorHandler);
-
 export default app;
