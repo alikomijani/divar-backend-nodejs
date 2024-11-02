@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 
-export function hash(data: string) {
-  const salt = bcrypt.genSaltSync(10);
-  return bcrypt.hashSync(data, salt);
+export async function hash(data: string) {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(data, salt);
 }
-export function checkHash(rawData: string, hashedData: string) {
-  return bcrypt.compareSync(rawData, hashedData);
+export async function checkHash(rawData: string, hashedData: string) {
+  return await bcrypt.compare(rawData, hashedData);
 }

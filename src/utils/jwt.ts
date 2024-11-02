@@ -1,24 +1,44 @@
 import type { JwtPayload } from 'jsonwebtoken';
-import { sign, verify } from 'jsonwebtoken';
-import { SECRET_KEY } from '../config';
+import {
+  JsonWebTokenError,
+  sign,
+  TokenExpiredError,
+  verify,
+} from 'jsonwebtoken';
+import { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } from '../config';
 import type { Role } from '@/users/users.schema';
 
 type TokenPayload = JwtPayload & { id: number; username: string; role: Role };
 
 export function createAuthToken(payload: TokenPayload) {
-  const accessToken = sign(payload, SECRET_KEY, { expiresIn: '1h' });
-  const refreshToken = sign(payload, SECRET_KEY, { expiresIn: '7d' });
+  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '1h' });
+  const refreshToken = sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
   return {
     accessToken,
     refreshToken,
   };
 }
 
-export function verifyToken(token: string): TokenPayload {
-  const decoded = verify(token, SECRET_KEY);
-  console.log(decoded);
-  if (typeof decoded === 'string') {
-    throw new Error('Invalid token structure');
+export function verifyToken(
+  token: string,
+  type: 'access' | 'refresh' = 'access',
+): TokenPayload {
+  try {
+    const decoded = verify(
+      token,
+      type === 'access' ? ACCESS_SECRET_KEY : REFRESH_SECRET_KEY,
+    );
+    if (typeof decoded === 'string') {
+      throw new Error('Invalid token structure');
+    }
+    return decoded as TokenPayload;
+  } catch (error) {
+    if (error instanceof TokenExpiredError) {
+      throw new Error('Token has expired');
+    } else if (error instanceof JsonWebTokenError) {
+      throw new Error('Invalid token');
+    } else {
+      throw new Error('Token verification failed');
+    }
   }
-  return decoded as TokenPayload;
 }

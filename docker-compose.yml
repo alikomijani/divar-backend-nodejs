@@ -9,7 +9,8 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8000
-      SECRET_KEY: SOME_STRONG_KEY
+      ACCESS_SECRET_KEY: SOME_STRONG_KEY
+      REFRESH_SECRET_KEY: SOME_STRONG_KEY2
       DB_URL: mongodb://root:example@mongo:27017/divar?authSource=admin
     depends_on:
       - mongo
