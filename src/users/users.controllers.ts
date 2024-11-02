@@ -3,6 +3,7 @@ import { Role, userModel } from './users.schema';
 import { StatusCodes } from 'http-status-codes';
 import type { Controller } from '../../types';
 import { MongoServerError } from 'mongodb'; // Import MongoError from the MongoDB driver
+import { createAccessToken, verifyToken } from '@/utils/jwt';
 
 export const registerUser: Controller<object, CreateUser> = async (
   req,
@@ -87,5 +88,29 @@ export const loginUser: Controller<object, LoginUserBody> = async (
     });
   } catch (err) {
     next(err);
+  }
+};
+
+// Controller function to refresh access token
+export const refreshAccessToken: Controller<
+  object,
+  { refreshToken: string }
+> = (req, res) => {
+  const { refreshToken } = req.body;
+
+  // todo: Check if refresh token exists in the database
+  if (!refreshToken) {
+    return res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
+  }
+  try {
+    // Verify the refresh token
+    const decoded = verifyToken(refreshToken, 'refresh');
+    const newAccessToken = createAccessToken(decoded);
+    // Generate a new access token
+
+    // Send the new access token to the client
+    return res.status(StatusCodes.OK).json({ accessToken: newAccessToken });
+  } catch {
+    return res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
   }
 };

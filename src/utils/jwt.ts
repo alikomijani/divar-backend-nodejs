@@ -16,6 +16,10 @@ export function createAuthToken(payload: TokenPayload) {
   return { accessToken, refreshToken };
 }
 
+export function createAccessToken(payload: TokenPayload) {
+  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '1h' });
+  return accessToken;
+}
 export function verifyToken(
   token: string,
   type: 'access' | 'refresh' = 'access',
@@ -23,13 +27,18 @@ export function verifyToken(
   const secretKey = type === 'access' ? ACCESS_SECRET_KEY : REFRESH_SECRET_KEY;
 
   try {
-    const decoded = verify(token, secretKey);
+    const decodedToken = verify(token, secretKey);
 
-    if (typeof decoded === 'string') {
-      throw new Error('Invalid token structure');
+    if (
+      decodedToken &&
+      typeof decodedToken !== 'string' &&
+      decodedToken.id &&
+      decodedToken.username &&
+      decodedToken.role
+    ) {
+      return decodedToken as TokenPayload;
     }
-
-    return decoded as TokenPayload;
+    throw new Error('Invalid token structure');
   } catch (error) {
     if (error instanceof TokenExpiredError) {
       throw new Error('Token has expired');

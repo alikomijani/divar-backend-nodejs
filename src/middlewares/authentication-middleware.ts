@@ -1,14 +1,9 @@
-import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '../utils/jwt';
 import type { Role } from '@/users/users.schema';
 import type { Controller } from 'types';
 
-export const loginMiddleware: Controller = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const loginMiddleware: Controller = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -19,21 +14,12 @@ export const loginMiddleware: Controller = async (
 
   try {
     const decodedToken = verifyToken(token);
-    if (
-      decodedToken &&
-      decodedToken.id &&
-      decodedToken.username &&
-      decodedToken.role
-    ) {
-      req.user = {
-        id: decodedToken.id,
-        username: decodedToken.username,
-        role: decodedToken.role,
-      };
-      return next();
-    } else {
-      throw new Error('Invalid token structure');
-    }
+    req.user = {
+      id: decodedToken.id,
+      username: decodedToken.username,
+      role: decodedToken.role,
+    };
+    return next();
   } catch {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       success: false,
@@ -42,15 +28,23 @@ export const loginMiddleware: Controller = async (
   }
 };
 
-export function roleMiddleware(requiredRole: Role) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (req.user?.role !== requiredRole) {
-      res.status(StatusCodes.UNAUTHORIZED).json({
+export function roleMiddleware(requiredRole: Role): Controller {
+  return (req, res, next) => {
+    const userRole = req.user?.role;
+
+    if (!userRole) {
+      return res.status(StatusCodes.FORBIDDEN).json({
         success: false,
-        message: 'Error! Authorization fail!',
+        message: 'Error! User role is not defined.',
       });
-    } else {
-      next();
     }
+
+    if (userRole !== requiredRole) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        success: false,
+        message: `Error! Authorization failed. Required role: ${requiredRole}, but user role is: ${userRole}`,
+      });
+    }
+    return next();
   };
 }
