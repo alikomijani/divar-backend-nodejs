@@ -26,7 +26,7 @@ export const registerUser: Controller<object, CreateUser> = async (
         success: false,
         message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
         errors: {
-          duplicatedField: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
+          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
         },
       });
     }
