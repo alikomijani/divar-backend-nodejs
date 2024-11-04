@@ -29,17 +29,56 @@ interface IUser extends CreateUser, Document {
   };
 }
 
-const userSchema = new mongoose.Schema<IUser>({
-  email: { type: String, required: true, unique: true },
-  username: { type: String, required: true, unique: true }, // Make username unique
-  password: { type: String, required: true },
-  firstName: { type: String },
-  lastName: { type: String },
-  role: { type: Number, default: 0 },
-});
+const userSchema = new mongoose.Schema<IUser>(
+  {
+    email: {
+      type: String,
+      required: true,
+      index: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    username: {
+      type: String,
+      required: true,
+      index: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: { type: String, required: true },
+    firstName: { type: String },
+    lastName: { type: String },
+    role: { type: Number, default: 0 },
+  },
+
+  {
+    methods: {
+      checkPassword: async function (rawPassword: string) {
+        return await checkHash(rawPassword, this.password);
+      },
+      setPassword: async function (rawPassword: string) {
+        this.password = await hash(rawPassword);
+        await this.save();
+      },
+      createToken: function () {
+        return createAuthToken({
+          id: this.id,
+          username: this.username,
+          role: this.role,
+        });
+      },
+    },
+  },
+);
 
 userSchema.virtual('id').get(function () {
   return String(this._id);
+});
+
+userSchema.virtual('fullName').get(function () {
+  return this.firstName + ' ' + this.lastName;
 });
 
 userSchema.pre('save', async function (next) {
@@ -55,21 +94,6 @@ userSchema.set('toJSON', {
 userSchema.set('toObject', {
   virtuals: true,
 });
-userSchema.methods.checkPassword = async function (rawPassword: string) {
-  return await checkHash(rawPassword, this.password);
-};
-userSchema.methods.setPassword = async function (rawPassword: string) {
-  this.password = await hash(rawPassword);
-  await this.save();
-};
-
-userSchema.methods.createToken = function () {
-  return createAuthToken({
-    id: this.id,
-    username: this.username,
-    role: this.role,
-  });
-};
 
 userSchema.index({ username: 1, email: 1 }, { unique: true });
 
