@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { generalErrorHandler } from './middlewares/general-error-middleware';
 import usersRouter from './users/users.routes';
+import citiesRouter from './cities/cities.routes';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/auth', usersRouter);
+app.use('/cities', citiesRouter);
 app.use(
   morgan('combined', {
     skip: function (_, res) {

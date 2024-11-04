@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import { cityModel } from './cities.schema';
 import type { ICity } from './cities.schema';
 import type { Controller } from 'types';
@@ -7,13 +8,13 @@ export const createCity: Controller<object, ICity> = async (req, res) => {
   try {
     const newCity = new cityModel(cityData);
     await newCity.save();
-    return res.status(201).json({
+    return res.status(StatusCodes.CREATED).json({
       success: true,
       message: 'City created successfully',
       city: newCity,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       success: false,
       message: 'Error creating city',
       error: (error as any).message,
@@ -26,30 +27,22 @@ export const getCities: Controller<
   object,
   { page: number; limit: number }
 > = async (req, res) => {
-  try {
-    const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit 10
-    const pageNumber = Number(page);
-    const limitNumber = Number(limit);
-    const cities = await cityModel
-      .find()
-      .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
-      .limit(limitNumber); // Limit the number of documents returned;
+  const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit 10
+  const pageNumber = Number(page);
+  const limitNumber = Number(limit);
+  const cities = await cityModel
+    .find()
+    .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
+    .limit(limitNumber); // Limit the number of documents returned;
 
-    const totalCities = await cityModel.countDocuments();
-    return res.status(200).json({
-      success: true,
-      cities,
-      totalPages: Math.ceil(totalCities / limitNumber), // Total pages based on the limit
-      currentPage: pageNumber,
-      totalCities, // Total number of cities
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Error fetching cities',
-      error: (error as any).message,
-    });
-  }
+  const totalCities = await cityModel.countDocuments();
+  return res.status(StatusCodes.OK).json({
+    success: true,
+    cities,
+    totalPages: Math.ceil(totalCities / limitNumber), // Total pages based on the limit
+    currentPage: pageNumber,
+    totalCities, // Total number of cities
+  });
 };
 
 export const getCityById: Controller<{ id: string }> = async (req, res) => {
