@@ -78,7 +78,9 @@ userSchema.virtual('id').get(function () {
 });
 
 userSchema.virtual('fullName').get(function () {
-  return this.firstName + ' ' + this.lastName;
+  if (this.firstName && this.password) {
+    return this.firstName + ' ' + this.lastName;
+  }
 });
 
 userSchema.pre('save', async function (next) {
@@ -87,9 +89,13 @@ userSchema.pre('save', async function (next) {
   }
   next();
 });
-
 userSchema.set('toJSON', {
   virtuals: true,
+  transform: function (doc, ret) {
+    delete ret._id;
+    delete ret.password;
+    delete ret.__v;
+  },
 });
 userSchema.set('toObject', {
   virtuals: true,

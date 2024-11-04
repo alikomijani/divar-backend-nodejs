@@ -28,13 +28,12 @@ export function verifyToken(
 
   try {
     const decodedToken = verify(token, secretKey);
-
     if (
       decodedToken &&
       typeof decodedToken !== 'string' &&
-      decodedToken.id &&
-      decodedToken.username &&
-      decodedToken.role
+      decodedToken.hasOwnProperty('id') &&
+      decodedToken.hasOwnProperty('username') &&
+      decodedToken.hasOwnProperty('role')
     ) {
       return decodedToken as TokenPayload;
     }

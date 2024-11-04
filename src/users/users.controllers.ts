@@ -12,12 +12,12 @@ export const registerUser: Controller<object, CreateUser> = async (
 ) => {
   try {
     const user = await userModel.create({ ...req.body, role: Role.User });
-    const token = user.createToken();
+    const tokens = user.createToken();
     // Remove the password field from the response for security
     const { password, ...userWithoutPassword } = user.toObject();
     return res.status(StatusCodes.CREATED).json({
-      ...token,
-      userWithoutPassword,
+      tokens,
+      user: userWithoutPassword,
     });
   } catch (error) {
     if (error instanceof MongoServerError && error.code === 11000) {
@@ -34,15 +34,9 @@ export const registerUser: Controller<object, CreateUser> = async (
     return next(error);
   }
 };
-export const getUser: Controller<{ username: string }, object> = async (
-  req,
-  res,
-  next,
-) => {
+export const getUser: Controller = async (req, res, next) => {
   try {
-    const user = await userModel
-      .findOne({ username: req.params.username })
-      .select('-password');
+    const user = await userModel.findById(req.user?.id);
     if (!user) {
       return res.status(404).send('User not found');
     } else {
@@ -75,11 +69,11 @@ export const loginUser: Controller<object, LoginUserBody> = async (
     }
 
     // Generate tokens
-    const token = user.createToken();
+    const tokens = user.createToken();
 
     // Send response with tokens
     return res.status(StatusCodes.OK).json({
-      token,
+      tokens,
       user: {
         id: user.id,
         username: user.username,

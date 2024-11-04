@@ -1,8 +1,8 @@
 import express from 'express';
-import type { Request, Response } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 import { generalErrorHandler } from './middlewares/general-error-middleware';
 import usersRouter from './users/users.routes';
 
@@ -25,8 +25,8 @@ app.use(
     },
   }),
 );
-app.get('/', (_: Request, res: Response) => {
-  res.send('Hello, TypeScript Express!');
-});
+
+app.get('/', express.static(path.join(__dirname, '../public')));
+
 app.use(generalErrorHandler);
 export default app;

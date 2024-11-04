@@ -14,6 +14,6 @@ usersRouter.post(
 
 usersRouter.post('/login', validateData(userLoginSchema), loginUser);
 
-usersRouter.get('/:username', loginMiddleware, getUser);
+usersRouter.get('/profile', loginMiddleware, getUser);
 
 export default usersRouter;
