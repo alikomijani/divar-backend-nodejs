@@ -13,7 +13,7 @@ export function validateData(schema: z.ZodObject<any, any>) {
         errors: validatedFields.error.flatten().fieldErrors,
       });
     } else {
-      req.body = validatedFields.data;
+      req.body = { ...req.body, ...validatedFields.data };
       next();
     }
   };
