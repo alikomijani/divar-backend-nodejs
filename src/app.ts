@@ -3,9 +3,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import { generalErrorHandler } from './middlewares/general-error-middleware';
-import usersRouter from './users/users.routes';
-import citiesRouter from './cities/cities.routes';
+import { generalErrorHandler } from './middlewares/general-error.middleware';
+import appRouter from './routes/app.routes';
 
 const app = express();
 
@@ -18,8 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use('/auth', usersRouter);
-app.use('/cities', citiesRouter);
+app.use(appRouter);
 app.use(
   morgan('combined', {
     skip: function (_, res) {
@@ -29,6 +27,6 @@ app.use(
 );
 
 app.get('/', express.static(path.join(__dirname, '../public')));
-
 app.use(generalErrorHandler);
+
 export default app;

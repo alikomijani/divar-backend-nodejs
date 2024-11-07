@@ -1,9 +1,10 @@
-import type { CreateUser, LoginUserBody } from './users.schema';
-import { Role, userModel } from './users.schema';
 import { StatusCodes } from 'http-status-codes';
-import type { Controller } from '../../types';
 import { MongoServerError } from 'mongodb'; // Import MongoError from the MongoDB driver
-import { createAccessToken, verifyToken } from '@/utils/jwt';
+import { createAccessToken, verifyToken } from '@/utils/jwt.utils';
+import { userModel } from '@/models/user.model';
+import type { Controller } from '@/types/app.types';
+import type { CreateUser, LoginUserBody } from '@/types/user.types';
+import { Role } from '@/types/user.types';
 
 export const registerUser: Controller<object, CreateUser> = async (
   req,

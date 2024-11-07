@@ -1,10 +1,5 @@
+import type { ICity } from '@/types/city.types';
 import mongoose from 'mongoose';
-
-export interface ICity {
-  name: string;
-  code: string;
-  slug: string;
-}
 
 const citySchema = new mongoose.Schema<ICity>({
   name: { type: String, required: true },

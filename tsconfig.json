@@ -13,7 +13,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@routes": ["./src/routes/*"],
+      "@models": ["./src/models/*"],
+      "@services": ["./src/services/*"],
+      "@validations": ["./src/validations/*"],
+      "@middlewares": ["./src/middlewares/*"],
+      "@controllers": ["./src/controllers/*"],
+      "@types": ["./src/types/*"]
     }
   },
   "lib": ["es2015"],

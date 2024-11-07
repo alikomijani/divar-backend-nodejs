@@ -1,3 +1,5 @@
+import { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } from '@/configs/app.configs';
+import type { Role } from '@/types/user.types';
 import type { JwtPayload } from 'jsonwebtoken';
 import {
   JsonWebTokenError,
@@ -5,8 +7,6 @@ import {
   TokenExpiredError,
   verify,
 } from 'jsonwebtoken';
-import { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } from '../config';
-import type { Role } from '@/users/users.schema';
 
 type TokenPayload = JwtPayload & { id: number; username: string; role: Role };
 

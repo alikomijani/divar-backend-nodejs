@@ -1,8 +1,8 @@
+import { categoryModel } from '@/models/category.model';
+import type { Controller } from '@/types/app.types';
+import type { ICategory } from '@/types/category.types';
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { categoryModel } from './models'; // Adjust path if needed
-import type { ICategory } from './models';
-import type { Controller } from 'types';
 
 // CREATE a new category
 export const createCategory = async (req: Request, res: Response) => {

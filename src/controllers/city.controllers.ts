@@ -1,7 +1,7 @@
+import { cityModel } from '@/models/city.model';
+import type { Controller } from '@/types/app.types';
+import type { ICity } from '@/types/city.types';
 import { StatusCodes } from 'http-status-codes';
-import { cityModel } from './cities.schema';
-import type { ICity } from './cities.schema';
-import type { Controller } from 'types';
 
 export const createCity: Controller<object, ICity> = async (req, res) => {
   const cityData: ICity = req.body;

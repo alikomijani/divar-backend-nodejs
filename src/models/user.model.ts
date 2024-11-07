@@ -1,33 +1,7 @@
-import { checkHash, hash } from '@/utils/hash';
-import { createAuthToken } from '@/utils/jwt';
-import type { Document } from 'mongoose';
+import type { IUser } from '@/types/user.types';
+import { checkHash, hash } from '@/utils/hash.utils';
+import { createAuthToken } from '@/utils/jwt.utils';
 import mongoose from 'mongoose';
-
-export enum Role {
-  User,
-  Admin,
-}
-
-export interface LoginUserBody {
-  username: string;
-  password: string;
-}
-export interface CreateUser {
-  username: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  role: Role;
-}
-interface IUser extends CreateUser, Document {
-  setPassword: (rawPassword: string) => Promise<void>;
-  checkPassword: (rawPassword: string) => Promise<boolean>;
-  createToken: () => {
-    accessToken: string;
-    refreshToken: string;
-  };
-}
 
 const userSchema = new mongoose.Schema<IUser>(
   {

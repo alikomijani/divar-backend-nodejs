@@ -2,7 +2,7 @@ import { createServer } from 'http';
 import 'dotenv/config';
 import app from './app';
 import { PORT } from './config';
-import { connectToDB } from './services/db';
+import { connectToDB } from './services/mongoose';
 
 const server = createServer(app);
 

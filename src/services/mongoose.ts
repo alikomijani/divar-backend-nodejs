@@ -1,4 +1,4 @@
-import { DB_URL } from '@/config';
+import { DB_URL } from '@/configs/db.configs';
 import mongoose from 'mongoose';
 
 export async function connectToDB() {
