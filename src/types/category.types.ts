@@ -5,17 +5,10 @@ export interface ICategory extends Document {
   slug: string;
   parent?: Types.ObjectId;
   icon: string;
-  filters: IFilter[];
-  properties: IProperty[];
+  properties: ICategoryProperty[];
 }
 
-export interface IFilter {
-  title: string;
-  label: string;
-  type: string;
-}
-
-export interface IProperty {
+export interface ICategoryProperty extends Document {
   name: string;
   label: string;
   type: string;
