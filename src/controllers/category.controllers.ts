@@ -45,9 +45,7 @@ export const updateCategory: Controller<
     },
   );
   if (!updatedCategory) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: 'Category not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Category not found' });
   }
   res.status(StatusCodes.OK).json(updatedCategory);
 };
@@ -57,9 +55,7 @@ export const deleteCategory: Controller<{ id: string }> = async (req, res) => {
   const { id } = req.params;
   const deletedCategory = await categoryModel.findByIdAndDelete(id);
   if (!deletedCategory) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: 'Category not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Category not found' });
   }
   res.status(StatusCodes.OK).json({ message: 'Category deleted successfully' });
 };

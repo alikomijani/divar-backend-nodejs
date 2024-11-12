@@ -5,6 +5,8 @@ import { userModel } from '@/models/user.model';
 import type { Controller } from '@/types/app.types';
 import type { CreateUser, LoginUserBody } from '@/types/user.types';
 import { Role } from '@/types/user.types';
+import type { NextFunction, Request, Response } from 'express';
+import type { RequestUserType } from '@/types/express';
 
 export const registerUser: Controller<object, CreateUser> = async (
   req,
@@ -16,7 +18,7 @@ export const registerUser: Controller<object, CreateUser> = async (
     const tokens = user.createToken();
     // Remove the password field from the response for security
     const { password, ...userWithoutPassword } = user.toObject();
-    return res.status(StatusCodes.CREATED).json({
+    res.status(StatusCodes.CREATED).json({
       tokens,
       user: userWithoutPassword,
     });
@@ -24,7 +26,7 @@ export const registerUser: Controller<object, CreateUser> = async (
     if (error instanceof MongoServerError && error.code === 11000) {
       // Handle duplicate email or username error
       const duplicatedField = Object.keys(error.keyValue)[0];
-      return res.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
         message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
         errors: {
@@ -32,19 +34,23 @@ export const registerUser: Controller<object, CreateUser> = async (
         },
       });
     }
-    return next(error);
+    next(error);
   }
 };
-export const getUser: Controller = async (req, res, next) => {
+export const getUser = async (
+  req: Request<object, object, RequestUserType>,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const user = await userModel.findById(req.user?.id);
     if (!user) {
-      return res.status(404).send('User not found');
+      res.status(404).send('User not found');
     } else {
-      return res.json(user);
+      res.json(user);
     }
   } catch (err) {
-    return next(err);
+    next(err);
   }
 };
 
@@ -57,14 +63,15 @@ export const loginUser: Controller<object, LoginUserBody> = async (
     const { username, password } = req.body;
     const user = await userModel.findOne({ username });
     if (!user) {
-      return res
+      res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ messages: ['Invalid credential'] });
+      return;
     }
     // Check if password is correct
     const isPasswordValid = await user.checkPassword(password);
     if (!isPasswordValid) {
-      return res
+      res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ messages: ['Invalid credential'] });
     }
@@ -73,7 +80,7 @@ export const loginUser: Controller<object, LoginUserBody> = async (
     const tokens = user.createToken();
 
     // Send response with tokens
-    return res.status(StatusCodes.OK).json({
+    res.status(StatusCodes.OK).json({
       tokens,
       user: {
         id: user.id,
@@ -95,7 +102,7 @@ export const refreshAccessToken: Controller<
 
   // todo: Check if refresh token exists in the database
   if (!refreshToken) {
-    return res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
+    res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
   }
   try {
     // Verify the refresh token
@@ -104,8 +111,8 @@ export const refreshAccessToken: Controller<
     // Generate a new access token
 
     // Send the new access token to the client
-    return res.status(StatusCodes.OK).json({ accessToken: newAccessToken });
+    res.status(StatusCodes.OK).json({ accessToken: newAccessToken });
   } catch {
-    return res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
+    res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
   }
 };

@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "main": "rc/server.ts",
   "scripts": {
-    "start": "nodemon -r tsconfig-paths/register src/server.ts",
+    "start": "npm run build && NODE_ENV=production npm run serve",
     "build": "tsc",
     "serve": "node build/server.js",
-    "dev": "nodemon -r tsconfig-paths/register src/server.ts",
-    "test": "jest"
+    "dev": "NODE_ENV=development nodemon -r tsconfig-paths/register src/server.ts",
+    "test": "jest",
+    "prepare": "npm run build",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -60,5 +62,16 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.12.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).[tj]s"
+    ]
   }
 }
