@@ -2,7 +2,7 @@ import express from 'express';
 import {
   createCity,
   getCities,
-  getCityById,
+  getCityBySlug,
   updateCity,
   deleteCity,
 } from '../controllers/city.controllers';
@@ -16,10 +16,15 @@ const cityRouter = express.Router();
 
 cityRouter.post('/', createCity); // Create a new city
 cityRouter.get('/', getCities); // Get all cities
-cityRouter.get('/:id', getCityById); // Get a city by ID
-cityRouter.put('/:id', loginMiddleware, roleMiddleware(Role.Admin), updateCity); // Update a city by ID
+cityRouter.get('/:slug', getCityBySlug); // Get a city by ID
+cityRouter.put(
+  '/:slug',
+  loginMiddleware,
+  roleMiddleware(Role.Admin),
+  updateCity,
+); // Update a city by ID
 cityRouter.delete(
-  '/:id',
+  '/:slug',
   loginMiddleware,
   roleMiddleware(Role.Admin),
   deleteCity,

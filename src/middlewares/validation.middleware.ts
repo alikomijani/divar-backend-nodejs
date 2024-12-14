@@ -10,6 +10,7 @@ export function validateData(schema: z.ZodObject<any, any>) {
     if (!validatedFields.success) {
       res.status(StatusCodes.BAD_REQUEST).json({
         message: 'invalid data',
+        success: false,
         errors: validatedFields.error.flatten().fieldErrors,
       });
     } else {

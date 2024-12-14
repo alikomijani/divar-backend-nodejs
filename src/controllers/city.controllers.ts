@@ -10,7 +10,7 @@ export const createCity: Controller<object, ICity> = async (req, res) => {
   res.status(StatusCodes.CREATED).json({
     success: true,
     message: 'City created successfully',
-    city: newCity,
+    result: newCity,
   });
 };
 
@@ -26,19 +26,19 @@ export const getCities: Controller<
     .find()
     .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
     .limit(limitNumber); // Limit the number of documents ed;
-  const totalCities = await cityModel.countDocuments();
+  const total = await cityModel.countDocuments();
   res.status(StatusCodes.OK).json({
     success: true,
-    cities,
-    totalPages: Math.ceil(totalCities / limitNumber), // Total pages based on the limit
+    results: cities,
+    totalPages: Math.ceil(total / limitNumber), // Total pages based on the limit
     currentPage: pageNumber,
-    totalCities, // Total number of cities
+    total, // Total number of cities
   });
 };
 
-export const getCityById: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const city = await cityModel.findById(id);
+export const getCityBySlug: Controller<{ slug: string }> = async (req, res) => {
+  const { slug } = req.params;
+  const city = await cityModel.findOne({ slug });
   if (!city) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,
@@ -47,18 +47,18 @@ export const getCityById: Controller<{ id: string }> = async (req, res) => {
   }
   res.status(StatusCodes.OK).json({
     success: true,
-    city,
+    result: city,
   });
 };
 
-export const updateCity: Controller<{ id: string }, ICity> = async (
+export const updateCity: Controller<{ slug: string }, ICity> = async (
   req,
   res,
 ) => {
-  const { id } = req.params;
+  const { slug } = req.params;
   const cityData: Partial<ICity> = req.body; // Use Partial to allow partial updates
 
-  const updatedCity = await cityModel.findByIdAndUpdate(id, cityData, {
+  const updatedCity = await cityModel.findOneAndUpdate({ slug }, cityData, {
     new: true,
   });
   if (!updatedCity) {
@@ -70,13 +70,13 @@ export const updateCity: Controller<{ id: string }, ICity> = async (
   res.status(StatusCodes.OK).json({
     success: true,
     message: 'City updated successfully',
-    city: updatedCity,
+    result: updatedCity,
   });
 };
 
-export const deleteCity: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const deletedCity = await cityModel.findByIdAndDelete(id);
+export const deleteCity: Controller<{ slug: string }> = async (req, res) => {
+  const { slug } = req.params;
+  const deletedCity = await cityModel.findOneAndDelete({ slug });
   if (!deletedCity) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,
