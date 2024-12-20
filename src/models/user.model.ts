@@ -77,4 +77,4 @@ UserSchema.set('toObject', {
 
 UserSchema.index({ username: 1, email: 1 }, { unique: true });
 
-export const User = mongoose.model('User', UserSchema);
+export const UserModel = mongoose.model('User', UserSchema);

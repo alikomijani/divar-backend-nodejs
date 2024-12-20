@@ -1,11 +1,11 @@
-import { City } from '@/models/city.model';
+import { CityModel } from '@/models/city.model';
 import type { Controller } from '@/types/app.types';
 import type { ICity } from '@/types/city.types';
 import { StatusCodes } from 'http-status-codes';
 
 export const createCity: Controller<object, ICity> = async (req, res) => {
   const cityData: ICity = req.body;
-  const newCity = new City(cityData);
+  const newCity = new CityModel(cityData);
   await newCity.save();
   res.status(StatusCodes.CREATED).json({
     success: true,
@@ -22,10 +22,10 @@ export const getCities: Controller<
   const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit 10
   const pageNumber = Number(page);
   const limitNumber = Number(limit);
-  const cities = await City.find()
+  const cities = await CityModel.find()
     .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
     .limit(limitNumber); // Limit the number of documents ed;
-  const total = await City.countDocuments();
+  const total = await CityModel.countDocuments();
   res.status(StatusCodes.OK).json({
     success: true,
     results: cities,
@@ -37,7 +37,7 @@ export const getCities: Controller<
 
 export const getCityBySlug: Controller<{ slug: string }> = async (req, res) => {
   const { slug } = req.params;
-  const city = await City.findOne({ slug });
+  const city = await CityModel.findOne({ slug });
   if (!city) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,
@@ -57,7 +57,7 @@ export const updateCity: Controller<{ slug: string }, ICity> = async (
   const { slug } = req.params;
   const cityData: Partial<ICity> = req.body; // Use Partial to allow partial updates
 
-  const updatedCity = await City.findOneAndUpdate({ slug }, cityData, {
+  const updatedCity = await CityModel.findOneAndUpdate({ slug }, cityData, {
     new: true,
   });
   if (!updatedCity) {
@@ -75,7 +75,7 @@ export const updateCity: Controller<{ slug: string }, ICity> = async (
 
 export const deleteCity: Controller<{ slug: string }> = async (req, res) => {
   const { slug } = req.params;
-  const deletedCity = await City.findOneAndDelete({ slug });
+  const deletedCity = await CityModel.findOneAndDelete({ slug });
   if (!deletedCity) {
     res.status(StatusCodes.NOT_FOUND).json({
       success: false,

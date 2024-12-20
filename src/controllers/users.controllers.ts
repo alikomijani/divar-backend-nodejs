@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { MongoServerError } from 'mongodb'; // Import MongoError from the MongoDB driver
 import { createAccessToken, verifyToken } from '@/utils/jwt.utils';
-import { User } from '@/models/user.model';
+import { UserModel } from '@/models/user.model';
 import type { Controller } from '@/types/app.types';
 import type { CreateUser, LoginUserBody } from '@/types/user.types';
 import { Role } from '@/types/user.types';
@@ -14,7 +14,7 @@ export const registerUser: Controller<object, CreateUser> = async (
   next,
 ) => {
   try {
-    const user = await User.create({ ...req.body, role: Role.User });
+    const user = await UserModel.create({ ...req.body, role: Role.User });
     const tokens = user.createToken();
     // Remove the password field from the response for security
     const { password, ...userWithoutPassword } = user.toObject();
@@ -43,7 +43,7 @@ export const getUser = async (
   next: NextFunction,
 ) => {
   try {
-    const user = await User.findById(req.user?.id);
+    const user = await UserModel.findById(req.user?.id);
     if (!user) {
       res.status(404).send('User not found');
     } else {
@@ -61,7 +61,7 @@ export const loginUser: Controller<object, LoginUserBody> = async (
 ) => {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const user = await UserModel.findOne({ username });
     if (!user) {
       res
         .status(StatusCodes.UNAUTHORIZED)

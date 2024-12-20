@@ -6,6 +6,7 @@ export interface ICategory extends Document {
   parent?: Types.ObjectId;
   icon: string;
   properties: ICategoryProperty[];
+  returnReasonAlert: string;
 }
 
 export interface ICategoryProperty extends Document {

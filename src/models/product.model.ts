@@ -11,19 +11,11 @@ const BadgeSchema = new mongoose.Schema({
   title: { type: String },
 });
 
-const CategorySchema = new mongoose.Schema({
-  id: { type: Number, required: true, unique: true },
-  title_fa: { type: String, required: true },
-  title_en: { type: String, required: true },
-  code: { type: String, required: true },
-  return_reason_alert: { type: String },
-});
-
 const BrandSchema = new mongoose.Schema({
   id: { type: Number, required: true, unique: true },
   title_fa: { type: String, required: true },
   title_en: { type: String, required: true },
-  code: { type: String, required: true },
+  slug: { type: String, required: true },
   logo: { url: { type: [String], default: [] } },
   is_premium: { type: Boolean, default: false },
 });
@@ -101,7 +93,6 @@ const ProductQuestionSchema = new mongoose.Schema({
 
 export const ColorModel = mongoose.model('Color', ColorSchema);
 export const BadgeModel = mongoose.model('Badge', BadgeSchema);
-export const CategoryModel = mongoose.model('Category', CategorySchema);
 export const BrandModel = mongoose.model('Brand', BrandSchema);
 export const ProductModel = mongoose.model('Product', ProductSchema);
 export const CommentModel = mongoose.model('Comment', CommentSchema);

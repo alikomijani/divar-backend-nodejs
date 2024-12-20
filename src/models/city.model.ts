@@ -23,4 +23,4 @@ CitySchema.set('toObject', {
   virtuals: true,
 });
 
-export const City = mongoose.model<ICity>('City', CitySchema);
+export const CityModel = mongoose.model<ICity>('City', CitySchema);

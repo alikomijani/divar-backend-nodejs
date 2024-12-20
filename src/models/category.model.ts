@@ -1,23 +1,24 @@
 import type { ICategory, ICategoryProperty } from '@/types/category.types';
 import mongoose, { Schema } from 'mongoose';
 
-export const propertySchema = new Schema<ICategoryProperty>({
+export const PropertySchema = new Schema<ICategoryProperty>({
   name: { type: String, required: true },
   label: { type: String, required: true },
   type: { type: String, required: true },
   options: [
     {
       label: { type: String, required: true },
-      value: { type: Schema.Types.Mixed, required: true },
+      value: { type: String, required: true },
     },
   ],
 });
 
-const categorySchema = new Schema<ICategory>({
+const CategorySchema = new Schema<ICategory>({
   name: { type: String, required: true },
   slug: { type: String, required: true, unique: true, index: 1 },
   icon: { type: String, required: false },
-  properties: { type: [propertySchema], default: [] },
+  returnReasonAlert: { type: String },
+  properties: { type: [PropertySchema], default: [] },
   parent: {
     type: mongoose.Types.ObjectId,
     ref: 'Category',
@@ -26,12 +27,12 @@ const categorySchema = new Schema<ICategory>({
 });
 
 // Add a virtual ID field
-categorySchema.virtual('id').get(function () {
+CategorySchema.virtual('id').get(function () {
   return String(this._id);
 });
 
 // Set JSON and Object transformations
-categorySchema.set('toJSON', {
+CategorySchema.set('toJSON', {
   virtuals: true,
   transform: (_, ret) => {
     delete ret._id;
@@ -39,13 +40,16 @@ categorySchema.set('toJSON', {
   },
 });
 
-categorySchema.set('toObject', {
+CategorySchema.set('toObject', {
   virtuals: true,
 });
 
-export const Category = mongoose.model<ICategory>('Category', categorySchema);
+export const CategoryModel = mongoose.model<ICategory>(
+  'Category',
+  CategorySchema,
+);
 
-export const Property = mongoose.model<ICategoryProperty>(
+export const PropertyModel = mongoose.model<ICategoryProperty>(
   'Property',
-  propertySchema,
+  PropertySchema,
 );
