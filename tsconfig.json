@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2016",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./build",
@@ -14,6 +14,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "lib": ["ES2020"],
     "paths": {
       "@/*": ["./src/*"],
       "@routes": ["./src/routes/*"],
@@ -25,7 +26,6 @@
       "@types": ["./src/types/*"]
     }
   },
-  "lib": ["ES2020"],
   "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/types/express.d.ts"]
+  "include": ["./src/**/*.ts", "./src/types/express.d.ts"]
 }

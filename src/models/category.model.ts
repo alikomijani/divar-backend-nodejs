@@ -1,7 +1,7 @@
 import type { ICategory, ICategoryProperty } from '@/types/category.types';
 import mongoose, { Schema } from 'mongoose';
 
-const propertySchema = new Schema<ICategoryProperty>({
+export const propertySchema = new Schema<ICategoryProperty>({
   name: { type: String, required: true },
   label: { type: String, required: true },
   type: { type: String, required: true },
@@ -15,7 +15,7 @@ const propertySchema = new Schema<ICategoryProperty>({
 
 const categorySchema = new Schema<ICategory>({
   name: { type: String, required: true },
-  slug: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true, index: 1 },
   icon: { type: String, required: false },
   properties: { type: [propertySchema], default: [] },
   parent: {
@@ -43,15 +43,9 @@ categorySchema.set('toObject', {
   virtuals: true,
 });
 
-// Index for unique slug field
-categorySchema.index({ slug: 1 }, { unique: true });
+export const Category = mongoose.model<ICategory>('Category', categorySchema);
 
-export const categoryModel = mongoose.model<ICategory>(
-  'Category',
-  categorySchema,
-);
-
-export const propertyModel = mongoose.model<ICategoryProperty>(
+export const Property = mongoose.model<ICategoryProperty>(
   'Property',
   propertySchema,
 );

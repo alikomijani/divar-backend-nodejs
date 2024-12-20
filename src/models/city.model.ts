@@ -1,17 +1,17 @@
 import type { ICity } from '@/types/city.types';
 import mongoose from 'mongoose';
 
-const citySchema = new mongoose.Schema<ICity>({
+const CitySchema = new mongoose.Schema<ICity>({
   name: { type: String, required: true },
   code: { type: String, required: true }, // Make username unique
-  slug: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true, index: 1 },
 });
 
-citySchema.virtual('id').get(function () {
+CitySchema.virtual('id').get(function () {
   return String(this._id);
 });
 
-citySchema.set('toJSON', {
+CitySchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {
     delete ret._id;
@@ -19,10 +19,8 @@ citySchema.set('toJSON', {
   },
 });
 
-citySchema.set('toObject', {
+CitySchema.set('toObject', {
   virtuals: true,
 });
 
-citySchema.index({ slug: 1 }, { unique: true });
-
-export const cityModel = mongoose.model<ICity>('City', citySchema);
+export const City = mongoose.model<ICity>('City', CitySchema);

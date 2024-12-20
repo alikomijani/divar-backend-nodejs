@@ -3,7 +3,7 @@ import { checkHash, hash } from '@/utils/hash.utils';
 import { createAuthToken } from '@/utils/jwt.utils';
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema<IUser>(
+const UserSchema = new mongoose.Schema<IUser>(
   {
     email: {
       type: String,
@@ -47,23 +47,23 @@ const userSchema = new mongoose.Schema<IUser>(
   },
 );
 
-userSchema.virtual('id').get(function () {
+UserSchema.virtual('id').get(function () {
   return String(this._id);
 });
 
-userSchema.virtual('fullName').get(function () {
+UserSchema.virtual('fullName').get(function () {
   if (this.firstName && this.password) {
     return this.firstName + ' ' + this.lastName;
   }
 });
 
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     this.password = await hash(this.password);
   }
   next();
 });
-userSchema.set('toJSON', {
+UserSchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {
     delete ret._id;
@@ -71,10 +71,10 @@ userSchema.set('toJSON', {
     delete ret.__v;
   },
 });
-userSchema.set('toObject', {
+UserSchema.set('toObject', {
   virtuals: true,
 });
 
-userSchema.index({ username: 1, email: 1 }, { unique: true });
+UserSchema.index({ username: 1, email: 1 }, { unique: true });
 
-export const userModel = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', UserSchema);
