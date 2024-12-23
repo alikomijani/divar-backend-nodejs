@@ -18,7 +18,12 @@ const CategorySchema = new Schema<ICategory>({
   slug: { type: String, required: true, unique: true, index: 1 },
   icon: { type: String, required: false },
   returnReasonAlert: { type: String },
-  properties: { type: [PropertySchema], default: [] },
+  properties: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: 'Property',
+    },
+  ],
   parent: {
     type: mongoose.Types.ObjectId,
     ref: 'Category',
@@ -31,8 +36,20 @@ CategorySchema.virtual('id').get(function () {
   return String(this._id);
 });
 
+PropertySchema.virtual('id').get(function () {
+  return String(this._id);
+});
+
 // Set JSON and Object transformations
 CategorySchema.set('toJSON', {
+  virtuals: true,
+  transform: (_, ret) => {
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
+PropertySchema.set('toJSON', {
   virtuals: true,
   transform: (_, ret) => {
     delete ret._id;
@@ -44,12 +61,15 @@ CategorySchema.set('toObject', {
   virtuals: true,
 });
 
-export const CategoryModel = mongoose.model<ICategory>(
-  'Category',
-  CategorySchema,
-);
+PropertySchema.set('toObject', {
+  virtuals: true,
+});
 
 export const PropertyModel = mongoose.model<ICategoryProperty>(
   'Property',
   PropertySchema,
+);
+export const CategoryModel = mongoose.model<ICategory>(
+  'Category',
+  CategorySchema,
 );

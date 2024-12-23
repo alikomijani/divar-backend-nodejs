@@ -1,23 +1,34 @@
+import type { Document, ObjectId } from 'mongoose';
 import mongoose from 'mongoose';
 
-const ColorSchema = new mongoose.Schema({
-  id: { type: Number },
+export interface IColor extends Document {
+  title: string;
+  hex_code: string;
+}
+const ColorSchema = new mongoose.Schema<IColor>({
   title: { type: String },
   hex_code: { type: String },
 });
 
-const BadgeSchema = new mongoose.Schema({
+export interface IBadge extends Document {
+  icon: string;
+  title: string;
+}
+const BadgeSchema = new mongoose.Schema<IBadge>({
   icon: { url: { type: String } },
   title: { type: String },
 });
-
-const BrandSchema = new mongoose.Schema({
-  id: { type: Number, required: true, unique: true },
+export interface IBrand extends Document {
+  title_fa: string;
+  title_en: string;
+  slug: string;
+  logo: string;
+}
+const BrandSchema = new mongoose.Schema<IBrand>({
   title_fa: { type: String, required: true },
   title_en: { type: String, required: true },
   slug: { type: String, required: true },
-  logo: { url: { type: [String], default: [] } },
-  is_premium: { type: Boolean, default: false },
+  logo: { type: String },
 });
 
 const ProductSchema = new mongoose.Schema({
@@ -61,7 +72,14 @@ const ProductSchema = new mongoose.Schema({
     description: { type: String },
   },
 });
-const CommentSchema = new mongoose.Schema({
+export interface IComment extends Document {
+  text: string;
+  rating: number;
+  created_at: Date;
+  product: ObjectId;
+  user: ObjectId;
+}
+const CommentSchema = new mongoose.Schema<IComment>({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product',

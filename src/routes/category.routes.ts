@@ -20,22 +20,22 @@ categoryRouter.get('/', getAllCategories);
 
 categoryRouter.post(
   '/',
-  loginMiddleware,
-  roleMiddleware(Role.Admin),
+  // loginMiddleware,
+  // roleMiddleware(Role.Admin),
   validateData(CategorySchema),
   createCategory,
 );
 
-categoryRouter.get('/:id', getCategoryById);
+categoryRouter.get('/:slug', getCategoryById);
 categoryRouter.put(
-  '/:id',
-  loginMiddleware,
-  roleMiddleware(Role.Admin),
+  '/:slug',
+  // loginMiddleware,
+  // roleMiddleware(Role.Admin),
   validateData(CategorySchema),
   updateCategory,
 );
 categoryRouter.delete(
-  '/:id',
+  '/:slug',
   loginMiddleware,
   roleMiddleware(Role.Admin),
   deleteCategory,
