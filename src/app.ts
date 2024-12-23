@@ -2,9 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import path from 'path';
 import { generalErrorHandler } from './middlewares/general-error.middleware';
 import appRouter from './routes/app.routes';
+import { PUBLIC_PATH } from './configs/app.configs';
 
 const app = express();
 
@@ -25,8 +25,7 @@ app.use(
     },
   }),
 );
-
-app.get('/', express.static(path.join(__dirname, '../public')));
+app.use(express.static(PUBLIC_PATH));
 app.use(generalErrorHandler);
 
 export default app;
