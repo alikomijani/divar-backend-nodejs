@@ -1,4 +1,4 @@
-import { PropertyModel } from '@/models/category.model';
+import { PropertyModel } from '@/models/property.model';
 import type { Controller } from '@/types/app.types';
 import type { ICategoryProperty } from '@/types/category.types';
 import type { Request, Response } from 'express';
