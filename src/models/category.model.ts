@@ -1,7 +1,7 @@
 import type { ICategory } from '@/types/category.types';
 import mongoose, { Schema } from 'mongoose';
 
-const CategorySchema = new Schema<ICategory>({
+export const CategorySchema = new Schema<ICategory>({
   name: { type: String, required: true },
   slug: { type: String, required: true, unique: true, index: 1 },
   icon: { type: String, required: false },

@@ -20,26 +20,4 @@ const CommentSchema = new mongoose.Schema<IComment>({
   created_at: { type: Date, default: Date.now },
 });
 
-const ProductQuestionSchema = new mongoose.Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
-    required: true,
-  },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  question: { type: String, required: true },
-  answers: [
-    {
-      user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-      answer: { type: String },
-      created_at: { type: Date, default: Date.now },
-    },
-  ],
-  created_at: { type: Date, default: Date.now },
-});
-
 export const CommentModel = mongoose.model('Comment', CommentSchema);
-export const ProductQuestionModel = mongoose.model(
-  'Comment',
-  ProductQuestionSchema,
-);

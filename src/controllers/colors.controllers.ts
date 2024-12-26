@@ -1,5 +1,5 @@
-import type { IColor } from '@/models/product.model';
-import { ColorModel } from '@/models/product.model';
+import type { IColor } from '@/models/color.model';
+import { ColorModel } from '@/models/color.model';
 import type { Controller, PaginationParams } from '@/types/app.types';
 import { StatusCodes } from 'http-status-codes';
 

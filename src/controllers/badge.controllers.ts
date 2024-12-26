@@ -1,5 +1,6 @@
-import type { IBadge } from '@/models/product.model';
-import { BadgeModel } from '@/models/product.model';
+import type { IBadge } from '@/models/badge.model';
+import { BadgeModel } from '@/models/badge.model';
+
 import type { Controller, PaginationParams } from '@/types/app.types';
 import { StatusCodes } from 'http-status-codes';
 
