@@ -23,16 +23,16 @@ propertiesRouter.get('/:id', getPropertyById);
 
 propertiesRouter.post(
   '/',
-  // loginMiddleware,
-  // roleMiddleware(Role.Admin),
+  loginMiddleware,
+  roleMiddleware(Role.Admin),
   validateData(PropertySchema),
   createProperty,
 );
 
 propertiesRouter.put(
   '/:id',
-  // loginMiddleware,
-  // roleMiddleware(Role.Admin),
+  loginMiddleware,
+  roleMiddleware(Role.Admin),
   validateData(PropertySchema),
   updateProperty,
 );

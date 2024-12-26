@@ -20,8 +20,8 @@ categoryRouter.get('/', getAllCategories);
 
 categoryRouter.post(
   '/',
-  // loginMiddleware,
-  // roleMiddleware(Role.Admin),
+  loginMiddleware,
+  roleMiddleware(Role.Admin),
   validateData(CategorySchema),
   createCategory,
 );
@@ -29,8 +29,8 @@ categoryRouter.post(
 categoryRouter.get('/:id', getCategoryById);
 categoryRouter.put(
   '/:id',
-  // loginMiddleware,
-  // roleMiddleware(Role.Admin),
+  loginMiddleware,
+  roleMiddleware(Role.Admin),
   validateData(CategorySchema),
   updateCategory,
 );
