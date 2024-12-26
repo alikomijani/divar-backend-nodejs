@@ -40,8 +40,9 @@ export const getBadgeById: Controller<{ id: string }, null> = async (
       success: false,
       message: 'Badge not found',
     });
+  } else {
+    res.status(StatusCodes.OK).json(badge);
   }
-  res.status(StatusCodes.OK).json(badge);
 };
 
 // Update Badge
@@ -59,8 +60,9 @@ export const updateBadge: Controller<{ id: string }, IBadge> = async (
       success: false,
       message: 'Badge not found',
     });
+  } else {
+    res.status(StatusCodes.OK).json(updatedBadge);
   }
-  res.status(StatusCodes.OK).json(updatedBadge);
 };
 
 // Delete Badge
@@ -72,9 +74,10 @@ export const deleteBadge: Controller<{ id: string }> = async (req, res) => {
       success: false,
       message: 'Badge not found',
     });
+  } else {
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Badge deleted successfully',
+    });
   }
-  res.status(StatusCodes.OK).json({
-    success: true,
-    message: 'Badge deleted successfully',
-  });
 };

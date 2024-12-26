@@ -35,8 +35,9 @@ export const getBrandById: Controller<{ id: string }> = async (req, res) => {
     return res.status(StatusCodes.NOT_FOUND).json({
       message: 'Brand not found',
     });
+  } else {
+    return res.status(StatusCodes.OK).json(brand);
   }
-  res.status(StatusCodes.OK).json(brand);
 };
 
 // Update Brand
@@ -53,8 +54,9 @@ export const updateBrand: Controller<{ id: string }, IBrand> = async (
     return res.status(StatusCodes.NOT_FOUND).json({
       message: 'Brand not found',
     });
+  } else {
+    return res.status(StatusCodes.OK).json(updatedBrand);
   }
-  res.status(StatusCodes.OK).json(updatedBrand);
 };
 
 // Delete Brand
@@ -66,9 +68,10 @@ export const deleteBrand: Controller<{ id: string }> = async (req, res) => {
       success: false,
       message: 'Brand not found',
     });
+  } else {
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Brand deleted successfully',
+    });
   }
-  res.status(StatusCodes.OK).json({
-    success: true,
-    message: 'Brand deleted successfully',
-  });
 };

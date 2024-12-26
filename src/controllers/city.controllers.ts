@@ -42,8 +42,9 @@ export const getCityBySlug: Controller<{ slug: string }> = async (req, res) => {
       success: false,
       message: 'City not found',
     });
+  } else {
+    return res.status(StatusCodes.OK).json(city);
   }
-  res.status(StatusCodes.OK).json(city);
 };
 
 export const updateCity: Controller<{ slug: string }, CityType> = async (
@@ -60,8 +61,9 @@ export const updateCity: Controller<{ slug: string }, CityType> = async (
       success: false,
       message: 'City not found',
     });
+  } else {
+    return res.status(StatusCodes.OK).json(updatedCity);
   }
-  res.status(StatusCodes.OK).json(updatedCity);
 };
 
 export const deleteCity: Controller<{ slug: string }> = async (req, res) => {
@@ -72,9 +74,10 @@ export const deleteCity: Controller<{ slug: string }> = async (req, res) => {
       success: false,
       message: 'City not found',
     });
+  } else {
+    return res.status(StatusCodes.ACCEPTED).json({
+      success: true,
+      message: 'City deleted successfully',
+    });
   }
-  res.status(StatusCodes.ACCEPTED).json({
-    success: true,
-    message: 'City deleted successfully',
-  });
 };
