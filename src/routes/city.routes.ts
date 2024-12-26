@@ -10,7 +10,7 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { Role } from '@/types/user.types';
+import { UserRole } from '@/models/user.model';
 
 const cityRouter = express.Router();
 
@@ -20,13 +20,13 @@ cityRouter.get('/:slug', getCityBySlug); // Get a city by ID
 cityRouter.put(
   '/:slug',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   updateCity,
 ); // Update a city by ID
 cityRouter.delete(
   '/:slug',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   deleteCity,
 ); // Delete a city by ID
 

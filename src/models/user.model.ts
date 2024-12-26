@@ -102,6 +102,8 @@ export const RegisterSchemaZod = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
 });
-
+export const RefreshTokenSchemaZod = z.object({
+  refreshToken: z.string(),
+});
 export type LoginUser = z.infer<typeof LoginSchemaZod>;
 export type RegisterUser = z.infer<typeof RegisterSchemaZod>;

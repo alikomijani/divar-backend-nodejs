@@ -3,7 +3,6 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { Role } from '@/types/user.types';
 import {
   createColor,
   deleteColor,
@@ -11,7 +10,8 @@ import {
   updateColor,
 } from '@/controllers/colors.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { ColorSchema } from '@/validations/product.validation';
+import { UserRole } from '@/models/user.model';
+import { ColorSchemaZod } from '@/models/color.model';
 
 const colorRouter = express.Router();
 
@@ -20,22 +20,22 @@ colorRouter.get('/', getAllColors); // Get all colors
 colorRouter.post(
   '/',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
-  validateData(ColorSchema),
+  roleMiddleware(UserRole.Admin),
+  validateData(ColorSchemaZod),
   createColor,
 ); // Create a new color
 colorRouter.put(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
-  validateData(ColorSchema),
+  roleMiddleware(UserRole.Admin),
+  validateData(ColorSchemaZod),
   updateColor,
 ); // Update a color by ID
 
 colorRouter.delete(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   deleteColor,
 ); // Delete a color by ID
 

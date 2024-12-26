@@ -11,8 +11,8 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { Role } from '@/types/user.types';
-import { PropertySchema } from '@/validations/category.validation';
+import { UserRole } from '@/models/user.model';
+import { PropertySchemaZod } from '@/models/property.model';
 
 const propertiesRouter = Router();
 
@@ -24,23 +24,23 @@ propertiesRouter.get('/:id', getPropertyById);
 propertiesRouter.post(
   '/',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
-  validateData(PropertySchema),
+  roleMiddleware(UserRole.Admin),
+  validateData(PropertySchemaZod),
   createProperty,
 );
 
 propertiesRouter.put(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
-  validateData(PropertySchema),
+  roleMiddleware(UserRole.Admin),
+  validateData(PropertySchemaZod),
   updateProperty,
 );
 
 propertiesRouter.delete(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   deleteProperty,
 );
 

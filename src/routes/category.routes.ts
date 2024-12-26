@@ -7,12 +7,12 @@ import {
   deleteCategory,
 } from '../controllers/category.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { CategorySchema } from '../validations/category.validation';
 import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { Role } from '@/types/user.types';
+import { UserRole } from '@/models/user.model';
+import { CategorySchemaZod } from '@/models/category.model';
 
 const categoryRouter = Router();
 
@@ -21,8 +21,8 @@ categoryRouter.get('/', getAllCategories);
 categoryRouter.post(
   '/',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
-  validateData(CategorySchema),
+  roleMiddleware(UserRole.Admin),
+  validateData(CategorySchemaZod),
   createCategory,
 );
 
@@ -30,14 +30,14 @@ categoryRouter.get('/:id', getCategoryById);
 categoryRouter.put(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
-  validateData(CategorySchema),
+  roleMiddleware(UserRole.Admin),
+  validateData(CategorySchemaZod),
   updateCategory,
 );
 categoryRouter.delete(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   deleteCategory,
 );
 

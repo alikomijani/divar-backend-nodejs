@@ -6,25 +6,22 @@ import {
   registerUser,
 } from '../controllers/users.controllers';
 import { validateData } from '../middlewares/validation.middleware';
-import {
-  refreshTokenSchema,
-  userLoginSchema,
-  userRegistrationSchema,
-} from '../validations/user.validation';
+
 import { loginMiddleware } from '../middlewares/authentication.middleware';
+import {
+  LoginSchemaZod,
+  RefreshTokenSchemaZod,
+  RegisterSchemaZod,
+} from '@/models/user.model';
 
 const userRouter = Router();
 
-userRouter.post(
-  '/register',
-  validateData(userRegistrationSchema),
-  registerUser,
-);
+userRouter.post('/register', validateData(RegisterSchemaZod), registerUser);
 
-userRouter.post('/login', validateData(userLoginSchema), loginUser);
+userRouter.post('/login', validateData(LoginSchemaZod), loginUser);
 userRouter.post(
   '/refresh',
-  validateData(refreshTokenSchema),
+  validateData(RefreshTokenSchemaZod),
   refreshAccessToken,
 );
 userRouter.get('/profile', loginMiddleware, getUser);

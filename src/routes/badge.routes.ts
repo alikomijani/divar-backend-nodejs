@@ -3,13 +3,13 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { Role } from '@/types/user.types';
 import {
   createBadge,
   deleteBadge,
   getAllBadges,
   updateBadge,
 } from '@/controllers/badge.controllers';
+import { UserRole } from '@/models/user.model';
 
 const badgeRouter = express.Router();
 
@@ -18,13 +18,13 @@ badgeRouter.get('/', getAllBadges); // Get all cities
 badgeRouter.put(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   updateBadge,
 ); // Update a badge by ID
 badgeRouter.delete(
   '/:id',
   loginMiddleware,
-  roleMiddleware(Role.Admin),
+  roleMiddleware(UserRole.Admin),
   deleteBadge,
 ); // Delete a badge by ID
 
