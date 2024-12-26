@@ -1,12 +1,12 @@
+import type { ICategory } from '@/models/category.model';
 import { PropertyModel } from '@/models/property.model';
 import type { Controller, PaginationParams } from '@/types/app.types';
-import type { ICategoryProperty } from '@/types/category.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 export const createProperty = async (req: Request, res: Response) => {
-  const propertyData: ICategoryProperty = req.body;
+  const propertyData: ICategory = req.body;
   const newProperty = await PropertyModel.create(propertyData);
   res.status(StatusCodes.CREATED).json(newProperty);
 };
@@ -43,7 +43,7 @@ export const getPropertyById: Controller<{ id: string }> = async (req, res) => {
 // UPDATE a Property by ID
 export const updateProperty: Controller<
   { id: string },
-  Partial<ICategoryProperty>
+  Partial<ICategory>
 > = async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;

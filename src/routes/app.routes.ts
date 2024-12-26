@@ -5,11 +5,13 @@ import propertyRouter from './properties.routes';
 import imagesRouter from './image.routes';
 import colorRouter from './color.routes';
 import cityRouter from './city.routes';
+import brandRouter from './brand.routes';
 import { validateIdParam } from '@/middlewares/validateID.middleware';
 
 const appRouter = Router();
 appRouter.use(validateIdParam);
 appRouter.use('/auth', userRouter);
+appRouter.use('/brands', brandRouter);
 appRouter.use('/categories', categoryRouter);
 appRouter.use('/properties', propertyRouter);
 appRouter.use('/images', imagesRouter);

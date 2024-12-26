@@ -1,20 +1,19 @@
 import { StatusCodes } from 'http-status-codes';
 import { MongoServerError } from 'mongodb'; // Import MongoError from the MongoDB driver
 import { createAccessToken, verifyToken } from '@/utils/jwt.utils';
-import { UserModel } from '@/models/user.model';
+import type { LoginUser, RegisterUser } from '@/models/user.model';
+import { UserModel, UserRole } from '@/models/user.model';
 import type { Controller } from '@/types/app.types';
-import type { CreateUser, LoginUserBody } from '@/types/user.types';
-import { Role } from '@/types/user.types';
 import type { NextFunction, Request, Response } from 'express';
 import type { RequestUserType } from '@/types/express';
 
-export const registerUser: Controller<object, CreateUser> = async (
+export const registerUser: Controller<object, RegisterUser> = async (
   req,
   res,
   next,
 ) => {
   try {
-    const user = await UserModel.create({ ...req.body, role: Role.User });
+    const user = await UserModel.create({ ...req.body, role: UserRole.User });
     const tokens = user.createToken();
     // Remove the password field from the response for security
     const { password, ...userWithoutPassword } = user.toObject();
@@ -54,14 +53,14 @@ export const getUser = async (
   }
 };
 
-export const loginUser: Controller<object, LoginUserBody> = async (
+export const loginUser: Controller<object, LoginUser> = async (
   req,
   res,
   next,
 ) => {
   try {
-    const { username, password } = req.body;
-    const user = await UserModel.findOne({ username });
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email });
     if (!user) {
       res
         .status(StatusCodes.UNAUTHORIZED)
@@ -84,7 +83,6 @@ export const loginUser: Controller<object, LoginUserBody> = async (
       tokens,
       user: {
         id: user.id,
-        username: user.username,
         email: user.email,
       },
     });

@@ -1,13 +1,13 @@
+import type { CityType } from '@/models/city.model';
 import { CityModel } from '@/models/city.model';
 import type { Controller, PaginationParams } from '@/types/app.types';
-import type { ICity } from '@/types/city.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 import { MongoServerError } from 'mongodb';
 
-export const createCity: Controller<object, ICity> = async (req, res) => {
+export const createCity: Controller<object, CityType> = async (req, res) => {
   try {
-    const cityData: ICity = req.body;
+    const cityData = req.body;
     const newCity = await CityModel.create(cityData);
     res.status(StatusCodes.CREATED).json(newCity);
   } catch (error) {
@@ -46,12 +46,12 @@ export const getCityBySlug: Controller<{ slug: string }> = async (req, res) => {
   res.status(StatusCodes.OK).json(city);
 };
 
-export const updateCity: Controller<{ slug: string }, ICity> = async (
+export const updateCity: Controller<{ slug: string }, CityType> = async (
   req,
   res,
 ) => {
   const { slug } = req.params;
-  const cityData: Partial<ICity> = req.body; // Use Partial to allow partial updates
+  const cityData: Partial<CityType> = req.body; // Use Partial to allow partial updates
   const updatedCity = await CityModel.findOneAndUpdate({ slug }, cityData, {
     new: true,
   });

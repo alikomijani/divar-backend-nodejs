@@ -1,35 +1,61 @@
-import type { ICategoryProperty } from '@/types/category.types';
+import type { Document } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
+import { z } from 'zod';
 
-export const PropertySchema = new Schema<ICategoryProperty>({
-  name: { type: String, required: true },
-  label: { type: String, required: true },
-  type: { type: String, required: true },
-  options: [
-    {
-      label: { type: String, required: true },
-      value: { type: String, required: true },
-    },
-  ],
+// Zod Schema
+export const PropertySchemaZod = z.object({
+  name: z.string().min(1, 'Name is required').trim(),
+  label: z.string().min(1, 'Label is required').trim(),
+  type: z.string().min(1, 'Type is required').trim(),
+  options: z
+    .array(
+      z.object({
+        label: z.string().min(1, 'Option label is required').trim(),
+        value: z.string().min(1, 'Option value is required').trim(),
+      }),
+    )
+    .optional(), // Options array is optional
 });
 
-PropertySchema.virtual('id').get(function () {
-  return String(this._id);
-});
+export type PropertyType = z.infer<typeof PropertySchemaZod>;
 
-PropertySchema.set('toJSON', {
-  virtuals: true,
-  transform: (_, ret) => {
-    delete ret._id;
-    delete ret.__v;
+// Mongoose Interface (Extending PropertyType and Document)
+export interface ICategoryProperty extends PropertyType, Document {
+  _id: mongoose.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Mongoose Schema
+export const PropertySchema = new Schema<ICategoryProperty>(
+  {
+    name: { type: String, required: true, trim: true },
+    label: { type: String, required: true, trim: true },
+    type: { type: String, required: true, trim: true },
+    options: [
+      {
+        label: { type: String, required: true, trim: true },
+        value: { type: String, required: true, trim: true },
+      },
+    ],
   },
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
+);
+
+// Virtual for 'id'
+PropertySchema.virtual('id').get(function (this: ICategoryProperty) {
+  return this._id.toHexString();
 });
 
-PropertySchema.set('toObject', {
-  virtuals: true,
-});
+// Transform to remove _id and __v (already in schema options)
 
 export const PropertyModel = mongoose.model<ICategoryProperty>(
   'Property',
   PropertySchema,
 );
+
+export default PropertyModel;

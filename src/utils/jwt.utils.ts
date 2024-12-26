@@ -1,5 +1,5 @@
 import { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } from '@/configs/app.configs';
-import type { Role } from '@/types/user.types';
+import type { UserRole } from '@/models/user.model';
 import type { JwtPayload } from 'jsonwebtoken';
 import {
   JsonWebTokenError,
@@ -8,7 +8,11 @@ import {
   verify,
 } from 'jsonwebtoken';
 
-type TokenPayload = JwtPayload & { id: number; username: string; role: Role };
+type TokenPayload = JwtPayload & {
+  id: number;
+  email: string;
+  role: UserRole;
+};
 
 export function createAuthToken(payload: TokenPayload) {
   const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '7d' });

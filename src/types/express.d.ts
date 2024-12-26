@@ -9,6 +9,6 @@ declare global {
 }
 export type RequestUserType = {
   id: number;
-  username: string;
+  email: string;
   role: Role;
 };

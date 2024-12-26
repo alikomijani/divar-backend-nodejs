@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '@/utils/jwt.utils';
 import type { Controller } from '@/types/app.types';
-import type { Role } from '@/types/user.types';
+import type { UserRole } from '@/models/user.model';
 
 export const loginMiddleware: Controller = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
@@ -16,7 +16,7 @@ export const loginMiddleware: Controller = async (req, res, next) => {
     const decodedToken = verifyToken(token!);
     req.user = {
       id: decodedToken.id,
-      username: decodedToken.username,
+      email: decodedToken.email,
       role: decodedToken.role,
     };
     next();
@@ -28,7 +28,7 @@ export const loginMiddleware: Controller = async (req, res, next) => {
   }
 };
 
-export function roleMiddleware(requiredRole: Role): Controller {
+export function roleMiddleware(requiredRole: UserRole): Controller {
   return (req, res, next) => {
     const userRole = req.user?.role;
     if (!userRole) {

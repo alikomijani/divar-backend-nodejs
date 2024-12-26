@@ -10,15 +10,24 @@ import {
   getAllBrands,
   updateBrand,
 } from '@/controllers/brand.controllers';
+import { validateData } from '@/middlewares/validation.middleware';
+import { BrandSchemaZod } from '@/models/brand.model';
 
 const brandRouter = express.Router();
 
-brandRouter.post('/', createBrand); // Create a new brand
+brandRouter.post(
+  '/',
+  loginMiddleware,
+  roleMiddleware(Role.Admin),
+  validateData(BrandSchemaZod),
+  createBrand,
+); // Create a new brand
 brandRouter.get('/', getAllBrands); // Get all cities
 brandRouter.put(
   '/:id',
   loginMiddleware,
   roleMiddleware(Role.Admin),
+  validateData(BrandSchemaZod),
   updateBrand,
 ); // Update a brand by ID
 brandRouter.delete(
