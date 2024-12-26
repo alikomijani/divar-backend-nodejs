@@ -32,13 +32,13 @@ export function roleMiddleware(requiredRole: UserRole): Controller {
   return (req, res, next) => {
     const userRole = req.user?.role;
     if (!userRole) {
-      res.status(StatusCodes.FORBIDDEN).json({
+      return res.status(StatusCodes.FORBIDDEN).json({
         success: false,
         message: 'Error! User role is not defined.',
       });
     }
     if (userRole < requiredRole) {
-      res.status(StatusCodes.UNAUTHORIZED).json({
+      return res.status(StatusCodes.UNAUTHORIZED).json({
         success: false,
         message: `Error! Authorization failed. Required role: ${requiredRole}, but user role is: ${userRole}`,
       });

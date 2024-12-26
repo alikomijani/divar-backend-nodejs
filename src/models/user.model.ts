@@ -6,8 +6,8 @@ import mongoose from 'mongoose';
 import { z } from 'zod';
 
 export enum UserRole {
-  User = 0,
-  Admin = 1, // Add more roles as needed
+  User = 1,
+  Admin = 2, // Add more roles as needed
 }
 export interface IUser extends Document {
   email: string;
