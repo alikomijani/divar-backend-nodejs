@@ -2,16 +2,26 @@ import { CityModel } from '@/models/city.model';
 import type { Controller } from '@/types/app.types';
 import type { ICity } from '@/types/city.types';
 import { StatusCodes } from 'http-status-codes';
+import { MongoServerError } from 'mongodb';
 
 export const createCity: Controller<object, ICity> = async (req, res) => {
-  const cityData: ICity = req.body;
-  const newCity = new CityModel(cityData);
-  await newCity.save();
-  res.status(StatusCodes.CREATED).json({
-    success: true,
-    message: 'City created successfully',
-    result: newCity,
-  });
+  try {
+    const cityData: ICity = req.body;
+    const newCity = await CityModel.create(cityData);
+    res.status(StatusCodes.CREATED).json(newCity);
+  } catch (error) {
+    if (error instanceof MongoServerError && error.code === 11000) {
+      // Handle duplicate email or username error
+      const duplicatedField = Object.keys(error.keyValue)[0];
+      res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
+        errors: {
+          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
+        },
+      });
+    }
+  }
 };
 
 export const getCities: Controller<

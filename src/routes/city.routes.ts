@@ -14,7 +14,7 @@ import { Role } from '@/types/user.types';
 
 const cityRouter = express.Router();
 
-cityRouter.post('/', createCity); // Create a new city
+cityRouter.post('/', loginMiddleware, createCity); // Create a new city
 cityRouter.get('/', getCities); // Get all cities
 cityRouter.get('/:slug', getCityBySlug); // Get a city by ID
 cityRouter.put(
