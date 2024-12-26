@@ -5,3 +5,4 @@ export type Controller<QueryParams = object, ReqBody = object, V = object> = (
   res: Response,
   next: NextFunction,
 ) => Promise<Response | any> | any;
+export type PaginationParams = { page: number; pageSize: number };

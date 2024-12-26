@@ -1,5 +1,5 @@
 import { PropertyModel } from '@/models/property.model';
-import type { Controller } from '@/types/app.types';
+import type { Controller, PaginationParams } from '@/types/app.types';
 import type { ICategoryProperty } from '@/types/category.types';
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -11,10 +11,24 @@ export const createProperty = async (req: Request, res: Response) => {
 };
 
 // READ all Properties
-export const getAllProperties = async (_req: Request, res: Response) => {
-  const properties = await PropertyModel.find();
+export const getAllProperties: Controller<
+  object,
+  object,
+  PaginationParams
+> = async (req, res) => {
+  const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
+  const pageNumber = Number(page);
+  const limitNumber = Number(pageSize);
+  const total = await PropertyModel.countDocuments();
+  const results = await PropertyModel.find()
+    .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
+    .limit(limitNumber); // Limit the number of documents
   res.status(StatusCodes.OK).json({
-    results: properties,
+    results,
+    total,
+    totalPages: Math.ceil(total / limitNumber), // Total pages based on the limit
+    page,
+    pageSize,
   });
 };
 

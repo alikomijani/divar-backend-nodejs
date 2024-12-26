@@ -1,21 +1,34 @@
 import type { IBrand } from '@/models/brand.model';
 import { BrandModel } from '@/models/brand.model';
-import type { Controller } from '@/types/app.types';
+import type { Controller, PaginationParams } from '@/types/app.types';
 import { StatusCodes } from 'http-status-codes';
 
 // Create Brand
 export const createBrand: Controller<object, IBrand> = async (req, res) => {
   const data = req.body;
-  const newBrand = new BrandModel(data);
-  await newBrand.save();
+  const newBrand = await BrandModel.create(data);
   res.status(StatusCodes.CREATED).json(newBrand);
 };
 
 // Get All Brands
-export const getAllBrands: Controller = async (req, res) => {
-  const brands = await BrandModel.find({});
+export const getAllBrands: Controller<
+  object,
+  object,
+  PaginationParams
+> = async (req, res) => {
+  const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
+  const pageNumber = Number(page);
+  const limitNumber = Number(pageSize);
+  const total = await BrandModel.countDocuments();
+  const brands = await BrandModel.find()
+    .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
+    .limit(limitNumber); // Limit the number of documents ed;;
   res.status(StatusCodes.OK).json({
     results: brands,
+    total,
+    totalPages: Math.ceil(total / limitNumber), // Total pages based on the limit
+    page,
+    pageSize,
   });
 };
 

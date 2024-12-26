@@ -11,13 +11,13 @@ import {
 type TokenPayload = JwtPayload & { id: number; username: string; role: Role };
 
 export function createAuthToken(payload: TokenPayload) {
-  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '1h' });
-  const refreshToken = sign(payload, REFRESH_SECRET_KEY, { expiresIn: '7d' });
+  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '7d' });
+  const refreshToken = sign(payload, REFRESH_SECRET_KEY, { expiresIn: '30d' });
   return { accessToken, refreshToken };
 }
 
 export function createAccessToken(payload: TokenPayload) {
-  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '1h' });
+  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '7d' });
   return accessToken;
 }
 export function verifyToken(
