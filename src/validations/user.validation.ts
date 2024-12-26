@@ -12,3 +12,6 @@ export const userLoginSchema = z.object({
   username: z.string().toLowerCase(),
   password: z.string(),
 });
+export const refreshTokenSchema = z.object({
+  refreshToken: z.string(),
+});

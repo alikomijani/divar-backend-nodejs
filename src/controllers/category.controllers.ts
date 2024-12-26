@@ -20,12 +20,9 @@ export const getAllCategories = async (_req: Request, res: Response) => {
 };
 
 // READ a single category by ID
-export const getCategoryById: Controller<{ slug: string }> = async (
-  req,
-  res,
-) => {
-  const { slug } = req.params;
-  const category = await CategoryModel.findOne({ slug })
+export const getCategoryById: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const category = await CategoryModel.findById(id)
     .populate('properties')
     .populate('parent');
   if (!category) {
@@ -38,17 +35,16 @@ export const getCategoryById: Controller<{ slug: string }> = async (
 
 // UPDATE a category by ID
 export const updateCategory: Controller<
-  { slug: string },
+  { id: string },
   Partial<ICategory>
 > = async (req, res) => {
-  const { slug } = req.params;
+  const { id } = req.params;
   const updatedData = req.body;
-  const updatedCategory = await CategoryModel.findOneAndUpdate(
-    { slug },
+  const updatedCategory = await CategoryModel.findByIdAndUpdate(
+    id,
     updatedData,
     {
       new: true,
-      runValidators: true,
     },
   )
     .populate('parent')
@@ -60,12 +56,9 @@ export const updateCategory: Controller<
 };
 
 // DELETE a category by ID
-export const deleteCategory: Controller<{ slug: string }> = async (
-  req,
-  res,
-) => {
-  const { slug } = req.params;
-  const deletedCategory = await CategoryModel.findOneAndDelete({ slug });
+export const deleteCategory: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const deletedCategory = await CategoryModel.findByIdAndDelete(id);
   if (!deletedCategory) {
     res.status(StatusCodes.NOT_FOUND).json({ message: 'Category not found' });
   }

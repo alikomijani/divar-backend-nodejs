@@ -7,6 +7,7 @@ import {
 } from '../controllers/users.controllers';
 import { validateData } from '../middlewares/validation.middleware';
 import {
+  refreshTokenSchema,
   userLoginSchema,
   userRegistrationSchema,
 } from '../validations/user.validation';
@@ -21,7 +22,11 @@ userRouter.post(
 );
 
 userRouter.post('/login', validateData(userLoginSchema), loginUser);
-userRouter.post('/refresh', refreshAccessToken);
+userRouter.post(
+  '/refresh',
+  validateData(refreshTokenSchema),
+  refreshAccessToken,
+);
 userRouter.get('/profile', loginMiddleware, getUser);
 
 export default userRouter;

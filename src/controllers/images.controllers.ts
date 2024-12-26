@@ -13,7 +13,7 @@ export const uploadController = (req: Request, res: Response) => {
     res.status(StatusCodes.OK).json({
       success: true,
       message: 'File uploaded successfully',
-      filePath: BASE_URL + filePath.split('/public')[1],
+      url: BASE_URL + filePath.split('/public')[1],
     });
   }
 };

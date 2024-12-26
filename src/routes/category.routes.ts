@@ -26,16 +26,16 @@ categoryRouter.post(
   createCategory,
 );
 
-categoryRouter.get('/:slug', getCategoryById);
+categoryRouter.get('/:id', getCategoryById);
 categoryRouter.put(
-  '/:slug',
+  '/:id',
   // loginMiddleware,
   // roleMiddleware(Role.Admin),
   validateData(CategorySchema),
   updateCategory,
 );
 categoryRouter.delete(
-  '/:slug',
+  '/:id',
   loginMiddleware,
   roleMiddleware(Role.Admin),
   deleteCategory,

@@ -1,5 +1,7 @@
+import { CategorySchema } from '@/validations/category.validation';
 import type { Document } from 'mongoose';
 import mongoose from 'mongoose';
+import { BrandSchema } from './brand.model';
 
 export interface IColor extends Document {
   title: string;
@@ -10,7 +12,7 @@ export interface IBadge extends Document {
   title: string;
 }
 export const BadgeSchema = new mongoose.Schema<IBadge>({
-  icon: { url: { type: String } },
+  icon: { type: String },
   title: { type: String },
 });
 
@@ -20,7 +22,7 @@ const ColorSchema = new mongoose.Schema<IColor>({
 });
 
 const ProductSchema = new mongoose.Schema({
-  id: { type: Number, required: true, unique: true },
+  code: { type: Number, required: true, unique: true },
   title_fa: { type: String, required: true },
   title_en: { type: String, required: true },
   status: {
@@ -29,36 +31,26 @@ const ProductSchema = new mongoose.Schema({
     default: 'marketable',
   },
   images: {
-    main: { type: String },
+    main: { type: String, require: true },
     list: { type: [String], default: [] },
   },
   colors: [ColorSchema],
   badges: [BadgeSchema],
-  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
-  brand: { type: mongoose.Schema.Types.ObjectId, ref: 'Brand' },
-  review: {
-    description: { type: String },
-    attributes: [
-      {
-        title: { type: String },
-        values: { type: [String], default: [] },
-      },
-    ],
-  },
-  specifications: [
+  category: { type: CategorySchema },
+  brand: { type: BrandSchema },
+  review: [
     {
-      title: { type: String },
-      attributes: [
-        {
-          title: { type: String },
-          values: { type: [String], default: [] },
-        },
-      ],
+      title: { type: String, require: true },
+      value: { type: String, require: true },
     },
   ],
-  expert_reviews: {
-    description: { type: String },
-  },
+  specifications: [
+    {
+      title: { type: String, require: true },
+      value: { type: String, require: true },
+    },
+  ],
+  expert_reviews: { type: String },
 });
 
 export const ColorModel = mongoose.model('Color', ColorSchema);

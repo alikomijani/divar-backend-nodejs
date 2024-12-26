@@ -19,6 +19,7 @@ const CommentSchema = new mongoose.Schema<IComment>({
   rating: { type: Number, min: 1, max: 5 },
   created_at: { type: Date, default: Date.now },
 });
+
 const ProductQuestionSchema = new mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
