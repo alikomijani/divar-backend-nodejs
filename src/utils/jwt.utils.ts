@@ -36,7 +36,7 @@ export function verifyToken(
       decodedToken &&
       typeof decodedToken !== 'string' &&
       decodedToken.hasOwnProperty('id') &&
-      decodedToken.hasOwnProperty('username') &&
+      decodedToken.hasOwnProperty('email') &&
       decodedToken.hasOwnProperty('role')
     ) {
       return decodedToken as TokenPayload;

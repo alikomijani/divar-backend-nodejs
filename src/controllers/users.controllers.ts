@@ -10,22 +10,21 @@ import type { RequestUserType } from '@/types/express';
 export const registerUser: Controller<object, RegisterUser> = async (
   req,
   res,
-  next,
 ) => {
   try {
     const user = await UserModel.create({ ...req.body, role: UserRole.User });
     const tokens = user.createToken();
     // Remove the password field from the response for security
     const { password, ...userWithoutPassword } = user.toObject();
-    res.status(StatusCodes.CREATED).json({
+    return res.status(StatusCodes.CREATED).json({
       tokens,
       user: userWithoutPassword,
     });
   } catch (error) {
     if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate email or username error
+      // Handle duplicate email  error
       const duplicatedField = Object.keys(error.keyValue)[0];
-      res.status(StatusCodes.BAD_REQUEST).json({
+      return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
         message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
         errors: {
@@ -33,7 +32,6 @@ export const registerUser: Controller<object, RegisterUser> = async (
         },
       });
     }
-    next(error);
   }
 };
 export const getUser = async (

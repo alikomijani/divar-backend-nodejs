@@ -12,7 +12,7 @@ export const createCity: Controller<object, CityType> = async (req, res) => {
     res.status(StatusCodes.CREATED).json(newCity);
   } catch (error) {
     if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate email or username error
+      // Handle duplicate slug error
       const duplicatedField = Object.keys(error.keyValue)[0];
       res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
