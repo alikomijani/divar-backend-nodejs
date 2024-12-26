@@ -7,7 +7,7 @@ export function generalErrorHandler(
   res: Response,
   _: NextFunction, // <-- Include this parameter
 ) {
-  console.log(err);
+  // console.log(err);
   // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

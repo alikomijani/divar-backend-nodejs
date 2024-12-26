@@ -1,6 +1,7 @@
 import { PropertyModel } from '@/models/property.model';
 import type { Controller, PaginationParams } from '@/types/app.types';
 import type { ICategoryProperty } from '@/types/category.types';
+import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
@@ -17,19 +18,13 @@ export const getAllProperties: Controller<
   PaginationParams
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const pageNumber = Number(page);
-  const limitNumber = Number(pageSize);
-  const total = await PropertyModel.countDocuments();
-  const results = await PropertyModel.find()
-    .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
-    .limit(limitNumber); // Limit the number of documents
-  res.status(StatusCodes.OK).json({
-    results,
-    total,
-    totalPages: Math.ceil(total / limitNumber), // Total pages based on the limit
+  const paginatedResult = await getPaginatedQuery(
+    PropertyModel,
     page,
     pageSize,
-  });
+    {},
+  );
+  return res.status(StatusCodes.OK).json(paginatedResult);
 };
 
 // READ a single category by ID
@@ -40,8 +35,9 @@ export const getPropertyById: Controller<{ id: string }> = async (req, res) => {
     return res
       .status(StatusCodes.NOT_FOUND)
       .json({ message: 'Property not found' });
+  } else {
+    return res.status(StatusCodes.OK).json(property);
   }
-  res.status(StatusCodes.OK).json(property);
 };
 
 // UPDATE a Property by ID
@@ -60,9 +56,12 @@ export const updateProperty: Controller<
     },
   );
   if (!updatedProperty) {
-    res.status(StatusCodes.NOT_FOUND).json({ message: 'Category not found' });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: 'Category not found' });
+  } else {
+    return res.status(StatusCodes.OK).json(updatedProperty);
   }
-  res.status(StatusCodes.OK).json(updatedProperty);
 };
 
 // DELETE a category by ID
@@ -70,7 +69,12 @@ export const deleteProperty: Controller<{ id: string }> = async (req, res) => {
   const { id } = req.params;
   const deletedProperty = await PropertyModel.findByIdAndDelete(id);
   if (!deletedProperty) {
-    res.status(StatusCodes.NOT_FOUND).json({ message: 'Property not found' });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: 'Property not found' });
+  } else {
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: 'Property deleted successfully' });
   }
-  res.status(StatusCodes.OK).json({ message: 'Property deleted successfully' });
 };

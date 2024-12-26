@@ -1,6 +1,7 @@
 import type { IBrand } from '@/models/brand.model';
 import { BrandModel } from '@/models/brand.model';
 import type { Controller, PaginationParams } from '@/types/app.types';
+import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
 // Create Brand
@@ -17,25 +18,19 @@ export const getAllBrands: Controller<
   PaginationParams
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const pageNumber = Number(page);
-  const limitNumber = Number(pageSize);
-  const total = await BrandModel.countDocuments();
-  const brands = await BrandModel.find()
-    .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
-    .limit(limitNumber); // Limit the number of documents ed;;
-  res.status(StatusCodes.OK).json({
-    results: brands,
-    total,
-    totalPages: Math.ceil(total / limitNumber), // Total pages based on the limit
+  const paginatedResult = await getPaginatedQuery(
+    BrandModel,
     page,
     pageSize,
-  });
+    {},
+  );
+  res.status(StatusCodes.OK).json(paginatedResult);
 };
 
 // Get Brand by ID
-export const getBrandById: Controller<{ slug: string }> = async (req, res) => {
-  const { slug } = req.params;
-  const brand = await BrandModel.findById(slug);
+export const getBrandById: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const brand = await BrandModel.findById(id);
   if (!brand) {
     return res.status(StatusCodes.NOT_FOUND).json({
       message: 'Brand not found',

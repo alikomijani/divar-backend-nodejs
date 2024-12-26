@@ -13,15 +13,15 @@ export const loginMiddleware: Controller = async (req, res, next) => {
   }
 
   try {
-    const decodedToken = verifyToken(token);
+    const decodedToken = verifyToken(token!);
     req.user = {
       id: decodedToken.id,
       username: decodedToken.username,
       role: decodedToken.role,
     };
-    return next();
+    next();
   } catch {
-    return res.status(StatusCodes.UNAUTHORIZED).json({
+    res.status(StatusCodes.UNAUTHORIZED).json({
       success: false,
       message: 'Error! Token is invalid.',
     });
@@ -31,20 +31,18 @@ export const loginMiddleware: Controller = async (req, res, next) => {
 export function roleMiddleware(requiredRole: Role): Controller {
   return (req, res, next) => {
     const userRole = req.user?.role;
-
     if (!userRole) {
-      return res.status(StatusCodes.FORBIDDEN).json({
+      res.status(StatusCodes.FORBIDDEN).json({
         success: false,
         message: 'Error! User role is not defined.',
       });
     }
-
-    if (userRole !== requiredRole) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({
+    if (userRole < requiredRole) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
         success: false,
         message: `Error! Authorization failed. Required role: ${requiredRole}, but user role is: ${userRole}`,
       });
     }
-    return next();
+    next();
   };
 }

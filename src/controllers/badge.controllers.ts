@@ -2,6 +2,7 @@ import type { IBadge } from '@/models/badge.model';
 import { BadgeModel } from '@/models/badge.model';
 
 import type { Controller, PaginationParams } from '@/types/app.types';
+import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
 // Create Badge
@@ -18,19 +19,13 @@ export const getAllBadges: Controller<object, null, PaginationParams> = async (
   res,
 ) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const pageNumber = Number(page);
-  const limitNumber = Number(pageSize);
-  const total = await BadgeModel.countDocuments();
-  const badges = await BadgeModel.find()
-    .skip((pageNumber - 1) * limitNumber) // Skip documents for pagination
-    .limit(limitNumber); // Limit the number of documents
-  res.status(StatusCodes.OK).json({
-    results: badges,
-    total,
-    totalPages: Math.ceil(total / limitNumber), // Total pages based on the limit
+  const paginatedQuery = await getPaginatedQuery(
+    BadgeModel,
     page,
     pageSize,
-  });
+    {},
+  );
+  res.status(StatusCodes.OK).json(paginatedQuery);
 };
 
 // Get Badge by ID
