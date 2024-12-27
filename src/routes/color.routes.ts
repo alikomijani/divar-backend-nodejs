@@ -7,6 +7,7 @@ import {
   createColor,
   deleteColor,
   getAllColors,
+  getColorById,
   updateColor,
 } from '@/controllers/colors.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
@@ -25,6 +26,9 @@ colorRouter.post(
   validateData(ColorSchemaZod),
   createColor,
 ); // Create a new color
+
+colorRouter.get('/:id', validateIdMiddleware, getColorById); // Update a color by ID
+
 colorRouter.put(
   '/:id',
   validateIdMiddleware,

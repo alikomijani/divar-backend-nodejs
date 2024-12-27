@@ -10,7 +10,22 @@ export const createColor: Controller<object, IColor> = async (req, res) => {
   await newColor.save();
   res.status(StatusCodes.CREATED).json(newColor);
 };
-
+// Read All ColorByID
+export const getColorById: Controller<{ id: string }, IColor> = async (
+  req,
+  res,
+) => {
+  const id = req.params.id;
+  const color = await ColorModel.findById(id);
+  if (!color) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      success: false,
+      message: 'Color not found',
+    });
+  } else {
+    return res.status(StatusCodes.OK).json(color);
+  }
+};
 // Read All Colors
 export const getAllColors: Controller<
   object,
