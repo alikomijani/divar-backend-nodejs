@@ -1,14 +1,15 @@
-import type { Role } from '@/models/user.model';
+import type { UserRole } from '@/models/user.model';
 
 declare global {
   namespace Express {
-    export interface Request {
-      user?: RequestUserType;
+    interface Request {
+      user?: RequestUser;
     }
   }
 }
-export type RequestUserType = {
-  id: number;
+
+export interface RequestUser {
+  id: string; // Or Types.ObjectId if applicable
   email: string;
-  role: Role;
-};
+  role: UserRole;
+}

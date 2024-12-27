@@ -1,11 +1,12 @@
+import type { PaginatedResponse } from '@/types/app.types';
 import type { Model } from 'mongoose';
 
 export async function getPaginatedQuery<T>(
   model: Model<T>,
-  page = 1,
-  pageSize = 10,
+  page: number | string | string[],
+  pageSize: number | string | string[],
   query: object,
-) {
+): Promise<PaginatedResponse<T>> {
   page = Number(page);
   pageSize = Number(pageSize);
   const total = await model.countDocuments();

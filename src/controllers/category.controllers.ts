@@ -14,10 +14,10 @@ export const createCategory: Controller<object, ICategory> = async (
 };
 
 // READ all categories
-export const getAllCategories: Controller<object, ICategory> = async (
-  req,
-  res,
-) => {
+export const getAllCategories: Controller<
+  object,
+  { results: ICategory[] }
+> = async (req, res) => {
   const categories = await CategoryModel.find()
     .populate('properties')
     .populate('parent');
@@ -57,7 +57,7 @@ export const updateCategory: Controller<
   if (!updatedCategory) {
     return res
       .status(StatusCodes.NOT_FOUND)
-      .json({ message: 'Category not found' });
+      .json({ message: 'Category not found', success: false });
   } else {
     return res.status(StatusCodes.OK).json(updatedCategory);
   }
@@ -72,8 +72,6 @@ export const deleteCategory: Controller<{ id: string }> = async (req, res) => {
       .status(StatusCodes.NOT_FOUND)
       .json({ message: 'Category not found' });
   } else {
-    return res
-      .status(StatusCodes.OK)
-      .json({ message: 'Category deleted successfully' });
+    return res.status(StatusCodes.NO_CONTENT).send();
   }
 };

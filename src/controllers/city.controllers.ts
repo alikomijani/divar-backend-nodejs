@@ -1,6 +1,6 @@
 import type { CityType } from '@/models/city.model';
 import { CityModel } from '@/models/city.model';
-import type { Controller, PaginationParams } from '@/types/app.types';
+import type { Controller, PaginatedResponse } from '@/types/app.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 import { MongoServerError } from 'mongodb';
@@ -25,10 +25,10 @@ export const createCity: Controller<object, CityType> = async (req, res) => {
   }
 };
 
-export const getCities: Controller<object, object, PaginationParams> = async (
-  req,
-  res,
-) => {
+export const getCities: Controller<
+  object,
+  PaginatedResponse<CityType>
+> = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
   const results = await getPaginatedQuery(CityModel, page, pageSize, {});
   res.status(StatusCodes.OK).json(results);
@@ -75,9 +75,6 @@ export const deleteCity: Controller<{ slug: string }> = async (req, res) => {
       message: 'City not found',
     });
   } else {
-    return res.status(StatusCodes.ACCEPTED).json({
-      success: true,
-      message: 'City deleted successfully',
-    });
+    return res.status(StatusCodes.NO_CONTENT).send();
   }
 };

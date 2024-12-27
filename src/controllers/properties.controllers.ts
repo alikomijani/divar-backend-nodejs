@@ -1,80 +1,117 @@
-import type { ICategory } from '@/models/category.model';
+import type { ICategoryProperty } from '@/models/property.model';
 import { PropertyModel } from '@/models/property.model';
-import type { Controller, PaginationParams } from '@/types/app.types';
+import type { Controller, PaginatedResponse } from '@/types/app.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
-import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import mongoose from 'mongoose';
 
-export const createProperty = async (req: Request, res: Response) => {
-  const propertyData: ICategory = req.body;
-  const newProperty = await PropertyModel.create(propertyData);
-  res.status(StatusCodes.CREATED).json(newProperty);
+export const createProperty: Controller<
+  object,
+  ICategoryProperty,
+  ICategoryProperty
+> = async (req, res) => {
+  try {
+    const propertyData: ICategoryProperty = req.body;
+    const newProperty = await PropertyModel.create(propertyData);
+    res.status(StatusCodes.CREATED).json(newProperty);
+  } catch (error) {
+    console.error('Error creating property:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: 'Failed to create property' });
+  }
 };
 
-// READ all Properties
 export const getAllProperties: Controller<
   object,
-  object,
-  PaginationParams
+  PaginatedResponse<ICategoryProperty>
 > = async (req, res) => {
-  const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const paginatedResult = await getPaginatedQuery(
-    PropertyModel,
-    page,
-    pageSize,
-    {},
-  );
-  return res.status(StatusCodes.OK).json(paginatedResult);
-};
-
-// READ a single category by ID
-export const getPropertyById: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const property = await PropertyModel.findById(id);
-  if (!property) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: 'Property not found' });
-  } else {
-    return res.status(StatusCodes.OK).json(property);
+  try {
+    const { page = 1, pageSize = 10 } = req.query;
+    const paginatedResult = await getPaginatedQuery(
+      PropertyModel,
+      page,
+      pageSize,
+      {},
+    );
+    return res.status(StatusCodes.OK).json(paginatedResult);
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: 'Failed to fetch properties' });
   }
 };
 
-// UPDATE a Property by ID
+export const getPropertyById: Controller<
+  { id: string },
+  ICategoryProperty
+> = async (req, res) => {
+  try {
+    const property = await PropertyModel.findById(req.params.id);
+    if (!property) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Property not found', success: false });
+    }
+    return res.status(StatusCodes.OK).json(property);
+  } catch (error) {
+    console.error('Error fetching property:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to fetch property', success: false });
+  }
+};
+
 export const updateProperty: Controller<
   { id: string },
-  Partial<ICategory>
+  ICategoryProperty,
+  Partial<ICategoryProperty>
 > = async (req, res) => {
-  const { id } = req.params;
-  const updatedData = req.body;
-  const updatedProperty = await PropertyModel.findByIdAndUpdate(
-    id,
-    updatedData,
-    {
-      new: true,
-      runValidators: true,
-    },
-  );
-  if (!updatedProperty) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: 'Category not found' });
-  } else {
+  try {
+    const updatedData: Partial<ICategoryProperty> = req.body;
+    const updatedProperty = await PropertyModel.findByIdAndUpdate(
+      req.params.id,
+      updatedData,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+    if (!updatedProperty) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Property not found', success: false });
+    }
     return res.status(StatusCodes.OK).json(updatedProperty);
+  } catch (error) {
+    console.error('Error updating property:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to update property', success: false });
   }
 };
 
-// DELETE a category by ID
 export const deleteProperty: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const deletedProperty = await PropertyModel.findByIdAndDelete(id);
-  if (!deletedProperty) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: 'Property not found' });
-  } else {
-    return res
-      .status(StatusCodes.OK)
-      .json({ message: 'Property deleted successfully' });
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'Invalid property ID' });
+    }
+    const deletedProperty = await PropertyModel.findByIdAndDelete(
+      req.params.id,
+    );
+    if (!deletedProperty) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Property not found' });
+    }
+    return res.status(StatusCodes.NO_CONTENT).send(); // 204 No Content
+  } catch (error) {
+    console.error('Error deleting property:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to delete property' });
   }
 };

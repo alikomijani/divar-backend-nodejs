@@ -12,6 +12,7 @@ import {
 import { validateData } from '@/middlewares/validation.middleware';
 import { UserRole } from '@/models/user.model';
 import { ColorSchemaZod } from '@/models/color.model';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const colorRouter = express.Router();
 
@@ -26,6 +27,7 @@ colorRouter.post(
 ); // Create a new color
 colorRouter.put(
   '/:id',
+  validateIdMiddleware,
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(ColorSchemaZod),
@@ -34,6 +36,7 @@ colorRouter.put(
 
 colorRouter.delete(
   '/:id',
+  validateIdMiddleware,
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   deleteColor,

@@ -1,6 +1,6 @@
 import type { IColor } from '@/models/color.model';
 import { ColorModel } from '@/models/color.model';
-import type { Controller, PaginationParams } from '@/types/app.types';
+import type { Controller, PaginatedResponse } from '@/types/app.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
@@ -14,8 +14,7 @@ export const createColor: Controller<object, IColor> = async (req, res) => {
 // Read All Colors
 export const getAllColors: Controller<
   object,
-  IColor[],
-  PaginationParams
+  PaginatedResponse<IColor>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
   const paginatedResult = await getPaginatedQuery(
@@ -28,12 +27,12 @@ export const getAllColors: Controller<
 };
 
 // Update Color
-export const updateColor: Controller<{ id: string }, IColor> = async (
+export const updateColor: Controller<{ id: string }, IColor, IColor> = async (
   req,
   res,
 ) => {
   const { id } = req.params;
-  const data: IColor = req.body;
+  const data = req.body;
   const updatedColor = await ColorModel.findByIdAndUpdate(id, data, {
     new: true,
   });
@@ -56,8 +55,5 @@ export const deleteColor: Controller<{ id: string }> = async (req, res) => {
       message: 'Color not found',
     });
   }
-  res.status(StatusCodes.OK).json({
-    success: true,
-    message: 'Color deleted successfully',
-  });
+  res.status(StatusCodes.NO_CONTENT).send();
 };

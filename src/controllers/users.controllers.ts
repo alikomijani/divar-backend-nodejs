@@ -4,13 +4,13 @@ import { createAccessToken, verifyToken } from '@/utils/jwt.utils';
 import type { LoginUser, RegisterUser } from '@/models/user.model';
 import { UserModel, UserRole } from '@/models/user.model';
 import type { Controller } from '@/types/app.types';
-import type { NextFunction, Request, Response } from 'express';
-import type { RequestUserType } from '@/types/express';
+import type { RequestUser } from '@/types/express';
 
-export const registerUser: Controller<object, RegisterUser> = async (
-  req,
-  res,
-) => {
+export const registerUser: Controller<
+  object,
+  { tokens: any; user: RequestUser },
+  RegisterUser
+> = async (req, res) => {
   try {
     const user = await UserModel.create({ ...req.body, role: UserRole.User });
     const tokens = user.createToken();
@@ -34,24 +34,22 @@ export const registerUser: Controller<object, RegisterUser> = async (
     }
   }
 };
-export const getUser = async (
-  req: Request<object, object, RequestUserType>,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getUser: Controller = async (req, res, next) => {
   try {
     const user = await UserModel.findById(req.user?.id);
     if (!user) {
-      res.status(404).send('User not found');
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ success: false, message: 'User not found' });
     } else {
-      res.json(user);
+      return res.json(user);
     }
   } catch (err) {
     next(err);
   }
 };
 
-export const loginUser: Controller<object, LoginUser> = async (
+export const loginUser: Controller<object, any, LoginUser> = async (
   req,
   res,
   next,
@@ -60,7 +58,7 @@ export const loginUser: Controller<object, LoginUser> = async (
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
     if (!user) {
-      res
+      return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ messages: ['Invalid credential'] });
       return;
@@ -68,7 +66,7 @@ export const loginUser: Controller<object, LoginUser> = async (
     // Check if password is correct
     const isPasswordValid = await user.checkPassword(password);
     if (!isPasswordValid) {
-      res
+      return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ messages: ['Invalid credential'] });
     }
@@ -77,7 +75,7 @@ export const loginUser: Controller<object, LoginUser> = async (
     const tokens = user.createToken();
 
     // Send response with tokens
-    res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.OK).json({
       tokens,
       user: {
         id: user.id,
@@ -92,13 +90,14 @@ export const loginUser: Controller<object, LoginUser> = async (
 // Controller function to refresh access token
 export const refreshAccessToken: Controller<
   object,
+  { accessToken: string },
   { refreshToken: string }
-> = (req, res) => {
+> = async (req, res) => {
   const { refreshToken } = req.body;
 
   // todo: Check if refresh token exists in the database
   if (!refreshToken) {
-    res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
+    return res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
   }
   try {
     // Verify the refresh token
@@ -106,8 +105,10 @@ export const refreshAccessToken: Controller<
     // Generate a new access token
     const newAccessToken = createAccessToken(decoded);
     // Send the new access token to the client
-    res.status(StatusCodes.OK).json({ accessToken: newAccessToken });
+    return res.status(StatusCodes.OK).json({ accessToken: newAccessToken });
   } catch {
-    res.sendStatus(StatusCodes.FORBIDDEN); // Forbidden
+    return res
+      .sendStatus(StatusCodes.FORBIDDEN)
+      .json({ success: false, message: 'Forbidden' }); // Forbidden
   }
 };

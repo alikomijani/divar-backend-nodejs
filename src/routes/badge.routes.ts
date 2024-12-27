@@ -10,6 +10,7 @@ import {
   updateBadge,
 } from '@/controllers/badge.controllers';
 import { UserRole } from '@/models/user.model';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const badgeRouter = express.Router();
 
@@ -17,12 +18,14 @@ badgeRouter.post('/', createBadge); // Create a new badge
 badgeRouter.get('/', getAllBadges); // Get all cities
 badgeRouter.put(
   '/:id',
+  validateIdMiddleware,
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   updateBadge,
 ); // Update a badge by ID
 badgeRouter.delete(
   '/:id',
+  validateIdMiddleware,
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   deleteBadge,
