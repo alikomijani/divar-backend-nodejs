@@ -6,7 +6,7 @@ import imagesRouter from './image.routes';
 import colorRouter from './color.routes';
 import cityRouter from './city.routes';
 import brandRouter from './brand.routes';
-import { validateIdParam } from '@/middlewares/validateID.middleware';
+import { validateIdParam } from '@/middlewares/validate-id.middleware';
 
 const appRouter = Router();
 appRouter.use(validateIdParam);
