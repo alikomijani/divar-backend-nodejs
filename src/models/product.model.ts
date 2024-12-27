@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
 import type { ColorType } from './color.model';
 import type { BadgeType } from './badge.model';
+import refValidator from '@/utils/ref-validator';
 
 // Zod Schemas for subdocuments
 const ReviewSchemaZod = z.object({
@@ -107,17 +108,31 @@ const ProductSchema = new Schema<IProduct>(
       main: { type: String, required: true, trim: true },
       list: { type: [String], default: [] },
     },
-    colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color' }],
-    badges: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Badge' }],
+    colors: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Color',
+        validate: refValidator('Color'),
+      },
+    ],
+    badges: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Badge',
+        validate: refValidator('Badge'),
+      },
+    ],
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
       required: true,
+      validate: refValidator('Category'),
     },
     brand: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Brand',
       required: true,
+      validate: refValidator('Brand'),
     },
     review: {
       type: [

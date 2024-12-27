@@ -9,7 +9,7 @@ import {
 } from 'jsonwebtoken';
 
 type TokenPayload = JwtPayload & {
-  id: number;
+  id: string;
   email: string;
   role: UserRole;
 };

@@ -29,7 +29,7 @@ export const loginMiddleware: Controller = async (req, res, next) => {
 };
 
 export function roleMiddleware(requiredRole: UserRole): Controller {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const userRole = req.user?.role;
     if (!userRole) {
       return res.status(StatusCodes.FORBIDDEN).json({
