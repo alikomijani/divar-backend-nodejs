@@ -6,6 +6,8 @@ import imagesRouter from './image.routes';
 import colorRouter from './color.routes';
 import cityRouter from './city.routes';
 import brandRouter from './brand.routes';
+import badgeRouter from './badge.routes';
+import productRouter from './product.routes';
 
 const appRouter = Router();
 appRouter.use('/auth', userRouter);
@@ -15,5 +17,7 @@ appRouter.use('/properties', propertyRouter);
 appRouter.use('/images', imagesRouter);
 appRouter.use('/colors', colorRouter);
 appRouter.use('/cities', cityRouter);
+appRouter.use('/badges', badgeRouter);
+appRouter.use('/products', productRouter);
 
 export default appRouter;

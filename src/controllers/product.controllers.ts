@@ -3,6 +3,7 @@ import type { IProduct } from '@/models/product.model';
 import ProductModel from '@/models/product.model';
 import { MongoServerError } from 'mongodb';
 import type { Controller } from '@/types/app.types';
+import { getPaginatedQuery } from '@/utils/paginatedQuery';
 
 export const createProduct: Controller = async (req, res) => {
   try {
@@ -32,8 +33,14 @@ export const createProduct: Controller = async (req, res) => {
 
 export const getAllProducts: Controller = async (req, res) => {
   try {
-    const products = await ProductModel.find();
-    return res.json(products);
+    const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
+    const paginatedResult = await getPaginatedQuery(
+      ProductModel,
+      page,
+      pageSize,
+      {},
+    );
+    return res.json(paginatedResult);
   } catch (error) {
     console.error(error);
     return res
@@ -42,9 +49,12 @@ export const getAllProducts: Controller = async (req, res) => {
   }
 };
 
-export const getProductById: Controller<{ id: string }> = async (req, res) => {
+export const getProductByCode: Controller<{ code: number }> = async (
+  req,
+  res,
+) => {
   try {
-    const product = await ProductModel.findById(req.params.id);
+    const product = await ProductModel.findOne({ code: req.params.code });
     if (!product) {
       return res
         .status(StatusCodes.NOT_FOUND)

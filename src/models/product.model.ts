@@ -96,7 +96,7 @@ export interface IProduct
 // Mongoose Schema
 const ProductSchema = new Schema<IProduct>(
   {
-    code: { type: Number, required: true, unique: true },
+    code: { type: Number, required: true, unique: true, immutable: true },
     title_fa: { type: String, required: true, trim: true },
     title_en: { type: String, required: true, trim: true },
     status: {

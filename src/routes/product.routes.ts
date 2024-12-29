@@ -3,19 +3,32 @@ import express from 'express';
 import {
   createProduct,
   getAllProducts,
-  getProductById,
   updateProduct,
   deleteProduct,
+  getProductByCode,
 } from '../controllers/product.controllers'; // Import your controller functions
 import { ProductSchemaZod } from '@/models/product.model';
 import { validateData } from '@/middlewares/validation.middleware';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
+import {
+  loginMiddleware,
+  roleMiddleware,
+} from '@/middlewares/authentication.middleware';
+import { UserRole } from '@/models/user.model';
 
-const router = express.Router();
+const productRouter = express.Router();
 
-router.post('/', validateData(ProductSchemaZod), createProduct);
-router.get('/', getAllProducts);
-router.get('/:id', getProductById);
-router.put('/:id', validateData(ProductSchemaZod), updateProduct);
-router.delete('/:id', deleteProduct);
+productRouter.post('/', validateData(ProductSchemaZod), createProduct);
+productRouter.get('/', getAllProducts);
+productRouter.get('/:code', getProductByCode);
+productRouter.put(
+  '/:id',
+  validateIdMiddleware,
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  validateData(ProductSchemaZod),
+  updateProduct,
+);
+productRouter.delete('/:id', deleteProduct);
 
-export default router;
+export default productRouter;
