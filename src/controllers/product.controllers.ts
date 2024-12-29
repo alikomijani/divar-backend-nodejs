@@ -49,7 +49,7 @@ export const getAllProducts: Controller = async (req, res) => {
   }
 };
 
-export const getProductByCode: Controller<{ code: number }> = async (
+export const getProductByCode: Controller<{ code: string }> = async (
   req,
   res,
 ) => {
@@ -70,18 +70,17 @@ export const getProductByCode: Controller<{ code: number }> = async (
 };
 
 export const updateProduct: Controller<
-  { id: string },
+  { code: string },
   IProduct,
   IProduct
 > = async (req, res) => {
   try {
     // req.body is already validated
-    const updatedProduct = await ProductModel.findByIdAndUpdate(
-      req.params.id,
+    const updatedProduct = await ProductModel.findOneAndUpdate(
+      { code: req.params.code },
       req.body,
       { new: true, runValidators: true },
     );
-
     if (!updatedProduct) {
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,
@@ -109,9 +108,11 @@ export const updateProduct: Controller<
   }
 };
 
-export const deleteProduct: Controller<{ id: string }> = async (req, res) => {
+export const deleteProduct: Controller<{ code: string }> = async (req, res) => {
   try {
-    const deletedProduct = await ProductModel.findByIdAndDelete(req.params.id);
+    const deletedProduct = await ProductModel.findOneAndDelete({
+      code: req.params.code,
+    });
     if (!deletedProduct) {
       return res
         .status(StatusCodes.NOT_FOUND)

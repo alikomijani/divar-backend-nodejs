@@ -9,7 +9,6 @@ import {
 } from '../controllers/product.controllers'; // Import your controller functions
 import { ProductSchemaZod } from '@/models/product.model';
 import { validateData } from '@/middlewares/validation.middleware';
-import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 import {
   loginMiddleware,
   roleMiddleware,
@@ -18,17 +17,27 @@ import { UserRole } from '@/models/user.model';
 
 const productRouter = express.Router();
 
-productRouter.post('/', validateData(ProductSchemaZod), createProduct);
+productRouter.post(
+  '/',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  validateData(ProductSchemaZod),
+  createProduct,
+);
 productRouter.get('/', getAllProducts);
 productRouter.get('/:code', getProductByCode);
 productRouter.put(
-  '/:id',
-  validateIdMiddleware,
+  '/:code',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(ProductSchemaZod),
   updateProduct,
 );
-productRouter.delete('/:id', deleteProduct);
+productRouter.delete(
+  '/:code',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  deleteProduct,
+);
 
 export default productRouter;
