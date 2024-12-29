@@ -35,6 +35,7 @@ const CitySchema = new Schema<CityType>(
       index: 1,
       trim: true,
       lowercase: true,
+      immutable: true,
     },
   },
   {
@@ -43,20 +44,6 @@ const CitySchema = new Schema<CityType>(
     toObject: { virtuals: true },
   },
 );
-
-// Virtual for 'id'
-CitySchema.virtual('id').get(function (this: CityType) {
-  return this._id;
-});
-
-// Transform to remove _id and __v
-CitySchema.set('toJSON', {
-  transform: function (doc, ret) {
-    delete ret._id;
-    delete ret.__v;
-    return ret;
-  },
-});
 
 export const CityModel = mongoose.model<CityType>('City', CitySchema);
 

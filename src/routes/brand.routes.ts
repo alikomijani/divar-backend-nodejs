@@ -7,12 +7,12 @@ import {
   createBrand,
   deleteBrand,
   getAllBrands,
+  getBrandBySlug,
   updateBrand,
 } from '@/controllers/brand.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
 import { BrandSchemaZod } from '@/models/brand.model';
 import { UserRole } from '@/models/user.model';
-import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const brandRouter = express.Router();
 
@@ -24,17 +24,16 @@ brandRouter.post(
   createBrand,
 ); // Create a new brand
 brandRouter.get('/', getAllBrands); // Get all cities
+brandRouter.get('/:slug', getBrandBySlug); // Get all cities
 brandRouter.put(
-  '/:id',
-  validateIdMiddleware,
+  '/:slug',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(BrandSchemaZod),
   updateBrand,
 ); // Update a brand by ID
 brandRouter.delete(
-  '/:id',
-  validateIdMiddleware,
+  '/:slug',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   deleteBrand,

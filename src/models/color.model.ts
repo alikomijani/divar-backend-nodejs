@@ -1,4 +1,4 @@
-import type { Document, Types } from 'mongoose';
+import type { Document } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
 
@@ -16,7 +16,6 @@ export type ColorType = z.infer<typeof ColorSchemaZod>;
 
 // Mongoose Interface (Extending ColorType and Document)
 export interface IColor extends ColorType, Document {
-  _id: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }

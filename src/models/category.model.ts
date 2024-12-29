@@ -4,7 +4,8 @@ import { z } from 'zod';
 
 // Interface
 export interface ICategory extends Document {
-  name: string;
+  title_fa: string;
+  title_en: string;
   slug: string;
   icon?: string;
   returnReasonAlert?: string;
@@ -15,7 +16,8 @@ export interface ICategory extends Document {
 // Mongoose Schema
 export const CategorySchema = new Schema<ICategory>(
   {
-    name: { type: String, required: true, trim: true },
+    title_en: { type: String, required: true, trim: true },
+    title_fa: { type: String, required: true, trim: true },
     slug: {
       type: String,
       required: true,
@@ -23,6 +25,7 @@ export const CategorySchema = new Schema<ICategory>(
       index: 1,
       trim: true,
       lowercase: true,
+      immutable: true,
     },
     icon: { type: String, trim: true },
     returnReasonAlert: { type: String, trim: true },
@@ -44,7 +47,8 @@ export const Category = mongoose.model<ICategory>('Category', CategorySchema);
 
 // Zod Schema
 export const CategorySchemaZod = z.object({
-  name: z.string().min(1, 'Name is required').trim(),
+  title_en: z.string().min(1, 'Name is required').trim(),
+  title_fa: z.string().min(1, 'Name is required').trim(),
   slug: z
     .string()
     .min(1, 'Slug is required')
@@ -66,24 +70,6 @@ export const CategorySchemaZod = z.object({
 export type CategoryType = z.infer<typeof CategorySchemaZod>;
 
 export default Category;
-
-// Add a virtual ID field
-CategorySchema.virtual('id').get(function () {
-  return String(this._id);
-});
-
-// Set JSON and Object transformations
-CategorySchema.set('toJSON', {
-  virtuals: true,
-  transform: (_, ret) => {
-    delete ret._id;
-    delete ret.__v;
-  },
-});
-
-CategorySchema.set('toObject', {
-  virtuals: true,
-});
 
 export const CategoryModel = mongoose.model<ICategory>(
   'Category',

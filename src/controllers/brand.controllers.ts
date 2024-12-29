@@ -26,13 +26,13 @@ export const getAllBrands: Controller<
   res.status(StatusCodes.OK).json(paginatedResult);
 };
 
-// Get Brand by ID
-export const getBrandById: Controller<{ id: string }, IBrand> = async (
+// Get Brand by slug
+export const getBrandBySlug: Controller<{ slug: string }, IBrand> = async (
   req,
   res,
 ) => {
-  const { id } = req.params;
-  const brand = await BrandModel.findById(id);
+  const { slug } = req.params;
+  const brand = await BrandModel.findOne({ slug });
   if (!brand) {
     return res.status(StatusCodes.NOT_FOUND).json({
       message: 'Brand not found',
@@ -44,13 +44,13 @@ export const getBrandById: Controller<{ id: string }, IBrand> = async (
 };
 
 // Update Brand
-export const updateBrand: Controller<{ id: string }, IBrand, IBrand> = async (
+export const updateBrand: Controller<{ slug: string }, IBrand, IBrand> = async (
   req,
   res,
 ) => {
-  const { id } = req.params;
+  const { slug } = req.params;
   const data = req.body;
-  const updatedBrand = await BrandModel.findByIdAndUpdate(id, data, {
+  const updatedBrand = await BrandModel.findOneAndUpdate({ slug }, data, {
     new: true,
   });
   if (!updatedBrand) {
@@ -64,9 +64,9 @@ export const updateBrand: Controller<{ id: string }, IBrand, IBrand> = async (
 };
 
 // Delete Brand
-export const deleteBrand: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const deletedBrand = await BrandModel.findByIdAndDelete(id);
+export const deleteBrand: Controller<{ slug: string }> = async (req, res) => {
+  const { slug } = req.params;
+  const deletedBrand = await BrandModel.findOneAndDelete({ slug });
   if (!deletedBrand) {
     return res.status(StatusCodes.NOT_FOUND).json({
       success: false,

@@ -39,6 +39,7 @@ export const BrandSchema = new mongoose.Schema<IBrand>(
       trim: true,
       lowercase: true,
       index: 1,
+      immutable: true,
     },
     logo: { type: String },
   },
@@ -46,21 +47,5 @@ export const BrandSchema = new mongoose.Schema<IBrand>(
     timestamps: true,
   },
 );
-// Add a virtual ID field
-BrandSchema.virtual('id').get(function () {
-  return String(this._id);
-});
 
-// Set JSON and Object transformations
-BrandSchema.set('toJSON', {
-  virtuals: true,
-  transform: (_, ret) => {
-    delete ret._id;
-    delete ret.__v;
-  },
-});
-
-BrandSchema.set('toObject', {
-  virtuals: true,
-});
 export const BrandModel = mongoose.model('Brand', BrandSchema);

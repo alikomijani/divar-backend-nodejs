@@ -13,7 +13,6 @@ import {
 } from '@/middlewares/authentication.middleware';
 import { UserRole } from '@/models/user.model';
 import { CategorySchemaZod } from '@/models/category.model';
-import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const categoryRouter = Router();
 
@@ -27,18 +26,16 @@ categoryRouter.post(
   createCategory,
 );
 
-categoryRouter.get('/:id', getCategoryById);
+categoryRouter.get('/:slug', getCategoryById);
 categoryRouter.put(
-  '/:id',
-  validateIdMiddleware,
+  '/:slug',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(CategorySchemaZod),
   updateCategory,
 );
 categoryRouter.delete(
-  '/:id',
-  validateIdMiddleware,
+  '/:slug',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   deleteCategory,

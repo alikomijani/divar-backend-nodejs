@@ -25,9 +25,12 @@ export const getAllCategories: Controller<
 };
 
 // READ a single category by ID
-export const getCategoryById: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const category = await CategoryModel.findById(id)
+export const getCategoryById: Controller<{ slug: string }> = async (
+  req,
+  res,
+) => {
+  const { slug } = req.params;
+  const category = await CategoryModel.findOne({ slug })
     .populate('properties')
     .populate('parent');
   if (!category) {
@@ -40,13 +43,13 @@ export const getCategoryById: Controller<{ id: string }> = async (req, res) => {
 
 // UPDATE a category by ID
 export const updateCategory: Controller<
-  { id: string },
+  { slug: string },
   Partial<ICategory>
 > = async (req, res) => {
-  const { id } = req.params;
+  const { slug } = req.params;
   const updatedData = req.body;
-  const updatedCategory = await CategoryModel.findByIdAndUpdate(
-    id,
+  const updatedCategory = await CategoryModel.findOneAndUpdate(
+    { slug },
     updatedData,
     {
       new: true,
@@ -64,9 +67,12 @@ export const updateCategory: Controller<
 };
 
 // DELETE a category by ID
-export const deleteCategory: Controller<{ id: string }> = async (req, res) => {
-  const { id } = req.params;
-  const deletedCategory = await CategoryModel.findByIdAndDelete(id);
+export const deleteCategory: Controller<{ slug: string }> = async (
+  req,
+  res,
+) => {
+  const { slug } = req.params;
+  const deletedCategory = await CategoryModel.findOneAndDelete({ slug });
   if (!deletedCategory) {
     return res
       .status(StatusCodes.NOT_FOUND)
