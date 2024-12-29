@@ -9,11 +9,13 @@ import refValidator from '@/utils/ref-validator';
 const ReviewSchemaZod = z.object({
   title: z.string().min(1, 'Review title is required').trim(),
   value: z.string().min(1, 'Review value is required').trim(),
+  name: z.string().min(1, 'Review name is required').trim(),
 });
 
 const SpecificationSchemaZod = z.object({
   title: z.string().min(1, 'Specification title is required').trim(),
   value: z.string().min(1, 'Specification value is required').trim(),
+  name: z.string().min(1, 'Specification name is required').trim(),
 });
 
 const ImageSchemaZod = z.object({
@@ -86,8 +88,8 @@ export interface IProduct
   >;
   category: Types.ObjectId;
   brand: Types.ObjectId;
-  review: { title: string; value: string }[];
-  specifications: { title: string; value: string }[];
+  review: { title: string; value: string; name: string }[];
+  specifications: { title: string; value: string; name: string }[];
   expert_reviews?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -136,6 +138,7 @@ const ProductSchema = new Schema<IProduct>(
     review: {
       type: [
         {
+          name: { type: String, required: true, trim: true },
           title: { type: String, required: true, trim: true },
           value: { type: String, required: true, trim: true },
         },
@@ -145,6 +148,7 @@ const ProductSchema = new Schema<IProduct>(
     specifications: {
       type: [
         {
+          name: { type: String, required: true, trim: true },
           title: { type: String, required: true, trim: true },
           value: { type: String, required: true, trim: true },
         },
