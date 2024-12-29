@@ -4,6 +4,7 @@ import ProductModel from '@/models/product.model';
 import { MongoServerError } from 'mongodb';
 import type { Controller } from '@/types/app.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
+import { duplicateKey } from '@/utils/duplicate-key';
 
 export const createProduct: Controller = async (req, res) => {
   try {
@@ -13,15 +14,7 @@ export const createProduct: Controller = async (req, res) => {
     res.status(StatusCodes.CREATED).json(savedProduct);
   } catch (error) {
     if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate email  error
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        success: false,
-        message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        errors: {
-          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        },
-      });
+      return duplicateKey(error, res);
     } else {
       console.error(error);
       return res
@@ -90,15 +83,7 @@ export const updateProduct: Controller<
     return res.json(updatedProduct);
   } catch (error) {
     if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate email  error
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        success: false,
-        message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        errors: {
-          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        },
-      });
+      return duplicateKey(error, res);
     } else {
       console.error(error);
       return res

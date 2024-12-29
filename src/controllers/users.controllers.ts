@@ -1,10 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
-import { MongoServerError } from 'mongodb'; // Import MongoError from the MongoDB driver
 import { createAccessToken, verifyToken } from '@/utils/jwt.utils';
 import type { LoginUser, RegisterUser } from '@/models/user.model';
 import { UserModel, UserRole } from '@/models/user.model';
 import type { Controller } from '@/types/app.types';
 import type { RequestUser } from '@/types/express';
+import { duplicateKey } from '@/utils/duplicate-key';
 
 export const registerUser: Controller<
   object,
@@ -21,17 +21,7 @@ export const registerUser: Controller<
       user: userWithoutPassword,
     });
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate email  error
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        success: false,
-        message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        errors: {
-          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        },
-      });
-    }
+    return duplicateKey(error, res);
   }
 };
 export const getUser: Controller = async (req, res, next) => {

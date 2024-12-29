@@ -1,6 +1,7 @@
 import type { IBrand } from '@/models/brand.model';
 import { BrandModel } from '@/models/brand.model';
 import type { Controller, PaginatedResponse } from '@/types/app.types';
+import { duplicateKey } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
@@ -8,7 +9,11 @@ import { StatusCodes } from 'http-status-codes';
 export const createBrand: Controller<object, IBrand> = async (req, res) => {
   const data = req.body;
   const newBrand = await BrandModel.create(data);
-  res.status(StatusCodes.CREATED).json(newBrand);
+  try {
+    res.status(StatusCodes.CREATED).json(newBrand);
+  } catch (error) {
+    return duplicateKey(error, res);
+  }
 };
 
 // Get All Brands

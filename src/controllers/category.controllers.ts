@@ -1,8 +1,8 @@
 import type { ICategory } from '@/models/category.model';
 import { CategoryModel } from '@/models/category.model';
 import type { Controller } from '@/types/app.types';
+import { duplicateKey } from '@/utils/duplicate-key';
 import { StatusCodes } from 'http-status-codes';
-import { MongoServerError } from 'mongodb';
 
 // CREATE a new category
 export const createCategory: Controller<object, ICategory> = async (
@@ -14,17 +14,7 @@ export const createCategory: Controller<object, ICategory> = async (
     const newCategory = await CategoryModel.create(categoryData);
     return res.status(StatusCodes.CREATED).json(newCategory);
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate slug error
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      res.status(StatusCodes.BAD_REQUEST).json({
-        success: false,
-        message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        errors: {
-          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        },
-      });
-    }
+    return duplicateKey(error, res);
   }
 };
 

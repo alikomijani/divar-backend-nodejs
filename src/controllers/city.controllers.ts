@@ -1,9 +1,9 @@
 import type { CityType } from '@/models/city.model';
 import { CityModel } from '@/models/city.model';
 import type { Controller, PaginatedResponse } from '@/types/app.types';
+import { duplicateKey } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
-import { MongoServerError } from 'mongodb';
 
 export const createCity: Controller<object, CityType> = async (req, res) => {
   try {
@@ -11,17 +11,7 @@ export const createCity: Controller<object, CityType> = async (req, res) => {
     const newCity = await CityModel.create(cityData);
     res.status(StatusCodes.CREATED).json(newCity);
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      // Handle duplicate slug error
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      res.status(StatusCodes.BAD_REQUEST).json({
-        success: false,
-        message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        errors: {
-          [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
-        },
-      });
-    }
+    return duplicateKey(error, res);
   }
 };
 
