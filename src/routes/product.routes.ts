@@ -6,6 +6,7 @@ import {
   updateProduct,
   deleteProduct,
   getProductByCode,
+  getProductPrices,
 } from '../controllers/product.controllers'; // Import your controller functions
 import { ProductSchemaZod } from '@/models/product.model';
 import { validateData } from '@/middlewares/validation.middleware';
@@ -26,6 +27,7 @@ productRouter.post(
 );
 productRouter.get('/', getAllProducts);
 productRouter.get('/:code', getProductByCode);
+productRouter.get('/:code/sellers', getProductPrices);
 productRouter.put(
   '/:code',
   loginMiddleware,

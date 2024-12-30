@@ -111,3 +111,22 @@ export const deleteProduct: Controller<{ code: string }> = async (req, res) => {
       .json({ message: 'Failed to delete product' });
   }
 };
+
+export const getProductPrices: Controller<{ code: string }> = async (
+  req,
+  res,
+) => {
+  try {
+    const product = await ProductModel.findOne({ code: req.params.code });
+    if (!product) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Product not found' });
+    }
+    const last_price = await ProductModel.getLastPricesForProduct(product.id);
+    return res.json(last_price);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching last prices' });
+  }
+};

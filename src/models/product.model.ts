@@ -1,9 +1,11 @@
-import type { Document, Types } from 'mongoose';
+import type { Document, Model } from 'mongoose';
+import { Types } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
 import type { ColorType } from './color.model';
 import type { BadgeType } from './badge.model';
 import refValidator from '@/utils/ref-validator';
+import { ProductSellerPriceModel } from './productSellers.model';
 
 // Zod Schemas for subdocuments
 const ReviewSchemaZod = z.object({
@@ -94,7 +96,17 @@ export interface IProduct
   createdAt: Date;
   updatedAt: Date;
 }
-
+interface ProductModelStatic extends Model<IProduct> {
+  getLastPricesForProduct(productId: string): Promise<
+    {
+      seller: Types.ObjectId;
+      lastPrice: number;
+      create_at: Date;
+      discount: number;
+      count: number;
+    }[]
+  >;
+}
 // Mongoose Schema
 const ProductSchema = new Schema<IProduct>(
   {
@@ -164,9 +176,46 @@ const ProductSchema = new Schema<IProduct>(
   },
 );
 
+ProductSchema.statics.getLastPricesForProduct = async function (
+  productId: string,
+) {
+  try {
+    const lastPrices = await ProductSellerPriceModel.aggregate([
+      { $match: { product: new Types.ObjectId(productId) } },
+      { $sort: { create_at: -1 } },
+      {
+        $group: {
+          _id: '$seller',
+          lastPrice: { $first: '$price' },
+          create_at: { $first: '$create_at' },
+          discount: { $first: '$discount' },
+          count: { $first: '$count' },
+        },
+      },
+      { $match: { count: { $gte: 1 } } }, // Add this $match stage
+      {
+        $project: {
+          _id: 0,
+          seller: '$_id',
+          lastPrice: 1,
+          create_at: 1,
+          discount: 1,
+          count: 1,
+        },
+      },
+    ]);
+    return lastPrices;
+  } catch (error) {
+    console.error('Error fetching last prices:', error);
+    throw error; // Re-throw the error to be handled by the caller
+  }
+};
+
 ProductSchema.index({ code: 1 }, { unique: true }); // Unique index for code
 ProductSchema.index({ code: 1, category: 1, brand: 1 });
-
-export const ProductModel = mongoose.model<IProduct>('Product', ProductSchema);
+export const ProductModel = mongoose.model<IProduct, ProductModelStatic>(
+  'Product',
+  ProductSchema,
+);
 
 export default ProductModel;
