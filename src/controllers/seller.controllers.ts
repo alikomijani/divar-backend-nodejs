@@ -78,6 +78,7 @@ const deleteSeller: Controller<{ id: string }> = async (req, res) => {
   }
   res.status(StatusCodes.NO_CONTENT);
 };
+
 export {
   createSeller,
   updateSeller,

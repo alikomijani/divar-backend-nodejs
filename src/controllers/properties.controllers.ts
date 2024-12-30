@@ -3,7 +3,6 @@ import { PropertyModel } from '@/models/property.model';
 import type { Controller, PaginatedResponse } from '@/types/app.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
-import mongoose from 'mongoose';
 
 export const createProperty: Controller<
   object,
@@ -94,11 +93,6 @@ export const updateProperty: Controller<
 
 export const deleteProperty: Controller<{ id: string }> = async (req, res) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: 'Invalid property ID' });
-    }
     const deletedProperty = await PropertyModel.findByIdAndDelete(
       req.params.id,
     );
