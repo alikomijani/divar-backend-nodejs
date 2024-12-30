@@ -93,6 +93,7 @@ export interface IProduct
   expert_reviews?: string;
   createdAt: Date;
   updatedAt: Date;
+  sellers: { seller: string; price: number; discount: number; count: number }[];
 }
 
 // Mongoose Schema
@@ -156,6 +157,18 @@ const ProductSchema = new Schema<IProduct>(
       default: [],
     },
     expert_reviews: { type: String, trim: true },
+    sellers: [
+      {
+        seller: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Seller',
+          required: true,
+        },
+        price: { type: Number, required: true },
+        discount: { type: Number },
+        count: { type: Number },
+      },
+    ],
   },
   {
     timestamps: true,
@@ -163,7 +176,12 @@ const ProductSchema = new Schema<IProduct>(
     toObject: { virtuals: true },
   },
 );
-
+ProductSchema.virtual('seller', {
+  ref: 'Seller',
+  localField: 'sellers.seller',
+  foreignField: '_id',
+  justOne: false, // Since you have an array of sellers
+});
 ProductSchema.index({ code: 1, category: 1, brand: 1 });
 
 export const ProductModel = mongoose.model<IProduct>('Product', ProductSchema);

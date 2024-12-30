@@ -1,4 +1,10 @@
 import type { Request, Response, NextFunction } from 'express';
+import type {
+  BufferToBinary,
+  Default__v,
+  FlattenMaps,
+  Require_id,
+} from 'mongoose';
 
 // More specific type for query parameters
 export type Query<T> = Record<keyof T, string | string[] | undefined>;
@@ -24,7 +30,7 @@ export type Controller<
 ) => Promise<Response<any> | any> | void;
 
 export interface PaginatedResponse<T> {
-  results: T[];
+  results: Default__v<Require_id<BufferToBinary<FlattenMaps<T>>>>[];
   page: number;
   pageSize: number;
   total: number;

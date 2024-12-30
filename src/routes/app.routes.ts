@@ -9,6 +9,7 @@ import brandRouter from './brand.routes';
 import badgeRouter from './badge.routes';
 import productRouter from './product.routes';
 import commentRouter from './comment.routes';
+import sellerRouter from './seller.routes';
 
 const appRouter = Router();
 appRouter.use('/auth', userRouter);
@@ -21,5 +22,6 @@ appRouter.use('/cities', cityRouter);
 appRouter.use('/badges', badgeRouter);
 appRouter.use('/products', productRouter);
 appRouter.use('/comments', commentRouter);
+appRouter.use('/seller', sellerRouter);
 
 export default appRouter;
