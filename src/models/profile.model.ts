@@ -5,9 +5,9 @@ export interface ProfileType extends Document {
   user: Types.ObjectId;
   first_name: string;
   last_name: string;
-  nation_code: string;
-  mobile: string;
-  birthday: Date; // Store as Date object for proper date handling
+  nation_code?: string;
+  mobile?: string;
+  birthday?: Date; // Store as Date object for proper date handling
   address_list: {
     location: [number, number]; // Corrected typo: lan -> lng (or lon)
     street: string;
@@ -54,15 +54,12 @@ const profileSchema = new Schema<ProfileType>(
     },
     nation_code: {
       type: String,
-      required: true,
     },
     mobile: {
       type: String,
-      required: true,
     },
     birthday: {
       type: Date,
-      required: true,
     },
     address_list: {
       type: [addressSchema], // Use the address schema here

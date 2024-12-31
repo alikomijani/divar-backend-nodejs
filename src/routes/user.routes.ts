@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import {
   getUser,
+  getUserProfile,
   loginUser,
   refreshAccessToken,
   registerUser,
+  updateUserProfile,
 } from '../controllers/users.controllers';
 import { validateData } from '../middlewares/validation.middleware';
 
@@ -24,6 +26,8 @@ userRouter.post(
   validateData(RefreshTokenSchemaZod),
   refreshAccessToken,
 );
-userRouter.get('/profile', loginMiddleware, getUser);
+userRouter.get('/user', loginMiddleware, getUser);
+userRouter.get('/profile', loginMiddleware, getUserProfile);
+userRouter.get('/profile/update', loginMiddleware, updateUserProfile);
 
 export default userRouter;

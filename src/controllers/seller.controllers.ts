@@ -1,4 +1,4 @@
-import type { SellerType } from '@/models/seller.model';
+import type { ISeller, SellerType } from '@/models/seller.model';
 import SellerModel from '@/models/seller.model';
 import type { Controller, PaginatedResponse } from '@/types/app.types';
 import { duplicateKey } from '@/utils/duplicate-key';
@@ -7,10 +7,7 @@ import { StatusCodes } from 'http-status-codes';
 import { MongoServerError } from 'mongodb';
 
 // Create (POST)
-const createSeller: Controller<object, SellerType, SellerType> = async (
-  req,
-  res,
-) => {
+const createSeller: Controller<object, ISeller, ISeller> = async (req, res) => {
   try {
     const newSeller = new SellerModel(req.body);
     const savedSeller = await newSeller.save();
@@ -51,7 +48,7 @@ const getSellerById: Controller<{ id: string }> = async (req, res) => {
 };
 
 // Update by ID (PUT)
-const updateSeller: Controller<{ id: string }, SellerType, SellerType> = async (
+const updateSeller: Controller<{ id: string }, ISeller, ISeller> = async (
   req,
   res,
 ) => {

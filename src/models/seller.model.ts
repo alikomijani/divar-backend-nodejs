@@ -1,8 +1,12 @@
+import type { Document, Types } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
 
-// Zod Schema and Type
+// Zod Schema and Type (unchanged)
 export const SellerSchemaZod = z.object({
+  user: z
+    .string()
+    .refine((val) => mongoose.Types.ObjectId.isValid(val), 'Invalid User ID'),
   name: z.string().min(1, 'Name is required').trim(),
   slug: z
     .string()
@@ -15,16 +19,23 @@ export const SellerSchemaZod = z.object({
     ),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
-  _id: z.string().optional(),
 });
 
 export type SellerType = z.infer<typeof SellerSchemaZod>;
 
-// Mongoose Interface (Extending CityType and Document)
+export interface ISeller extends Omit<SellerType, 'user'>, Document {
+  user: Types.ObjectId;
+}
 
-// Mongoose Schema
-const SellerSchema = new Schema<SellerType>(
+// Mongoose Schema (Corrected)
+const SellerSchema = new Schema<ISeller>(
   {
+    user: {
+      type: Schema.Types.ObjectId, // Use Schema.Types.ObjectId
+      required: true,
+      unique: true,
+      ref: 'User',
+    },
     name: { type: String, required: true, trim: true },
     slug: {
       type: String,
@@ -43,6 +54,6 @@ const SellerSchema = new Schema<SellerType>(
   },
 );
 
-export const SellerModel = mongoose.model<SellerType>('Seller', SellerSchema);
+export const SellerModel = mongoose.model<ISeller>('Seller', SellerSchema);
 
 export default SellerModel;

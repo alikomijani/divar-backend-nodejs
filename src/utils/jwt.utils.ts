@@ -7,14 +7,19 @@ import {
   TokenExpiredError,
   verify,
 } from 'jsonwebtoken';
+import type { Types } from 'mongoose';
 
 type TokenPayload = JwtPayload & {
-  id: string;
-  email: string;
+  id: string | Types.ObjectId;
+  profile?: string | Types.ObjectId;
+  seller?: string | Types.ObjectId;
   role: UserRole;
 };
-
-export function createAuthToken(payload: TokenPayload) {
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}
+export function createAuthToken(payload: TokenPayload): AuthTokens {
   const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '7d' });
   const refreshToken = sign(payload, REFRESH_SECRET_KEY, { expiresIn: '30d' });
   return { accessToken, refreshToken };
@@ -36,8 +41,8 @@ export function verifyToken(
       decodedToken &&
       typeof decodedToken !== 'string' &&
       decodedToken.hasOwnProperty('id') &&
-      decodedToken.hasOwnProperty('email') &&
-      decodedToken.hasOwnProperty('role')
+      decodedToken.hasOwnProperty('role') &&
+      decodedToken.hasOwnProperty('profile')
     ) {
       return decodedToken as TokenPayload;
     }
