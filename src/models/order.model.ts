@@ -11,7 +11,6 @@ interface IOrder extends Document {
     street: string;
     city: string;
     postalCode: string;
-    country: string;
     // ... other address fields
   };
   // ... other order-level fields (e.g., payment method, tracking number)
@@ -30,7 +29,6 @@ const OrderSchema = new Schema<IOrder>({
     street: { type: String },
     city: { type: String },
     postalCode: { type: String },
-    country: { type: String },
   },
 });
 

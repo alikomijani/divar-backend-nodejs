@@ -7,19 +7,16 @@ import { z } from 'zod';
 
 export enum UserRole {
   User = 1,
-  Admin = 2, // Add more roles as needed
+  Seller = 2,
+  Admin = 3,
 }
 export interface IUser extends Document {
   email: string;
   password: string; // for hashing, not exposed in responses
-  firstName?: string;
-  lastName?: string;
   role: UserRole;
   checkPassword(rawPassword: string): Promise<boolean>;
   setPassword(rawPassword: string): Promise<void>;
   createToken(): string;
-  id: string; // virtual getter for _id
-  fullName?: string; // virtual getter
 }
 const UserSchema = new mongoose.Schema<IUser>(
   {
@@ -32,8 +29,6 @@ const UserSchema = new mongoose.Schema<IUser>(
       trim: true,
     },
     password: { type: String, required: true },
-    firstName: { type: String },
-    lastName: { type: String },
     role: { type: Number, enum: UserRole, default: UserRole.User },
   },
   {
@@ -55,16 +50,6 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
   },
 );
-
-UserSchema.virtual('id').get(function () {
-  return String(this._id);
-});
-
-UserSchema.virtual('fullName').get(function () {
-  if (this.firstName && this.lastName) {
-    return this.firstName + ' ' + this.lastName;
-  }
-});
 
 UserSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
