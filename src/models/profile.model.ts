@@ -1,15 +1,35 @@
 import mongoose, { Schema } from 'mongoose';
 import type { Document, Types } from 'mongoose';
+import { z } from 'zod';
+
+// Zod Schemas
+const locationSchemaZod = z.tuple([z.number(), z.number()]);
+
+const addressSchemaZod = z.object({
+  location: locationSchemaZod,
+  street: z.string().min(1, 'Street is required'),
+  city: z.string().min(1, 'City is required'),
+  postalCode: z.string().min(1, 'Postal code is required'),
+});
+
+export const profileSchemaZod = z.object({
+  first_name: z.string().optional(),
+  last_name: z.string().optional(),
+  nation_code: z.string().optional(),
+  mobile: z.string().optional(),
+  birthday: z.string().datetime().optional(),
+  address_list: z.array(addressSchemaZod).default([]),
+});
 
 export interface ProfileType extends Document {
   user: Types.ObjectId;
-  first_name: string;
-  last_name: string;
+  first_name?: string;
+  last_name?: string;
   nation_code?: string;
   mobile?: string;
-  birthday?: Date; // Store as Date object for proper date handling
+  birthday?: Date;
   address_list: {
-    location: [number, number]; // Corrected typo: lan -> lng (or lon)
+    location: [number, number];
     street: string;
     city: string;
     postalCode: string;
@@ -18,7 +38,7 @@ export interface ProfileType extends Document {
 
 const addressSchema = new Schema({
   location: {
-    type: [Number], // Array of numbers for coordinates
+    type: [Number],
     required: true,
   },
   street: {
@@ -39,18 +59,16 @@ const profileSchema = new Schema<ProfileType>(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'User', // Important: Reference to the User model
+      ref: 'User',
       required: true,
       unique: true,
       index: true,
     },
     first_name: {
       type: String,
-      required: true,
     },
     last_name: {
       type: String,
-      required: true,
     },
     nation_code: {
       type: String,
@@ -62,13 +80,13 @@ const profileSchema = new Schema<ProfileType>(
       type: Date,
     },
     address_list: {
-      type: [addressSchema], // Use the address schema here
-      default: [], // Important: Initialize as empty array
+      type: [addressSchema],
+      default: [],
     },
   },
-  { timestamps: true }, // Add timestamps for createdAt and updatedAt
+  { timestamps: true },
 );
-profileSchema.index({ user: 1 }, { unique: true }); // Unique index for code
+profileSchema.index({ user: 1 }, { unique: true });
 const ProfileModel = mongoose.model<ProfileType>('Profile', profileSchema);
 
 export default ProfileModel;

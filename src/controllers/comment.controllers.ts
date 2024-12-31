@@ -6,7 +6,7 @@ import { StatusCodes } from 'http-status-codes';
 
 // Create
 export const createComment: Controller<object, IComment, IComment> = async (
-  req,
+  req: any,
   res,
 ) => {
   try {
@@ -60,7 +60,7 @@ export const updateComment: Controller<
   { id: string },
   IComment,
   IComment
-> = async (req, res) => {
+> = async (req: any, res) => {
   try {
     const { text, rating } = req.body;
     const comment = await CommentModel.findOneAndUpdate(
@@ -83,7 +83,10 @@ export const updateComment: Controller<
 };
 
 // Delete
-export const deleteComment: Controller<{ id: string }> = async (req, res) => {
+export const deleteComment: Controller<{ id: string }> = async (
+  req: any,
+  res,
+) => {
   try {
     const comment = await CommentModel.findOneAndDelete({
       id: req.params.id,

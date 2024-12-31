@@ -2,10 +2,9 @@ import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '@/utils/jwt.utils';
 import type { LoginUser, RegisterUser } from '@/models/user.model';
 import { UserModel, UserRole } from '@/models/user.model';
-import type { Controller } from '@/types/app.types';
 import { duplicateKey } from '@/utils/duplicate-key';
 import ProfileModel from '@/models/profile.model';
-import { hash } from '@/utils/hash.utils';
+import type { Controller } from '@/types/app.types';
 
 export const registerUser: Controller<
   object,
@@ -13,11 +12,13 @@ export const registerUser: Controller<
   RegisterUser
 > = async (req, res) => {
   try {
-    const user = await UserModel.create({ ...req.body, role: UserRole.User });
+    const user = await UserModel.create({
+      email: req.body.email,
+      password: req.body.password,
+      role: UserRole.User,
+    });
     const userProfile = await ProfileModel.create({
       user: user.id,
-      first_name: '',
-      last_name: '',
     });
     user.profile = userProfile.id;
     await user.save();
@@ -29,31 +30,41 @@ export const registerUser: Controller<
       user: userWithoutPassword,
     });
   } catch (error) {
-    return duplicateKey(error, res);
+    duplicateKey(error, res);
   }
 };
-export const getUserProfile: Controller = async (req, res) => {
-  const profile = ProfileModel.findOne({ user: req.user?.id });
-  if (!profile) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ success: false, message: 'Profile not found' });
+
+export const getUserProfile: Controller = async (req: any, res, next) => {
+  try {
+    const profile = await ProfileModel.findOne({ user: req.user?.id });
+    if (!profile) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ success: false, message: 'Profile not found' });
+    }
+    return res.json(profile);
+  } catch (error) {
+    console.log(error);
+    next(error);
   }
-  return res.json(profile);
 };
 
-export const updateUserProfile: Controller = async (req, res) => {
-  const profile = ProfileModel.findOneAndReplace(
-    { user: req.user?.id },
-    { ...req.body, user: req.user?.id },
-    {
-      upsert: true,
-    },
-  );
-
-  return res.json(profile);
+export const updateUserProfile: Controller = async (req: any, res, next) => {
+  try {
+    const profile = await ProfileModel.findOneAndUpdate(
+      { user: req.user?.id },
+      { ...req.body },
+      {
+        upsert: true,
+        new: true,
+      },
+    );
+    return res.json(profile);
+  } catch (error) {
+    next(error);
+  }
 };
-export const getUser: Controller = async (req, res, next) => {
+export const getUser: Controller = async (req: any, res, next) => {
   try {
     const user = await UserModel.findById(req.user?.id);
     if (!user) {
@@ -75,13 +86,13 @@ export const loginUser: Controller<object, any, LoginUser> = async (
 ) => {
   try {
     const { email, password: rowPassword } = req.body;
-    const password = await hash(rowPassword);
-    const user = await UserModel.findOne({ email, password });
-    if (!user) {
+    const user = await UserModel.findOne({ email });
+    if (!user || !(await user.checkPassword(rowPassword))) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ messages: ['Invalid credential'] });
     }
+
     if (!user.isActive) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
@@ -100,6 +111,7 @@ export const loginUser: Controller<object, any, LoginUser> = async (
       },
     });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };

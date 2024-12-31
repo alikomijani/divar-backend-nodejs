@@ -1,5 +1,4 @@
 import { ACCESS_SECRET_KEY, REFRESH_SECRET_KEY } from '@/configs/app.configs';
-import type { UserRole } from '@/models/user.model';
 import type { JwtPayload } from 'jsonwebtoken';
 import {
   JsonWebTokenError,
@@ -8,6 +7,11 @@ import {
   verify,
 } from 'jsonwebtoken';
 
+enum UserRole {
+  User = 1,
+  Seller = 2,
+  Admin = 3,
+}
 type TokenPayload = JwtPayload & {
   id: string;
   profile: string;

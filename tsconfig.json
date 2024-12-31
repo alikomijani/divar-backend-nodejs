@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "lib": ["ES2020"],
+    "lib": ["ES2016"],
     "paths": {
       "@/*": ["./src/*"],
       "@routes": ["./src/routes/*"],
@@ -27,5 +27,8 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts", "./src/types/express.d.ts"]
+  "include": [
+    "./src/**/*.ts",
+    "src/types/**/*.d.ts" // Include your declaration files
+  ]
 }

@@ -3,7 +3,7 @@ import { verifyToken } from '@/utils/jwt.utils';
 import type { Controller } from '@/types/app.types';
 import type { UserRole } from '@/models/user.model';
 
-export const loginMiddleware: Controller = async (req, res, next) => {
+export const loginMiddleware: Controller = async (req: any, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -30,7 +30,7 @@ export const loginMiddleware: Controller = async (req, res, next) => {
 };
 
 export function roleMiddleware(requiredRole: UserRole): Controller {
-  return async (req, res, next) => {
+  return async (req: any, res, next) => {
     const userRole = req.user?.role;
     if (!userRole) {
       return res.status(StatusCodes.FORBIDDEN).json({

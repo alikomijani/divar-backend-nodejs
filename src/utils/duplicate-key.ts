@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import { MongoServerError } from 'mongodb';
 import type { Response } from 'express';
 
-export function duplicateKey(error: unknown, res: Response) {
+export function duplicateKey(error: any, res: Response) {
   if (error instanceof MongoServerError && error.code === 11000) {
     // Handle duplicate slug error
     const duplicatedField = Object.keys(error.keyValue)[0];
@@ -12,6 +12,12 @@ export function duplicateKey(error: unknown, res: Response) {
       errors: {
         [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
       },
+    });
+  } else {
+    console.log(error);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: error.message || 'server error',
     });
   }
 }

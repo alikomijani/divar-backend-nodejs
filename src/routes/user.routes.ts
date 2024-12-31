@@ -15,6 +15,7 @@ import {
   RefreshTokenSchemaZod,
   RegisterSchemaZod,
 } from '@/models/user.model';
+import { profileSchemaZod } from '@/models/profile.model';
 
 const userRouter = Router();
 
@@ -28,6 +29,11 @@ userRouter.post(
 );
 userRouter.get('/user', loginMiddleware, getUser);
 userRouter.get('/profile', loginMiddleware, getUserProfile);
-userRouter.get('/profile/update', loginMiddleware, updateUserProfile);
+userRouter.put(
+  '/profile',
+  loginMiddleware,
+  validateData(profileSchemaZod),
+  updateUserProfile,
+);
 
 export default userRouter;

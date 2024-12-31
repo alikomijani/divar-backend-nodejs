@@ -38,13 +38,13 @@ const UserSchema = new mongoose.Schema<IUser>(
     profile: {
       type: Types.ObjectId,
       ref: 'Profile',
-      require: false,
+      sparse: true, // Make the index sparse
       unique: true,
     },
     seller: {
       type: Types.ObjectId,
       ref: 'Seller',
-      require: false,
+      sparse: true, // Make the index sparse
       unique: true,
     },
   },
