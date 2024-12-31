@@ -24,10 +24,6 @@ export function createAuthToken(payload: TokenPayload): AuthTokens {
   return { accessToken, refreshToken };
 }
 
-export function createAccessToken(payload: TokenPayload) {
-  const accessToken = sign(payload, ACCESS_SECRET_KEY, { expiresIn: '7d' });
-  return accessToken;
-}
 export function verifyToken(
   token: string,
   type: 'access' | 'refresh' = 'access',

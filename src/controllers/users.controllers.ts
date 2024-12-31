@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { createAccessToken, verifyToken } from '@/utils/jwt.utils';
+import { verifyToken } from '@/utils/jwt.utils';
 import type { LoginUser, RegisterUser } from '@/models/user.model';
 import { UserModel, UserRole } from '@/models/user.model';
 import type { Controller } from '@/types/app.types';
@@ -88,8 +88,8 @@ export const loginUser: Controller<object, any, LoginUser> = async (
         .json({ messages: ['user is deactivate!'] });
     }
 
-    const tokens = user.createToken();
     // Generate tokens
+    const tokens = user.createToken();
 
     // Send response with tokens
     return res.status(StatusCodes.OK).json({
@@ -120,12 +120,18 @@ export const refreshAccessToken: Controller<
     // Verify the refresh token
     const { iat, exp, ...decoded } = verifyToken(refreshToken, 'refresh');
     // Generate a new access token
-    const newAccessToken = createAccessToken(decoded);
+    const user = await UserModel.findOne({ id: decoded.id, isActive: true });
+    if (user) {
+      const newTokens = user.createToken();
+      return res.status(StatusCodes.OK).json(newTokens);
+    } else {
+      throw new Error('user not found or deactivate');
+    }
     // Send the new access token to the client
-    return res.status(StatusCodes.OK).json({ accessToken: newAccessToken });
-  } catch {
-    return res
-      .sendStatus(StatusCodes.FORBIDDEN)
-      .json({ success: false, message: 'Forbidden' }); // Forbidden
+  } catch (error: any) {
+    return res.sendStatus(StatusCodes.FORBIDDEN).json({
+      success: false,
+      message: error?.message || 'Forbidden',
+    }); // Forbidden
   }
 };
