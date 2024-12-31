@@ -7,12 +7,11 @@ import {
   TokenExpiredError,
   verify,
 } from 'jsonwebtoken';
-import type { Types } from 'mongoose';
 
 type TokenPayload = JwtPayload & {
-  id: string | Types.ObjectId;
-  profile?: string | Types.ObjectId;
-  seller?: string | Types.ObjectId;
+  id: string;
+  profile: string;
+  seller?: string;
   role: UserRole;
 };
 export interface AuthTokens {

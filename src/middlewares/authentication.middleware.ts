@@ -16,7 +16,8 @@ export const loginMiddleware: Controller = async (req, res, next) => {
     const decodedToken = verifyToken(token!);
     req.user = {
       id: decodedToken.id,
-      email: decodedToken.email,
+      profile: decodedToken.profile,
+      seller: decodedToken.seller,
       role: decodedToken.role,
     };
     next();

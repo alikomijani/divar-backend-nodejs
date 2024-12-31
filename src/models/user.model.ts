@@ -16,8 +16,8 @@ export interface IUser extends Document {
   password: string; // for hashing, not exposed in responses
   role: UserRole;
   isActive: boolean;
-  profile?: Types.ObjectId;
-  seller?: Types.ObjectId;
+  profile?: any;
+  seller?: any;
   checkPassword(rawPassword: string): Promise<boolean>;
   setPassword(rawPassword: string): Promise<void>;
   createToken(): AuthTokens;
@@ -61,8 +61,8 @@ const UserSchema = new mongoose.Schema<IUser>(
         return createAuthToken({
           id: this.id,
           role: this.role,
-          profile: this.profile,
-          seller: this.seller,
+          profile: this.profile!.toString(), // profile Initialize when user create and bind
+          seller: this.seller?.toString(),
         });
       },
     },

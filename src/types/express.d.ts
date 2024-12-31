@@ -10,6 +10,7 @@ declare global {
 
 export interface RequestUser {
   id: string; // Or Types.ObjectId if applicable
-  email: string;
+  profile: string;
+  seller?: string;
   role: UserRole;
 }
