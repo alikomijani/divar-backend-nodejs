@@ -1,12 +1,46 @@
 import express from 'express';
 import profileController from '../controllers/profile.controllers'; // Import the controller
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
+import {
+  loginMiddleware,
+  roleMiddleware,
+} from '@/middlewares/authentication.middleware';
+import { UserRole } from '@/models/user.model';
 
-const router = express.Router();
+const profileRouter = express.Router();
+// admin routes
+profileRouter.post(
+  '/',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  profileController.createProfile,
+);
+profileRouter.get(
+  '/:id',
+  validateIdMiddleware,
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  profileController.getProfileById,
+);
+profileRouter.put(
+  '/:id',
+  validateIdMiddleware,
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  profileController.updateProfile,
+);
+profileRouter.delete(
+  '/:id',
+  validateIdMiddleware,
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  profileController.deleteProfile,
+);
+profileRouter.get(
+  '/',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  profileController.getAllProfiles,
+);
 
-router.post('/', profileController.createProfile);
-router.get('/:id', profileController.getProfileById);
-router.put('/:id', profileController.updateProfile);
-router.delete('/:id', profileController.deleteProfile);
-router.get('/', profileController.getAllProfiles);
-
-export default router;
+export default profileRouter;
