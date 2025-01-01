@@ -1,9 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '@/utils/jwt.utils';
-import type { Controller } from '@/types/app.types';
 import type { UserRole } from '@/models/user.model';
+import type { Controller } from '@/types/express';
 
-export const loginMiddleware: Controller = async (req: any, res, next) => {
+export const loginMiddleware: Controller = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -16,8 +16,6 @@ export const loginMiddleware: Controller = async (req: any, res, next) => {
     const decodedToken = verifyToken(token!);
     req.user = {
       id: decodedToken.id,
-      profile: decodedToken.profile,
-      seller: decodedToken.seller,
       role: decodedToken.role,
     };
     next();
@@ -30,7 +28,7 @@ export const loginMiddleware: Controller = async (req: any, res, next) => {
 };
 
 export function roleMiddleware(requiredRole: UserRole): Controller {
-  return async (req: any, res, next) => {
+  return async (req, res, next) => {
     const userRole = req.user?.role;
     if (!userRole) {
       return res.status(StatusCodes.FORBIDDEN).json({
@@ -39,7 +37,7 @@ export function roleMiddleware(requiredRole: UserRole): Controller {
       });
     }
     if (userRole < requiredRole) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({
+      return res.status(StatusCodes.FORBIDDEN).json({
         success: false,
         message: `Error! Authorization failed. Required role: ${requiredRole}, but user role is: ${userRole}`,
       });

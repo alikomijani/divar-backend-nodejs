@@ -1,6 +1,7 @@
 import type { IColor } from '@/models/color.model';
 import { ColorModel } from '@/models/color.model';
-import type { Controller, PaginatedResponse } from '@/types/app.types';
+import type { PaginatedResponse } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 

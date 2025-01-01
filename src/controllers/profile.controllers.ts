@@ -1,6 +1,6 @@
 import type { ProfileType } from '@/models/profile.model';
 import ProfileModel from '@/models/profile.model';
-import type { Controller } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 import type { Request, Response } from 'express';
 
 // Create a new profile

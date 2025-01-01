@@ -30,7 +30,6 @@ export type AnswerType = z.infer<typeof AnswerSchemaZod>;
 // Mongoose Interfaces
 interface IAnswer extends Omit<AnswerType, 'user'>, Document {
   user: Types.ObjectId;
-  created_at: Date;
 }
 
 interface IProductQuestion
@@ -39,18 +38,20 @@ interface IProductQuestion
   product: Types.ObjectId;
   user: Types.ObjectId;
   answers: Types.DocumentArray<
-    mongoose.Types.Subdocument<Types.ObjectId> & Omit<IAnswer, 'created_at'>
+    mongoose.Types.Subdocument<Types.ObjectId> & IAnswer
   >;
-  created_at: Date;
-  updated_at?: Date;
 }
 
 // Mongoose Schema
-const AnswerSchema = new Schema<IAnswer>({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  answer: { type: String, required: true, trim: true },
-  created_at: { type: Date, default: Date.now },
-});
+const AnswerSchema = new Schema<IAnswer>(
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    answer: { type: String, required: true, trim: true },
+  },
+  {
+    timestamps: true,
+  },
+);
 
 const ProductQuestionSchema = new Schema<IProductQuestion>(
   {
@@ -70,10 +71,9 @@ const ProductQuestionSchema = new Schema<IProductQuestion>(
       trim: true,
     },
     answers: [AnswerSchema],
-    created_at: { type: Date, default: Date.now },
   },
   {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   },

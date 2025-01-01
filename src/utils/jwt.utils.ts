@@ -14,8 +14,6 @@ enum UserRole {
 }
 type TokenPayload = JwtPayload & {
   id: string;
-  profile: string;
-  seller?: string;
   role: UserRole;
 };
 export interface AuthTokens {
@@ -40,8 +38,7 @@ export function verifyToken(
       decodedToken &&
       typeof decodedToken !== 'string' &&
       decodedToken.hasOwnProperty('id') &&
-      decodedToken.hasOwnProperty('role') &&
-      decodedToken.hasOwnProperty('profile')
+      decodedToken.hasOwnProperty('role')
     ) {
       return decodedToken as TokenPayload;
     }

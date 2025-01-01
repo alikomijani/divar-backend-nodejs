@@ -1,6 +1,7 @@
 import type { CityType } from '@/models/city.model';
 import { CityModel } from '@/models/city.model';
-import type { Controller, PaginatedResponse } from '@/types/app.types';
+import type { PaginatedResponse } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 import { duplicateKey } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';

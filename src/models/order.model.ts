@@ -37,6 +37,7 @@ export const OrderModel = mongoose.model<IOrder>('Order', OrderSchema);
 interface IOrderItem extends Document {
   order: Types.ObjectId; // Reference to the order
   product: Types.ObjectId; // Reference to the product
+  user: Types.ObjectId; // Reference to the product
   productSeller: Types.ObjectId; // Reference to ProductSeller
   quantity: number;
 }
@@ -44,6 +45,7 @@ interface IOrderItem extends Document {
 const OrderItemSchema = new Schema<IOrderItem>({
   order: { type: Schema.Types.ObjectId, ref: 'Order', required: true },
   product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   productSeller: {
     type: Schema.Types.ObjectId,
     ref: 'ProductSeller',

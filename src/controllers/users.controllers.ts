@@ -4,39 +4,37 @@ import type { LoginUser, RegisterUser } from '@/models/user.model';
 import { UserModel, UserRole } from '@/models/user.model';
 import { duplicateKey } from '@/utils/duplicate-key';
 import ProfileModel from '@/models/profile.model';
-import type { Controller } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 
-export const registerUser: Controller<
-  object,
-  { tokens: any; user: { email: string; role: UserRole } },
-  RegisterUser
-> = async (req, res) => {
+export const registerUser: Controller = async (req, res) => {
   try {
+    const data = req.body as RegisterUser;
     const user = await UserModel.create({
-      email: req.body.email,
-      password: req.body.password,
+      email: data.email,
+      password: data.password,
       role: UserRole.User,
     });
     const userProfile = await ProfileModel.create({
       user: user.id,
+      first_name: data.first_name,
+      last_name: data.last_name,
     });
-    user.profile = userProfile.id;
-    await user.save();
     const tokens = user.createToken();
     // Remove the password field from the response for security
     const { password, ...userWithoutPassword } = user.toObject();
     return res.status(StatusCodes.CREATED).json({
       tokens,
       user: userWithoutPassword,
+      profile: userProfile,
     });
   } catch (error) {
     duplicateKey(error, res);
   }
 };
 
-export const getUserProfile: Controller = async (req: any, res, next) => {
+export const getUserProfile: Controller = async (req, res, next) => {
   try {
-    const profile = await ProfileModel.findOne({ user: req.user?.id });
+    const profile = await ProfileModel.findById({ user: req.user?.id });
     if (!profile) {
       return res
         .status(StatusCodes.NOT_FOUND)
@@ -49,13 +47,12 @@ export const getUserProfile: Controller = async (req: any, res, next) => {
   }
 };
 
-export const updateUserProfile: Controller = async (req: any, res, next) => {
+export const updateUserProfile: Controller = async (req, res, next) => {
   try {
     const profile = await ProfileModel.findOneAndUpdate(
       { user: req.user?.id },
       { ...req.body },
       {
-        upsert: true,
         new: true,
       },
     );
@@ -64,7 +61,7 @@ export const updateUserProfile: Controller = async (req: any, res, next) => {
     next(error);
   }
 };
-export const getUser: Controller = async (req: any, res, next) => {
+export const getUser: Controller = async (req, res, next) => {
   try {
     const user = await UserModel.findById(req.user?.id);
     if (!user) {

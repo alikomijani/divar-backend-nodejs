@@ -20,7 +20,6 @@ import { profileSchemaZod } from '@/models/profile.model';
 const userRouter = Router();
 
 userRouter.post('/register', validateData(RegisterSchemaZod), registerUser);
-
 userRouter.post('/login', validateData(LoginSchemaZod), loginUser);
 userRouter.post(
   '/refresh',

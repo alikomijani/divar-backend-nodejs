@@ -1,6 +1,7 @@
 import type { ICategoryProperty } from '@/models/property.model';
 import { PropertyModel } from '@/models/property.model';
-import type { Controller, PaginatedResponse } from '@/types/app.types';
+import type { PaginatedResponse } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 

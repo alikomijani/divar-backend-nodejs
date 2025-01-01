@@ -2,9 +2,9 @@ import { StatusCodes } from 'http-status-codes';
 import type { IProduct } from '@/models/product.model';
 import ProductModel from '@/models/product.model';
 import { MongoServerError } from 'mongodb';
-import type { Controller } from '@/types/app.types';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { duplicateKey } from '@/utils/duplicate-key';
+import type { Controller } from '@/types/express';
 
 export const createProduct: Controller = async (req, res) => {
   try {

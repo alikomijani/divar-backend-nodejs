@@ -34,16 +34,16 @@ export const ProductSchemaZod = z.object({
   title_en: z.string().min(1, 'Title (EN) is required').trim(),
   status: z.enum(['marketable', 'unmarketable']).default('marketable'),
   images: ImageSchemaZod,
-  colors: z
-    .array(
-      z
-        .string()
-        .refine(
-          (val) => mongoose.Types.ObjectId.isValid(val),
-          'Invalid Color ID',
-        ),
-    )
-    .optional(),
+  // colors: z
+  //   .array(
+  //     z
+  //       .string()
+  //       .refine(
+  //         (val) => mongoose.Types.ObjectId.isValid(val),
+  //         'Invalid Color ID',
+  //       ),
+  //   )
+  //   .optional(),
   badges: z
     .array(
       z
@@ -122,13 +122,6 @@ const ProductSchema = new Schema<IProduct>(
       main: { type: String, required: true, trim: true },
       list: { type: [String], default: [] },
     },
-    colors: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Color',
-        validate: refValidator('Color'),
-      },
-    ],
     badges: [
       {
         type: Schema.Types.ObjectId,
@@ -182,7 +175,7 @@ ProductSchema.statics.getLastPricesForProduct = async function (
   try {
     const lastPrices = await ProductSellerPriceModel.aggregate([
       { $match: { product: new Types.ObjectId(productId) } },
-      { $sort: { create_at: -1 } },
+      { $sort: { createAt: -1 } },
       {
         $group: {
           _id: '$seller',

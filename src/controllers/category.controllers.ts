@@ -1,6 +1,6 @@
 import type { ICategory } from '@/models/category.model';
 import { CategoryModel } from '@/models/category.model';
-import type { Controller } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 import { duplicateKey } from '@/utils/duplicate-key';
 import { StatusCodes } from 'http-status-codes';
 

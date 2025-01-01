@@ -36,9 +36,10 @@ export type CommentType = z.infer<typeof CommentSchemaZod>;
 export interface IComment extends Document {
   text: string;
   rating?: number; // Rating is optional
-  created_at: Date;
   product: Types.ObjectId;
   user: Types.ObjectId;
+  createAt: Date;
+  updateAt: Date;
 }
 
 // Mongoose Schema

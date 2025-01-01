@@ -1,5 +1,5 @@
 import { BASE_URL } from '@/configs/app.configs';
-import type { Controller } from '@/types/app.types';
+import type { Controller } from '@/types/express';
 import { StatusCodes } from 'http-status-codes';
 import path from 'path';
 

@@ -1,6 +1,6 @@
-import type { Controller } from '@/types/app.types';
 import { isValidObjectId } from 'mongoose';
 import { StatusCodes } from 'http-status-codes';
+import type { Controller } from '@/types/express';
 
 export const validateIdMiddleware: Controller<{ id: string }> = async (
   req,

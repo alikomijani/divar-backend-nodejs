@@ -2,7 +2,7 @@ import { checkHash, hash } from '@/utils/hash.utils';
 import type { AuthTokens } from '@/utils/jwt.utils';
 import { createAuthToken } from '@/utils/jwt.utils';
 import type { Document } from 'mongoose';
-import mongoose, { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 import { z } from 'zod';
 
@@ -16,8 +16,6 @@ export interface IUser extends Document {
   password: string; // for hashing, not exposed in responses
   role: UserRole;
   isActive: boolean;
-  profile?: any;
-  seller?: any;
   checkPassword(rawPassword: string): Promise<boolean>;
   setPassword(rawPassword: string): Promise<void>;
   createToken(): AuthTokens;
@@ -35,18 +33,6 @@ const UserSchema = new mongoose.Schema<IUser>(
     password: { type: String, required: true },
     role: { type: Number, enum: UserRole, default: UserRole.User },
     isActive: { type: Boolean, default: true },
-    profile: {
-      type: Types.ObjectId,
-      ref: 'Profile',
-      sparse: true, // Make the index sparse
-      unique: true,
-    },
-    seller: {
-      type: Types.ObjectId,
-      ref: 'Seller',
-      sparse: true, // Make the index sparse
-      unique: true,
-    },
   },
   {
     methods: {
@@ -61,8 +47,6 @@ const UserSchema = new mongoose.Schema<IUser>(
         return createAuthToken({
           id: this.id,
           role: this.role,
-          profile: this.profile!.toString(), // profile Initialize when user create and bind
-          seller: this.seller?.toString(),
         });
       },
     },
@@ -102,6 +86,8 @@ export const LoginSchemaZod = z.object({
 export const RegisterSchemaZod = z.object({
   email: z.string().email('Invalid Email').trim(),
   password: z.string().min(6, 'Password must be at least 6 characters').trim(),
+  first_name: z.string().min(1, 'firstName is required'),
+  last_name: z.string().min(1, 'lastName is required'),
 });
 export const RefreshTokenSchemaZod = z.object({
   refreshToken: z.string(),
