@@ -1,60 +1,87 @@
 import type { Types, Document } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
-
-interface IOrder extends Document {
-  user: Types.ObjectId; // Reference to the user who placed the order
-  orderDate: Date;
-  orderStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'; // e.g.,
-  totalAmount: number;
-  shippingAddress: {
-    // Store shipping address details
-    street: string;
-    city: string;
-    postalCode: string;
-    // ... other address fields
-  };
-  // ... other order-level fields (e.g., payment method, tracking number)
-}
-
-const OrderSchema = new Schema<IOrder>({
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  orderDate: { type: Date, default: Date.now },
-  orderStatus: {
-    type: String,
-    enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
-    default: 'pending',
-  },
-  totalAmount: { type: Number, required: true },
-  shippingAddress: {
-    street: { type: String },
-    city: { type: String },
-    postalCode: { type: String },
-  },
-});
-
-export const OrderModel = mongoose.model<IOrder>('Order', OrderSchema);
+import { z } from 'zod';
+import { addressSchemaZod } from './profile.model'; // Assuming this exists
 
 interface IOrderItem extends Document {
-  order: Types.ObjectId; // Reference to the order
-  product: Types.ObjectId; // Reference to the product
-  user: Types.ObjectId; // Reference to the product
-  productSeller: Types.ObjectId; // Reference to ProductSeller
+  productSeller: Types.ObjectId;
   quantity: number;
+  order: Types.ObjectId; // Add reference back to the Order
+  seller: Types.ObjectId; // Add reference back to the Seller
 }
 
 const OrderItemSchema = new Schema<IOrderItem>({
-  order: { type: Schema.Types.ObjectId, ref: 'Order', required: true },
-  product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   productSeller: {
     type: Schema.Types.ObjectId,
     ref: 'ProductSeller',
     required: true,
-  }, // Reference to ProductSeller
+  },
   quantity: { type: Number, required: true },
+  order: { type: Schema.Types.ObjectId, ref: 'Order' }, // Reference to the Order
+  seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true }, // Make it required
 });
 
+export enum OrderStatus {
+  Pending = 'pending',
+  Processing = 'processing',
+  Shipped = 'shipped',
+  Delivered = 'delivered',
+  Cancelled = 'cancelled',
+}
+export interface IOrder extends Document {
+  user: Types.ObjectId;
+  deliveryDate: Date;
+  orderStatus: OrderStatus;
+  shippingAddress: {
+    street: string;
+    city: string;
+    postalCode: string;
+  };
+  orderItems: Types.ObjectId[]; // Store an array of ObjectIds referencing OrderItems
+}
+
+const OrderSchema = new Schema<IOrder>(
+  {
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    deliveryDate: { type: Date, default: Date.now },
+    orderStatus: {
+      type: String,
+      enum: OrderStatus,
+      default: OrderStatus.Pending,
+    },
+    shippingAddress: {
+      street: { type: String },
+      city: { type: String },
+      postalCode: { type: String },
+    },
+    orderItems: [{ type: Schema.Types.ObjectId, ref: 'OrderItem' }], // Array of OrderItem references
+  },
+  {
+    timestamps: true,
+  },
+);
+
+export const OrderModel = mongoose.model<IOrder>('Order', OrderSchema);
 export const OrderItemModel = mongoose.model<IOrderItem>(
   'OrderItem',
   OrderItemSchema,
 );
+
+// Zod Validation (unchanged - this is the key to your requirement)
+export const OrderSchemaZod = z.object({
+  shippingAddress: addressSchemaZod,
+  deliveryDate: z.string().datetime(), // More precise date/time validation
+  orderItems: z.array(
+    z.object({
+      productSeller: z
+        .string()
+        .refine(
+          (val) => mongoose.Types.ObjectId.isValid(val),
+          'Invalid ProductSeller ID',
+        ),
+      quantity: z.number().positive().min(1).int(),
+    }),
+  ),
+});
+
+export type OrderSchemaType = z.infer<typeof OrderSchemaZod>;

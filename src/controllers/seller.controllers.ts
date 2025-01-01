@@ -5,23 +5,18 @@ import type { Controller } from '@/types/express';
 import { duplicateKey } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
-import { MongoServerError } from 'mongodb';
 
 // Create (POST)
-const createSeller: Controller<object, ISeller, ISeller> = async (req, res) => {
+const createSeller: Controller<object, ISeller, SellerType> = async (
+  req,
+  res,
+) => {
   try {
     const newSeller = new SellerModel(req.body);
     const savedSeller = await newSeller.save();
     return res.status(StatusCodes.CREATED).json(savedSeller); // Return the created seller with status 201 (Created)
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      return duplicateKey(error, res);
-    } else {
-      console.error(error);
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: 'Failed to create product', success: false });
-    }
+    return duplicateKey(error, res);
   }
 };
 

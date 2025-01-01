@@ -5,16 +5,16 @@ export async function getPaginatedQuery<T>(
   model: Model<T>,
   page: number | string | string[],
   pageSize: number | string | string[],
-  query: object,
+  query: object = {},
 ): Promise<PaginatedResponse<T>> {
   page = Number(page);
   pageSize = Number(pageSize);
-  const total = await model.countDocuments();
+  const total = await model.countDocuments(query);
   const results = await model
     .find(query)
     .skip((page - 1) * page) // Skip documents for pagination
-    .limit(pageSize)
-    .lean(); // Limit the number of documents
+    .limit(pageSize) // Limit the number of documents
+    .lean(); // return object instead of full document object
   return {
     results,
     total,

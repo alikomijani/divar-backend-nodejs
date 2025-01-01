@@ -17,6 +17,7 @@ export const loginMiddleware: Controller = async (req, res, next) => {
     req.user = {
       id: decodedToken.id,
       role: decodedToken.role,
+      sellerId: decodedToken.sellerId,
     };
     next();
   } catch {

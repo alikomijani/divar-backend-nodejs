@@ -15,6 +15,7 @@ enum UserRole {
 type TokenPayload = JwtPayload & {
   id: string;
   role: UserRole;
+  sellerId?: string;
 };
 export interface AuthTokens {
   accessToken: string;

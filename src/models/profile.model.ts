@@ -5,7 +5,7 @@ import { z } from 'zod';
 // Zod Schemas
 const locationSchemaZod = z.tuple([z.number(), z.number()]);
 
-const addressSchemaZod = z.object({
+export const addressSchemaZod = z.object({
   location: locationSchemaZod,
   street: z.string().min(1, 'Street is required'),
   city: z.string().min(1, 'City is required'),

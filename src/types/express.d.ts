@@ -38,4 +38,5 @@ enum UserRole {
 export interface RequestUser {
   id: string; // Or Types.ObjectId if applicable
   role: UserRole;
+  sellerId?: string;
 }

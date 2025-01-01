@@ -17,8 +17,6 @@ export const SellerSchemaZod = z.object({
       /^[a-z0-9-]+$/,
       'Slug can only contain lowercase letters, numbers, and hyphens',
     ),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
 });
 
 export type SellerType = z.infer<typeof SellerSchemaZod>;

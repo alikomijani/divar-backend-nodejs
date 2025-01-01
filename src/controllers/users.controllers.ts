@@ -5,6 +5,7 @@ import { UserModel, UserRole } from '@/models/user.model';
 import { duplicateKey } from '@/utils/duplicate-key';
 import ProfileModel from '@/models/profile.model';
 import type { Controller } from '@/types/express';
+import SellerModel from '@/models/seller.model';
 
 export const registerUser: Controller = async (req, res) => {
   try {
@@ -95,9 +96,13 @@ export const loginUser: Controller<object, any, LoginUser> = async (
         .status(StatusCodes.UNAUTHORIZED)
         .json({ messages: ['user is deactivate!'] });
     }
-
+    let sellerId: string | undefined = undefined;
+    if (user.role === UserRole.Seller) {
+      const seller = await SellerModel.findOne({ user: user.id });
+      sellerId = seller?.id;
+    }
     // Generate tokens
-    const tokens = user.createToken();
+    const tokens = user.createToken(sellerId);
 
     // Send response with tokens
     return res.status(StatusCodes.OK).json({

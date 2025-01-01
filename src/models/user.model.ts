@@ -18,7 +18,7 @@ export interface IUser extends Document {
   isActive: boolean;
   checkPassword(rawPassword: string): Promise<boolean>;
   setPassword(rawPassword: string): Promise<void>;
-  createToken(): AuthTokens;
+  createToken(sellerId?: string): AuthTokens;
 }
 const UserSchema = new mongoose.Schema<IUser>(
   {
@@ -43,10 +43,11 @@ const UserSchema = new mongoose.Schema<IUser>(
         this.password = await hash(rawPassword);
         await this.save();
       },
-      createToken: function () {
+      createToken: function (sellerId?: string) {
         return createAuthToken({
           id: this.id,
           role: this.role,
+          sellerId,
         });
       },
     },
