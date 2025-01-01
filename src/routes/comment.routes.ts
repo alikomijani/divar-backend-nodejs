@@ -6,10 +6,9 @@ import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 import {
   createComment,
   deleteComment,
-  getAllComments,
+  getProductComments,
   updateComment,
 } from '@/controllers/comment.controllers';
-import { getColorById } from '@/controllers/colors.controllers';
 import {
   CommentSchemaZod,
   UpdateCommentSchemaZod,
@@ -17,30 +16,28 @@ import {
 
 const commentRouter = express.Router();
 
-commentRouter.get('/', getAllComments); // Get all colors
+commentRouter.get('/product/:productId/comments', getProductComments); // Get all colors
 
 commentRouter.post(
-  '/',
+  '/comments',
   loginMiddleware,
   validateData(CommentSchemaZod),
   createComment,
-); // Create a new color
-
-commentRouter.get('/:id', validateIdMiddleware, getColorById); // Update a color by ID
+); // Create a new comment
 
 commentRouter.put(
-  '/:id',
+  '/comments/:id',
   validateIdMiddleware,
   loginMiddleware,
   validateData(UpdateCommentSchemaZod),
   updateComment,
-); // Update a color by ID
+); // Update a comment by ID
 
 commentRouter.delete(
-  '/:id',
+  '/comments/:id',
   validateIdMiddleware,
   loginMiddleware,
   deleteComment,
-); // Delete a color by ID
+); // Delete a comment by ID
 
 export default commentRouter;

@@ -1,7 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '@/utils/jwt.utils';
-import type { UserRole } from '@/models/user.model';
-import type { Controller } from '@/types/express';
+import type { Controller, UserRole } from '@/types/express';
 
 export const loginMiddleware: Controller = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];

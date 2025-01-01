@@ -43,6 +43,17 @@ const getSellerById: Controller<{ id: string }> = async (req, res) => {
   res.json(seller);
 };
 
+// Read by ID (GET)
+const getSellerDetails: Controller = async (req, res) => {
+  const sellerId = req.user?.sellerId;
+  const seller = await SellerModel.findById(sellerId);
+  if (!seller) {
+    return res
+      .status(404)
+      .json({ success: false, message: 'Seller not found' }); // Return 404 for non-existent seller
+  }
+  res.json(seller);
+};
 // Update by ID (PUT)
 const updateSeller: Controller<{ id: string }, ISeller, ISeller> = async (
   req,
@@ -78,4 +89,5 @@ export {
   getAllSellers,
   getSellerById,
   deleteSeller,
+  getSellerDetails,
 };

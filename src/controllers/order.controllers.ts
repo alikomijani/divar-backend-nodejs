@@ -89,3 +89,14 @@ export const getOrdersBySeller: Controller = async (req, res) => {
     throw error;
   }
 };
+
+export const getAllOrders: Controller = async (req, res) => {
+  try {
+    const { page = 1, pageSize = 10 } = req.query;
+    const orders = await getPaginatedQuery(OrderModel, page, pageSize, {});
+    return res.json(orders);
+  } catch (error) {
+    console.error('Error getting orders:', error);
+    throw error;
+  }
+};

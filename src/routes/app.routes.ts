@@ -10,6 +10,12 @@ import badgeRouter from './badge.routes';
 import productRouter from './product.routes';
 import commentRouter from './comment.routes';
 import sellerRouter from './seller.routes';
+import orderRouter from './order.routes';
+import {
+  loginMiddleware,
+  roleMiddleware,
+} from '@/middlewares/authentication.middleware';
+import { UserRole } from '@/models/user.model';
 
 const appRouter = Router();
 appRouter.use('/auth', userRouter);
@@ -21,7 +27,13 @@ appRouter.use('/colors', colorRouter);
 appRouter.use('/cities', cityRouter);
 appRouter.use('/badges', badgeRouter);
 appRouter.use('/products', productRouter);
-appRouter.use('/comments', commentRouter);
-appRouter.use('/seller', sellerRouter);
+appRouter.use(commentRouter);
+appRouter.use(
+  '/admin/seller',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  sellerRouter,
+); // edit seller info need admin permission
+appRouter.use(loginMiddleware, orderRouter); // all order routes need authentication
 
 export default appRouter;

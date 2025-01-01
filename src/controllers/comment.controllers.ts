@@ -1,5 +1,6 @@
 import type { IComment } from '@/models/comment.model';
 import CommentModel from '@/models/comment.model';
+import { UserRole } from '@/models/user.model';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
@@ -7,7 +8,7 @@ import { StatusCodes } from 'http-status-codes';
 
 // Create
 export const createComment: Controller<object, IComment, IComment> = async (
-  req: any,
+  req,
   res,
 ) => {
   try {
@@ -26,27 +27,16 @@ export const createComment: Controller<object, IComment, IComment> = async (
 };
 
 // Read All
-export const getAllComments: Controller<
-  object,
+export const getProductComments: Controller<
+  { productId: string },
   PaginatedResponse<IComment>
 > = async (req, res) => {
   try {
-    const { userId, productId, page = 1, pageSize = 10 } = req.query;
-    const query: any = {};
-
-    if (userId) {
-      query.user = userId;
-    }
-
-    if (productId) {
-      query.product = productId;
-    }
-    const comments = await getPaginatedQuery(
-      CommentModel,
-      page,
-      pageSize,
-      query,
-    );
+    const { page = 1, pageSize = 10, ...restQuery } = req.query;
+    const comments = await getPaginatedQuery(CommentModel, page, pageSize, {
+      product: req.params.productId,
+      ...restQuery,
+    });
     res.status(StatusCodes.OK).json(comments);
   } catch (err) {
     console.error(err);
@@ -61,19 +51,23 @@ export const updateComment: Controller<
   { id: string },
   IComment,
   IComment
-> = async (req: any, res) => {
+> = async (req, res) => {
   try {
     const { text, rating } = req.body;
-    const comment = await CommentModel.findOneAndUpdate(
-      { id: req.params.id, user: req.user?.id },
-      { text, rating },
-      { new: true },
-    );
+    const comment = await CommentModel.findById(req.params.id);
     if (!comment) {
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ success: false, message: 'Comment not found' });
     }
+    if (req.user?.role !== UserRole.Admin && comment.id !== req.user?.id) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ success: false, message: 'Forbidden' });
+    }
+    comment.text = text;
+    comment.rating = rating;
+    await comment.save();
     return res.status(StatusCodes.ACCEPTED).json(comment);
   } catch (err) {
     console.error(err);
@@ -84,20 +78,20 @@ export const updateComment: Controller<
 };
 
 // Delete
-export const deleteComment: Controller<{ id: string }> = async (
-  req: any,
-  res,
-) => {
+export const deleteComment: Controller<{ id: string }> = async (req, res) => {
   try {
-    const comment = await CommentModel.findOneAndDelete({
-      id: req.params.id,
-      user: req.user?.id,
-    });
+    const comment = await CommentModel.findById(req.params.id);
     if (!comment) {
       return res
         .status(StatusCodes.NOT_FOUND)
-        .json({ message: 'Comment not found' });
+        .json({ success: false, message: 'Comment not found' });
     }
+    if (req.user?.role !== UserRole.Admin && comment.id !== req.user?.id) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ success: false, message: 'Forbidden' });
+    }
+    await comment.deleteOne();
     return res.status(StatusCodes.NO_CONTENT);
   } catch (err) {
     console.error(err);
