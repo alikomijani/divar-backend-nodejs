@@ -49,5 +49,14 @@ export const PropertyModel = mongoose.model<ICategoryProperty>(
   'Property',
   PropertySchema,
 );
-
+PropertySchema.set('toJSON', {
+  virtuals: true,
+  transform: function (doc, ret) {
+    delete ret.__v;
+    delete ret._id;
+  },
+});
+PropertySchema.set('toObject', {
+  virtuals: true,
+});
 export default PropertyModel;

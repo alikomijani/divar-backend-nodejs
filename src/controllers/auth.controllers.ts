@@ -19,7 +19,7 @@ export const registerUser: Controller<object, object, RegisterUser> = async (
       role: UserRole.User,
     });
     const userProfile = await ProfileModel.create({
-      user: user.id,
+      user: user._id,
       firstName: data.firstName,
       lastName: data.lastName,
     });

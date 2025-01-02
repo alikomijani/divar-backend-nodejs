@@ -16,27 +16,31 @@ import { UserRole } from '@/models/auth.model';
 
 const brandRouter = express.Router();
 
-brandRouter.post(
+brandRouter.get('/', getAllBrands); // Get all cities
+brandRouter.get('/:slug', getBrandBySlug); // Get all cities
+
+const brandAdminRouter = express.Router();
+brandAdminRouter.get('/', getAllBrands); // Get all cities
+brandAdminRouter.get('/:slug', getBrandBySlug); // Get all cities
+brandAdminRouter.post(
   '/',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(BrandSchemaZod),
   createBrand,
 ); // Create a new brand
-brandRouter.get('/', getAllBrands); // Get all cities
-brandRouter.get('/:slug', getBrandBySlug); // Get all cities
-brandRouter.put(
+brandAdminRouter.put(
   '/:slug',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(BrandSchemaZod),
   updateBrand,
 ); // Update a brand by ID
-brandRouter.delete(
+brandAdminRouter.delete(
   '/:slug',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   deleteBrand,
 ); // Delete a brand by ID
 
-export default brandRouter;
+export { brandRouter, brandAdminRouter };

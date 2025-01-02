@@ -12,9 +12,9 @@ export async function getPaginatedQuery<T>(
   const total = await model.countDocuments(query);
   const results = await model
     .find(query)
+    .select('-__v')
     .skip((page - 1) * page) // Skip documents for pagination
-    .limit(pageSize) // Limit the number of documents
-    .lean(); // return object instead of full document object
+    .limit(pageSize); // Limit the number of documents
   return {
     results,
     total,

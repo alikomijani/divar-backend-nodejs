@@ -200,5 +200,14 @@ export const ProductModel = mongoose.model<IProduct, ProductModelStatic>(
   'Product',
   ProductSchema,
 );
-
+ProductSchema.set('toJSON', {
+  virtuals: true,
+  transform: function (doc, ret) {
+    delete ret.__v;
+    delete ret._id;
+  },
+});
+ProductSchema.set('toObject', {
+  virtuals: true,
+});
 export default ProductModel;

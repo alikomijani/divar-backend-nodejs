@@ -36,7 +36,16 @@ export const ProductSellerPriceSchema = new Schema<IProductSellerPrice>(
   },
 );
 ProductSellerPriceSchema.index({ product: 1, seller: 1, date: -1 }); // Index for efficient retrieval of last price
-
+ProductSellerPriceSchema.set('toJSON', {
+  virtuals: true,
+  transform: function (doc, ret) {
+    delete ret.__v;
+    delete ret._id;
+  },
+});
+ProductSellerPriceSchema.set('toObject', {
+  virtuals: true,
+});
 export const ProductSellerPriceModel = model<IProductSellerPrice>(
   'ProductSellers',
   ProductSellerPriceSchema,

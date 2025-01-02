@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema<IUser>(
       },
       createToken: function (sellerId?: string) {
         return createAuthToken({
-          id: this.id,
+          id: this._id as string,
           role: this.role,
           sellerId,
         });
@@ -63,9 +63,9 @@ UserSchema.pre('save', async function (next) {
 UserSchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {
-    delete ret._id;
     delete ret.password;
     delete ret.__v;
+    delete ret._id;
   },
 });
 UserSchema.set('toObject', {

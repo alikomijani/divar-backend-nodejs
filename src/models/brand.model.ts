@@ -46,5 +46,14 @@ export const BrandSchema = new mongoose.Schema<IBrand>(
     timestamps: true,
   },
 );
-
+BrandSchema.set('toJSON', {
+  virtuals: true,
+  transform: function (doc, ret) {
+    delete ret.__v;
+    delete ret._id;
+  },
+});
+BrandSchema.set('toObject', {
+  virtuals: true,
+});
 export const BrandModel = mongoose.model('Brand', BrandSchema);

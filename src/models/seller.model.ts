@@ -53,5 +53,14 @@ const SellerSchema = new Schema<ISeller>(
 );
 
 export const SellerModel = mongoose.model<ISeller>('Seller', SellerSchema);
-
+SellerSchema.set('toJSON', {
+  virtuals: true,
+  transform: function (doc, ret) {
+    delete ret.__v;
+    delete ret._id;
+  },
+});
+SellerSchema.set('toObject', {
+  virtuals: true,
+});
 export default SellerModel;
