@@ -2,32 +2,21 @@ import express from 'express';
 import {
   createCity,
   getCities,
-  getCityBySlug,
+  getCityById,
   updateCity,
   deleteCity,
 } from '../controllers/city.controllers';
-import {
-  loginMiddleware,
-  roleMiddleware,
-} from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/auth.model';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const cityRouter = express.Router();
-
-cityRouter.post('/', loginMiddleware, createCity); // Create a new city
 cityRouter.get('/', getCities); // Get all cities
-cityRouter.get('/:slug', getCityBySlug); // Get a city by ID
-cityRouter.put(
-  '/:slug',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  updateCity,
-); // Update a city by ID
-cityRouter.delete(
-  '/:slug',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  deleteCity,
-); // Delete a city by ID
 
-export default cityRouter;
+const cityAdminRouter = express.Router();
+
+cityAdminRouter.post('/', createCity); // Create a new city
+cityAdminRouter.get('/', getCities); // Get all cities
+cityAdminRouter.get('/:id', validateIdMiddleware, getCityById); // Get a city by ID
+cityAdminRouter.put('/:id', validateIdMiddleware, updateCity); // Update a city by ID
+cityAdminRouter.delete('/:id', validateIdMiddleware, deleteCity); // Delete a city by ID
+
+export { cityAdminRouter, cityRouter };

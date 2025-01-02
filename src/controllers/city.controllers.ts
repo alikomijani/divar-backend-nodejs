@@ -25,9 +25,9 @@ export const getCities: Controller<
   res.status(StatusCodes.OK).json(results);
 };
 
-export const getCityBySlug: Controller<{ slug: string }> = async (req, res) => {
-  const { slug } = req.params;
-  const city = await CityModel.findOne({ slug });
+export const getCityById: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const city = await CityModel.findById(id);
   if (!city) {
     return res.status(StatusCodes.NOT_FOUND).json({
       success: false,
@@ -38,13 +38,13 @@ export const getCityBySlug: Controller<{ slug: string }> = async (req, res) => {
   }
 };
 
-export const updateCity: Controller<{ slug: string }, CityType> = async (
+export const updateCity: Controller<{ id: string }, CityType> = async (
   req,
   res,
 ) => {
-  const { slug } = req.params;
+  const { id } = req.params;
   const cityData: Partial<CityType> = req.body; // Use Partial to allow partial updates
-  const updatedCity = await CityModel.findOneAndUpdate({ slug }, cityData, {
+  const updatedCity = await CityModel.findByIdAndUpdate(id, cityData, {
     new: true,
   });
   if (!updatedCity) {
@@ -57,9 +57,9 @@ export const updateCity: Controller<{ slug: string }, CityType> = async (
   }
 };
 
-export const deleteCity: Controller<{ slug: string }> = async (req, res) => {
-  const { slug } = req.params;
-  const deletedCity = await CityModel.findOneAndDelete({ slug });
+export const deleteCity: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const deletedCity = await CityModel.findByIdAndDelete(id);
   if (!deletedCity) {
     return res.status(StatusCodes.NOT_FOUND).json({
       success: false,

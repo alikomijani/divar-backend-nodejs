@@ -6,7 +6,7 @@ import { categoryRouter, categoryAdminRouter } from './category.routes';
 import propertyRouter from './properties.routes';
 import imagesRouter from './image.routes';
 import colorRouter from './color.routes';
-import cityRouter from './city.routes';
+import { cityAdminRouter, cityRouter } from './city.routes';
 import productRouter from './product.routes';
 import commentRouter from './comment.routes';
 import sellerRouter from './seller.routes';
@@ -16,6 +16,7 @@ import {
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
 import { UserRole } from '@/models/auth.model';
+import { profileAdminRouter } from './profile.routes';
 
 const userRouter = Router();
 
@@ -40,6 +41,9 @@ adminRouter.use(loginMiddleware, roleMiddleware(UserRole.Admin));
 adminRouter.use('/badges', badgeAdminRouter);
 adminRouter.use('/brands', brandAdminRouter);
 adminRouter.use('/categories', categoryAdminRouter);
+adminRouter.use('/cities', cityAdminRouter);
+adminRouter.use('/profiles', profileAdminRouter);
+
 adminRouter.use('/properties', propertyRouter);
 const shopRouter = Router();
 shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
