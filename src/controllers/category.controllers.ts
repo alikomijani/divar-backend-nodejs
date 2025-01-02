@@ -64,7 +64,9 @@ export const getCategoryBySlug: Controller<{ slug: string }> = async (
 
 export const getCategoryById: Controller<{ id: string }> = async (req, res) => {
   const { id } = req.params;
-  const category = await CategoryModel.findById(id);
+  const category = await CategoryModel.findById(id)
+    .populate('properties')
+    .populate('parent');
   if (!category) {
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -86,7 +88,9 @@ export const updateCategory: Controller<
     {
       new: true,
     },
-  );
+  )
+    .populate('parent')
+    .populate('properties');
   if (!updatedCategory) {
     return res
       .status(StatusCodes.NOT_FOUND)

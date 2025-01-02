@@ -6,6 +6,7 @@ import {
   updateCategory,
   deleteCategory,
   getCategoryBySlug,
+  getPaginatedCategories,
 } from '../controllers/category.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
 import { CategorySchemaZod } from '@/models/category.model';
@@ -18,7 +19,7 @@ categoryRouter.get('/:slug', getCategoryBySlug);
 
 const categoryAdminRouter = Router();
 
-categoryAdminRouter.get('/', getAllCategories);
+categoryAdminRouter.get('/', getPaginatedCategories);
 categoryAdminRouter.get('/:id', validateIdMiddleware, getCategoryById);
 categoryAdminRouter.post('/', validateData(CategorySchemaZod), createCategory);
 categoryAdminRouter.put(
@@ -29,4 +30,4 @@ categoryAdminRouter.put(
 );
 categoryAdminRouter.delete('/:slug', validateIdMiddleware, deleteCategory);
 
-export default categoryRouter;
+export { categoryAdminRouter, categoryRouter };
