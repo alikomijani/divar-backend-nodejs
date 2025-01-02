@@ -5,40 +5,28 @@ import {
   getCategoryById,
   updateCategory,
   deleteCategory,
+  getCategoryBySlug,
 } from '../controllers/category.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import {
-  loginMiddleware,
-  roleMiddleware,
-} from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/auth.model';
 import { CategorySchemaZod } from '@/models/category.model';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const categoryRouter = Router();
 
 categoryRouter.get('/', getAllCategories);
+categoryRouter.get('/:slug', getCategoryBySlug);
 
-categoryRouter.post(
-  '/',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  validateData(CategorySchemaZod),
-  createCategory,
-);
+const categoryAdminRouter = Router();
 
-categoryRouter.get('/:slug', getCategoryById);
-categoryRouter.put(
-  '/:slug',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
+categoryAdminRouter.get('/', getAllCategories);
+categoryAdminRouter.get('/:id', validateIdMiddleware, getCategoryById);
+categoryAdminRouter.post('/', validateData(CategorySchemaZod), createCategory);
+categoryAdminRouter.put(
+  '/:id',
+  validateIdMiddleware,
   validateData(CategorySchemaZod),
   updateCategory,
 );
-categoryRouter.delete(
-  '/:slug',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  deleteCategory,
-);
+categoryAdminRouter.delete('/:slug', validateIdMiddleware, deleteCategory);
 
 export default categoryRouter;

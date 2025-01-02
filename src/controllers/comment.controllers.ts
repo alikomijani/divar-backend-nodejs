@@ -33,9 +33,13 @@ export const getProductComments: Controller<
 > = async (req, res) => {
   try {
     const { page = 1, pageSize = 10, ...restQuery } = req.query;
-    const comments = await getPaginatedQuery(CommentModel, page, pageSize, {
-      product: req.params.productId,
-      ...restQuery,
+    const comments = await getPaginatedQuery(CommentModel, {
+      page,
+      pageSize,
+      query: {
+        product: req.params.productId,
+        ...restQuery,
+      },
     });
     res.status(StatusCodes.OK).json(comments);
   } catch (err) {

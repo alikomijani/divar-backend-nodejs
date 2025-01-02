@@ -24,12 +24,10 @@ export const getAllBadges: Controller<
   PaginatedResponse<IBadge>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const paginatedQuery = await getPaginatedQuery(
-    BadgeModel,
+  const paginatedQuery = await getPaginatedQuery(BadgeModel, {
     page,
     pageSize,
-    {},
-  );
+  });
   res.status(StatusCodes.OK).json(paginatedQuery);
 };
 

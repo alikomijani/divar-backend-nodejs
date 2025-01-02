@@ -1,24 +1,34 @@
 import type { PaginatedResponse } from '@/types/app.types';
-import type { Model } from 'mongoose';
+import type { Model, Document } from 'mongoose';
+import type { PopulateOptions } from 'mongoose';
 
-export async function getPaginatedQuery<T>(
+type PaginatedQueryOptions = {
+  page: number | string | string[];
+  pageSize: number | string | string[];
+  query?: object;
+  populateOptions?: PopulateOptions[];
+};
+export async function getPaginatedQuery<T extends Document>(
   model: Model<T>,
-  page: number | string | string[],
-  pageSize: number | string | string[],
-  query: object = {},
+  { page, pageSize, query = {}, populateOptions }: PaginatedQueryOptions,
 ): Promise<PaginatedResponse<T>> {
   page = Number(page);
   pageSize = Number(pageSize);
   const total = await model.countDocuments(query);
-  const results = await model
+  const resultsQuery = model
     .find(query)
     .select('-__v')
-    .skip((page - 1) * page) // Skip documents for pagination
-    .limit(pageSize); // Limit the number of documents
+    .skip((page - 1) * pageSize)
+    .limit(pageSize);
+  if (populateOptions) {
+    resultsQuery.populate(populateOptions);
+  }
+  const results = await resultsQuery.exec();
+
   return {
     results,
     total,
-    totalPages: Math.ceil(total / pageSize), // Total pages based on the limit
+    totalPages: Math.ceil(total / pageSize),
     page,
     pageSize,
   };

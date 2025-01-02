@@ -27,12 +27,10 @@ export const createProduct: Controller = async (req, res) => {
 export const getAllProducts: Controller = async (req, res) => {
   try {
     const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-    const paginatedResult = await getPaginatedQuery(
-      ProductModel,
+    const paginatedResult = await getPaginatedQuery(ProductModel, {
       page,
       pageSize,
-      {},
-    );
+    });
     return res.json(paginatedResult);
   } catch (error) {
     console.error(error);

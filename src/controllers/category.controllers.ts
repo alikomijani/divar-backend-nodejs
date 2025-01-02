@@ -2,6 +2,7 @@ import type { ICategory } from '@/models/category.model';
 import { CategoryModel } from '@/models/category.model';
 import type { Controller } from '@/types/express';
 import { duplicateKey } from '@/utils/duplicate-key';
+import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
 // CREATE a new category
@@ -19,18 +20,33 @@ export const createCategory: Controller<object, ICategory> = async (
 };
 
 // READ all categories
+export const getPaginatedCategories: Controller = async (req, res) => {
+  const { page = 1, pageSize = 10 } = req.query;
+  const categories = await getPaginatedQuery(CategoryModel, {
+    page,
+    pageSize,
+    populateOptions: [{ path: 'parent' }, { path: 'properties' }],
+  });
+
+  return res.status(StatusCodes.OK).json(categories);
+};
+// READ all categories
 export const getAllCategories: Controller<
   object,
   { results: ICategory[] }
 > = async (req, res) => {
-  const categories = await CategoryModel.find()
-    .populate('properties')
-    .populate('parent');
-  return res.status(StatusCodes.OK).json({ results: categories });
+  const { page = 1, pageSize = 10 } = req.query;
+  const categories = await getPaginatedQuery(CategoryModel, {
+    page,
+    pageSize,
+    populateOptions: [{ path: 'parent' }, { path: 'properties' }],
+  });
+
+  return res.status(StatusCodes.OK).json(categories);
 };
 
 // READ a single category by ID
-export const getCategoryById: Controller<{ slug: string }> = async (
+export const getCategoryBySlug: Controller<{ slug: string }> = async (
   req,
   res,
 ) => {
@@ -46,22 +62,31 @@ export const getCategoryById: Controller<{ slug: string }> = async (
   res.status(StatusCodes.OK).json(category);
 };
 
+export const getCategoryById: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const category = await CategoryModel.findById(id);
+  if (!category) {
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: 'Category not found' });
+  }
+  res.status(StatusCodes.OK).json(category);
+};
+
 // UPDATE a category by ID
 export const updateCategory: Controller<
-  { slug: string },
+  { id: string },
   Partial<ICategory>
 > = async (req, res) => {
-  const { slug } = req.params;
+  const { id } = req.params;
   const updatedData = req.body;
-  const updatedCategory = await CategoryModel.findOneAndUpdate(
-    { slug },
+  const updatedCategory = await CategoryModel.findByIdAndUpdate(
+    id,
     updatedData,
     {
       new: true,
     },
-  )
-    .populate('parent')
-    .populate('properties');
+  );
   if (!updatedCategory) {
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -72,12 +97,9 @@ export const updateCategory: Controller<
 };
 
 // DELETE a category by ID
-export const deleteCategory: Controller<{ slug: string }> = async (
-  req,
-  res,
-) => {
-  const { slug } = req.params;
-  const deletedCategory = await CategoryModel.findOneAndDelete({ slug });
+export const deleteCategory: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const deletedCategory = await CategoryModel.findByIdAndDelete(id);
   if (!deletedCategory) {
     return res
       .status(StatusCodes.NOT_FOUND)

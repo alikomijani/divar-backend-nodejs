@@ -21,7 +21,7 @@ export const getCities: Controller<
   PaginatedResponse<CityType>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const results = await getPaginatedQuery(CityModel, page, pageSize, {});
+  const results = await getPaginatedQuery(CityModel, { page, pageSize });
   res.status(StatusCodes.OK).json(results);
 };
 

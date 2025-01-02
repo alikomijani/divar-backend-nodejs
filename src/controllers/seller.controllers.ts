@@ -27,7 +27,7 @@ const getAllSellers: Controller<
   PaginatedResponse<SellerType>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const sellers = await getPaginatedQuery(SellerModel, page, pageSize, {});
+  const sellers = await getPaginatedQuery(SellerModel, { page, pageSize });
   return res.json(sellers);
 };
 

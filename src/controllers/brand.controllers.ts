@@ -23,12 +23,10 @@ export const getAllBrands: Controller<
   PaginatedResponse<IBrand>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const paginatedResult = await getPaginatedQuery(
-    BrandModel,
+  const paginatedResult = await getPaginatedQuery(BrandModel, {
     page,
     pageSize,
-    {},
-  );
+  });
   res.status(StatusCodes.OK).json(paginatedResult);
 };
 

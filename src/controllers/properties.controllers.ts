@@ -28,12 +28,10 @@ export const getAllProperties: Controller<
 > = async (req, res) => {
   try {
     const { page = 1, pageSize = 10 } = req.query;
-    const paginatedResult = await getPaginatedQuery(
-      PropertyModel,
+    const paginatedResult = await getPaginatedQuery(PropertyModel, {
       page,
       pageSize,
-      {},
-    );
+    });
     return res.status(StatusCodes.OK).json(paginatedResult);
   } catch (error) {
     console.error('Error fetching properties:', error);

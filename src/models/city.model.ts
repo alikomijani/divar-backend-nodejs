@@ -1,3 +1,4 @@
+import type { Document } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
 
@@ -21,9 +22,10 @@ export const CitySchemaZod = z.object({
 export type CityType = z.infer<typeof CitySchemaZod>;
 
 // Mongoose Interface (Extending CityType and Document)
+export interface ICity extends CityType, Document {}
 
 // Mongoose Schema
-const CitySchema = new Schema<CityType>(
+const CitySchema = new Schema<ICity>(
   {
     name: { type: String, required: true, trim: true },
     code: { type: String, required: true, trim: true },
@@ -53,6 +55,6 @@ CitySchema.set('toJSON', {
 CitySchema.set('toObject', {
   virtuals: true,
 });
-export const CityModel = mongoose.model<CityType>('City', CitySchema);
+export const CityModel = mongoose.model<ICity>('City', CitySchema);
 
 export default CityModel;

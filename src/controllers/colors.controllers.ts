@@ -33,12 +33,10 @@ export const getAllColors: Controller<
   PaginatedResponse<IColor>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const paginatedResult = await getPaginatedQuery(
-    ColorModel,
+  const paginatedResult = await getPaginatedQuery(ColorModel, {
     page,
     pageSize,
-    {},
-  );
+  });
   res.status(StatusCodes.OK).json(paginatedResult);
 };
 

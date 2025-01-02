@@ -54,8 +54,12 @@ export const getUserOrders: Controller<
 > = async (req, res, next) => {
   try {
     const { page = 1, pageSize = 10 } = req.query;
-    const results = await getPaginatedQuery(OrderModel, page, pageSize, {
-      user: req.user?.id,
+    const results = await getPaginatedQuery(OrderModel, {
+      page,
+      pageSize,
+      query: {
+        user: req.user?.id,
+      },
     });
     return res.json(results);
   } catch (error) {
@@ -93,7 +97,7 @@ export const getOrdersBySeller: Controller = async (req, res) => {
 export const getAllOrders: Controller = async (req, res) => {
   try {
     const { page = 1, pageSize = 10 } = req.query;
-    const orders = await getPaginatedQuery(OrderModel, page, pageSize, {});
+    const orders = await getPaginatedQuery(OrderModel, { page, pageSize });
     return res.json(orders);
   } catch (error) {
     console.error('Error getting orders:', error);
