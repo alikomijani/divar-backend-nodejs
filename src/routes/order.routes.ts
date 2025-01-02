@@ -5,7 +5,7 @@ import {
   getUserOrders,
 } from '@/controllers/order.controllers';
 import { roleMiddleware } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 import express from 'express';
 
 const orderRouter = express.Router();

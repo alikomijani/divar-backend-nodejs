@@ -11,7 +11,7 @@ import {
   updateColor,
 } from '@/controllers/colors.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 import { ColorSchemaZod } from '@/models/color.model';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 

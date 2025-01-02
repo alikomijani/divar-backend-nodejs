@@ -10,7 +10,7 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 
 const cityRouter = express.Router();
 

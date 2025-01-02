@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '@/utils/jwt.utils';
-import type { LoginUser, RegisterUser } from '@/models/user.model';
-import { UserModel, UserRole } from '@/models/user.model';
+import type { LoginUser, RegisterUser } from '@/models/auth.model';
+import { UserModel, UserRole } from '@/models/auth.model';
 import { duplicateKey } from '@/utils/duplicate-key';
 import ProfileModel from '@/models/profile.model';
 import type { Controller } from '@/types/express';

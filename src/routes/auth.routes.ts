@@ -5,7 +5,7 @@ import {
   refreshAccessToken,
   registerUser,
   updateUserProfile,
-} from '../controllers/users.controllers';
+} from '../controllers/auth.controllers';
 import { validateData } from '../middlewares/validation.middleware';
 
 import { loginMiddleware } from '../middlewares/authentication.middleware';
@@ -13,7 +13,7 @@ import {
   LoginSchemaZod,
   RefreshTokenSchemaZod,
   RegisterSchemaZod,
-} from '@/models/user.model';
+} from '@/models/auth.model';
 import { profileSchemaZod } from '@/models/profile.model';
 
 const userRouter = Router();

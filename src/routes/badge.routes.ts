@@ -9,7 +9,7 @@ import {
   getAllBadges,
   updateBadge,
 } from '@/controllers/badge.controllers';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const badgeRouter = express.Router();

@@ -11,7 +11,7 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 import { CategorySchemaZod } from '@/models/category.model';
 
 const categoryRouter = Router();

@@ -5,7 +5,7 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 
 const profileRouter = express.Router();
 // admin routes

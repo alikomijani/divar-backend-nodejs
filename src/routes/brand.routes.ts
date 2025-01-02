@@ -12,7 +12,7 @@ import {
 } from '@/controllers/brand.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
 import { BrandSchemaZod } from '@/models/brand.model';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 
 const brandRouter = express.Router();
 

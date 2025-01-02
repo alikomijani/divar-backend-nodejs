@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import userRouter from './user.routes';
+import userRouter from './auth.routes';
 import categoryRouter from './category.routes';
 import propertyRouter from './properties.routes';
 import imagesRouter from './image.routes';
@@ -15,10 +15,11 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/models/user.model';
+import { UserRole } from '@/models/auth.model';
 
 const appRouter = Router();
 appRouter.use('/auth', userRouter);
+appRouter.use('/badges', badgeRouter);
 appRouter.use('/brands', brandRouter);
 appRouter.use('/categories', categoryRouter);
 appRouter.use(
@@ -30,7 +31,6 @@ appRouter.use(
 appRouter.use('/images', imagesRouter);
 appRouter.use('/colors', colorRouter);
 appRouter.use('/cities', cityRouter);
-appRouter.use('/badges', badgeRouter);
 appRouter.use('/products', productRouter);
 appRouter.use(commentRouter);
 appRouter.use(
