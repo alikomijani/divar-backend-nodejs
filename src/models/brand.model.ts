@@ -16,8 +16,6 @@ export const BrandSchemaZod = z.object({
       'Slug can only contain lowercase letters, numbers, and hyphens',
     ),
   logo: z.string().optional(), // Optional logo
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
 });
 
 // Define a type based on the Zod schema

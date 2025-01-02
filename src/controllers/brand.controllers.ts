@@ -8,9 +8,9 @@ import { StatusCodes } from 'http-status-codes';
 
 // Create Brand
 export const createBrand: Controller<object, IBrand> = async (req, res) => {
-  const data = req.body;
-  const newBrand = await BrandModel.create(data);
   try {
+    const data = req.body;
+    const newBrand = await BrandModel.create(data);
     res.status(StatusCodes.CREATED).json(newBrand);
   } catch (error) {
     return duplicateKey(error, res);
@@ -49,30 +49,50 @@ export const getBrandBySlug: Controller<{ slug: string }, IBrand> = async (
   }
 };
 
-// Update Brand
-export const updateBrand: Controller<{ slug: string }, IBrand, IBrand> = async (
+export const getBrandById: Controller<{ id: string }, IBrand> = async (
   req,
   res,
 ) => {
-  const { slug } = req.params;
-  const data = req.body;
-  const updatedBrand = await BrandModel.findOneAndUpdate({ slug }, data, {
-    new: true,
-  });
-  if (!updatedBrand) {
+  const { id } = req.params;
+  const brand = await BrandModel.findById(id);
+  if (!brand) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      success: false,
       message: 'Brand not found',
+      success: false,
     });
   } else {
-    return res.status(StatusCodes.OK).json(updatedBrand);
+    return res.status(StatusCodes.OK).json(brand);
+  }
+};
+
+// Update Brand
+export const updateBrand: Controller<{ id: string }, IBrand, IBrand> = async (
+  req,
+  res,
+) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const updatedBrand = await BrandModel.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+    if (!updatedBrand) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: 'Brand not found',
+      });
+    } else {
+      return res.status(StatusCodes.OK).json(updatedBrand);
+    }
+  } catch (error) {
+    return duplicateKey(error, res);
   }
 };
 
 // Delete Brand
-export const deleteBrand: Controller<{ slug: string }> = async (req, res) => {
-  const { slug } = req.params;
-  const deletedBrand = await BrandModel.findOneAndDelete({ slug });
+export const deleteBrand: Controller<{ id: string }> = async (req, res) => {
+  const { id } = req.params;
+  const deletedBrand = await BrandModel.findByIdAndDelete(id);
   if (!deletedBrand) {
     return res.status(StatusCodes.NOT_FOUND).json({
       success: false,
