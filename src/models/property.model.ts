@@ -21,7 +21,6 @@ export type PropertyType = z.infer<typeof PropertySchemaZod>;
 
 // Mongoose Interface (Extending PropertyType and Document)
 export interface ICategoryProperty extends PropertyType, Document {
-  _id: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -45,13 +44,6 @@ export const PropertySchema = new Schema<ICategoryProperty>(
     toObject: { virtuals: true },
   },
 );
-
-// Virtual for 'id'
-PropertySchema.virtual('id').get(function (this: ICategoryProperty) {
-  return this._id.toHexString();
-});
-
-// Transform to remove _id and __v (already in schema options)
 
 export const PropertyModel = mongoose.model<ICategoryProperty>(
   'Property',

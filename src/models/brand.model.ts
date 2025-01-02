@@ -1,11 +1,11 @@
-import type { Document, Types } from 'mongoose';
+import type { Document } from 'mongoose';
 import mongoose from 'mongoose';
 
 import { z } from 'zod';
 
 export const BrandSchemaZod = z.object({
-  title_fa: z.string().min(1, 'Title (FA) is required'), // Minimum 1 character
-  title_en: z.string().min(1, 'Title (EN) is required'), // Minimum 1 character
+  titleFa: z.string().min(1, 'Title (FA) is required'), // Minimum 1 character
+  titleEn: z.string().min(1, 'Title (EN) is required'), // Minimum 1 character
   slug: z
     .string()
     .min(1, 'Slug is required')
@@ -24,14 +24,13 @@ export const BrandSchemaZod = z.object({
 export type BrandType = z.infer<typeof BrandSchemaZod>;
 
 export interface IBrand extends BrandType, Document {
-  _id: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
 export const BrandSchema = new mongoose.Schema<IBrand>(
   {
-    title_fa: { type: String, required: true },
-    title_en: { type: String, required: true },
+    titleFa: { type: String, required: true },
+    titleEn: { type: String, required: true },
     slug: {
       type: String,
       required: true,

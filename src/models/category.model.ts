@@ -4,8 +4,8 @@ import { z } from 'zod';
 
 // Interface
 export interface ICategory extends Document {
-  title_fa: string;
-  title_en: string;
+  titleFa: string;
+  titleEn: string;
   slug: string;
   icon?: string;
   returnReasonAlert?: string;
@@ -16,8 +16,8 @@ export interface ICategory extends Document {
 // Mongoose Schema
 export const CategorySchema = new Schema<ICategory>(
   {
-    title_en: { type: String, required: true, trim: true },
-    title_fa: { type: String, required: true, trim: true },
+    titleEn: { type: String, required: true, trim: true },
+    titleFa: { type: String, required: true, trim: true },
     slug: {
       type: String,
       required: true,
@@ -47,8 +47,8 @@ export const Category = mongoose.model<ICategory>('Category', CategorySchema);
 
 // Zod Schema
 export const CategorySchemaZod = z.object({
-  title_en: z.string().min(1, 'Name is required').trim(),
-  title_fa: z.string().min(1, 'Name is required').trim(),
+  titleEn: z.string().min(1, 'Name is required').trim(),
+  titleFa: z.string().min(1, 'Name is required').trim(),
   slug: z
     .string()
     .min(1, 'Slug is required')

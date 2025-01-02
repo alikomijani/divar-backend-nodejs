@@ -14,8 +14,13 @@ import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const badgeRouter = express.Router();
 
-badgeRouter.post('/', createBadge); // Create a new badge
-badgeRouter.get('/', getAllBadges); // Get all cities
+badgeRouter.post(
+  '/',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  createBadge,
+); // Create a new badge
+badgeRouter.get('/', getAllBadges); // Get all
 badgeRouter.put(
   '/:id',
   validateIdMiddleware,

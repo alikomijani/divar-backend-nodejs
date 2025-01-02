@@ -87,8 +87,8 @@ export const LoginSchemaZod = z.object({
 export const RegisterSchemaZod = z.object({
   email: z.string().email('Invalid Email').trim(),
   password: z.string().min(6, 'Password must be at least 6 characters').trim(),
-  first_name: z.string().min(1, 'firstName is required'),
-  last_name: z.string().min(1, 'lastName is required'),
+  firstName: z.string().min(1, 'firstName is required'),
+  lastName: z.string().min(1, 'lastName is required'),
 });
 export const RefreshTokenSchemaZod = z.object({
   refreshToken: z.string(),

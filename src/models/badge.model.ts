@@ -1,4 +1,4 @@
-import type { Document, Types } from 'mongoose';
+import type { Document } from 'mongoose';
 import mongoose from 'mongoose';
 import { z } from 'zod';
 
@@ -12,7 +12,6 @@ export const BadgeSchemaZod = z.object({
 
 export type BadgeType = z.infer<typeof BadgeSchemaZod>;
 export interface IBadge extends BadgeType, Document {
-  _id: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }

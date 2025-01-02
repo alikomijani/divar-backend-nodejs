@@ -7,9 +7,12 @@ import ProfileModel from '@/models/profile.model';
 import type { Controller } from '@/types/express';
 import SellerModel from '@/models/seller.model';
 
-export const registerUser: Controller = async (req, res) => {
+export const registerUser: Controller<object, object, RegisterUser> = async (
+  req,
+  res,
+) => {
   try {
-    const data = req.body as RegisterUser;
+    const data = req.body;
     const user = await UserModel.create({
       email: data.email,
       password: data.password,
@@ -17,8 +20,8 @@ export const registerUser: Controller = async (req, res) => {
     });
     const userProfile = await ProfileModel.create({
       user: user.id,
-      first_name: data.first_name,
-      last_name: data.last_name,
+      firstName: data.firstName,
+      lastName: data.lastName,
     });
     const tokens = user.createToken();
     // Remove the password field from the response for security

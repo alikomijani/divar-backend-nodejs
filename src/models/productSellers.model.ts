@@ -20,7 +20,7 @@ interface IProductSellerPrice extends Document {
   price: number;
   discount: number;
   count: number;
-  create_at: Date;
+  createAt: Date;
 }
 
 export const ProductSellerPriceSchema = new Schema<IProductSellerPrice>(

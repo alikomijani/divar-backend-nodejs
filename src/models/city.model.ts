@@ -16,7 +16,6 @@ export const CitySchemaZod = z.object({
     ),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
-  _id: z.string().optional(),
 });
 
 export type CityType = z.infer<typeof CitySchemaZod>;

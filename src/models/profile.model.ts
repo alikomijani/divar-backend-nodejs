@@ -13,22 +13,22 @@ export const addressSchemaZod = z.object({
 });
 
 export const profileSchemaZod = z.object({
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  nation_code: z.string().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  nationCode: z.string().optional(),
   mobile: z.string().optional(),
   birthday: z.string().datetime().optional(),
-  address_list: z.array(addressSchemaZod).default([]),
+  addressList: z.array(addressSchemaZod).default([]),
 });
 
 export interface ProfileType extends Document {
   user: Types.ObjectId;
-  first_name?: string;
-  last_name?: string;
-  nation_code?: string;
+  firstName?: string;
+  lastName?: string;
+  nationCode?: string;
   mobile?: string;
   birthday?: Date;
-  address_list: {
+  addressList: {
     location: [number, number];
     street: string;
     city: string;
@@ -64,13 +64,13 @@ const profileSchema = new Schema<ProfileType>(
       unique: true,
       index: true,
     },
-    first_name: {
+    firstName: {
       type: String,
     },
-    last_name: {
+    lastName: {
       type: String,
     },
-    nation_code: {
+    nationCode: {
       type: String,
     },
     mobile: {
@@ -79,7 +79,7 @@ const profileSchema = new Schema<ProfileType>(
     birthday: {
       type: Date,
     },
-    address_list: {
+    addressList: {
       type: [addressSchema],
       default: [],
     },

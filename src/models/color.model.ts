@@ -5,7 +5,7 @@ import { z } from 'zod';
 // Zod Schema (without _id)
 export const ColorSchemaZod = z.object({
   title: z.string().min(1, 'Title is required').trim(),
-  hex_code: z
+  hexCode: z
     .string()
     .min(1, 'Hex code is required')
     .trim()
@@ -24,7 +24,7 @@ export interface IColor extends ColorType, Document {
 export const ColorSchema = new Schema<IColor>(
   {
     title: { type: String, required: true, trim: true },
-    hex_code: { type: String, required: true, trim: true },
+    hexCode: { type: String, required: true, trim: true },
   },
   { timestamps: true },
 );

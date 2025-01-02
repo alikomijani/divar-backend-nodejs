@@ -2,13 +2,14 @@ import type { ProfileType } from '@/models/profile.model';
 import ProfileModel from '@/models/profile.model';
 import type { Controller } from '@/types/express';
 import type { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 // Create a new profile
 export const createProfile = async (req: Request, res: Response) => {
   try {
     const newProfile: ProfileType = new ProfileModel(req.body);
     const savedProfile = await newProfile.save();
-    res.status(201).json(savedProfile); // 201 Created
+    res.status(StatusCodes.CREATED).json(savedProfile); // 201 Created
   } catch (error: any) {
     console.error('Error creating profile:', error);
     res
@@ -25,7 +26,9 @@ export const getProfileById: Controller<{ id: string }> = async (
   try {
     const profile = await ProfileModel.findById(req.params.id);
     if (!profile) {
-      return res.status(404).json({ message: 'Profile not found' }); // 404 Not Found
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Profile not found' }); // 404 Not Found
     }
     return res.json(profile);
   } catch (error: any) {

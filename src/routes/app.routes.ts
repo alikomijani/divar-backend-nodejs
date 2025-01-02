@@ -21,7 +21,12 @@ const appRouter = Router();
 appRouter.use('/auth', userRouter);
 appRouter.use('/brands', brandRouter);
 appRouter.use('/categories', categoryRouter);
-appRouter.use('/properties', propertyRouter);
+appRouter.use(
+  '/properties',
+  loginMiddleware,
+  roleMiddleware(UserRole.Admin),
+  propertyRouter,
+);
 appRouter.use('/images', imagesRouter);
 appRouter.use('/colors', colorRouter);
 appRouter.use('/cities', cityRouter);

@@ -30,20 +30,10 @@ const ImageSchemaZod = z.object({
 // Main Product Zod Schema
 export const ProductSchemaZod = z.object({
   code: z.number().int().positive('Code must be a positive integer'),
-  title_fa: z.string().min(1, 'Title (FA) is required').trim(),
-  title_en: z.string().min(1, 'Title (EN) is required').trim(),
+  titleFa: z.string().min(1, 'Title (FA) is required').trim(),
+  titleEn: z.string().min(1, 'Title (EN) is required').trim(),
   status: z.enum(['marketable', 'unmarketable']).default('marketable'),
   images: ImageSchemaZod,
-  // colors: z
-  //   .array(
-  //     z
-  //       .string()
-  //       .refine(
-  //         (val) => mongoose.Types.ObjectId.isValid(val),
-  //         'Invalid Color ID',
-  //       ),
-  //   )
-  //   .optional(),
   badges: z
     .array(
       z
@@ -75,8 +65,8 @@ export interface IProduct
   extends Omit<ProductType, 'colors' | 'badges' | 'category' | 'brand'>,
     Document {
   code: number;
-  title_fa: string;
-  title_en: string;
+  titleFa: string;
+  titleEn: string;
   status: 'marketable' | 'unmarketable';
   images: {
     main: string;
@@ -111,8 +101,8 @@ interface ProductModelStatic extends Model<IProduct> {
 const ProductSchema = new Schema<IProduct>(
   {
     code: { type: Number, required: true, unique: true, immutable: true },
-    title_fa: { type: String, required: true, trim: true },
-    title_en: { type: String, required: true, trim: true },
+    titleFa: { type: String, required: true, trim: true },
+    titleEn: { type: String, required: true, trim: true },
     status: {
       type: String,
       enum: ['marketable', 'unmarketable'],

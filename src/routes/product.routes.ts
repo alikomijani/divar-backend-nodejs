@@ -31,14 +31,14 @@ productRouter.get('/:code/sellers', getProductPrices);
 productRouter.put(
   '/:code',
   loginMiddleware,
-  roleMiddleware(UserRole.Admin),
+  roleMiddleware(UserRole.Seller),
   validateData(ProductSchemaZod),
   updateProduct,
 );
 productRouter.delete(
   '/:code',
   loginMiddleware,
-  roleMiddleware(UserRole.Admin),
+  roleMiddleware(UserRole.Seller),
   deleteProduct,
 );
 
