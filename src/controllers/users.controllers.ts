@@ -25,29 +25,13 @@ export const registerUser: Controller<object, object, RegisterUser> = async (
     });
     const tokens = user.createToken();
     // Remove the password field from the response for security
-    const { password, ...userWithoutPassword } = user.toObject();
     return res.status(StatusCodes.CREATED).json({
       tokens,
-      user: userWithoutPassword,
+      user,
       profile: userProfile,
     });
   } catch (error) {
     duplicateKey(error, res);
-  }
-};
-
-export const getUserProfile: Controller = async (req, res, next) => {
-  try {
-    const profile = await ProfileModel.findById({ user: req.user?.id });
-    if (!profile) {
-      return res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ success: false, message: 'Profile not found' });
-    }
-    return res.json(profile);
-  } catch (error) {
-    console.log(error);
-    next(error);
   }
 };
 
@@ -68,14 +52,17 @@ export const updateUserProfile: Controller = async (req, res, next) => {
 export const getUser: Controller = async (req, res, next) => {
   try {
     const user = await UserModel.findById(req.user?.id);
-    if (!user) {
+    const profile = await ProfileModel.findOne({ user: req.user?.id });
+
+    if (!user || !profile) {
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ success: false, message: 'User not found' });
     } else {
-      return res.json(user);
+      return res.json({ user, profile });
     }
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
@@ -88,16 +75,17 @@ export const loginUser: Controller<object, any, LoginUser> = async (
   try {
     const { email, password: rowPassword } = req.body;
     const user = await UserModel.findOne({ email });
-    if (!user || !(await user.checkPassword(rowPassword))) {
+    const profile = await ProfileModel.findOne({ user: user?.id });
+    if (!profile || !user || !(await user.checkPassword(rowPassword))) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
-        .json({ messages: ['Invalid credential'] });
+        .json({ success: false, messages: ['Invalid credential'] });
     }
 
     if (!user.isActive) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
-        .json({ messages: ['user is deactivate!'] });
+        .json({ success: false, messages: ['user is deactivate!'] });
     }
     let sellerId: string | undefined = undefined;
     if (user.role === UserRole.Seller) {
@@ -110,10 +98,8 @@ export const loginUser: Controller<object, any, LoginUser> = async (
     // Send response with tokens
     return res.status(StatusCodes.OK).json({
       tokens,
-      user: {
-        id: user.id,
-        email: user.email,
-      },
+      user,
+      profile,
     });
   } catch (err) {
     console.log(err);
@@ -137,16 +123,16 @@ export const refreshAccessToken: Controller<
     // Verify the refresh token
     const { iat, exp, ...decoded } = verifyToken(refreshToken, 'refresh');
     // Generate a new access token
-    const user = await UserModel.findOne({ id: decoded.id, isActive: true });
+    const user = await UserModel.findOne({ _id: decoded.id, isActive: true });
     if (user) {
       const newTokens = user.createToken();
       return res.status(StatusCodes.OK).json(newTokens);
     } else {
-      throw new Error('user not found or deactivate');
+      throw new Error('User is deactivate');
     }
     // Send the new access token to the client
   } catch (error: any) {
-    return res.sendStatus(StatusCodes.FORBIDDEN).json({
+    return res.status(StatusCodes.FORBIDDEN).json({
       success: false,
       message: error?.message || 'Forbidden',
     }); // Forbidden

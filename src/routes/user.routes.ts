@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import {
   getUser,
-  getUserProfile,
   loginUser,
   refreshAccessToken,
   registerUser,
@@ -27,7 +26,6 @@ userRouter.post(
   refreshAccessToken,
 );
 userRouter.get('/user', loginMiddleware, getUser);
-userRouter.get('/profile', loginMiddleware, getUserProfile);
 userRouter.put(
   '/profile',
   loginMiddleware,

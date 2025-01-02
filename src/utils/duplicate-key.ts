@@ -10,7 +10,9 @@ export function duplicateKey(error: any, res: Response) {
       success: false,
       message: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
       errors: {
-        [duplicatedField]: `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
+        [duplicatedField]: [
+          `${duplicatedField} already exists. Please use a different ${duplicatedField}.`,
+        ],
       },
     });
   } else {

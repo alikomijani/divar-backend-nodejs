@@ -87,6 +87,18 @@ const profileSchema = new Schema<ProfileType>(
   { timestamps: true },
 );
 profileSchema.index({ user: 1 }, { unique: true });
+
+profileSchema.set('toJSON', {
+  virtuals: true,
+  transform: function (doc, ret) {
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+profileSchema.set('toObject', {
+  virtuals: true,
+});
+
 const ProfileModel = mongoose.model<ProfileType>('Profile', profileSchema);
 
 export default ProfileModel;
