@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { generalErrorHandler } from './middlewares/general-error.middleware';
-import appRouter from './routes/app.routes';
+import { userRouter, adminRouter, shopRouter } from './routes/app.routes';
 import { PUBLIC_PATH } from './configs/app.configs';
 
 const app = express();
@@ -16,7 +16,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(appRouter);
+app.use(userRouter);
+app.use('/admin', adminRouter);
+app.use('/shop', shopRouter);
 app.use(
   morgan('combined', {
     skip: function (_, res) {

@@ -16,21 +16,21 @@ import {
 } from '@/models/auth.model';
 import { profileSchemaZod } from '@/models/profile.model';
 
-const userRouter = Router();
+const authRouter = Router();
 
-userRouter.post('/register', validateData(RegisterSchemaZod), registerUser);
-userRouter.post('/login', validateData(LoginSchemaZod), loginUser);
-userRouter.post(
+authRouter.post('/register', validateData(RegisterSchemaZod), registerUser);
+authRouter.post('/login', validateData(LoginSchemaZod), loginUser);
+authRouter.post(
   '/refresh',
   validateData(RefreshTokenSchemaZod),
   refreshAccessToken,
 );
-userRouter.get('/user', loginMiddleware, getUser);
-userRouter.put(
+authRouter.get('/user', loginMiddleware, getUser);
+authRouter.put(
   '/profile',
   loginMiddleware,
   validateData(profileSchemaZod),
   updateUserProfile,
 );
 
-export default userRouter;
+export default authRouter;

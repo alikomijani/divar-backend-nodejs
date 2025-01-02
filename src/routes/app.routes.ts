@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import userRouter from './auth.routes';
+import authRouter from './auth.routes';
 import categoryRouter from './category.routes';
 import propertyRouter from './properties.routes';
 import imagesRouter from './image.routes';
 import colorRouter from './color.routes';
 import cityRouter from './city.routes';
 import brandRouter from './brand.routes';
-import badgeRouter from './badge.routes';
+import { badgeAdminRouter } from './badge.routes';
 import productRouter from './product.routes';
 import commentRouter from './comment.routes';
 import sellerRouter from './seller.routes';
@@ -17,28 +17,30 @@ import {
 } from '@/middlewares/authentication.middleware';
 import { UserRole } from '@/models/auth.model';
 
-const appRouter = Router();
-appRouter.use('/auth', userRouter);
-appRouter.use('/badges', badgeRouter);
-appRouter.use('/brands', brandRouter);
-appRouter.use('/categories', categoryRouter);
-appRouter.use(
-  '/properties',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  propertyRouter,
-);
-appRouter.use('/images', imagesRouter);
-appRouter.use('/colors', colorRouter);
-appRouter.use('/cities', cityRouter);
-appRouter.use('/products', productRouter);
-appRouter.use(commentRouter);
-appRouter.use(
+const userRouter = Router();
+
+userRouter.use('/auth', authRouter);
+userRouter.use('/brands', brandRouter);
+userRouter.use('/categories', categoryRouter);
+
+userRouter.use('/images', imagesRouter);
+userRouter.use('/colors', colorRouter);
+userRouter.use('/cities', cityRouter);
+userRouter.use('/products', productRouter);
+userRouter.use(commentRouter);
+userRouter.use(
   '/admin/seller',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   sellerRouter,
 ); // edit seller info need admin permission
-appRouter.use(loginMiddleware, orderRouter); // all order routes need authentication
+userRouter.use(loginMiddleware, orderRouter); // all order routes need authentication
 
-export default appRouter;
+const adminRouter = Router();
+adminRouter.use(loginMiddleware, roleMiddleware(UserRole.Admin));
+adminRouter.use('/badges', badgeAdminRouter);
+adminRouter.use('/properties', propertyRouter);
+const shopRouter = Router();
+shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
+
+export { userRouter, adminRouter, shopRouter };
