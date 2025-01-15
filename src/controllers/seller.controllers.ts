@@ -2,7 +2,7 @@ import type { ISeller, SellerType } from '@/models/seller.model';
 import SellerModel from '@/models/seller.model';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
-import { duplicateKey } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
@@ -16,7 +16,7 @@ const createSeller: Controller<object, ISeller, SellerType> = async (
     const savedSeller = await newSeller.save();
     return res.status(StatusCodes.CREATED).json(savedSeller); // Return the created seller with status 201 (Created)
   } catch (error) {
-    return duplicateKey(error, res);
+    return handleMongooseError(error, res);
   }
 };
 

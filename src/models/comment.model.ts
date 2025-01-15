@@ -1,3 +1,4 @@
+import refValidator from '@/utils/ref-validator';
 import type { Document, Types } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
@@ -49,6 +50,7 @@ const CommentSchema = new Schema<IComment>(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
       required: true,
+      validate: refValidator('Product'),
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     text: { type: String, required: true, trim: true },

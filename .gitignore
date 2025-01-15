@@ -130,3 +130,4 @@ dist
 .pnp.*
 .Ds_store
 build
+sample_data

@@ -16,7 +16,11 @@ import {
 
 const commentRouter = express.Router();
 
-commentRouter.get('/product/:productId/comments', getProductComments); // Get all colors
+commentRouter.get(
+  '/product/:id/comments',
+  validateIdMiddleware,
+  getProductComments,
+); // Get all colors
 
 commentRouter.post(
   '/comments',

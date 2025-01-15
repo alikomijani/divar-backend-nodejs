@@ -1,4 +1,4 @@
-import type { IComment } from '@/models/comment.model';
+import type { CommentType, IComment } from '@/models/comment.model';
 import CommentModel from '@/models/comment.model';
 import { UserRole } from '@/models/auth.model';
 import type { PaginatedResponse } from '@/types/app.types';
@@ -7,7 +7,7 @@ import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
 // Create
-export const createComment: Controller<object, IComment, IComment> = async (
+export const createComment: Controller<object, IComment, CommentType> = async (
   req,
   res,
 ) => {
@@ -28,7 +28,7 @@ export const createComment: Controller<object, IComment, IComment> = async (
 
 // Read All
 export const getProductComments: Controller<
-  { productId: string },
+  { id: string },
   PaginatedResponse<IComment>
 > = async (req, res) => {
   try {
@@ -37,7 +37,7 @@ export const getProductComments: Controller<
       page,
       pageSize,
       query: {
-        product: req.params.productId,
+        product: req.params.id,
         ...restQuery,
       },
     });

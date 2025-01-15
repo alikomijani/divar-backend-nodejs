@@ -1,7 +1,7 @@
 import type { ICategory } from '@/models/category.model';
 import { CategoryModel } from '@/models/category.model';
 import type { Controller } from '@/types/express';
-import { duplicateKey } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
@@ -15,7 +15,7 @@ export const createCategory: Controller<object, ICategory> = async (
     const newCategory = await CategoryModel.create(categoryData);
     return res.status(StatusCodes.CREATED).json(newCategory);
   } catch (error) {
-    return duplicateKey(error, res);
+    return handleMongooseError(error, res);
   }
 };
 

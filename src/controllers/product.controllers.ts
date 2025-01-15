@@ -1,9 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import type { IProduct } from '@/models/product.model';
 import ProductModel from '@/models/product.model';
-import { MongoServerError } from 'mongodb';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
-import { duplicateKey } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/duplicate-key';
 import type { Controller } from '@/types/express';
 
 export const createProduct: Controller = async (req, res) => {
@@ -13,14 +12,7 @@ export const createProduct: Controller = async (req, res) => {
     const savedProduct = await newProduct.save();
     res.status(StatusCodes.CREATED).json(savedProduct);
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      return duplicateKey(error, res);
-    } else {
-      console.error(error);
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: 'Failed to create product', success: false });
-    }
+    return handleMongooseError(error, res);
   }
 };
 
@@ -80,14 +72,7 @@ export const updateProduct: Controller<
     }
     return res.json(updatedProduct);
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      return duplicateKey(error, res);
-    } else {
-      console.error(error);
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ success: false, message: 'Failed to update product' });
-    }
+    return handleMongooseError(error, res);
   }
 };
 

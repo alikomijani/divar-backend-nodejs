@@ -2,7 +2,7 @@ import type { IBrand } from '@/models/brand.model';
 import { BrandModel } from '@/models/brand.model';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
-import { duplicateKey } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
@@ -13,7 +13,7 @@ export const createBrand: Controller<object, IBrand> = async (req, res) => {
     const newBrand = await BrandModel.create(data);
     res.status(StatusCodes.CREATED).json(newBrand);
   } catch (error) {
-    return duplicateKey(error, res);
+    return handleMongooseError(error, res);
   }
 };
 
@@ -22,10 +22,30 @@ export const getAllBrands: Controller<
   object,
   PaginatedResponse<IBrand>
 > = async (req, res) => {
-  const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
+  const { page = 1, pageSize = 10, brandSlugs, category } = req.query; // Default to page 1 and limit 10
+  const query: Record<string, any> = {};
+  if (brandSlugs) {
+    const slugArray = Array.isArray(brandSlugs) ? brandSlugs : [brandSlugs]; // Ensure it's an array
+    const brands = await BrandModel.find({ slug: { $in: slugArray } }).select(
+      '_id',
+    ); // Find brands by slugs
+    if (!brands.length) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message: 'No brands found for the provided slugs',
+        success: false,
+      });
+    }
+    query.brand = { $in: brands.map((brand) => brand._id) }; // Use the brand IDs in the query
+  }
+
+  // If category is provided, add it to the query
+  if (category) {
+    query.category = category;
+  }
   const paginatedResult = await getPaginatedQuery(BrandModel, {
     page,
     pageSize,
+    query,
   });
   res.status(StatusCodes.OK).json(paginatedResult);
 };
@@ -83,7 +103,7 @@ export const updateBrand: Controller<{ id: string }, IBrand, IBrand> = async (
       return res.status(StatusCodes.OK).json(updatedBrand);
     }
   } catch (error) {
-    return duplicateKey(error, res);
+    return handleMongooseError(error, res);
   }
 };
 

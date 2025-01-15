@@ -2,7 +2,7 @@ import type { CityType } from '@/models/city.model';
 import { CityModel } from '@/models/city.model';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
-import { duplicateKey } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
@@ -12,7 +12,7 @@ export const createCity: Controller<object, CityType> = async (req, res) => {
     const newCity = await CityModel.create(cityData);
     res.status(StatusCodes.CREATED).json(newCity);
   } catch (error) {
-    return duplicateKey(error, res);
+    return handleMongooseError(error, res);
   }
 };
 
