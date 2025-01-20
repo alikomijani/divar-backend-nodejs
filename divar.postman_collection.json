@@ -1,0 +1,4555 @@
+{
+	"info": {
+		"_postman_id": "2bb4e64c-5a7d-4988-bf31-19fc4bf31245",
+		"name": "divar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6688069",
+		"_collection_link": "https://cloudy-satellite-511532.postman.co/workspace/My-Workspace~50d9fc7b-7d21-430a-82c2-2e53d2540411/collection/6688069-2bb4e64c-5a7d-4988-bf31-19fc4bf31245?action=share&source=collection_link&creator=6688069"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "required field miss",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa126@gmail.com\",\n    \"first_name\": \"Ali\",\n    \"last_name\": \"Komijani\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "102"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"66-X2RLj5QvCWJO5ENNCSfnwZwTHuY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:13:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"invalid data\",\n    \"success\": false,\n    \"errors\": {\n        \"firstName\": [\n            \"Required\"\n        ],\n        \"lastName\": [\n            \"Required\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "success user register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "770"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"302-JA4z1S+Wx/GbSHdPkrw2Sod+JxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:14:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM2NDQ2NDY0fQ.z1sV5qB0tjOm_g5leHOLicRL4wLVdSKeDpNhboO-CsQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM4NDMzNjY0fQ.2IMI-PWm59rxp0QlmNVldlQmZAqjmZos3mVMTq9jqwQ\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"_id\": \"6776d78084cecf1edbb63495\",\n        \"__v\": 0,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"_id\": \"6776d78084cecf1edbb63497\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "duplicate field error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9e-jRftz4kWVYjKH7lSVWoPqk5J+40\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:16:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": [\n        \"email already exists. Please use a different email.\"\n    ],\n    \"errors\": {\n        \"email\": [\n            \"email already exists. Please use a different email.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ali@gmail.com\",\n    \"password\": \"K@mij3314\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "invalid user credential",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"akpa1255@gmail.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-ot9AQO2705uqD4HilIuRA3l/Ypk\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:17:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"messages\": [\n        \"Invalid credential\"\n    ]\n}"
+						},
+						{
+							"name": "login user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"akpa125@gmail.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "720"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d0-eS2Nk7ulNwzQ3GE/pBVslguqRMc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:26:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM2NDQ3MTk4fQ.rpS2xf_ASvIkzWp5Ej8oea_copscIGWPK182UefSC3s\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM4NDM0Mzk4fQ.JVoFSN2oXXiR2egr5vV6KF4ue8w-sOQfOxCgbrXlros\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "User Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User Info",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/user",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"134-KVgBZgrdJu/6oJaqZ9NdXsxXucs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:22:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "refreshToken",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjYzMSwiZXhwIjoxNzM4NDM0NjMxfQ.ZpnWyzHe66Xmid2e9__zwICd0W7LpVdNamTa018jlIg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/refresh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "refreshToken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjYzMSwiZXhwIjoxNzM4NDM0NjMxfQ.ZpnWyzHe66Xmid2e9__zwICd0W7LpVdNamTa018jlIg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/refresh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-RT4LGpQbErWYNjqS9RMSRVKYaxc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 02 Jan 2025 18:46:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"User is deactivate\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"nation_code\": \"US\",\n  \"mobile\": \"+15551234568\",\n  \"birthday\": \"1990-01-15T00:00:00.000Z\", // ISO 8601 date string\n  \"address_list\": [\n    {\n      \"location\": [34.0522, -118.2437],\n      \"street\": \"123 Main St\",\n      \"city\": \"Los Angeles\",\n      \"postalCode\": \"90001\"\n    },\n    {\n      \"location\": [40.7128, -74.0060],\n      \"street\": \"456 Park Ave\",\n      \"city\": \"New York\",\n      \"postalCode\": \"10001\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/profile",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"nation_code\": \"US\",\n  \"mobile\": \"+15551234568\",\n  \"birthday\": \"1990-01-15T00:00:00.000Z\", // ISO 8601 date string\n  \"address_list\": [\n    {\n      \"location\": [34.0522, -118.2437],\n      \"street\": \"123 Main St\",\n      \"city\": \"Los Angeles\",\n      \"postalCode\": \"90001\"\n    },\n    {\n      \"location\": [40.7128, -74.0060],\n      \"street\": \"456 Park Ave\",\n      \"city\": \"New York\",\n      \"postalCode\": \"10001\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/profile",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "548"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"224-sCjjYp59rZIT/7DpPYIJNpOSbo0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 Dec 2024 18:03:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6774262dd545871a7fced3dd\",\n    \"user\": \"6774262dd545871a7fced3db\",\n    \"address_list\": [\n        {\n            \"location\": [\n                34.0522,\n                -118.2437\n            ],\n            \"street\": \"123 Main St\",\n            \"city\": \"Los Angeles\",\n            \"postalCode\": \"90001\",\n            \"_id\": \"677431e2c669214f9c1d8779\"\n        },\n        {\n            \"location\": [\n                40.7128,\n                -74.006\n            ],\n            \"street\": \"456 Park Ave\",\n            \"city\": \"New York\",\n            \"postalCode\": \"10001\",\n            \"_id\": \"677431e2c669214f9c1d877a\"\n        }\n    ],\n    \"createdAt\": \"2024-12-31T17:13:17.242Z\",\n    \"updatedAt\": \"2024-12-31T18:03:14.963Z\",\n    \"__v\": 0,\n    \"birthday\": \"1990-01-15T00:00:00.000Z\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"mobile\": \"+15551234568\",\n    \"nation_code\": \"US\"\n}"
+						}
+					]
+				}
+			],
+			"description": "این بخش مربوط به ثبت نام - ورود - تعویض توکن و اطلاعات کاربری میباشد."
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Brand",
+					"item": [
+						{
+							"name": "get all Brands",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/brands",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"brands"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get all Brands",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/brands",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"brands"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "328"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"148-qA2DSFJXeG+0i2opw3rkKpLwCOo\""
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 15 Jan 2025 20:23:58 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"titleFa\": \"به روز شده نام فارسی برند\",\n            \"titleEn\": \"Updated English Brand Name\",\n            \"slug\": \"lg\",\n            \"logo\": \"https://example.com/updated-logo.png\",\n            \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n            \"updatedAt\": \"2025-01-02T21:23:13.562Z\",\n            \"id\": \"677702374d88342901ad0df1\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "get brand by slug",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/brands/lg",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"brands",
+										"lg"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/brands/lg",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"brands",
+												"lg"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "266"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"10a-UJG41/v6VVXC6yBXoV6wEiK+vxM\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:49:16 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleFa\": \"به روز شده نام فارسی برند\",\n    \"titleEn\": \"Updated English Brand Name\",\n    \"slug\": \"lg\",\n    \"logo\": \"https://example.com/updated-logo.png\",\n    \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n    \"updatedAt\": \"2025-01-02T21:23:13.562Z\",\n    \"id\": \"677702374d88342901ad0df1\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "get categories",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/categories",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/categories",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "934"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3a6-ShMQBHtobOVo2Lr0Xn46zRi7AL0\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:42:30 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"titleEn\": \"mobile\",\n            \"titleFa\": \"موبایل\",\n            \"slug\": \"mobile\",\n            \"icon\": \"\",\n            \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n            \"properties\": [],\n            \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n            \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n            \"id\": \"6777138fc0d989811a8bcf7a\"\n        },\n        {\n            \"titleEn\": \"samsung\",\n            \"titleFa\": \"گوشی سامسونگ\",\n            \"slug\": \"mobile1\",\n            \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n            \"properties\": [],\n            \"createdAt\": \"2025-01-02T22:32:18.012Z\",\n            \"updatedAt\": \"2025-01-02T22:36:40.125Z\",\n            \"parent\": {\n                \"titleEn\": \"mobile\",\n                \"titleFa\": \"موبایل\",\n                \"slug\": \"mobile\",\n                \"icon\": \"\",\n                \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n                \"properties\": [],\n                \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n                \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n                \"id\": \"6777138fc0d989811a8bcf7a\"\n            },\n            \"id\": \"677713f23c89325083f8e4ed\"\n        }\n    ],\n    \"total\": 2,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "get category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/categories/mobile1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"categories",
+										"mobile1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/categories/mobile",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"categories",
+												"mobile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "286"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"11e-dG28L/uNGOM3jWPTYcGFkslgjUw\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:43:22 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleEn\": \"mobile\",\n    \"titleFa\": \"موبایل\",\n    \"slug\": \"mobile\",\n    \"icon\": \"\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [],\n    \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n    \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n    \"id\": \"6777138fc0d989811a8bcf7a\"\n}"
+								},
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/categories/mobile1",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"categories",
+												"mobile1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "585"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"249-UkrJMLlNRhFn+zYRvuo/K5L+DPM\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:43:47 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleEn\": \"samsung\",\n    \"titleFa\": \"گوشی سامسونگ\",\n    \"slug\": \"mobile1\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [],\n    \"createdAt\": \"2025-01-02T22:32:18.012Z\",\n    \"updatedAt\": \"2025-01-02T22:36:40.125Z\",\n    \"parent\": {\n        \"titleEn\": \"mobile\",\n        \"titleFa\": \"موبایل\",\n        \"slug\": \"mobile\",\n        \"icon\": \"\",\n        \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n        \"properties\": [],\n        \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n        \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n        \"id\": \"6777138fc0d989811a8bcf7a\"\n    },\n    \"id\": \"677713f23c89325083f8e4ed\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "City",
+					"item": [
+						{
+							"name": "get cities",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/cities",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/cities",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"cities"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "222"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"de-Ifd7p2ddBXjh+vbeElSARr12/Cc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 23:00:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"name\": \"تهران\",\n            \"code\": \"021\",\n            \"slug\": \"tehran\",\n            \"createdAt\": \"2025-01-02T22:58:59.658Z\",\n            \"updatedAt\": \"2025-01-02T22:58:59.658Z\",\n            \"id\": \"67771a33e2e8defa3ff74051\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "get all product comments",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/product/:productId/comments",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"product",
+										":productId",
+										"comments"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "12345"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create comment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\":\"عالی\",\n    \"rating\":5,\n    \"product\":12345\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/comments",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "edit comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\":\"\",\n    \"rating\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/comments/:commentId",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "commentId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/comments/:commentId",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"comments",
+										":commentId"
+									],
+									"variable": [
+										{
+											"key": "commentId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "Badge",
+					"item": [
+						{
+							"name": "Create Badge",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/badges",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"badges"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create Badge",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "96"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"60-0R2PUGiUFCSDg2xmPEwLrog4p/0\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 19:25:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"Error! Authorization failed. Required role: 3, but user role is: 1\"\n}"
+								},
+								{
+									"name": "Create Badge",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "179"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"b3-y3wReF3uoaZtJZDf+ZATSlfuYWs\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 19:32:32 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\",\n    \"createdAt\": \"2025-01-02T19:32:32.374Z\",\n    \"updatedAt\": \"2025-01-02T19:32:32.374Z\",\n    \"id\": \"6776e9d01f72277b1d39a267\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get all badges",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/badges",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"badges"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "241"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"f1-ZCEqGWhfCtzyoK5f3ghIeN10+4g\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 20:56:03 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"icon\": \"https://example.com/logo.png\",\n            \"title\": \"ارسال فوری\",\n            \"createdAt\": \"2025-01-02T20:55:02.632Z\",\n            \"updatedAt\": \"2025-01-02T20:55:02.632Z\",\n            \"id\": \"6776fd26659f8d7d25da6a37\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "update badge",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"badges",
+										"6776fd26659f8d7d25da6a37"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges",
+												"6776fd26659f8d7d25da6a37"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "179"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"b3-dvtPZA5scLEa5X6yLSxW98LVIf8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 20:58:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\",\n    \"createdAt\": \"2025-01-02T20:55:02.632Z\",\n    \"updatedAt\": \"2025-01-02T20:58:27.394Z\",\n    \"id\": \"6776fd26659f8d7d25da6a37\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get badge",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"badges",
+										"6776fd26659f8d7d25da6a37"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges",
+												"6776fd26659f8d7d25da6a37"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "179"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"b3-dvtPZA5scLEa5X6yLSxW98LVIf8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:00:43 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\",\n    \"createdAt\": \"2025-01-02T20:55:02.632Z\",\n    \"updatedAt\": \"2025-01-02T20:58:27.394Z\",\n    \"id\": \"6776fd26659f8d7d25da6a37\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete badge",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"badges",
+										"6776fd26659f8d7d25da6a37"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Brand",
+					"item": [
+						{
+							"name": "Create Brand",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"logo\": \"https://example.com/logo.png\",\n    \"titleFa\": \"ال جی\",\n    \"titleEn\": \"LG\",\n    \"slug\":\"lg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/brands",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"brands"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create Brand",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"logo\": \"https://example.com/logo.png\",\n    \"titleFa\": \"ال جی\",\n    \"titleEn\": \"LG\",\n    \"slug\":\"lg\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/brands",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"brands"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "198"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"c6-bwBbZrIQ8YLUozfHs7YcNjazAac\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:16:39 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleFa\": \"ال جی\",\n    \"titleEn\": \"LG\",\n    \"slug\": \"lg\",\n    \"logo\": \"https://example.com/logo.png\",\n    \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n    \"updatedAt\": \"2025-01-02T21:16:39.870Z\",\n    \"id\": \"677702374d88342901ad0df1\"\n}"
+								},
+								{
+									"name": "Create Brand",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"logo\": \"https://example.com/logo.png\",\n    \"titleFa\": \"ال جی\",\n    \"titleEn\": \"LG\",\n    \"slug\":\"lg\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/brands",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"brands"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "151"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"97-Z6N8oDcgLT+zEfXybGN+A6IqY70\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:17:54 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"slug already exists. Please use a different slug.\",\n    \"errors\": {\n        \"slug\": [\n            \"slug already exists. Please use a different slug.\"\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get All Brands",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/brands",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"brands"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All Brands",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/brands",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"brands"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "260"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"104-y57dCphejFvjrZCdwwl0uJBewW8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:18:31 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"titleFa\": \"ال جی\",\n            \"titleEn\": \"LG\",\n            \"slug\": \"lg\",\n            \"logo\": \"https://example.com/logo.png\",\n            \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n            \"updatedAt\": \"2025-01-02T21:16:39.870Z\",\n            \"id\": \"677702374d88342901ad0df1\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Brand by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/brands/677702374d88342901ad0df1",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"brands",
+										"677702374d88342901ad0df1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Brand by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/brands/677702374d88342901ad0df1",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"brands",
+												"677702374d88342901ad0df1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "198"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"c6-bwBbZrIQ8YLUozfHs7YcNjazAac\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:18:52 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleFa\": \"ال جی\",\n    \"titleEn\": \"LG\",\n    \"slug\": \"lg\",\n    \"logo\": \"https://example.com/logo.png\",\n    \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n    \"updatedAt\": \"2025-01-02T21:16:39.870Z\",\n    \"id\": \"677702374d88342901ad0df1\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Brand",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"titleFa\": \"به روز شده نام فارسی برند\",\n  \"titleEn\": \"Updated English Brand Name\",\n  \"slug\": \"updated-english-brand-name\", //Ensure unique\n  \"logo\": \"https://example.com/updated-logo.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/brands/677702374d88342901ad0df1",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"brands",
+										"677702374d88342901ad0df1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Brand",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"titleFa\": \"به روز شده نام فارسی برند\",\n  \"titleEn\": \"Updated English Brand Name\",\n  \"slug\": \"updated-english-brand-name\", //Ensure unique\n  \"logo\": \"https://example.com/updated-logo.png\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/brands/677702374d88342901ad0df1",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"brands",
+												"677702374d88342901ad0df1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "266"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"10a-UJG41/v6VVXC6yBXoV6wEiK+vxM\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:23:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleFa\": \"به روز شده نام فارسی برند\",\n    \"titleEn\": \"Updated English Brand Name\",\n    \"slug\": \"lg\",\n    \"logo\": \"https://example.com/updated-logo.png\",\n    \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n    \"updatedAt\": \"2025-01-02T21:23:13.562Z\",\n    \"id\": \"677702374d88342901ad0df1\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Brand",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/brands/677702374d88342901ad0df1",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"brands",
+										"677702374d88342901ad0df1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/categories",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get all",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/categories",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "626"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"272-+5Mcnjn01nzw0HjchzNgrH9WnNY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:33:02 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"titleEn\": \"mobile\",\n            \"titleFa\": \"موبایل\",\n            \"slug\": \"mobile\",\n            \"icon\": \"\",\n            \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n            \"properties\": [],\n            \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n            \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n            \"id\": \"6777138fc0d989811a8bcf7a\"\n        },\n        {\n            \"titleEn\": \"mobile\",\n            \"titleFa\": \"موبایل\",\n            \"slug\": \"mobile1\",\n            \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n            \"properties\": [],\n            \"createdAt\": \"2025-01-02T22:32:18.012Z\",\n            \"updatedAt\": \"2025-01-02T22:32:18.012Z\",\n            \"id\": \"677713f23c89325083f8e4ed\"\n        }\n    ],\n    \"total\": 2,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "create category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"titleEn\": \"mobile\",\n    \"slug\": \"mobile1\",\n    \"titleFa\": \"موبایل\",\n    \"returnReasonAlert\":\"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\":[]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/categories",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "create category",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"titleEn\": \"mobile\",\n    \"slug\": \"mobile\",\n    \"titleFa\": \"موبایل\",\n    \"returnReasonAlert\":\"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\":[]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/categories",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "151"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"97-Z6N8oDcgLT+zEfXybGN+A6IqY70\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:31:08 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"slug already exists. Please use a different slug.\",\n    \"errors\": {\n        \"slug\": [\n            \"slug already exists. Please use a different slug.\"\n        ]\n    }\n}"
+								},
+								{
+									"name": "create category",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"titleEn\": \"mobile\",\n    \"slug\": \"mobile1\",\n    \"titleFa\": \"موبایل\",\n    \"returnReasonAlert\":\"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\":[]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/categories",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "277"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"115-WdLqYoxBDU3m7seIA12eQOCgllA\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:32:18 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleEn\": \"mobile\",\n    \"titleFa\": \"موبایل\",\n    \"slug\": \"mobile1\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [],\n    \"createdAt\": \"2025-01-02T22:32:18.012Z\",\n    \"updatedAt\": \"2025-01-02T22:32:18.012Z\",\n    \"id\": \"677713f23c89325083f8e4ed\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/categories/6777138fc0d989811a8bcf7a",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"categories",
+										"6777138fc0d989811a8bcf7a"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/categories/6777138fc0d989811a8bcf7a",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"categories",
+												"6777138fc0d989811a8bcf7a"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "286"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"11e-dG28L/uNGOM3jWPTYcGFkslgjUw\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:38:25 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleEn\": \"mobile\",\n    \"titleFa\": \"موبایل\",\n    \"slug\": \"mobile\",\n    \"icon\": \"\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [],\n    \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n    \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n    \"id\": \"6777138fc0d989811a8bcf7a\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"titleEn\": \"samsung\",\n    \"titleFa\": \"گوشی سامسونگ\",\n    \"slug\": \"samsung\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [\n        \"678a8dd04cb47ca1204e0e38\"\n    ],\n    \"parent\": \"6777138fc0d989811a8bcf7a\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/categories/:categoryId",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"categories",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "categoryId",
+											"value": "677713f23c89325083f8e4ed"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "update category",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"موبایل\",\n    \"slug\": \"mobile\",\n    \"title_en\": \"mobile\",\n    \"title_fa\": \"موبایل\",\n    \"properties\": [\n        \"6769a2687e8fe9496ee233c1\"\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/categories/mobile",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"categories",
+												"mobile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "198"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"c6-o1zFdxGbJVC/TNGNW06+KiSc/+s\""
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 31 Dec 2024 18:59:44 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"_id\": \"67743eed981f21a364c97696\",\n    \"title_en\": \"mobile\",\n    \"title_fa\": \"موبایل\",\n    \"slug\": \"mobile\",\n    \"properties\": [],\n    \"createdAt\": \"2024-12-31T18:58:53.288Z\",\n    \"updatedAt\": \"2024-12-31T18:59:44.039Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "update category",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"titleEn\": \"samsung\",\n    \"titleFa\": \"گوشی سامسونگ\",\n    \"slug\": \"samsung\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [],\n    \"createdAt\": \"2025-01-02T22:32:18.012Z\",\n    \"updatedAt\": \"2025-01-02T22:32:18.012Z\",\n    \"parent\": \"6777138fc0d989811a8bcf7a\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/categories/677713f23c89325083f8e4ed",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"categories",
+												"677713f23c89325083f8e4ed"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "585"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"249-UkrJMLlNRhFn+zYRvuo/K5L+DPM\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:36:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"titleEn\": \"samsung\",\n    \"titleFa\": \"گوشی سامسونگ\",\n    \"slug\": \"mobile1\",\n    \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\": [],\n    \"createdAt\": \"2025-01-02T22:32:18.012Z\",\n    \"updatedAt\": \"2025-01-02T22:36:40.125Z\",\n    \"parent\": {\n        \"titleEn\": \"mobile\",\n        \"titleFa\": \"موبایل\",\n        \"slug\": \"mobile\",\n        \"icon\": \"\",\n        \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n        \"properties\": [],\n        \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n        \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n        \"id\": \"6777138fc0d989811a8bcf7a\"\n    },\n    \"id\": \"677713f23c89325083f8e4ed\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete catefory",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/categories/6777138fc0d989811a8bcf7a",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"categories",
+										"6777138fc0d989811a8bcf7a"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "City",
+					"item": [
+						{
+							"name": "get all cities",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/cities?page=1&pageSize=10",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"cities"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get all cities",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/cities",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"cities"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "222"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"de-Ifd7p2ddBXjh+vbeElSARr12/Cc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:59:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"name\": \"تهران\",\n            \"code\": \"021\",\n            \"slug\": \"tehran\",\n            \"createdAt\": \"2025-01-02T22:58:59.658Z\",\n            \"updatedAt\": \"2025-01-02T22:58:59.658Z\",\n            \"id\": \"67771a33e2e8defa3ff74051\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "create city",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"تهران\",\n    \"code\": \"021\",\n    \"slug\": \"tehran\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/cities",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "create city",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"تهران\",\n    \"code\": \"021\",\n    \"slug\": \"tehran\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/cities",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"cities"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "160"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"a0-FpamF115e4ubuaW8h3YtPH/YdUg\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 22:58:59 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"تهران\",\n    \"code\": \"021\",\n    \"slug\": \"tehran\",\n    \"createdAt\": \"2025-01-02T22:58:59.658Z\",\n    \"updatedAt\": \"2025-01-02T22:58:59.658Z\",\n    \"id\": \"67771a33e2e8defa3ff74051\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get City",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/cities/:slug",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"cities",
+										":slug"
+									],
+									"variable": [
+										{
+											"key": "slug",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get City",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/cities/tehran",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"cities",
+												"tehran"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "82"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"52-n06hr4dMFvMGv9/AmN5ugAEroC0\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 19:22:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"تهران\",\n    \"code\": \"021\",\n    \"slug\": \"tehran\",\n    \"id\": \"676dacf28badd8e5ff4aaa70\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update ciry",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"تهران1\",\n    \"code\": \"021\",\n    \"slug\": \"tehran\",\n    \"id\": \"676d573e2abc64fb9acf4093\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/cities/:slug",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"cities",
+										":slug"
+									],
+									"variable": [
+										{
+											"key": "slug",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "update city",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"code\": \"021\",\n    \"slug\": \"komijan\"\n \n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/cities/kokmijan",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"cities",
+												"kokmijan"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "83"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"53-I5+FzOoFwhcBulvlM9Jk7155suA\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 19:22:54 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"تهران1\",\n    \"code\": \"021\",\n    \"slug\": \"tehran\",\n    \"id\": \"676dacf28badd8e5ff4aaa70\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete city",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/cities/:slug",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"cities",
+										":slug"
+									],
+									"variable": [
+										{
+											"key": "slug",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Colors",
+					"item": [
+						{
+							"name": "Create Color",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Red\",\n  \"hexCode\": \"#FF0000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/colors",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"colors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Colors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/colors",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"colors"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All Colors",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/colors",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"colors"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "217"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"d9-+DkB5rMMhId5iCUY07o0i7E3NI0\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 27 Dec 2024 14:31:53 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"_id\": \"676eba26072fccefc92efa25\",\n            \"title\": \"Red\",\n            \"hex_code\": \"#FF0000\",\n            \"createdAt\": \"2024-12-27T14:31:03.001Z\",\n            \"updatedAt\": \"2024-12-27T14:31:03.001Z\",\n            \"__v\": 0\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Color by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/colors/:ColorID",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"colors",
+										":ColorID"
+									],
+									"variable": [
+										{
+											"key": "ColorID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Color",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Dark Red\",\n  \"hex_code\": \"#8B0000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/colors/:colorID",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"colors",
+										":colorID"
+									],
+									"variable": [
+										{
+											"key": "colorID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Color",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/colors/:colorID",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"colors",
+										":colorID"
+									],
+									"variable": [
+										{
+											"key": "colorID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Properties",
+					"item": [
+						{
+							"name": "get properties",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/properties",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"properties"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get properties",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/properties",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"properties"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "172"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ac-UqqTKRQOZErZdEykn0sRBQKX8LA\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 18:55:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"name\": \"lcd_size\",\n            \"label\": \"صفحه نمایش\",\n            \"type\": \"string\",\n            \"options\": [],\n            \"id\": \"676da489b7615b3d0c8792ae\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "get property",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/properties/:slug",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"properties",
+										":slug"
+									],
+									"variable": [
+										{
+											"key": "slug",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get property",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/properties/676da489b7615b3d0c8792ae",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"properties",
+												"676da489b7615b3d0c8792ae"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "110"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"6e-3B3RAyFMMLajRfb/bXu7UTRxY2A\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 18:55:54 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"lcd_size\",\n    \"label\": \"صفحه نمایش\",\n    \"type\": \"string\",\n    \"options\": [],\n    \"id\": \"676da489b7615b3d0c8792ae\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create propertiy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"lcd_size\",\n    \"label\":\"صفحه نمایش\",\n    \"type\":\"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/properties",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"properties"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "create property",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"lcd_size\",\n    \"label\":\"صفحه نمایش\",\n    \"type\":\"string\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/properties",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"properties"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "110"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"6e-3B3RAyFMMLajRfb/bXu7UTRxY2A\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 18:46:33 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"lcd_size\",\n    \"label\": \"صفحه نمایش\",\n    \"type\": \"string\",\n    \"options\": [],\n    \"id\": \"676da489b7615b3d0c8792ae\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": 12345,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"category\": \"6777138fc0d989811a8bcf7a\", // Replace with actual ID\n    \"brand\": \"677702374d88342901ad0df1\", // Replace with actual ID\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ], // Replace with actual IDs\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"name\": \"weight\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"name\": \"weight\",\n            \"value\": \"1 کیلوگرم\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/products",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create Product",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"code\": 12345,\n  \"title_fa\": \"محصول تستی\",\n  \"title_en\": \"Test Product\",\n  \"images\": {\n    \"main\": \"https://example.com/image.jpg\",\n    \"list\": [\"https://example.com/image2.jpg\"]\n  },\n  \"category\": \"676da835bcceb44dd9dd767c\", // Replace with actual ID\n  \"brand\": \"676db72944910e35cd8c48f9\", // Replace with actual ID\n  \"colors\": [\"676eba26072fccefc92efa25\"], // Replace with actual IDs\n  \"badges\": [\"676ebe0834c01ac49f9c9fe3\"],\n  \"review\": [\n    {\n      \"title\": \"وزن\",\n      \"value\": \"1 کیلوگرم\"\n    }\n  ],\n  \"specifications\": [\n    {\n      \"title\": \"وزن\",\n      \"value\": \"1 کیلوگرم\"\n    }\n  ],\n  \"expert_reviews\": \"این یک محصول عالی است\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/products",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "797"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"31d-4553X9bswVGgO55pMcWDUixzx4w\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 27 Dec 2024 14:49:06 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 12345,\n    \"title_fa\": \"محصول تستی\",\n    \"title_en\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ],\n    \"badges\": [\n        \"676ebe0834c01ac49f9c9fe3\"\n    ],\n    \"category\": \"676da835bcceb44dd9dd767c\",\n    \"brand\": \"676db72944910e35cd8c48f9\",\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282a\",\n            \"id\": \"676ebe62121d7237b64b282a\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282b\",\n            \"id\": \"676ebe62121d7237b64b282b\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"_id\": \"676ebe62121d7237b64b2829\",\n    \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n    \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n    \"__v\": 0,\n    \"id\": \"676ebe62121d7237b64b2829\"\n}"
+								},
+								{
+									"name": "Create Product",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"code\": 12345,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"category\": \"6777138fc0d989811a8bcf7a\", // Replace with actual ID\n    \"brand\": \"677702374d88342901ad0df1\", // Replace with actual ID\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ], // Replace with actual IDs\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"name\": \"weight\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"name\": \"weight\",\n            \"value\": \"1 کیلوگرم\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/products",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "722"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2d2-HmEKpPzdrRO+Ibe1+wGK65QoMv0\""
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 15 Jan 2025 20:24:35 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 12345,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"badges\": [],\n    \"category\": \"6777138fc0d989811a8bcf7a\",\n    \"brand\": \"677702374d88342901ad0df1\",\n    \"review\": [\n        {\n            \"name\": \"weight\",\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"6788198312158b35068e6586\",\n            \"id\": \"6788198312158b35068e6586\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"name\": \"weight\",\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"6788198312158b35068e6587\",\n            \"id\": \"6788198312158b35068e6587\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2025-01-15T20:24:35.599Z\",\n    \"updatedAt\": \"2025-01-15T20:24:35.599Z\",\n    \"id\": \"6788198312158b35068e6585\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get All Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/products?page=1&pageSize=10",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All Products",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products?page=1&pageSize=10",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "859"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"35b-ZmNRnWqkig6c6sLA66g3UT6duto\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:42:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"images\": {\n                \"main\": \"https://example.com/image.jpg\",\n                \"list\": [\n                    \"https://example.com/image2.jpg\"\n                ]\n            },\n            \"_id\": \"676ebe62121d7237b64b2829\",\n            \"code\": 12345,\n            \"title_fa\": \"محصول تستی\",\n            \"title_en\": \"Test Product\",\n            \"status\": \"marketable\",\n            \"colors\": [\n                \"676eba26072fccefc92efa25\"\n            ],\n            \"badges\": [\n                \"676ebe0834c01ac49f9c9fe3\"\n            ],\n            \"category\": \"676da835bcceb44dd9dd767c\",\n            \"brand\": \"676db72944910e35cd8c48f9\",\n            \"review\": [\n                {\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"676ebe62121d7237b64b282a\",\n                    \"id\": \"676ebe62121d7237b64b282a\"\n                }\n            ],\n            \"specifications\": [\n                {\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"676ebe62121d7237b64b282b\",\n                    \"id\": \"676ebe62121d7237b64b282b\"\n                }\n            ],\n            \"expert_reviews\": \"این یک محصول عالی است\",\n            \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n            \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n            \"__v\": 0,\n            \"id\": \"676ebe62121d7237b64b2829\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Product by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/products/:code",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"products",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products/12345",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products",
+												"12345"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "797"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"31d-W1w6YZxZSnKvfaccp/jSS2B1DxM\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:51:14 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"_id\": \"676ebe62121d7237b64b2829\",\n    \"code\": 12345,\n    \"title_fa\": \"محصول تستی\",\n    \"title_en\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ],\n    \"badges\": [\n        \"676ebe0834c01ac49f9c9fe3\"\n    ],\n    \"category\": \"676da835bcceb44dd9dd767c\",\n    \"brand\": \"676db72944910e35cd8c48f9\",\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282a\",\n            \"id\": \"676ebe62121d7237b64b282a\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282b\",\n            \"id\": \"676ebe62121d7237b64b282b\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n    \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n    \"__v\": 0,\n    \"id\": \"676ebe62121d7237b64b2829\"\n}"
+								},
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products/12345d",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products",
+												"12345d"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"25-5xwM/bgnG/frJLypoPAI9u3kmqQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:51:30 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Failed to fetch product\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title_en\": \"Updated Product Title\",\n  \"status\": \"unmarketable\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/products/:code",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"products",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/products/:code",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"products",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "SHOP",
+			"item": []
+		},
+		{
+			"name": "upload image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "postman-cloud:///1efd5cf9-9a37-4e30-9564-c8471b86523b"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/images",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"images"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmQ1NDcwOTA4NDU2ZmE2ZWI3NjMzMCIsInVzZXJuYW1lIjoiYWFrcGExMjUiLCJyb2xlIjowLCJpYXQiOjE3MzUyMTgyODgsImV4cCI6MTczNTgyMzA4OH0.i8eOhi75Euc9pdW1YyQ_jgTVqOY6B9F8UfUT_3EjZGc",
+			"type": "string"
+		}
+	]
+}
