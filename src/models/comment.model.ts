@@ -12,12 +12,7 @@ export const CommentSchemaZod = z.object({
     .min(1, 'Rating must be at least 1')
     .max(5, 'Rating cannot exceed 5')
     .optional(), // Rating is optional
-  product: z
-    .string()
-    .refine(
-      (val) => mongoose.Types.ObjectId.isValid(val),
-      'Invalid Product ID',
-    ),
+  product: z.number(),
 });
 
 // Update Zod Schema

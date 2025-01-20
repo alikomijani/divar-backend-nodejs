@@ -5,6 +5,7 @@ import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
+import ProductModel from '@/models/product.model';
 
 // Create
 export const createComment: Controller<object, IComment, CommentType> = async (
@@ -12,8 +13,19 @@ export const createComment: Controller<object, IComment, CommentType> = async (
   res,
 ) => {
   try {
+    const product = await ProductModel.findOne({ code: req.body.product });
+    if (!product) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: 'invalid Data',
+        errors: {
+          product: ['Product not found!'],
+        },
+      });
+    }
     const newComment = new CommentModel({
       ...req.body,
+      product: product._id,
       user: req.user!.id, // assuming you have a middleware that sets req.user.id
     });
     const savedComment = await newComment.save();
@@ -28,16 +40,27 @@ export const createComment: Controller<object, IComment, CommentType> = async (
 
 // Read All
 export const getProductComments: Controller<
-  { id: string },
+  { code: string },
   PaginatedResponse<IComment>
 > = async (req, res) => {
   try {
     const { page = 1, pageSize = 10, ...restQuery } = req.query;
+    const product = await ProductModel.findOne({ code: req.params.code });
+    if (!product) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: 'invalid Data',
+        errors: {
+          product: ['Product not found!'],
+        },
+      });
+    }
     const comments = await getPaginatedQuery(CommentModel, {
       page,
       pageSize,
+      populateOptions: [{ path: 'user' }],
       query: {
-        product: req.params.id,
+        product: product?._id,
         ...restQuery,
       },
     });

@@ -17,29 +17,34 @@ import {
 import { UserRole } from '@/models/auth.model';
 
 const productRouter = express.Router();
+const productAdminRouter = express.Router();
 
-productRouter.post(
+productRouter.get('/', getAllProducts);
+productRouter.get('/:code', getProductByCode);
+productRouter.get('/:code/sellers', getProductPrices);
+
+// admin
+productAdminRouter.get('/', getAllProducts);
+productAdminRouter.get('/:code', getProductByCode);
+productAdminRouter.post(
   '/',
   loginMiddleware,
   roleMiddleware(UserRole.Admin),
   validateData(ProductSchemaZod),
   createProduct,
 );
-productRouter.get('/', getAllProducts);
-productRouter.get('/:code', getProductByCode);
-productRouter.get('/:code/sellers', getProductPrices);
-productRouter.put(
+productAdminRouter.put(
   '/:code',
   loginMiddleware,
   roleMiddleware(UserRole.Seller),
   validateData(ProductSchemaZod),
   updateProduct,
 );
-productRouter.delete(
+productAdminRouter.delete(
   '/:code',
   loginMiddleware,
   roleMiddleware(UserRole.Seller),
   deleteProduct,
 );
 
-export default productRouter;
+export { productRouter, productAdminRouter };

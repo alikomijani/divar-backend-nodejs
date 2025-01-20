@@ -7,7 +7,7 @@ import propertyRouter from './properties.routes';
 import imagesRouter from './image.routes';
 import colorRouter from './color.routes';
 import { cityAdminRouter, cityRouter } from './city.routes';
-import productRouter from './product.routes';
+import { productRouter, productAdminRouter } from './product.routes';
 import commentRouter from './comment.routes';
 import sellerRouter from './seller.routes';
 import orderRouter from './order.routes';
@@ -24,7 +24,6 @@ userRouter.use('/auth', authRouter);
 userRouter.use('/brands', brandRouter);
 userRouter.use('/categories', categoryRouter);
 userRouter.use('/images', imagesRouter);
-userRouter.use('/colors', colorRouter);
 userRouter.use('/cities', cityRouter);
 userRouter.use('/products', productRouter);
 userRouter.use(commentRouter);
@@ -43,8 +42,10 @@ adminRouter.use('/brands', brandAdminRouter);
 adminRouter.use('/categories', categoryAdminRouter);
 adminRouter.use('/cities', cityAdminRouter);
 adminRouter.use('/profiles', profileAdminRouter);
-
+adminRouter.use('/colors', colorRouter);
 adminRouter.use('/properties', propertyRouter);
+adminRouter.use('/products', productAdminRouter);
+
 const shopRouter = Router();
 shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
 

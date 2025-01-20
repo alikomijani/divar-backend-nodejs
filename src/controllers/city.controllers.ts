@@ -22,7 +22,7 @@ export const getCities: Controller<
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
   const results = await getPaginatedQuery(CityModel, { page, pageSize });
-  res.status(StatusCodes.OK).json(results);
+  return res.status(StatusCodes.OK).json(results);
 };
 
 export const getCityById: Controller<{ id: string }> = async (req, res) => {

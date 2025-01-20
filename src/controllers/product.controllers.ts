@@ -22,6 +22,11 @@ export const getAllProducts: Controller = async (req, res) => {
     const paginatedResult = await getPaginatedQuery(ProductModel, {
       page,
       pageSize,
+      populateOptions: [
+        { path: 'badges' },
+        { path: 'category' },
+        { path: 'brand' },
+      ],
     });
     return res.json(paginatedResult);
   } catch (error) {

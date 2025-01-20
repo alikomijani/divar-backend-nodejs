@@ -16,9 +16,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(userRouter);
-app.use('/admin', adminRouter);
-app.use('/shop', shopRouter);
+
 app.use(
   morgan('combined', {
     skip: function (_, res) {
@@ -27,6 +25,10 @@ app.use(
   }),
 );
 app.use(express.static(PUBLIC_PATH));
+app.use(userRouter);
+app.use('/admin', adminRouter);
+app.use('/shop', shopRouter);
+
 app.use(generalErrorHandler);
 
 export default app;
