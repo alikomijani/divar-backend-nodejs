@@ -42,7 +42,12 @@ export const getProductByCode: Controller<{ code: string }> = async (
   res,
 ) => {
   try {
-    const product = await ProductModel.findOne({ code: req.params.code });
+    const product = await ProductModel.findOne({
+      code: req.params.code,
+    })
+      .populate('category')
+      .populate('badges')
+      .populate('brand');
     if (!product) {
       return res
         .status(StatusCodes.NOT_FOUND)
