@@ -1405,6 +1405,431 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Get All Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/products?page=1&pageSize=10",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All Products",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products?page=1&pageSize=10",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "859"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"35b-ZmNRnWqkig6c6sLA66g3UT6duto\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:42:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"images\": {\n                \"main\": \"https://example.com/image.jpg\",\n                \"list\": [\n                    \"https://example.com/image2.jpg\"\n                ]\n            },\n            \"_id\": \"676ebe62121d7237b64b2829\",\n            \"code\": 12345,\n            \"title_fa\": \"محصول تستی\",\n            \"title_en\": \"Test Product\",\n            \"status\": \"marketable\",\n            \"colors\": [\n                \"676eba26072fccefc92efa25\"\n            ],\n            \"badges\": [\n                \"676ebe0834c01ac49f9c9fe3\"\n            ],\n            \"category\": \"676da835bcceb44dd9dd767c\",\n            \"brand\": \"676db72944910e35cd8c48f9\",\n            \"review\": [\n                {\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"676ebe62121d7237b64b282a\",\n                    \"id\": \"676ebe62121d7237b64b282a\"\n                }\n            ],\n            \"specifications\": [\n                {\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"676ebe62121d7237b64b282b\",\n                    \"id\": \"676ebe62121d7237b64b282b\"\n                }\n            ],\n            \"expert_reviews\": \"این یک محصول عالی است\",\n            \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n            \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n            \"__v\": 0,\n            \"id\": \"676ebe62121d7237b64b2829\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Product by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/products/:code",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"products",
+										":code"
+									],
+									"variable": [
+										{
+											"key": "code",
+											"value": "12345"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products/12345",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products",
+												"12345"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "797"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"31d-W1w6YZxZSnKvfaccp/jSS2B1DxM\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:51:14 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"_id\": \"676ebe62121d7237b64b2829\",\n    \"code\": 12345,\n    \"title_fa\": \"محصول تستی\",\n    \"title_en\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ],\n    \"badges\": [\n        \"676ebe0834c01ac49f9c9fe3\"\n    ],\n    \"category\": \"676da835bcceb44dd9dd767c\",\n    \"brand\": \"676db72944910e35cd8c48f9\",\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282a\",\n            \"id\": \"676ebe62121d7237b64b282a\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282b\",\n            \"id\": \"676ebe62121d7237b64b282b\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n    \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n    \"__v\": 0,\n    \"id\": \"676ebe62121d7237b64b2829\"\n}"
+								},
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products/12345d",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products",
+												"12345d"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"25-5xwM/bgnG/frJLypoPAI9u3kmqQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:51:30 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Failed to fetch product\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Product Sellers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/products/:code/sellers",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"products",
+										":code",
+										"sellers"
+									],
+									"variable": [
+										{
+											"key": "code",
+											"value": "12345"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products/12345",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products",
+												"12345"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "797"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"31d-W1w6YZxZSnKvfaccp/jSS2B1DxM\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:51:14 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"_id\": \"676ebe62121d7237b64b2829\",\n    \"code\": 12345,\n    \"title_fa\": \"محصول تستی\",\n    \"title_en\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ],\n    \"badges\": [\n        \"676ebe0834c01ac49f9c9fe3\"\n    ],\n    \"category\": \"676da835bcceb44dd9dd767c\",\n    \"brand\": \"676db72944910e35cd8c48f9\",\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282a\",\n            \"id\": \"676ebe62121d7237b64b282a\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282b\",\n            \"id\": \"676ebe62121d7237b64b282b\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n    \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n    \"__v\": 0,\n    \"id\": \"676ebe62121d7237b64b2829\"\n}"
+								},
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/products/12345d",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"products",
+												"12345d"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"25-5xwM/bgnG/frJLypoPAI9u3kmqQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 29 Dec 2024 14:51:30 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Failed to fetch product\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
 				}
 			]
 		},
@@ -2387,12 +2812,18 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{ADMIN_BASE_URL}}/categories",
+									"raw": "{{ADMIN_BASE_URL}}/categories?q=س",
 									"host": [
 										"{{ADMIN_BASE_URL}}"
 									],
 									"path": [
 										"categories"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "س"
+										}
 									]
 								}
 							},
@@ -2465,7 +2896,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"titleEn\": \"mobile\",\n    \"slug\": \"mobile1\",\n    \"titleFa\": \"موبایل\",\n    \"returnReasonAlert\":\"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\":[]\n}",
+									"raw": "{\n    \"titleEn\": \"mobile\",\n    \"slug\": \"mobile1\",\n    \"titleFa\": \"موبایل\",\n    \"icon\":\"\",\n    \"returnReasonAlert\":\"بازگشت در دسته بندی موبایل مجاز نیست\",\n    \"properties\":[],\n    \"parent\":\"\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3645,12 +4076,18 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{ADMIN_BASE_URL}}/properties",
+									"raw": "{{ADMIN_BASE_URL}}/properties?q=lcd",
 									"host": [
 										"{{ADMIN_BASE_URL}}"
 									],
 									"path": [
 										"properties"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "lcd"
+										}
 									]
 								}
 							},
@@ -4146,9 +4583,9 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{BASE_URL}}/products?page=1&pageSize=10",
+											"raw": "{{ADMIN_BASE_URL}}/products?page=1&pageSize=10",
 											"host": [
-												"{{BASE_URL}}"
+												"{{ADMIN_BASE_URL}}"
 											],
 											"path": [
 												"products"
@@ -4175,7 +4612,7 @@
 										},
 										{
 											"key": "Access-Control-Allow-Origin",
-											"value": "http://localhost:5173"
+											"value": "http://localhost:3000"
 										},
 										{
 											"key": "Vary",
@@ -4187,15 +4624,15 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "859"
+											"value": "2029"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"35b-ZmNRnWqkig6c6sLA66g3UT6duto\""
+											"value": "W/\"7ed-vOL9/InYag0Nzfmbz+mzudGA98Y\""
 										},
 										{
 											"key": "Date",
-											"value": "Sun, 29 Dec 2024 14:42:27 GMT"
+											"value": "Fri, 24 Jan 2025 15:42:29 GMT"
 										},
 										{
 											"key": "Connection",
@@ -4207,7 +4644,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"results\": [\n        {\n            \"images\": {\n                \"main\": \"https://example.com/image.jpg\",\n                \"list\": [\n                    \"https://example.com/image2.jpg\"\n                ]\n            },\n            \"_id\": \"676ebe62121d7237b64b2829\",\n            \"code\": 12345,\n            \"title_fa\": \"محصول تستی\",\n            \"title_en\": \"Test Product\",\n            \"status\": \"marketable\",\n            \"colors\": [\n                \"676eba26072fccefc92efa25\"\n            ],\n            \"badges\": [\n                \"676ebe0834c01ac49f9c9fe3\"\n            ],\n            \"category\": \"676da835bcceb44dd9dd767c\",\n            \"brand\": \"676db72944910e35cd8c48f9\",\n            \"review\": [\n                {\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"676ebe62121d7237b64b282a\",\n                    \"id\": \"676ebe62121d7237b64b282a\"\n                }\n            ],\n            \"specifications\": [\n                {\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"676ebe62121d7237b64b282b\",\n                    \"id\": \"676ebe62121d7237b64b282b\"\n                }\n            ],\n            \"expert_reviews\": \"این یک محصول عالی است\",\n            \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n            \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n            \"__v\": 0,\n            \"id\": \"676ebe62121d7237b64b2829\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+									"body": "{\n    \"results\": [\n        {\n            \"images\": {\n                \"main\": \"https://example.com/image.jpg\",\n                \"list\": [\n                    \"https://example.com/image2.jpg\"\n                ]\n            },\n            \"code\": 12345,\n            \"titleFa\": \"محصول تستی\",\n            \"titleEn\": \"Test Product\",\n            \"status\": \"marketable\",\n            \"badges\": [\n                {\n                    \"icon\": \"http://localhost:8000/uploads/image-1737700901408-118045453.png\",\n                    \"title\": \"owl\",\n                    \"createdAt\": \"2025-01-24T06:41:44.722Z\",\n                    \"updatedAt\": \"2025-01-24T06:41:44.722Z\",\n                    \"id\": \"67933628a52fa1ee71dfa8dd\"\n                },\n                {\n                    \"icon\": \"http://localhost:8000/uploads/image-1737732254241-175066932.jpeg\",\n                    \"title\": \"error\",\n                    \"createdAt\": \"2025-01-24T15:24:23.456Z\",\n                    \"updatedAt\": \"2025-01-24T15:24:23.456Z\",\n                    \"id\": \"6793b0a72e839b8e4934b089\"\n                }\n            ],\n            \"category\": {\n                \"titleEn\": \"mobile\",\n                \"titleFa\": \"موبایل\",\n                \"slug\": \"mobile\",\n                \"icon\": \"\",\n                \"returnReasonAlert\": \"بازگشت در دسته بندی موبایل مجاز نیست\",\n                \"properties\": [],\n                \"createdAt\": \"2025-01-02T22:30:39.011Z\",\n                \"updatedAt\": \"2025-01-02T22:30:39.011Z\",\n                \"id\": \"6777138fc0d989811a8bcf7a\"\n            },\n            \"brand\": {\n                \"titleFa\": \"به روز شده نام فارسی برند\",\n                \"titleEn\": \"Updated English Brand Name\",\n                \"slug\": \"lg\",\n                \"logo\": \"http://localhost:8000/uploads/image-1737703562872-689327484.jpeg\",\n                \"createdAt\": \"2025-01-02T21:16:39.870Z\",\n                \"updatedAt\": \"2025-01-24T07:26:08.127Z\",\n                \"id\": \"677702374d88342901ad0df1\"\n            },\n            \"review\": [\n                {\n                    \"name\": \"weight\",\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"6788198312158b35068e6586\",\n                    \"id\": \"6788198312158b35068e6586\"\n                }\n            ],\n            \"specifications\": [\n                {\n                    \"name\": \"weight\",\n                    \"title\": \"وزن\",\n                    \"value\": \"1 کیلوگرم\",\n                    \"_id\": \"6788198312158b35068e6587\",\n                    \"id\": \"6788198312158b35068e6587\"\n                }\n            ],\n            \"expert_reviews\": \"این یک محصول عالی است\",\n            \"createdAt\": \"2025-01-15T20:24:35.599Z\",\n            \"updatedAt\": \"2025-01-24T15:41:05.577Z\",\n            \"colors\": [\n                {\n                    \"title\": \"نارنجی\",\n                    \"hexCode\": \"#f27d69\",\n                    \"createdAt\": \"2025-01-24T13:36:50.903Z\",\n                    \"updatedAt\": \"2025-01-24T15:35:41.096Z\",\n                    \"id\": \"67939772c4d94bc23f400125\"\n                },\n                {\n                    \"title\": \"قرمز\",\n                    \"hexCode\": \"#ff0000\",\n                    \"createdAt\": \"2025-01-18T14:19:49.318Z\",\n                    \"updatedAt\": \"2025-01-24T15:35:27.702Z\",\n                    \"id\": \"678bb88509576cb7ce67e538\"\n                }\n            ],\n            \"id\": \"6788198312158b35068e6585\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
 								}
 							]
 						},
