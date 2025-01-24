@@ -25,7 +25,6 @@ export const getAllCategories: Controller<
   { results: ICategory[] }
 > = async (req, res) => {
   const { page = 1, pageSize = 10, q = '' } = req.query;
-  console.log(q);
   let query = {};
   if (q) {
     query = {

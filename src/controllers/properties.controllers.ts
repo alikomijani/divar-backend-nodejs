@@ -27,10 +27,20 @@ export const getAllProperties: Controller<
   PaginatedResponse<ICategoryProperty>
 > = async (req, res) => {
   try {
-    const { page = 1, pageSize = 10 } = req.query;
+    const { page = 1, pageSize = 10, q = '' } = req.query;
+    let query = {};
+    if (q) {
+      query = {
+        $or: [
+          { name: { $regex: q, $options: 'i' } }, // Case-insensitive search in name
+          { label: { $regex: q, $options: 'i' } },
+        ],
+      };
+    }
     const paginatedResult = await getPaginatedQuery(PropertyModel, {
       page,
       pageSize,
+      query,
     });
     return res.status(StatusCodes.OK).json(paginatedResult);
   } catch (error) {

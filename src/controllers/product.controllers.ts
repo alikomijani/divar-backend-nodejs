@@ -26,6 +26,7 @@ export const getAllProducts: Controller = async (req, res) => {
         { path: 'badges' },
         { path: 'category' },
         { path: 'brand' },
+        { path: 'colors' },
       ],
     });
     return res.json(paginatedResult);
@@ -47,7 +48,8 @@ export const getProductByCode: Controller<{ code: string }> = async (
     })
       .populate('category')
       .populate('badges')
-      .populate('brand');
+      .populate('brand')
+      .populate('colors');
     if (!product) {
       return res
         .status(StatusCodes.NOT_FOUND)
@@ -69,6 +71,7 @@ export const updateProduct: Controller<
 > = async (req, res) => {
   try {
     // req.body is already validated
+    console.log(req.body);
     const updatedProduct = await ProductModel.findOneAndUpdate(
       { code: req.params.code },
       req.body,

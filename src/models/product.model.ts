@@ -29,9 +29,22 @@ const ImageSchemaZod = z.object({
 
 // Main Product Zod Schema
 export const ProductSchemaZod = z.object({
-  code: z.number().int().positive('Code must be a positive integer'),
+  code: z
+    .number({ message: 'ali' })
+    .int()
+    .positive('Code must be a positive integer'),
   titleFa: z.string().min(1, 'Title (FA) is required').trim(),
   titleEn: z.string().min(1, 'Title (EN) is required').trim(),
+  colors: z
+    .array(
+      z
+        .string()
+        .refine(
+          (val) => mongoose.Types.ObjectId.isValid(val),
+          'Invalid Color ID',
+        ),
+    )
+    .optional(),
   status: z.enum(['marketable', 'unmarketable']).default('marketable'),
   images: ImageSchemaZod,
   badges: z
@@ -117,6 +130,13 @@ const ProductSchema = new Schema<IProduct>(
         type: Schema.Types.ObjectId,
         ref: 'Badge',
         validate: refValidator('Badge'),
+      },
+    ],
+    colors: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Color',
+        validate: refValidator('Color'),
       },
     ],
     category: {
