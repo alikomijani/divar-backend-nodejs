@@ -20,25 +20,25 @@ export const createCategory: Controller<object, ICategory> = async (
 };
 
 // READ all categories
-export const getPaginatedCategories: Controller = async (req, res) => {
-  const { page = 1, pageSize = 10 } = req.query;
-  const categories = await getPaginatedQuery(CategoryModel, {
-    page,
-    pageSize,
-    populateOptions: [{ path: 'parent' }, { path: 'properties' }],
-  });
-
-  return res.status(StatusCodes.OK).json(categories);
-};
-// READ all categories
 export const getAllCategories: Controller<
   object,
   { results: ICategory[] }
 > = async (req, res) => {
-  const { page = 1, pageSize = 10 } = req.query;
+  const { page = 1, pageSize = 10, q = '' } = req.query;
+  console.log(q);
+  let query = {};
+  if (q) {
+    query = {
+      $or: [
+        { titleFa: { $regex: q, $options: 'i' } }, // Case-insensitive search in titleFa
+        { titleEn: { $regex: q, $options: 'i' } }, // Case-insensitive search in titleEn
+      ],
+    };
+  }
   const categories = await getPaginatedQuery(CategoryModel, {
     page,
     pageSize,
+    query,
     populateOptions: [{ path: 'parent' }, { path: 'properties' }],
   });
 

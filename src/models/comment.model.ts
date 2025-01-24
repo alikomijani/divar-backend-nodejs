@@ -14,6 +14,7 @@ export const CommentSchemaZod = z.object({
     .optional(), // Rating is optional
   product: z.number(),
 });
+export type CommentType = z.infer<typeof CommentSchemaZod>;
 
 // Update Zod Schema
 export const UpdateCommentSchemaZod = z.object({
@@ -25,8 +26,6 @@ export const UpdateCommentSchemaZod = z.object({
     .max(5, 'Rating cannot exceed 5')
     .optional(), // Rating is optional
 });
-
-export type CommentType = z.infer<typeof CommentSchemaZod>;
 
 // Mongoose Interface
 export interface IComment extends Document {
