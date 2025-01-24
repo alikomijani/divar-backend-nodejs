@@ -131,3 +131,4 @@ dist
 .Ds_store
 build
 sample_data
+public/uploads
