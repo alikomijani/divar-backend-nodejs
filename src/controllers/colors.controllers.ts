@@ -1,5 +1,5 @@
-import type { IColor } from '@/schema/color.model';
-import { ColorModel } from '@/schema/color.model';
+import type { IColor } from '@/schema/color.schema';
+import { ColorModel } from '@/schema/color.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';

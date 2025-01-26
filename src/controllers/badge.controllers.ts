@@ -1,5 +1,5 @@
-import type { IBadge } from '@/schema/badge.model';
-import { BadgeModel } from '@/schema/badge.model';
+import type { IBadge } from '@/schema/badge.schema';
+import { BadgeModel } from '@/schema/badge.schema';
 
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';

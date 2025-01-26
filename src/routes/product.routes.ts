@@ -8,13 +8,13 @@ import {
   getProductByCode,
   getProductPrices,
 } from '../controllers/product.controllers'; // Import your controller functions
-import { ProductSchemaZod } from '@/schema/product.model';
+import { ProductSchemaZod } from '@/schema/product.schema';
 import { validateData } from '@/middlewares/validation.middleware';
 import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/schema/auth.model';
+import { UserRole } from '@/schema/auth.schema';
 
 const productRouter = express.Router();
 const productAdminRouter = express.Router();

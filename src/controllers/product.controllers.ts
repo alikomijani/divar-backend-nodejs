@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
-import type { IProduct } from '@/schema/product.model';
-import ProductModel from '@/schema/product.model';
+import type { IProduct } from '@/schema/product.schema';
+import ProductModel from '@/schema/product.schema';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { handleMongooseError } from '@/utils/duplicate-key';
 import type { Controller } from '@/types/express';

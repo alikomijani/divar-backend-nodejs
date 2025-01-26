@@ -1,5 +1,5 @@
-import type { ICategory } from '@/schema/category.model';
-import { CategoryModel } from '@/schema/category.model';
+import type { ICategory } from '@/schema/category.schema';
+import { CategoryModel } from '@/schema/category.schema';
 import type { Controller } from '@/types/express';
 import { handleMongooseError } from '@/utils/duplicate-key';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';

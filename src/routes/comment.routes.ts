@@ -12,7 +12,7 @@ import {
 import {
   CommentSchemaZod,
   UpdateCommentSchemaZod,
-} from '@/schema/comment.model';
+} from '@/schema/comment.schema';
 
 const commentRouter = express.Router();
 

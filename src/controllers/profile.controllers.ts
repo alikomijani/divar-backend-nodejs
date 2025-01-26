@@ -1,4 +1,4 @@
-import ProfileModel from '@/schema/profile.model';
+import ProfileModel from '@/schema/profile.schema';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import type { Request, Response } from 'express';

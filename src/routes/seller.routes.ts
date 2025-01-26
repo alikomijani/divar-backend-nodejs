@@ -8,7 +8,7 @@ import {
 
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 import { validateData } from '@/middlewares/validation.middleware';
-import { SellerSchemaZod } from '@/schema/seller.model';
+import { SellerSchemaZod } from '@/schema/seller.schema';
 import { Router } from 'express';
 
 const sellerRouter = Router();

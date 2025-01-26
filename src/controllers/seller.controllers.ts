@@ -1,6 +1,6 @@
-import { UserModel, UserRole } from '@/schema/auth.model';
-import type { ISeller, SellerType } from '@/schema/seller.model';
-import SellerModel from '@/schema/seller.model';
+import { UserModel, UserRole } from '@/schema/auth.schema';
+import type { ISeller, SellerType } from '@/schema/seller.schema';
+import SellerModel from '@/schema/seller.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { handleMongooseError } from '@/utils/duplicate-key';

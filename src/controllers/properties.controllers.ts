@@ -1,5 +1,5 @@
-import type { ICategoryProperty } from '@/schema/property.model';
-import { PropertyModel } from '@/schema/property.model';
+import type { ICategoryProperty } from '@/schema/property.schema';
+import { PropertyModel } from '@/schema/property.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';

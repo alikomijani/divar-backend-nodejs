@@ -6,12 +6,12 @@ import type {
   LoginUser,
   RegisterUser,
   UpdateUserType,
-} from '@/schema/auth.model';
-import { UserModel, UserRole } from '@/schema/auth.model';
+} from '@/schema/auth.schema';
+import { UserModel, UserRole } from '@/schema/auth.schema';
 import { handleMongooseError } from '@/utils/duplicate-key';
-import ProfileModel from '@/schema/profile.model';
+import ProfileModel from '@/schema/profile.schema';
 import type { Controller } from '@/types/express';
-import SellerModel from '@/schema/seller.model';
+import SellerModel from '@/schema/seller.schema';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 
 export const registerUser: Controller<object, object, RegisterUser> = async (

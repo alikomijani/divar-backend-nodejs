@@ -1,5 +1,5 @@
-import type { IBrand } from '@/schema/brand.model';
-import { BrandModel } from '@/schema/brand.model';
+import type { IBrand } from '@/schema/brand.schema';
+import { BrandModel } from '@/schema/brand.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { handleMongooseError } from '@/utils/duplicate-key';

@@ -1,11 +1,11 @@
-import type { CommentType, IComment } from '@/schema/comment.model';
-import CommentModel from '@/schema/comment.model';
-import { UserRole } from '@/schema/auth.model';
+import type { CommentType, IComment } from '@/schema/comment.schema';
+import CommentModel from '@/schema/comment.schema';
+import { UserRole } from '@/schema/auth.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
-import ProductModel from '@/schema/product.model';
+import ProductModel from '@/schema/product.schema';
 
 // Create
 export const createComment: Controller<object, IComment, CommentType> = async (

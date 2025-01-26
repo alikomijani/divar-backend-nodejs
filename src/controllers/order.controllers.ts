@@ -1,6 +1,6 @@
-import type { IOrder, OrderSchemaType } from '@/schema/order.model';
-import { OrderItemModel, OrderModel } from '@/schema/order.model';
-import { ProductSellerPriceModel } from '@/schema/productSellers.model';
+import type { IOrder, OrderSchemaType } from '@/schema/order.schema';
+import { OrderItemModel, OrderModel } from '@/schema/order.schema';
+import { ProductSellerPriceModel } from '@/schema/productSellers.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';

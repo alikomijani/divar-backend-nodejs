@@ -2,10 +2,10 @@ import type { Document, Model } from 'mongoose';
 import { Types } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
-import type { ColorType } from './color.model';
-import type { BadgeType } from './badge.model';
+import type { ColorType } from './color.schema';
+import type { BadgeType } from './badge.schema';
 import refValidator from '@/utils/ref-validator';
-import { ProductSellerPriceModel } from './productSellers.model';
+import { ProductSellerPriceModel } from './productSellers.schema';
 
 // Zod Schemas for subdocuments
 const ReviewSchemaZod = z.object({

@@ -7,7 +7,7 @@ import {
   updateProperty,
 } from '../controllers/properties.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { PropertySchemaZod } from '@/schema/property.model';
+import { PropertySchemaZod } from '@/schema/property.schema';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const propertiesRouter = Router();

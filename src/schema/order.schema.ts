@@ -1,7 +1,7 @@
 import type { Types, Document } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 import { z } from 'zod';
-import { addressSchemaZod } from './profile.model'; // Assuming this exists
+import { addressSchemaZod } from './profile.schema'; // Assuming this exists
 
 interface IOrderItem extends Document {
   productSeller: Types.ObjectId;

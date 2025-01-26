@@ -15,7 +15,7 @@ import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/schema/auth.model';
+import { UserRole } from '@/schema/auth.schema';
 import { profileAdminRouter } from './profile.routes';
 
 const userRouter = Router();

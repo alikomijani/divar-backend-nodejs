@@ -8,7 +8,7 @@ import {
   getCategoryBySlug,
 } from '../controllers/category.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { CategorySchemaZod } from '@/schema/category.model';
+import { CategorySchemaZod } from '@/schema/category.schema';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const categoryRouter = Router();
