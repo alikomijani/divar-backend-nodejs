@@ -15,19 +15,13 @@ export const ColorSchemaZod = z.object({
 export type ColorType = z.infer<typeof ColorSchemaZod>;
 
 // Mongoose Interface (Extending ColorType and Document)
-export interface IColor extends ColorType, Document {
-  createdAt: Date;
-  updatedAt: Date;
-}
+export interface IColor extends ColorType, Document {}
 
 // Mongoose Schema
-export const ColorSchema = new Schema<IColor>(
-  {
-    title: { type: String, required: true, trim: true },
-    hexCode: { type: String, required: true, trim: true },
-  },
-  { timestamps: true },
-);
+export const ColorSchema = new Schema<IColor>({
+  title: { type: String, required: true, trim: true },
+  hexCode: { type: String, required: true, trim: true },
+});
 ColorSchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {

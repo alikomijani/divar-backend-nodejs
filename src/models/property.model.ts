@@ -20,10 +20,7 @@ export const PropertySchemaZod = z.object({
 export type PropertyType = z.infer<typeof PropertySchemaZod>;
 
 // Mongoose Interface (Extending PropertyType and Document)
-export interface ICategoryProperty extends PropertyType, Document {
-  createdAt: Date;
-  updatedAt: Date;
-}
+export interface ICategoryProperty extends PropertyType, Document {}
 
 // Mongoose Schema
 export const PropertySchema = new Schema<ICategoryProperty>(
@@ -39,7 +36,6 @@ export const PropertySchema = new Schema<ICategoryProperty>(
     ],
   },
   {
-    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   },

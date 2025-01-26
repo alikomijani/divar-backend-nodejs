@@ -17,13 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(
-  morgan('combined', {
-    skip: function (_, res) {
-      return res.statusCode < 400;
-    },
-  }),
-);
+app.use(morgan('combined'));
 app.use(express.static(PUBLIC_PATH));
 app.use(userRouter);
 app.use('/admin', adminRouter);

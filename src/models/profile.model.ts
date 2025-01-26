@@ -13,8 +13,6 @@ export const addressSchemaZod = z.object({
 });
 
 export const profileSchemaZod = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
   nationCode: z.string().optional(),
   mobile: z.string().optional(),
   birthday: z.string().datetime().optional(),
@@ -23,8 +21,6 @@ export const profileSchemaZod = z.object({
 
 export interface ProfileType extends Document {
   user: Types.ObjectId;
-  firstName?: string;
-  lastName?: string;
   nationCode?: string;
   mobile?: string;
   birthday?: Date;
@@ -63,12 +59,6 @@ const profileSchema = new Schema<ProfileType>(
       required: true,
       unique: true,
       index: true,
-    },
-    firstName: {
-      type: String,
-    },
-    lastName: {
-      type: String,
     },
     nationCode: {
       type: String,

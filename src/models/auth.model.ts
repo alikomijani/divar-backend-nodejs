@@ -12,6 +12,8 @@ export enum UserRole {
   Admin = 3,
 }
 export interface IUser extends Document {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string; // for hashing, not exposed in responses
   role: UserRole;
@@ -22,6 +24,8 @@ export interface IUser extends Document {
 }
 const UserSchema = new mongoose.Schema<IUser>(
   {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
     email: {
       type: String,
       required: true,
@@ -35,6 +39,7 @@ const UserSchema = new mongoose.Schema<IUser>(
     isActive: { type: Boolean, default: true },
   },
   {
+    timestamps: true,
     methods: {
       checkPassword: async function (rawPassword: string) {
         return await checkHash(rawPassword, this.password);
@@ -70,6 +75,9 @@ UserSchema.set('toJSON', {
 });
 UserSchema.set('toObject', {
   virtuals: true,
+  transform: function (doc, ret) {
+    delete ret.password;
+  },
 });
 
 UserSchema.index({ email: 1 }, { unique: true });
@@ -81,17 +89,38 @@ export const LoginSchemaZod = z.object({
     .min(1, 'Email is required')
     .trim()
     .or(z.string().email('Invalid Email')),
-  password: z.string().min(6, 'Password must be at least 6 characters').trim(),
+  password: z.string(),
 });
 
 export const RegisterSchemaZod = z.object({
   email: z.string().email('Invalid Email').trim(),
-  password: z.string().min(6, 'Password must be at least 6 characters').trim(),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
   firstName: z.string().min(1, 'firstName is required'),
   lastName: z.string().min(1, 'lastName is required'),
+});
+
+export const UpdateUserSchemaZod = z.object({
+  email: z.string().email('Invalid Email').trim(),
+  firstName: z.string().min(1, 'firstName is required'),
+  lastName: z.string().min(1, 'lastName is required'),
+  role: z.nativeEnum(UserRole),
+});
+
+export const ChangePasswordSchemaZod = z.object({
+  oldPassword: z.string(),
+  newPassword: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+export const SetPasswordSchemaZod = z.object({
+  oldPassword: z.string(),
+  newPassword: z.string().min(6, 'Password must be at least 6 characters'),
 });
 export const RefreshTokenSchemaZod = z.object({
   refreshToken: z.string(),
 });
+
 export type LoginUser = z.infer<typeof LoginSchemaZod>;
 export type RegisterUser = z.infer<typeof RegisterSchemaZod>;
+export type UpdateUserType = z.infer<typeof UpdateUserSchemaZod>;
+export type ChangePasswordType = z.infer<typeof ChangePasswordSchemaZod>;
+export type SetPasswordType = z.infer<typeof SetPasswordSchemaZod>;

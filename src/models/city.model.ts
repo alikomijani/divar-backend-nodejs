@@ -15,8 +15,6 @@ export const CitySchemaZod = z.object({
       /^[a-z0-9-]+$/,
       'Slug can only contain lowercase letters, numbers, and hyphens',
     ),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().optional(),
 });
 
 export type CityType = z.infer<typeof CitySchemaZod>;
@@ -40,7 +38,6 @@ const CitySchema = new Schema<ICity>(
     },
   },
   {
-    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   },

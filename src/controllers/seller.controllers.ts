@@ -1,3 +1,4 @@
+import { UserModel, UserRole } from '@/models/auth.model';
 import type { ISeller, SellerType } from '@/models/seller.model';
 import SellerModel from '@/models/seller.model';
 import type { PaginatedResponse } from '@/types/app.types';
@@ -14,6 +15,12 @@ const createSeller: Controller<object, ISeller, SellerType> = async (
   try {
     const newSeller = new SellerModel(req.body);
     const savedSeller = await newSeller.save();
+    const user = await UserModel.findById(savedSeller.user);
+    /// upgrade user permissions
+    if (user && user.role === UserRole.User) {
+      user.role = UserRole.Seller;
+      await user.save();
+    }
     return res.status(StatusCodes.CREATED).json(savedSeller); // Return the created seller with status 201 (Created)
   } catch (error) {
     return handleMongooseError(error, res);

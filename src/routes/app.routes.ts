@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import authRouter from './auth.routes';
+import { authRouter, authAdminRouter } from './auth.routes';
 import { badgeAdminRouter } from './badge.routes';
 import { brandRouter, brandAdminRouter } from './brand.routes';
 import { categoryRouter, categoryAdminRouter } from './category.routes';
@@ -9,7 +9,7 @@ import colorRouter from './color.routes';
 import { cityAdminRouter, cityRouter } from './city.routes';
 import { productRouter, productAdminRouter } from './product.routes';
 import commentRouter from './comment.routes';
-import sellerRouter from './seller.routes';
+import { sellerRouter, sellerAdminRouter } from './seller.routes';
 import orderRouter from './order.routes';
 import {
   loginMiddleware,
@@ -27,12 +27,7 @@ userRouter.use('/images', imagesRouter);
 userRouter.use('/cities', cityRouter);
 userRouter.use('/products', productRouter);
 userRouter.use(commentRouter);
-userRouter.use(
-  '/admin/seller',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  sellerRouter,
-); // edit seller info need admin permission
+userRouter.use('/sellers', sellerRouter);
 userRouter.use(loginMiddleware, orderRouter); // all order routes need authentication
 
 const adminRouter = Router();
@@ -45,6 +40,8 @@ adminRouter.use('/profiles', profileAdminRouter);
 adminRouter.use('/colors', colorRouter);
 adminRouter.use('/properties', propertyRouter);
 adminRouter.use('/products', productAdminRouter);
+adminRouter.use('/auth', authAdminRouter);
+adminRouter.use('/sellers', sellerAdminRouter);
 
 const shopRouter = Router();
 shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));

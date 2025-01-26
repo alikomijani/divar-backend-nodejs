@@ -1,11 +1,18 @@
 import { StatusCodes } from 'http-status-codes';
 import { verifyToken } from '@/utils/jwt.utils';
-import type { LoginUser, RegisterUser } from '@/models/auth.model';
+import type {
+  ChangePasswordType,
+  IUser,
+  LoginUser,
+  RegisterUser,
+  UpdateUserType,
+} from '@/models/auth.model';
 import { UserModel, UserRole } from '@/models/auth.model';
 import { handleMongooseError } from '@/utils/duplicate-key';
 import ProfileModel from '@/models/profile.model';
 import type { Controller } from '@/types/express';
 import SellerModel from '@/models/seller.model';
+import { getPaginatedQuery } from '@/utils/paginatedQuery';
 
 export const registerUser: Controller<object, object, RegisterUser> = async (
   req,
@@ -14,14 +21,11 @@ export const registerUser: Controller<object, object, RegisterUser> = async (
   try {
     const data = req.body;
     const user = await UserModel.create({
-      email: data.email,
-      password: data.password,
+      ...data,
       role: UserRole.User,
     });
     const userProfile = await ProfileModel.create({
       user: user._id,
-      firstName: data.firstName,
-      lastName: data.lastName,
     });
     const tokens = user.createToken();
     // Remove the password field from the response for security
@@ -136,5 +140,92 @@ export const refreshAccessToken: Controller<
       success: false,
       message: error?.message || 'Forbidden',
     }); // Forbidden
+  }
+};
+
+export const getAllUsers: Controller<object, any> = async (req, res) => {
+  try {
+    const { page = 1, pageSize = 10, role, isActive, email } = req.query; // Default to page 1 and limit 10
+    const query: any = {};
+    if (role) {
+      query.role = role;
+    }
+    if (isActive !== undefined) {
+      query.isActive = isActive;
+    }
+    if (email) {
+      query.email = email;
+    }
+    const paginatedResult = await getPaginatedQuery(UserModel, {
+      page,
+      pageSize,
+      query,
+    });
+    return res.json(paginatedResult);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to fetch users', success: false });
+  }
+};
+
+export const getUserById: Controller<{ id: string }, any> = async (
+  req,
+  res,
+) => {
+  const { id } = req.params;
+  const user = await UserModel.findById(id);
+  if (!user) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      success: false,
+      message: 'notFound',
+    });
+  }
+  return res.json(user);
+};
+export const updateUser: Controller<
+  { id: string },
+  IUser,
+  UpdateUserType
+> = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: 'notFound',
+      });
+    }
+    return res.json(user);
+  } catch (e) {
+    return handleMongooseError(e, res);
+  }
+};
+
+export const changeUserPassword: Controller<
+  { id: string },
+  IUser,
+  ChangePasswordType
+> = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findById(id);
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: 'notFound',
+      });
+    }
+
+    if (await user.checkPassword(req.body.oldPassword)) {
+      user.setPassword(req.body.newPassword);
+    }
+    return res.json(user);
+  } catch (e) {
+    return handleMongooseError(e, res);
   }
 };

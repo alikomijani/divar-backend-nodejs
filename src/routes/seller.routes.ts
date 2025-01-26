@@ -12,18 +12,23 @@ import { SellerSchemaZod } from '@/models/seller.model';
 import { Router } from 'express';
 
 const sellerRouter = Router();
+const sellerAdminRouter = Router();
 
 sellerRouter.get('/', getAllSellers);
 sellerRouter.get('/:id', validateIdMiddleware, getSellerById);
 
-sellerRouter.post('/', validateData(SellerSchemaZod), createSeller);
+// admin routes
 
-sellerRouter.put(
+sellerAdminRouter.get('/', getAllSellers);
+sellerAdminRouter.get('/:id', validateIdMiddleware, getSellerById);
+sellerAdminRouter.post('/', validateData(SellerSchemaZod), createSeller);
+
+sellerAdminRouter.put(
   '/:id',
   validateIdMiddleware,
   validateData(SellerSchemaZod),
   updateSeller,
 );
 
-sellerRouter.put('/:id', validateIdMiddleware, deleteSeller);
-export default sellerRouter;
+sellerAdminRouter.put('/:id', validateIdMiddleware, deleteSeller);
+export { sellerRouter, sellerAdminRouter };

@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import {
+  getAllUsers,
   getUser,
+  getUserById,
   loginUser,
   refreshAccessToken,
   registerUser,
+  updateUser,
   updateUserProfile,
 } from '../controllers/auth.controllers';
 import { validateData } from '../middlewares/validation.middleware';
@@ -15,8 +18,10 @@ import {
   RegisterSchemaZod,
 } from '@/models/auth.model';
 import { profileSchemaZod } from '@/models/profile.model';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const authRouter = Router();
+const authAdminRouter = Router();
 
 authRouter.post('/register', validateData(RegisterSchemaZod), registerUser);
 authRouter.post('/login', validateData(LoginSchemaZod), loginUser);
@@ -32,5 +37,8 @@ authRouter.put(
   validateData(profileSchemaZod),
   updateUserProfile,
 );
+authAdminRouter.get('/users', getAllUsers);
+authAdminRouter.get('/users:id', validateIdMiddleware, getUserById);
+authAdminRouter.put('/users/:id', updateUser);
 
-export default authRouter;
+export { authRouter, authAdminRouter };
