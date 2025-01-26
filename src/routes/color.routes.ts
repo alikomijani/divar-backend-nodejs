@@ -8,7 +8,7 @@ import {
   updateColor,
 } from '@/controllers/colors.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { ColorSchemaZod } from '@/models/color.model';
+import { ColorSchemaZod } from '@/schema/color.model';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const colorRouter = express.Router();

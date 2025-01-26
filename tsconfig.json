@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@routes": ["./src/routes/*"],
-      "@models": ["./src/models/*"],
+      "@models": ["src/schema/*"],
       "@services": ["./src/services/*"],
       "@validations": ["./src/validations/*"],
       "@middlewares": ["./src/middlewares/*"],

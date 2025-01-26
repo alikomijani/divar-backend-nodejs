@@ -16,8 +16,8 @@ import {
   LoginSchemaZod,
   RefreshTokenSchemaZod,
   RegisterSchemaZod,
-} from '@/models/auth.model';
-import { profileSchemaZod } from '@/models/profile.model';
+} from '@/schema/auth.model';
+import { profileSchemaZod } from '@/schema/profile.model';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const authRouter = Router();

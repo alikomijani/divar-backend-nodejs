@@ -1,5 +1,5 @@
-import type { CityType } from '@/models/city.model';
-import { CityModel } from '@/models/city.model';
+import type { CityType } from '@/schema/city.model';
+import { CityModel } from '@/schema/city.model';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
 import { handleMongooseError } from '@/utils/duplicate-key';

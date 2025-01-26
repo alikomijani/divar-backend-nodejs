@@ -9,7 +9,7 @@ import {
   updateBrand,
 } from '@/controllers/brand.controllers';
 import { validateData } from '@/middlewares/validation.middleware';
-import { BrandSchemaZod } from '@/models/brand.model';
+import { BrandSchemaZod } from '@/schema/brand.model';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const brandRouter = express.Router();
