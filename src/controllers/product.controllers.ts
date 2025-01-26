@@ -2,7 +2,7 @@ import { StatusCodes } from 'http-status-codes';
 import type { IProduct } from '@/schema/product.schema';
 import ProductModel from '@/schema/product.schema';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
-import { handleMongooseError } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/db-errors';
 import type { Controller } from '@/types/express';
 
 export const createProduct: Controller = async (req, res) => {

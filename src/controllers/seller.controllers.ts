@@ -3,7 +3,7 @@ import type { ISeller, SellerType } from '@/schema/seller.schema';
 import SellerModel from '@/schema/seller.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
-import { handleMongooseError } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/db-errors';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 

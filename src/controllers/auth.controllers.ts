@@ -8,7 +8,7 @@ import type {
   UpdateUserType,
 } from '@/schema/auth.schema';
 import { UserModel, UserRole } from '@/schema/auth.schema';
-import { handleMongooseError } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/db-errors';
 import ProfileModel from '@/schema/profile.schema';
 import type { Controller } from '@/types/express';
 import SellerModel from '@/schema/seller.schema';

@@ -1,7 +1,7 @@
 import type { ICategory } from '@/schema/category.schema';
 import { CategoryModel } from '@/schema/category.schema';
 import type { Controller } from '@/types/express';
-import { handleMongooseError } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/db-errors';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 

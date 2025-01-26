@@ -2,7 +2,7 @@ import type { IBrand } from '@/schema/brand.schema';
 import { BrandModel } from '@/schema/brand.schema';
 import type { PaginatedResponse } from '@/types/app.types';
 import type { Controller } from '@/types/express';
-import { handleMongooseError } from '@/utils/duplicate-key';
+import { handleMongooseError } from '@/utils/db-errors';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { StatusCodes } from 'http-status-codes';
 
