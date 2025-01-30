@@ -15,6 +15,7 @@ import {
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
 import { UserRole } from '@/schema/auth.schema';
+import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const productRouter = express.Router();
 const productAdminRouter = express.Router();
@@ -34,7 +35,8 @@ productAdminRouter.post(
   createProduct,
 );
 productAdminRouter.put(
-  '/:code',
+  '/:id',
+  validateIdMiddleware,
   loginMiddleware,
   roleMiddleware(UserRole.Seller),
   validateData(ProductSchemaZod),

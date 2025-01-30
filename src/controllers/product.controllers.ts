@@ -65,18 +65,17 @@ export const getProductByCode: Controller<{ code: string }> = async (
 };
 
 export const updateProduct: Controller<
-  { code: string },
+  { id: string },
   IProduct,
   IProduct
 > = async (req, res) => {
   try {
+    const id = req.params.id;
     // req.body is already validated
-    console.log(req.body);
-    const updatedProduct = await ProductModel.findOneAndUpdate(
-      { code: req.params.code },
-      req.body,
-      { new: true, runValidators: true },
-    );
+    const updatedProduct = await ProductModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!updatedProduct) {
       return res.status(StatusCodes.NOT_FOUND).json({
         success: false,
