@@ -145,7 +145,7 @@ export const refreshAccessToken: Controller<
 
 export const getAllUsers: Controller<object, any> = async (req, res) => {
   try {
-    const { page = 1, pageSize = 10, role, isActive, email } = req.query; // Default to page 1 and limit 10
+    const { page = 1, pageSize = 10, role, isActive, q = '' } = req.query; // Default to page 1 and limit 10
     const query: any = {};
     if (role) {
       query.role = role;
@@ -153,8 +153,10 @@ export const getAllUsers: Controller<object, any> = async (req, res) => {
     if (isActive !== undefined) {
       query.isActive = isActive;
     }
-    if (email) {
-      query.email = email;
+    if (q) {
+      query['$or'] = [
+        { email: { $regex: q, $options: 'i' } }, // Case-insensitive search in titleFa
+      ];
     }
     const paginatedResult = await getPaginatedQuery(UserModel, {
       page,
