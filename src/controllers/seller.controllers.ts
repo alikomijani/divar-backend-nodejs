@@ -34,14 +34,18 @@ const getAllSellers: Controller<
   PaginatedResponse<SellerType>
 > = async (req, res) => {
   const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
-  const sellers = await getPaginatedQuery(SellerModel, { page, pageSize });
+  const sellers = await getPaginatedQuery(SellerModel, {
+    page,
+    pageSize,
+    populateOptions: [{ path: 'user' }],
+  });
   return res.json(sellers);
 };
 
 // Read by ID (GET)
 const getSellerById: Controller<{ id: string }> = async (req, res) => {
   const { id } = req.params;
-  const seller = await SellerModel.findById(id);
+  const seller = await SellerModel.findById(id).populate('user');
   if (!seller) {
     return res
       .status(404)
@@ -69,7 +73,7 @@ const updateSeller: Controller<{ id: string }, ISeller, ISeller> = async (
   const { id } = req.params;
   const updatedSeller = await SellerModel.findByIdAndUpdate(id, req.body, {
     new: true,
-  }); // Return the updated document
+  }).populate('user'); // Return the updated document
   if (!updatedSeller) {
     return res
       .status(404)
