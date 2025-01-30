@@ -13,7 +13,7 @@ interface IOrderItem extends Document {
 const OrderItemSchema = new Schema<IOrderItem>({
   productSeller: {
     type: Schema.Types.ObjectId,
-    ref: 'ProductSeller',
+    ref: 'ProductSellers',
     required: true,
   },
   quantity: { type: Number, required: true },
@@ -53,6 +53,9 @@ const OrderSchema = new Schema<IOrder>(
       street: { type: String },
       city: { type: String },
       postalCode: { type: String },
+      location: {
+        type: [Number],
+      },
     },
     orderItems: [{ type: Schema.Types.ObjectId, ref: 'OrderItem' }], // Array of OrderItem references
   },
@@ -71,17 +74,19 @@ export const OrderItemModel = mongoose.model<IOrderItem>(
 export const OrderSchemaZod = z.object({
   shippingAddress: addressSchemaZod,
   deliveryDate: z.string().datetime(), // More precise date/time validation
-  orderItems: z.array(
-    z.object({
-      productSeller: z
-        .string()
-        .refine(
-          (val) => mongoose.Types.ObjectId.isValid(val),
-          'Invalid ProductSeller ID',
-        ),
-      quantity: z.number().positive().min(1).int(),
-    }),
-  ),
+  orderItems: z
+    .array(
+      z.object({
+        productSeller: z
+          .string()
+          .refine(
+            (val) => mongoose.Types.ObjectId.isValid(val),
+            'Invalid ProductSeller ID',
+          ),
+        quantity: z.number().positive().min(1).int(),
+      }),
+    )
+    .min(1),
 });
 OrderSchema.set('toJSON', {
   virtuals: true,

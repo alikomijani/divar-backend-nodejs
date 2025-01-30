@@ -102,6 +102,7 @@ export interface IProduct
 interface ProductModelStatic extends Model<IProduct> {
   getLastPricesForProduct(productId: string): Promise<
     {
+      id: string;
       seller: Types.ObjectId;
       lastPrice: number;
       create_at: Date;
@@ -190,20 +191,31 @@ ProductSchema.statics.getLastPricesForProduct = async function (
         $group: {
           _id: '$seller',
           lastPrice: { $first: '$price' },
-          create_at: { $first: '$create_at' },
+          createAt: { $first: '$createAt' },
           discount: { $first: '$discount' },
           count: { $first: '$count' },
+          id: { $first: '$_id' },
         },
       },
-      { $match: { count: { $gte: 1 } } }, // Add this $match stage
+      { $match: { count: { $gte: 1 } } },
+      {
+        $lookup: {
+          from: 'sellers', // The name of the Seller collection
+          localField: '_id', // The field from the current collection (seller ID)
+          foreignField: '_id', // The field from the Seller collection
+          as: 'sellerDetails', // The name of the new field to store the joined data
+        },
+      },
+      { $unwind: '$sellerDetails' }, // Unwind the joined array (since $lookup returns an array)
       {
         $project: {
           _id: 0,
-          seller: '$_id',
+          seller: '$sellerDetails', // Replace seller ID with seller details
           lastPrice: 1,
-          create_at: 1,
+          createAt: 1,
           discount: 1,
           count: 1,
+          id: 1,
         },
       },
     ]);

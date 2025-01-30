@@ -10,7 +10,7 @@ import { cityAdminRouter, cityRouter } from './city.routes';
 import { productRouter, productAdminRouter } from './product.routes';
 import commentRouter from './comment.routes';
 import { sellerRouter, sellerAdminRouter } from './seller.routes';
-import orderRouter from './order.routes';
+import { orderRouter, orderAdminRouter, orderShopRouter } from './order.routes';
 import {
   loginMiddleware,
   roleMiddleware,
@@ -28,7 +28,7 @@ userRouter.use('/cities', cityRouter);
 userRouter.use('/products', productRouter);
 userRouter.use(commentRouter);
 userRouter.use('/sellers', sellerRouter);
-userRouter.use(loginMiddleware, orderRouter); // all order routes need authentication
+userRouter.use('/orders', loginMiddleware, orderRouter); // all order routes need authentication
 
 const adminRouter = Router();
 adminRouter.use(loginMiddleware, roleMiddleware(UserRole.Admin));
@@ -42,8 +42,10 @@ adminRouter.use('/properties', propertyRouter);
 adminRouter.use('/products', productAdminRouter);
 adminRouter.use('/auth', authAdminRouter);
 adminRouter.use('/sellers', sellerAdminRouter);
+adminRouter.use('/orders', orderAdminRouter);
 
 const shopRouter = Router();
 shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
+shopRouter.use('/orders', orderShopRouter);
 
 export { userRouter, adminRouter, shopRouter };

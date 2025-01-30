@@ -60,6 +60,15 @@ export const getUserOrders: Controller<
       query: {
         user: req.user?.id,
       },
+      populateOptions: [
+        {
+          path: 'orderItems',
+          populate: [
+            { path: 'seller' },
+            { path: 'productSeller', populate: [{ path: 'product' }] },
+          ],
+        },
+      ],
     });
     return res.json(results);
   } catch (error) {
@@ -97,7 +106,20 @@ export const getOrdersBySeller: Controller = async (req, res) => {
 export const getAllOrders: Controller = async (req, res) => {
   try {
     const { page = 1, pageSize = 10 } = req.query;
-    const orders = await getPaginatedQuery(OrderModel, { page, pageSize });
+    const orders = await getPaginatedQuery(OrderModel, {
+      page,
+      pageSize,
+      populateOptions: [
+        { path: 'user' },
+        {
+          path: 'orderItems',
+          populate: [
+            { path: 'seller' },
+            { path: 'productSeller', populate: [{ path: 'product' }] },
+          ],
+        },
+      ],
+    });
     return res.json(orders);
   } catch (error) {
     console.error('Error getting orders:', error);
