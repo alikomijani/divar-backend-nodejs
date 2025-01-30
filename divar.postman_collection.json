@@ -252,7 +252,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"ali@gmail.com\",\n    \"password\": \"K@mij3314\"\n}",
+							"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1830,6 +1830,282 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "Sellers",
+					"item": [
+						{
+							"name": "get sellers list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/sellers",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"sellers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSellerID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/sellers/:id",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"sellers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "create order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shippingAddress\": {\n        \"street\": \"emam\",\n        \"city\": \"komijan\",\n        \"postalCode\": \"123\",\n        \"location\":[1,2]\n    },\n    \"deliveryDate\":\"2025-01-30T12:12:29.041Z\",\n    \"orderItems\":[\n        {\n            \"productSeller\":\"679b6ed4641088336994d932\",\n            \"quantity\":2\n\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/orders",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"shippingAddress\": {\n        \"street\": \"emam\",\n        \"city\": \"komijan\",\n        \"postalCode\": \"123\",\n        \"location\":[1,2]\n    },\n    \"deliveryDate\":\"2025-01-30T12:12:29.041Z\",\n    \"orderItems\":[\n        {\n            \"productSeller\":\"679b6ed4641088336994d932\",\n            \"quantity\":2\n\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/orders",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "342"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"156-KLtMwoC0d+YEmMf3jD7uHgZnMD0\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Jan 2025 12:29:07 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"user\": \"67962ebaba45fd16ce1c197d\",\n    \"deliveryDate\": \"2025-01-30T12:12:29.041Z\",\n    \"orderStatus\": \"pending\",\n    \"shippingAddress\": {\n        \"street\": \"emam\",\n        \"city\": \"komijan\",\n        \"postalCode\": \"123\",\n        \"location\": [\n            1,\n            2\n        ]\n    },\n    \"orderItems\": [\n        \"679b7093153c76690997463e\"\n    ],\n    \"createdAt\": \"2025-01-30T12:29:07.682Z\",\n    \"updatedAt\": \"2025-01-30T12:29:07.711Z\",\n    \"id\": \"679b7093153c76690997463b\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get orders",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"shippingAddress\": {\n        \"street\": \"emam\",\n        \"city\": \"komijan\",\n        \"postalCode\": \"123\",\n        \"location\":[1,2]\n    },\n    \"deliveryDate\":\"2025-01-30T12:12:29.041Z\",\n    \"orderItems\":[\n        {\n            \"productSeller\":\"1\",\n            \"quantity\":2\n\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/orders",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get user orders",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"shippingAddress\": {\n        \"street\": \"emam\",\n        \"city\": \"komijan\",\n        \"postalCode\": \"123\",\n        \"location\":[1,2]\n    },\n    \"deliveryDate\":\"2025-01-30T12:12:29.041Z\",\n    \"orderItems\":[\n        {\n            \"productSeller\":\"1\",\n            \"quantity\":2\n\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/orders",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1694"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"69e-T3xO3N7+XIRaOfWAHbrtZN2pAjs\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Jan 2025 12:45:07 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"shippingAddress\": {\n                \"street\": \"emam\",\n                \"city\": \"komijan\",\n                \"postalCode\": \"123\",\n                \"location\": [\n                    1,\n                    2\n                ]\n            },\n            \"user\": \"67962ebaba45fd16ce1c197d\",\n            \"deliveryDate\": \"2025-01-30T12:12:29.041Z\",\n            \"orderStatus\": \"pending\",\n            \"orderItems\": [\n                {\n                    \"_id\": \"679b7093153c76690997463e\",\n                    \"productSeller\": {\n                        \"product\": {\n                            \"images\": {\n                                \"main\": \"https://example.com/image.jpg\",\n                                \"list\": [\n                                    \"https://example.com/image2.jpg\",\n                                    \"http://localhost:8000/uploads/image-1737733409928-445546853.jpeg\"\n                                ]\n                            },\n                            \"code\": 12345,\n                            \"titleFa\": \"محصول تستی\",\n                            \"titleEn\": \"Test Product\",\n                            \"status\": \"marketable\",\n                            \"badges\": [\n                                \"67933628a52fa1ee71dfa8dd\",\n                                \"6793b0a72e839b8e4934b089\"\n                            ],\n                            \"category\": \"6777138fc0d989811a8bcf7a\",\n                            \"brand\": \"677702374d88342901ad0df1\",\n                            \"review\": [\n                                {\n                                    \"name\": \"weight\",\n                                    \"title\": \"وزن\",\n                                    \"value\": \"1 کیلوگرم\",\n                                    \"_id\": \"6788198312158b35068e6586\",\n                                    \"id\": \"6788198312158b35068e6586\"\n                                }\n                            ],\n                            \"specifications\": [\n                                {\n                                    \"name\": \"weight\",\n                                    \"title\": \"وزن\",\n                                    \"value\": \"1 کیلوگرم\",\n                                    \"_id\": \"6788198312158b35068e6587\",\n                                    \"id\": \"6788198312158b35068e6587\"\n                                }\n                            ],\n                            \"expert_reviews\": \"این یک محصول عالی است\",\n                            \"createdAt\": \"2025-01-15T20:24:35.599Z\",\n                            \"updatedAt\": \"2025-01-24T15:43:32.686Z\",\n                            \"colors\": [\n                                \"67939772c4d94bc23f400125\"\n                            ],\n                            \"id\": \"6788198312158b35068e6585\"\n                        },\n                        \"seller\": \"67954a1a540d93578de87c0b\",\n                        \"price\": 10000000,\n                        \"count\": 2,\n                        \"discount\": 3,\n                        \"id\": \"679b6ed4641088336994d932\"\n                    },\n                    \"quantity\": 2,\n                    \"order\": \"679b7093153c76690997463b\",\n                    \"seller\": {\n                        \"user\": \"67962ebaba45fd16ce1c197d\",\n                        \"name\": \"فروشگاه کمیجانی\",\n                        \"slug\": \"komij\",\n                        \"createdAt\": \"2025-01-25T20:31:22.409Z\",\n                        \"updatedAt\": \"2025-01-25T20:31:22.409Z\",\n                        \"id\": \"67954a1a540d93578de87c0b\"\n                    },\n                    \"__v\": 0\n                }\n            ],\n            \"createdAt\": \"2025-01-30T12:29:07.682Z\",\n            \"updatedAt\": \"2025-01-30T12:29:07.711Z\",\n            \"id\": \"679b7093153c76690997463b\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -4887,6 +5163,407 @@
 									""
 								]
 							}
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "get users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/auth/users?page=1&pageSize=10",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "role",
+											"value": "3",
+											"description": "filter",
+											"disabled": true
+										},
+										{
+											"key": "isActive",
+											"value": "false",
+											"description": "filter",
+											"disabled": true
+										},
+										{
+											"key": "q",
+											"value": "ali",
+											"description": "text search in email",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Sellers",
+					"item": [
+						{
+							"name": "create Seller",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\":\"6788ae240f8f94ca628d6ba2\",\n    \"name\":\"فروشگاه کمیجانی\",\n    \"slug\":\"komij\"\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/sellers",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"sellers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"user\":\"6788ae240f8f94ca628d6ba2\",\n    \"name\":\"فروشگاه کمیجانی\",\n    \"slug\":\"komij\"\n\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/sellers",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"sellers"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "199"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"c7-zBZcbqQDxHBNaTHLZHFNBDPxOW8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 25 Jan 2025 20:31:22 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"user\": \"6788ae240f8f94ca628d6ba2\",\n    \"name\": \"فروشگاه کمیجانی\",\n    \"slug\": \"komij\",\n    \"createdAt\": \"2025-01-25T20:31:22.409Z\",\n    \"updatedAt\": \"2025-01-25T20:31:22.409Z\",\n    \"id\": \"67954a1a540d93578de87c0b\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get all sellers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/sellers",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"sellers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/sellers",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"sellers"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "261"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"105-K9rALMkeGoZKFoLFGZFt46xnHdU\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 25 Jan 2025 20:34:04 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"user\": \"6788ae240f8f94ca628d6ba2\",\n            \"name\": \"فروشگاه کمیجانی\",\n            \"slug\": \"komij\",\n            \"createdAt\": \"2025-01-25T20:31:22.409Z\",\n            \"updatedAt\": \"2025-01-25T20:31:22.409Z\",\n            \"id\": \"67954a1a540d93578de87c0b\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "getSellerbyID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/sellers/:id",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"sellers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "67954a1a540d93578de87c0b"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get all sellers Copy",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/sellers/:id",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"sellers",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "67954a1a540d93578de87c0b"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "199"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"c7-zBZcbqQDxHBNaTHLZHFNBDPxOW8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 25 Jan 2025 20:35:19 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"user\": \"6788ae240f8f94ca628d6ba2\",\n    \"name\": \"فروشگاه کمیجانی\",\n    \"slug\": \"komij\",\n    \"createdAt\": \"2025-01-25T20:31:22.409Z\",\n    \"updatedAt\": \"2025-01-25T20:31:22.409Z\",\n    \"id\": \"67954a1a540d93578de87c0b\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "get orders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ADMIN_BASE_URL}}/orders",
+									"host": [
+										"{{ADMIN_BASE_URL}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/orders",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1872"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"750-gfcYksoz5bm+FXYinUx6p8Z2Tbc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 30 Jan 2025 12:47:21 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"shippingAddress\": {\n                \"street\": \"emam\",\n                \"city\": \"komijan\",\n                \"postalCode\": \"123\",\n                \"location\": [\n                    1,\n                    2\n                ]\n            },\n            \"user\": {\n                \"firstName\": \"Ali\",\n                \"lastName\": \"Komijani\",\n                \"email\": \"akpa125@gmail.com\",\n                \"role\": 3,\n                \"isActive\": true,\n                \"createdAt\": \"2025-01-26T12:46:50.544Z\",\n                \"updatedAt\": \"2025-01-26T12:46:50.544Z\",\n                \"id\": \"67962ebaba45fd16ce1c197d\"\n            },\n            \"deliveryDate\": \"2025-01-30T12:12:29.041Z\",\n            \"orderStatus\": \"pending\",\n            \"orderItems\": [\n                {\n                    \"_id\": \"679b7093153c76690997463e\",\n                    \"productSeller\": {\n                        \"product\": {\n                            \"images\": {\n                                \"main\": \"https://example.com/image.jpg\",\n                                \"list\": [\n                                    \"https://example.com/image2.jpg\",\n                                    \"http://localhost:8000/uploads/image-1737733409928-445546853.jpeg\"\n                                ]\n                            },\n                            \"code\": 12345,\n                            \"titleFa\": \"محصول تستی\",\n                            \"titleEn\": \"Test Product\",\n                            \"status\": \"marketable\",\n                            \"badges\": [\n                                \"67933628a52fa1ee71dfa8dd\",\n                                \"6793b0a72e839b8e4934b089\"\n                            ],\n                            \"category\": \"6777138fc0d989811a8bcf7a\",\n                            \"brand\": \"677702374d88342901ad0df1\",\n                            \"review\": [\n                                {\n                                    \"name\": \"weight\",\n                                    \"title\": \"وزن\",\n                                    \"value\": \"1 کیلوگرم\",\n                                    \"_id\": \"6788198312158b35068e6586\",\n                                    \"id\": \"6788198312158b35068e6586\"\n                                }\n                            ],\n                            \"specifications\": [\n                                {\n                                    \"name\": \"weight\",\n                                    \"title\": \"وزن\",\n                                    \"value\": \"1 کیلوگرم\",\n                                    \"_id\": \"6788198312158b35068e6587\",\n                                    \"id\": \"6788198312158b35068e6587\"\n                                }\n                            ],\n                            \"expert_reviews\": \"این یک محصول عالی است\",\n                            \"createdAt\": \"2025-01-15T20:24:35.599Z\",\n                            \"updatedAt\": \"2025-01-24T15:43:32.686Z\",\n                            \"colors\": [\n                                \"67939772c4d94bc23f400125\"\n                            ],\n                            \"id\": \"6788198312158b35068e6585\"\n                        },\n                        \"seller\": \"67954a1a540d93578de87c0b\",\n                        \"price\": 10000000,\n                        \"count\": 2,\n                        \"discount\": 3,\n                        \"id\": \"679b6ed4641088336994d932\"\n                    },\n                    \"quantity\": 2,\n                    \"order\": \"679b7093153c76690997463b\",\n                    \"seller\": {\n                        \"user\": \"67962ebaba45fd16ce1c197d\",\n                        \"name\": \"فروشگاه کمیجانی\",\n                        \"slug\": \"komij\",\n                        \"createdAt\": \"2025-01-25T20:31:22.409Z\",\n                        \"updatedAt\": \"2025-01-25T20:31:22.409Z\",\n                        \"id\": \"67954a1a540d93578de87c0b\"\n                    },\n                    \"__v\": 0\n                }\n            ],\n            \"createdAt\": \"2025-01-30T12:29:07.682Z\",\n            \"updatedAt\": \"2025-01-30T12:29:07.711Z\",\n            \"id\": \"679b7093153c76690997463b\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
 						}
 					]
 				}
