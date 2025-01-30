@@ -29,6 +29,13 @@ export const getAllProducts: Controller = async (req, res) => {
         { path: 'colors' },
       ],
     });
+    const productsWithBestSeller = await Promise.all(
+      paginatedResult.results.map(async (product) => ({
+        ...product.toObject(), // Convert Mongoose document to plain object
+        bestSeller: await product.getBestSeller(), // ✅ No TypeScript error now!
+      })),
+    );
+    paginatedResult.results = productsWithBestSeller;
     return res.json(paginatedResult);
   } catch (error) {
     console.error(error);
@@ -55,7 +62,8 @@ export const getProductByCode: Controller<{ code: string }> = async (
         .status(StatusCodes.NOT_FOUND)
         .json({ message: 'Product not found' });
     }
-    res.json(product);
+    const bestSeller = await product.getBestSeller();
+    res.json({ ...product.toObject(), bestSeller });
   } catch (error) {
     console.error(error);
     return res

@@ -6,6 +6,7 @@ import type { ColorType } from './color.schema';
 import type { BadgeType } from './badge.schema';
 import refValidator from '@/utils/ref-validator';
 import { ProductSellerPriceModel } from './productSellers.schema';
+import type { ISeller } from './seller.schema';
 
 // Zod Schemas for subdocuments
 const ReviewSchemaZod = z.object({
@@ -98,12 +99,20 @@ export interface IProduct
   expert_reviews?: string;
   createdAt: Date;
   updatedAt: Date;
+  getBestSeller: () => Promise<{
+    id: string;
+    seller: ISeller;
+    lastPrice: number;
+    create_at: Date;
+    discount: number;
+    count: number;
+  } | null>;
 }
 interface ProductModelStatic extends Model<IProduct> {
   getLastPricesForProduct(productId: string): Promise<
     {
       id: string;
-      seller: Types.ObjectId;
+      seller: ISeller;
       lastPrice: number;
       create_at: Date;
       discount: number;
@@ -111,8 +120,9 @@ interface ProductModelStatic extends Model<IProduct> {
     }[]
   >;
 }
+
 // Mongoose Schema
-const ProductSchema = new Schema<IProduct>(
+const ProductSchema = new Schema<IProduct, ProductModelStatic>(
   {
     code: { type: Number, required: true, unique: true, immutable: true },
     titleFa: { type: String, required: true, trim: true },
@@ -175,44 +185,55 @@ const ProductSchema = new Schema<IProduct>(
   },
   {
     timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
   },
 );
+
+ProductSchema.methods.getBestSeller = async function () {
+  const model = this.constructor as ProductModelStatic;
+  const lastPrices = await model.getLastPricesForProduct(this._id);
+  if (!lastPrices || lastPrices.length === 0) {
+    return null;
+  }
+
+  return lastPrices.reduce((best, seller) =>
+    seller.lastPrice < best.lastPrice ? seller : best,
+  );
+};
 
 ProductSchema.statics.getLastPricesForProduct = async function (
   productId: string,
 ) {
   try {
     const lastPrices = await ProductSellerPriceModel.aggregate([
-      { $match: { product: new Types.ObjectId(productId) } },
-      { $sort: { createAt: -1 } },
+      {
+        $match: { product: new Types.ObjectId(productId), count: { $gte: 1 } },
+      }, // Filter early
+      { $sort: { createdAt: -1 } }, // Sort before grouping to get latest prices
       {
         $group: {
           _id: '$seller',
           lastPrice: { $first: '$price' },
-          createAt: { $first: '$createAt' },
+          createdAt: { $first: '$createdAt' }, // Ensure correct field name
           discount: { $first: '$discount' },
           count: { $first: '$count' },
           id: { $first: '$_id' },
         },
       },
-      { $match: { count: { $gte: 1 } } },
       {
         $lookup: {
-          from: 'sellers', // The name of the Seller collection
-          localField: '_id', // The field from the current collection (seller ID)
-          foreignField: '_id', // The field from the Seller collection
-          as: 'sellerDetails', // The name of the new field to store the joined data
+          from: 'sellers',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'sellerDetails',
         },
       },
-      { $unwind: '$sellerDetails' }, // Unwind the joined array (since $lookup returns an array)
+      { $unwind: '$sellerDetails' }, // Unwind joined seller details
       {
         $project: {
           _id: 0,
-          seller: '$sellerDetails', // Replace seller ID with seller details
+          seller: '$sellerDetails',
           lastPrice: 1,
-          createAt: 1,
+          createdAt: 1,
           discount: 1,
           count: 1,
           id: 1,
@@ -222,15 +243,12 @@ ProductSchema.statics.getLastPricesForProduct = async function (
     return lastPrices;
   } catch (error) {
     console.error('Error fetching last prices:', error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error;
   }
 };
 
 ProductSchema.index({ code: 1, category: 1, brand: 1 });
-export const ProductModel = mongoose.model<IProduct, ProductModelStatic>(
-  'Product',
-  ProductSchema,
-);
+
 ProductSchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {
@@ -241,4 +259,10 @@ ProductSchema.set('toJSON', {
 ProductSchema.set('toObject', {
   virtuals: true,
 });
+
+export const ProductModel = mongoose.model<IProduct, ProductModelStatic>(
+  'Product',
+  ProductSchema,
+);
+
 export default ProductModel;
