@@ -76,7 +76,6 @@ const profileSchema = new Schema<ProfileType>(
   },
   { timestamps: true },
 );
-profileSchema.index({ user: 1 }, { unique: true });
 
 profileSchema.set('toJSON', {
   virtuals: true,

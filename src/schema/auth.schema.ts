@@ -80,8 +80,6 @@ UserSchema.set('toObject', {
   },
 });
 
-UserSchema.index({ email: 1 }, { unique: true });
-
 export const UserModel = mongoose.model('User', UserSchema);
 export const LoginSchemaZod = z.object({
   email: z

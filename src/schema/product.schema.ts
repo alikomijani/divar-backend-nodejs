@@ -226,7 +226,6 @@ ProductSchema.statics.getLastPricesForProduct = async function (
   }
 };
 
-ProductSchema.index({ code: 1 }, { unique: true }); // Unique index for code
 ProductSchema.index({ code: 1, category: 1, brand: 1 });
 export const ProductModel = mongoose.model<IProduct, ProductModelStatic>(
   'Product',
