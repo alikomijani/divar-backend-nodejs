@@ -7,6 +7,8 @@ import {
   deleteProduct,
   getProductByCode,
   getProductPrices,
+  getSellerAllProducts,
+  getSellerProductByCode,
 } from '../controllers/product.controllers'; // Import your controller functions
 import { ProductSchemaZod } from '@/schema/product.schema';
 import { validateData } from '@/middlewares/validation.middleware';
@@ -19,10 +21,16 @@ import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const productRouter = express.Router();
 const productAdminRouter = express.Router();
+const productShopRouter = express.Router();
 
+//user
 productRouter.get('/', getAllProducts);
 productRouter.get('/:code', getProductByCode);
 productRouter.get('/:code/sellers', getProductPrices);
+
+//shop
+productShopRouter.get('/', getSellerAllProducts);
+productShopRouter.get('/:code', getSellerProductByCode);
 
 // admin
 productAdminRouter.get('/', getAllProducts);
@@ -49,4 +57,4 @@ productAdminRouter.delete(
   deleteProduct,
 );
 
-export { productRouter, productAdminRouter };
+export { productRouter, productAdminRouter, productShopRouter };

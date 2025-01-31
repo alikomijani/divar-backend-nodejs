@@ -4,6 +4,7 @@ import ProductModel from '@/schema/product.schema';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { handleMongooseError } from '@/utils/db-errors';
 import type { Controller } from '@/types/express';
+import { ProductSellerPriceModel } from '@/schema/productSellers.schema';
 
 export const createProduct: Controller = async (req, res) => {
   try {
@@ -132,5 +133,72 @@ export const getProductPrices: Controller<{ code: string }> = async (
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching last prices' });
+  }
+};
+
+export const getSellerProductByCode: Controller<{ code: string }> = async (
+  req,
+  res,
+) => {
+  try {
+    const product = await ProductModel.findOne({
+      code: req.params.code,
+    })
+      .populate('category')
+      .populate('badges')
+      .populate('brand')
+      .populate('colors');
+    if (!product) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'Product not found' });
+    }
+    const bestSeller = await ProductSellerPriceModel.findOne({
+      product: product.id,
+      seller: req.user?.sellerId,
+    })
+      .sort({ createdAt: -1 })
+      .limit(1);
+    res.json({ ...product.toObject(), bestSeller });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to fetch product' });
+  }
+};
+
+export const getSellerAllProducts: Controller = async (req, res) => {
+  try {
+    // TODO: filter base on textSearch brand category, colors , price
+    const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
+    const paginatedResult = await getPaginatedQuery(ProductModel, {
+      page,
+      pageSize,
+      populateOptions: [
+        { path: 'badges' },
+        { path: 'category' },
+        { path: 'brand' },
+        { path: 'colors' },
+      ],
+    });
+    const productsWithBestSeller = await Promise.all(
+      paginatedResult.results.map(async (product) => ({
+        ...product.toObject(), // Convert Mongoose document to plain object
+        bestSeller: await ProductSellerPriceModel.findOne({
+          product: product.id,
+          seller: req.user?.sellerId,
+        })
+          .sort({ createdAt: -1 })
+          .limit(1),
+      })),
+    );
+    paginatedResult.results = productsWithBestSeller;
+    return res.json(paginatedResult);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to fetch products', success: false });
   }
 };
