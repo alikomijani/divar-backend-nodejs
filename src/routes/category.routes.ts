@@ -27,6 +27,6 @@ categoryAdminRouter.put(
   validateData(CategorySchemaZod),
   updateCategory,
 );
-categoryAdminRouter.delete('/:slug', validateIdMiddleware, deleteCategory);
+categoryAdminRouter.delete('/:id', validateIdMiddleware, deleteCategory);
 
 export { categoryAdminRouter, categoryRouter };
