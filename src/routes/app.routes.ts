@@ -57,5 +57,6 @@ shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
 shopRouter.use('/orders', orderShopRouter);
 shopRouter.use('/sellers', sellerShopRouter);
 shopRouter.use('/products', productShopRouter);
+shopRouter.use('/categories', categoryAdminRouter); // category permission same as admin
 
 export { userRouter, adminRouter, shopRouter };

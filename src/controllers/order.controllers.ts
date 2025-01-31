@@ -85,16 +85,12 @@ export const getOrdersBySeller: Controller = async (req, res) => {
       .json({ message: 'seller id not found', success: false });
   }
   try {
-    const orders = await OrderModel.find({
-      'orderItems.seller': sellerId,
+    // to do aggregate order
+    const orders = await OrderItemModel.find({
+      seller: sellerId,
     })
-      .populate({
-        path: 'orderItems',
-        populate: {
-          path: 'productSeller',
-        },
-      })
-      .populate('user');
+      .populate('productSeller')
+      .populate('order');
 
     return res.json(orders);
   } catch (error) {

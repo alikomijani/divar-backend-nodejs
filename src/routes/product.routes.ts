@@ -12,11 +12,6 @@ import {
 } from '../controllers/product.controllers'; // Import your controller functions
 import { ProductSchemaZod } from '@/schema/product.schema';
 import { validateData } from '@/middlewares/validation.middleware';
-import {
-  loginMiddleware,
-  roleMiddleware,
-} from '@/middlewares/authentication.middleware';
-import { UserRole } from '@/schema/auth.schema';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
 
 const productRouter = express.Router();
@@ -31,30 +26,24 @@ productRouter.get('/:code/sellers', getProductPrices);
 //shop
 productShopRouter.get('/', getSellerAllProducts);
 productShopRouter.get('/:code', getSellerProductByCode);
+productShopRouter.post('/', validateData(ProductSchemaZod), createProduct);
+productShopRouter.put(
+  '/:id',
+  validateIdMiddleware,
+  validateData(ProductSchemaZod),
+  updateProduct,
+);
 
 // admin
 productAdminRouter.get('/', getAllProducts);
 productAdminRouter.get('/:code', getProductByCode);
-productAdminRouter.post(
-  '/',
-  loginMiddleware,
-  roleMiddleware(UserRole.Admin),
-  validateData(ProductSchemaZod),
-  createProduct,
-);
+productAdminRouter.post('/', validateData(ProductSchemaZod), createProduct);
 productAdminRouter.put(
   '/:id',
   validateIdMiddleware,
-  loginMiddleware,
-  roleMiddleware(UserRole.Seller),
   validateData(ProductSchemaZod),
   updateProduct,
 );
-productAdminRouter.delete(
-  '/:code',
-  loginMiddleware,
-  roleMiddleware(UserRole.Seller),
-  deleteProduct,
-);
+productAdminRouter.delete('/:code', deleteProduct);
 
 export { productRouter, productAdminRouter, productShopRouter };
