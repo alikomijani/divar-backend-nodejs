@@ -1,4 +1,6 @@
 import { UserModel, UserRole } from '@/schema/auth.schema';
+import ProductModel from '@/schema/product.schema';
+import { ProductSellerPriceModel } from '@/schema/productSellers.schema';
 import type { ISeller, SellerType } from '@/schema/seller.schema';
 import SellerModel from '@/schema/seller.schema';
 import type { PaginatedResponse } from '@/types/app.types';
@@ -94,6 +96,28 @@ const deleteSeller: Controller<{ id: string }> = async (req, res) => {
   res.status(StatusCodes.NO_CONTENT);
 };
 
+const addProductPrice: Controller<{ code: string }> = async (req, res) => {
+  try {
+    const { code } = req.params;
+    const product = await ProductModel.findOne({ code });
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Product not found' });
+    }
+    const productPrice = await new ProductSellerPriceModel({
+      ...req.body,
+      product: product.id,
+      seller: req.user?.sellerId,
+    });
+    await productPrice.save();
+    return res.status(201).json(productPrice);
+  } catch (e) {
+    console.log(e);
+    return handleMongooseError(e, res);
+  }
+};
+
 export {
   createSeller,
   updateSeller,
@@ -101,4 +125,5 @@ export {
   getSellerById,
   deleteSeller,
   getSellerDetails,
+  addProductPrice,
 };

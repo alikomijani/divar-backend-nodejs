@@ -18,6 +18,7 @@ export const createProduct: Controller = async (req, res) => {
 
 export const getAllProducts: Controller = async (req, res) => {
   try {
+    // TODO: filter base on textSearch brand category, colors , price
     const { page = 1, pageSize = 10 } = req.query; // Default to page 1 and limit 10
     const paginatedResult = await getPaginatedQuery(ProductModel, {
       page,

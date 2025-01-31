@@ -9,7 +9,11 @@ import colorRouter from './color.routes';
 import { cityAdminRouter, cityRouter } from './city.routes';
 import { productRouter, productAdminRouter } from './product.routes';
 import commentRouter from './comment.routes';
-import { sellerRouter, sellerAdminRouter } from './seller.routes';
+import {
+  sellerRouter,
+  sellerAdminRouter,
+  sellerShopRouter,
+} from './seller.routes';
 import { orderRouter, orderAdminRouter, orderShopRouter } from './order.routes';
 import {
   loginMiddleware,
@@ -47,5 +51,6 @@ adminRouter.use('/orders', orderAdminRouter);
 const shopRouter = Router();
 shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
 shopRouter.use('/orders', orderShopRouter);
+shopRouter.use('/sellers', sellerShopRouter);
 
 export { userRouter, adminRouter, shopRouter };

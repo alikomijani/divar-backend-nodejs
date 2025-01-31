@@ -92,7 +92,7 @@ export const loginUser: Controller<object, any, LoginUser> = async (
         .json({ success: false, messages: ['user is deactivate!'] });
     }
     let sellerId: string | undefined = undefined;
-    if (user.role === UserRole.Seller) {
+    if (user.role === UserRole.Seller || user.role === UserRole.Admin) {
       const seller = await SellerModel.findOne({ user: user.id });
       sellerId = seller?.id;
     }

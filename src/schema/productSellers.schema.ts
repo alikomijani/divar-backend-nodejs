@@ -1,17 +1,11 @@
-import type { Document } from 'mongoose';
-import { model, Schema, Types } from 'mongoose';
+import type { Document, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { z } from 'zod';
 
-export const AddProductSellerPriceSchema = z.object({
-  product: z
-    .string()
-    .refine((val) => Types.ObjectId.isValid(val), 'Invalid product ID'),
-  seller: z
-    .string()
-    .refine((val) => Types.ObjectId.isValid(val), 'Invalid seller ID'),
+export const AddProductSellerPriceSchemaZod = z.object({
   price: z.number().int().min(0).positive(),
   count: z.number().int().min(0).positive(),
-  discount: z.number().int().min(0).max(100).positive(),
+  discount: z.number().int().min(0).max(100),
 });
 
 interface IProductSellerPrice extends Document {
