@@ -4,7 +4,7 @@ import ProductModel from '@/schema/product.schema';
 import { getPaginatedQuery } from '@/utils/paginatedQuery';
 import { handleMongooseError } from '@/utils/db-errors';
 import type { Controller } from '@/types/express';
-import { ProductSellerPriceModel } from '@/schema/productSellers.schema';
+import { getSellerLastPrice } from '@/models/product.model';
 
 export const createProduct: Controller = async (req, res) => {
   try {
@@ -153,12 +153,10 @@ export const getSellerProductByCode: Controller<{ code: string }> = async (
         .status(StatusCodes.NOT_FOUND)
         .json({ message: 'Product not found' });
     }
-    const bestSeller = await ProductSellerPriceModel.findOne({
-      product: product.id,
-      seller: req.user?.sellerId,
-    })
-      .sort({ createdAt: -1 })
-      .limit(1);
+    const bestSeller = await await getSellerLastPrice(
+      req.user!.sellerId as string,
+      product.id,
+    );
     res.json({ ...product.toObject(), bestSeller });
   } catch (error) {
     console.error(error);
@@ -185,12 +183,10 @@ export const getSellerAllProducts: Controller = async (req, res) => {
     const productsWithBestSeller = await Promise.all(
       paginatedResult.results.map(async (product) => ({
         ...product.toObject(), // Convert Mongoose document to plain object
-        bestSeller: await ProductSellerPriceModel.findOne({
-          product: product.id,
-          seller: req.user?.sellerId,
-        })
-          .sort({ createdAt: -1 })
-          .limit(1),
+        bestSeller: await getSellerLastPrice(
+          req.user!.sellerId as string,
+          product.id,
+        ),
       })),
     );
     paginatedResult.results = productsWithBestSeller;
