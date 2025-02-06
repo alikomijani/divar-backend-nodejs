@@ -8,17 +8,11 @@ import refValidator from '@/utils/ref-validator';
 import { ProductSellerPriceModel } from './productSellers.schema';
 import type { ISeller } from './seller.schema';
 
-// Zod Schemas for subdocuments
-const ReviewSchemaZod = z.object({
-  title: z.string().min(1, 'Review title is required').trim(),
-  value: z.string().min(1, 'Review value is required').trim(),
-  name: z.string().min(1, 'Review name is required').trim(),
-});
-
 const SpecificationSchemaZod = z.object({
   title: z.string().min(1, 'Specification title is required').trim(),
   value: z.string().min(1, 'Specification value is required').trim(),
   name: z.string().min(1, 'Specification name is required').trim(),
+  isDefault: z.boolean(),
 });
 
 const ImageSchemaZod = z.object({
@@ -67,9 +61,9 @@ export const ProductSchemaZod = z.object({
   brand: z
     .string()
     .refine((val) => mongoose.Types.ObjectId.isValid(val), 'Invalid Brand ID'),
-  review: z.array(ReviewSchemaZod).optional(),
   specifications: z.array(SpecificationSchemaZod).optional(),
-  expert_reviews: z.string().trim().optional(),
+  review: z.string().trim().optional(),
+  expert_review: z.string().trim().optional(),
 });
 
 export type ProductType = z.infer<typeof ProductSchemaZod>;
@@ -94,9 +88,14 @@ export interface IProduct
   >;
   category: Types.ObjectId;
   brand: Types.ObjectId;
-  review: { title: string; value: string; name: string }[];
-  specifications: { title: string; value: string; name: string }[];
-  expert_reviews?: string;
+  specifications: {
+    title: string;
+    value: string;
+    name: string;
+    isDefault: boolean;
+  }[];
+  review?: string;
+  expert_review?: string;
   createdAt: Date;
   updatedAt: Date;
   getBestSeller: () => Promise<{
@@ -161,27 +160,20 @@ const ProductSchema = new Schema<IProduct, ProductModelStatic>(
       ref: 'Brand',
       validate: refValidator('Brand'),
     },
-    review: {
-      type: [
-        {
-          name: { type: String, required: true, trim: true },
-          title: { type: String, required: true, trim: true },
-          value: { type: String, required: true, trim: true },
-        },
-      ],
-      default: [],
-    },
+
     specifications: {
       type: [
         {
           name: { type: String, required: true, trim: true },
           title: { type: String, required: true, trim: true },
           value: { type: String, required: true, trim: true },
+          isDefault: { type: Boolean, required: true },
         },
       ],
       default: [],
     },
-    expert_reviews: { type: String, trim: true },
+    review: { type: String, trim: true },
+    expert_review: { type: String, trim: true },
   },
   {
     timestamps: true,

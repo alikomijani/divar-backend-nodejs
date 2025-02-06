@@ -2969,18 +2969,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{ADMIN_BASE_URL}}/categories?q=س",
+									"raw": "{{ADMIN_BASE_URL}}/categories",
 									"host": [
 										"{{ADMIN_BASE_URL}}"
 									],
 									"path": [
 										"categories"
-									],
-									"query": [
-										{
-											"key": "q",
-											"value": "س"
-										}
 									]
 								}
 							},
@@ -4546,7 +4540,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"code\": 12345,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"category\": \"6777138fc0d989811a8bcf7a\", // Replace with actual ID\n    \"brand\": \"677702374d88342901ad0df1\", // Replace with actual ID\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ], // Replace with actual IDs\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"name\": \"weight\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"name\": \"weight\",\n            \"value\": \"1 کیلوگرم\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\"\n}",
+									"raw": "{\n    \"code\": 1234567,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"category\": \"679359c33ac6c774a3d1c697\",  \n    \"brand\": \"67933d59a52fa1ee71dfa908\",  \n    \"colors\": [\n        \"678bacf64cb47ca1204e1008\"\n    ],  \n    \"review\": \"این یک بررسی است.\",\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"name\": \"weight\",\n            \"value\": \"1 کیلوگرم\",\n            \"isDefault\":true\n        }\n    ],\n    \"expert_review\": \"این یک محصول عالی است\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4577,7 +4571,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"code\": 12345,\n  \"title_fa\": \"محصول تستی\",\n  \"title_en\": \"Test Product\",\n  \"images\": {\n    \"main\": \"https://example.com/image.jpg\",\n    \"list\": [\"https://example.com/image2.jpg\"]\n  },\n  \"category\": \"676da835bcceb44dd9dd767c\", // Replace with actual ID\n  \"brand\": \"676db72944910e35cd8c48f9\", // Replace with actual ID\n  \"colors\": [\"676eba26072fccefc92efa25\"], // Replace with actual IDs\n  \"badges\": [\"676ebe0834c01ac49f9c9fe3\"],\n  \"review\": [\n    {\n      \"title\": \"وزن\",\n      \"value\": \"1 کیلوگرم\"\n    }\n  ],\n  \"specifications\": [\n    {\n      \"title\": \"وزن\",\n      \"value\": \"1 کیلوگرم\"\n    }\n  ],\n  \"expert_reviews\": \"این یک محصول عالی است\"\n}",
+											"raw": "{\n    \"code\": 1234567,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"category\": \"679359c33ac6c774a3d1c697\",  \n    \"brand\": \"67933d59a52fa1ee71dfa908\",  \n    \"colors\": [\n        \"678bacf64cb47ca1204e1008\"\n    ],  \n    \"review\": \"این یک بررسی است.\",\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"name\": \"weight\",\n            \"value\": \"1 کیلوگرم\",\n            \"isDefault\":true\n        }\n    ],\n    \"expert_review\": \"این یک محصول عالی است\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4585,83 +4579,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{BASE_URL}}/products",
+											"raw": "{{ADMIN_BASE_URL}}/products",
 											"host": [
-												"{{BASE_URL}}"
-											],
-											"path": [
-												"products"
-											]
-										}
-									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "X-Powered-By",
-											"value": "Express"
-										},
-										{
-											"key": "Access-Control-Allow-Origin",
-											"value": "http://localhost:5173"
-										},
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "797"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"31d-4553X9bswVGgO55pMcWDUixzx4w\""
-										},
-										{
-											"key": "Date",
-											"value": "Fri, 27 Dec 2024 14:49:06 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"code\": 12345,\n    \"title_fa\": \"محصول تستی\",\n    \"title_en\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ],\n    \"badges\": [\n        \"676ebe0834c01ac49f9c9fe3\"\n    ],\n    \"category\": \"676da835bcceb44dd9dd767c\",\n    \"brand\": \"676db72944910e35cd8c48f9\",\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282a\",\n            \"id\": \"676ebe62121d7237b64b282a\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282b\",\n            \"id\": \"676ebe62121d7237b64b282b\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"_id\": \"676ebe62121d7237b64b2829\",\n    \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n    \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n    \"__v\": 0,\n    \"id\": \"676ebe62121d7237b64b2829\"\n}"
-								},
-								{
-									"name": "Create Product",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"code\": 12345,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"category\": \"6777138fc0d989811a8bcf7a\", // Replace with actual ID\n    \"brand\": \"677702374d88342901ad0df1\", // Replace with actual ID\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ], // Replace with actual IDs\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"name\": \"weight\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"name\": \"weight\",\n            \"value\": \"1 کیلوگرم\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{BASE_URL}}/products",
-											"host": [
-												"{{BASE_URL}}"
+												"{{ADMIN_BASE_URL}}"
 											],
 											"path": [
 												"products"
@@ -4690,15 +4610,15 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "722"
+											"value": "682"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"2d2-HmEKpPzdrRO+Ibe1+wGK65QoMv0\""
+											"value": "W/\"2aa-sxfQUhLZKiZWerYhtAvPyCftvvU\""
 										},
 										{
 											"key": "Date",
-											"value": "Wed, 15 Jan 2025 20:24:35 GMT"
+											"value": "Thu, 06 Feb 2025 08:13:21 GMT"
 										},
 										{
 											"key": "Connection",
@@ -4710,7 +4630,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"code\": 12345,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"badges\": [],\n    \"category\": \"6777138fc0d989811a8bcf7a\",\n    \"brand\": \"677702374d88342901ad0df1\",\n    \"review\": [\n        {\n            \"name\": \"weight\",\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"6788198312158b35068e6586\",\n            \"id\": \"6788198312158b35068e6586\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"name\": \"weight\",\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"6788198312158b35068e6587\",\n            \"id\": \"6788198312158b35068e6587\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2025-01-15T20:24:35.599Z\",\n    \"updatedAt\": \"2025-01-15T20:24:35.599Z\",\n    \"id\": \"6788198312158b35068e6585\"\n}"
+									"body": "{\n    \"code\": 1234567,\n    \"titleFa\": \"محصول تستی\",\n    \"titleEn\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"badges\": [],\n    \"colors\": [\n        \"678bacf64cb47ca1204e1008\"\n    ],\n    \"category\": \"679359c33ac6c774a3d1c697\",\n    \"brand\": \"67933d59a52fa1ee71dfa908\",\n    \"specifications\": [\n        {\n            \"name\": \"weight\",\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"isDefault\": true,\n            \"_id\": \"67a46f2150c21a636280b775\",\n            \"id\": \"67a46f2150c21a636280b775\"\n        }\n    ],\n    \"review\": \"این یک بررسی است.\",\n    \"expert_review\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2025-02-06T08:13:21.230Z\",\n    \"updatedAt\": \"2025-02-06T08:13:21.230Z\",\n    \"id\": \"67a46f2150c21a636280b774\"\n}"
 								}
 							]
 						},
