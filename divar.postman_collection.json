@@ -4,413 +4,12 @@
 		"name": "divar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6688069",
-		"_collection_link": "https://cloudy-satellite-511532.postman.co/workspace/50d9fc7b-7d21-430a-82c2-2e53d2540411/collection/6688069-2bb4e64c-5a7d-4988-bf31-19fc4bf31245?action=share&source=collection_link&creator=6688069"
+		"_collection_link": "https://cloudy-satellite-511532.postman.co/workspace/My-Workspace~50d9fc7b-7d21-430a-82c2-2e53d2540411/collection/6688069-2bb4e64c-5a7d-4988-bf31-19fc4bf31245?source=collection_link"
 	},
 	"item": [
 		{
 			"name": "Authentication",
 			"item": [
-				{
-					"name": "Register user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/auth/register",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "required field miss",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa126@gmail.com\",\n    \"first_name\": \"Ali\",\n    \"last_name\": \"Komijani\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/auth/register",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "102"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"66-X2RLj5QvCWJO5ENNCSfnwZwTHuY\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Jan 2025 18:13:56 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"invalid data\",\n    \"success\": false,\n    \"errors\": {\n        \"firstName\": [\n            \"Required\"\n        ],\n        \"lastName\": [\n            \"Required\"\n        ]\n    }\n}"
-						},
-						{
-							"name": "success user register",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/auth/register",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "770"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"302-JA4z1S+Wx/GbSHdPkrw2Sod+JxY\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Jan 2025 18:14:24 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM2NDQ2NDY0fQ.z1sV5qB0tjOm_g5leHOLicRL4wLVdSKeDpNhboO-CsQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM4NDMzNjY0fQ.2IMI-PWm59rxp0QlmNVldlQmZAqjmZos3mVMTq9jqwQ\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"_id\": \"6776d78084cecf1edbb63495\",\n        \"__v\": 0,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"_id\": \"6776d78084cecf1edbb63497\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"__v\": 0\n    }\n}"
-						},
-						{
-							"name": "duplicate field error",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/auth/register",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "158"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"9e-jRftz4kWVYjKH7lSVWoPqk5J+40\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Jan 2025 18:16:11 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"success\": false,\n    \"message\": [\n        \"email already exists. Please use a different email.\"\n    ],\n    \"errors\": {\n        \"email\": [\n            \"email already exists. Please use a different email.\"\n        ]\n    }\n}"
-						}
-					]
-				},
-				{
-					"name": "login user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/auth/login",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "invalid user credential",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"akpa1255@gmail.com\",\n    \"password\": \"123456\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/auth/login",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "35"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"23-ot9AQO2705uqD4HilIuRA3l/Ypk\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Jan 2025 18:17:28 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"messages\": [\n        \"Invalid credential\"\n    ]\n}"
-						},
-						{
-							"name": "login user",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"akpa125@gmail.com\",\n    \"password\": \"123456\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/auth/login",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "720"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"2d0-eS2Nk7ulNwzQ3GE/pBVslguqRMc\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 02 Jan 2025 18:26:38 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM2NDQ3MTk4fQ.rpS2xf_ASvIkzWp5Ej8oea_copscIGWPK182UefSC3s\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM4NDM0Mzk4fQ.JVoFSN2oXXiR2egr5vV6KF4ue8w-sOQfOxCgbrXlros\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
-						}
-					]
-				},
 				{
 					"name": "User Info",
 					"request": {
@@ -617,7 +216,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"nation_code\": \"US\",\n  \"mobile\": \"+15551234568\",\n  \"birthday\": \"1990-01-15T00:00:00.000Z\", // ISO 8601 date string\n  \"address_list\": [\n    {\n      \"location\": [34.0522, -118.2437],\n      \"street\": \"123 Main St\",\n      \"city\": \"Los Angeles\",\n      \"postalCode\": \"90001\"\n    },\n    {\n      \"location\": [40.7128, -74.0060],\n      \"street\": \"456 Park Ave\",\n      \"city\": \"New York\",\n      \"postalCode\": \"10001\"\n    }\n  ]\n}",
+							"raw": "{\n  \"nationCode\": \"US\",\n  \"mobile\": \"+15551234568\",\n  \"birthday\": \"1990-01-15T00:00:00.000Z\", // ISO 8601 date string\n  \"addressList\": [\n    {\n      \"location\": [34.0522, -118.2437],\n      \"street\": \"123 Main St\",\n      \"city\": \"Los Angeles\",\n      \"postalCode\": \"90001\"\n    },\n    {\n      \"location\": [40.7128, -74.0060],\n      \"street\": \"456 Park Ave\",\n      \"city\": \"New York\",\n      \"postalCode\": \"10001\"\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1899,6 +1498,463 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Register user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.status === 'OK') {",
+											"    // Parse the response JSON",
+											"    const res = pm.response.json();",
+											"    // Extract the accessToken from the nested 'tokens' object",
+											"    const token = res.tokens.accessToken;",
+											"    // Log the token to the console for debugging",
+											"    console.log(\"Access Token:\", token);",
+											"    // Set the token as a collection variable",
+											"    pm.collectionVariables.set(\"TOKEN\", token);",
+											"} else {",
+											"    // Handle error cases",
+											"    console.error(\"Request failed with status:\", pm.response.status);",
+											"    console.error(\"Response body:\", pm.response.text());",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "required field miss",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa126@gmail.com\",\n    \"first_name\": \"Ali\",\n    \"last_name\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "102"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"66-X2RLj5QvCWJO5ENNCSfnwZwTHuY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:13:56 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"invalid data\",\n    \"success\": false,\n    \"errors\": {\n        \"firstName\": [\n            \"Required\"\n        ],\n        \"lastName\": [\n            \"Required\"\n        ]\n    }\n}"
+								},
+								{
+									"name": "success user register",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "770"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"302-JA4z1S+Wx/GbSHdPkrw2Sod+JxY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:14:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM2NDQ2NDY0fQ.z1sV5qB0tjOm_g5leHOLicRL4wLVdSKeDpNhboO-CsQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM4NDMzNjY0fQ.2IMI-PWm59rxp0QlmNVldlQmZAqjmZos3mVMTq9jqwQ\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"_id\": \"6776d78084cecf1edbb63495\",\n        \"__v\": 0,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"_id\": \"6776d78084cecf1edbb63497\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"__v\": 0\n    }\n}"
+								},
+								{
+									"name": "duplicate field error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "158"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9e-jRftz4kWVYjKH7lSVWoPqk5J+40\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:16:11 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": [\n        \"email already exists. Please use a different email.\"\n    ],\n    \"errors\": {\n        \"email\": [\n            \"email already exists. Please use a different email.\"\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "login user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.status === 'OK') {",
+											"    // Parse the response JSON",
+											"    const res = pm.response.json();",
+											"    // Extract the accessToken from the nested 'tokens' object",
+											"    const token = res.tokens.accessToken;",
+											"    // Log the token to the console for debugging",
+											"    console.log(\"Access Token:\", token);",
+											"    // Set the token as a collection variable",
+											"    pm.collectionVariables.set(\"TOKEN\", token);",
+											"} else {",
+											"    // Handle error cases",
+											"    console.error(\"Request failed with status:\", pm.response.status);",
+											"    console.error(\"Response body:\", pm.response.text());",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"role\":1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "invalid user credential",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"akpa1255@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/login",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"23-ot9AQO2705uqD4HilIuRA3l/Ypk\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:17:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"messages\": [\n        \"Invalid credential\"\n    ]\n}"
+								},
+								{
+									"name": "login user",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"akpa125@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/login",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "720"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2d0-eS2Nk7ulNwzQ3GE/pBVslguqRMc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:26:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM2NDQ3MTk4fQ.rpS2xf_ASvIkzWp5Ej8oea_copscIGWPK182UefSC3s\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM4NDM0Mzk4fQ.JVoFSN2oXXiR2egr5vV6KF4ue8w-sOQfOxCgbrXlros\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
+								}
+							]
+						}
+					],
+					"description": "این بخش مربوط به ثبت نام - ورود - تعویض توکن و اطلاعات کاربری میباشد."
 				}
 			],
 			"auth": {
@@ -3410,13 +3466,19 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{ADMIN_BASE_URL}}/categories/6777138fc0d989811a8bcf7a",
+									"raw": "{{ADMIN_BASE_URL}}/categories/:id",
 									"host": [
 										"{{ADMIN_BASE_URL}}"
 									],
 									"path": [
 										"categories",
-										"6777138fc0d989811a8bcf7a"
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "679c890349f2b60ae82b9b56"
+										}
 									]
 								}
 							},
@@ -5391,6 +5453,464 @@
 							]
 						}
 					]
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Register user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.status === 'OK') {",
+											"    // Parse the response JSON",
+											"    const res = pm.response.json();",
+											"    // Extract the accessToken from the nested 'tokens' object",
+											"    const token = res.tokens.accessToken;",
+											"    // Log the token to the console for debugging",
+											"    console.log(\"Access Token:\", token);",
+											"    // Set the token as a collection variable",
+											"    pm.collectionVariables.set(\"TOKEN\", token);",
+											"} else {",
+											"    // Handle error cases",
+											"    console.error(\"Request failed with status:\", pm.response.status);",
+											"    console.error(\"Response body:\", pm.response.text());",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"1234567\",\n    \"email\": \"akpa1w@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/admin/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"admin",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "required field miss",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa126@gmail.com\",\n    \"first_name\": \"Ali\",\n    \"last_name\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "102"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"66-X2RLj5QvCWJO5ENNCSfnwZwTHuY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:13:56 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"invalid data\",\n    \"success\": false,\n    \"errors\": {\n        \"firstName\": [\n            \"Required\"\n        ],\n        \"lastName\": [\n            \"Required\"\n        ]\n    }\n}"
+								},
+								{
+									"name": "success user register",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "770"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"302-JA4z1S+Wx/GbSHdPkrw2Sod+JxY\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:14:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM2NDQ2NDY0fQ.z1sV5qB0tjOm_g5leHOLicRL4wLVdSKeDpNhboO-CsQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM4NDMzNjY0fQ.2IMI-PWm59rxp0QlmNVldlQmZAqjmZos3mVMTq9jqwQ\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"_id\": \"6776d78084cecf1edbb63495\",\n        \"__v\": 0,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"_id\": \"6776d78084cecf1edbb63497\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"__v\": 0\n    }\n}"
+								},
+								{
+									"name": "duplicate field error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "158"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9e-jRftz4kWVYjKH7lSVWoPqk5J+40\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:16:11 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": [\n        \"email already exists. Please use a different email.\"\n    ],\n    \"errors\": {\n        \"email\": [\n            \"email already exists. Please use a different email.\"\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "login user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.status === 'OK') {",
+											"    // Parse the response JSON",
+											"    const res = pm.response.json();",
+											"    // Extract the accessToken from the nested 'tokens' object",
+											"    const token = res.tokens.accessToken;",
+											"    // Log the token to the console for debugging",
+											"    console.log(\"Access Token:\", token);",
+											"    // Set the token as a collection variable",
+											"    pm.collectionVariables.set(\"TOKEN\", token);",
+											"} else {",
+											"    // Handle error cases",
+											"    console.error(\"Request failed with status:\", pm.response.status);",
+											"    console.error(\"Response body:\", pm.response.text());",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"role\":3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "invalid user credential",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"akpa1255@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/login",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"23-ot9AQO2705uqD4HilIuRA3l/Ypk\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:17:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"messages\": [\n        \"Invalid credential\"\n    ]\n}"
+								},
+								{
+									"name": "login user",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"akpa125@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/login",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "720"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2d0-eS2Nk7ulNwzQ3GE/pBVslguqRMc\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:26:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM2NDQ3MTk4fQ.rpS2xf_ASvIkzWp5Ej8oea_copscIGWPK182UefSC3s\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM4NDM0Mzk4fQ.JVoFSN2oXXiR2egr5vV6KF4ue8w-sOQfOxCgbrXlros\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
+								}
+							]
+						}
+					],
+					"description": "این بخش مربوط به ثبت نام - ورود - تعویض توکن و اطلاعات کاربری میباشد."
 				}
 			],
 			"auth": {
@@ -6315,6 +6835,329 @@
 								}
 							},
 							"response": []
+						}
+					]
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "register seller",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.status === 'OK') {",
+											"    // Parse the response JSON",
+											"    const res = pm.response.json();",
+											"    // Extract the accessToken from the nested 'tokens' object",
+											"    const token = res.tokens.accessToken;",
+											"    // Log the token to the console for debugging",
+											"    console.log(\"Access Token:\", token);",
+											"    // Set the token as a collection variable",
+											"    pm.collectionVariables.set(\"TOKEN\", token);",
+											"} else {",
+											"    // Handle error cases",
+											"    console.error(\"Request failed with status:\", pm.response.status);",
+											"    console.error(\"Response body:\", pm.response.text());",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\",\n    \"shopName\":\"ali\",\n    \"shopSlug\":\"komij2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/seller/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"seller",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\",\n    \"shopName\":\"ali\",\n    \"shopSlug\":\"komij2\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/seller/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"seller",
+												"register"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "895"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"37f-xQNj6ka6jLbGcWt7eMafI/LwtJo\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 06 Feb 2025 06:21:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YTQ1NGYyZDllY2NlMTZiZWQ4NjI2NSIsInJvbGUiOjIsInNlbGxlcklkIjoiNjdhNDU0ZjJkOWVjY2UxNmJlZDg2MjY5IiwiaWF0IjoxNzM4ODIyODk4LCJleHAiOjE3Mzk0Mjc2OTh9.b5A4DtVqOKkcVEKHZAcKqTff1T8a6g5Yy3mrQpwQGQs\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YTQ1NGYyZDllY2NlMTZiZWQ4NjI2NSIsInJvbGUiOjIsInNlbGxlcklkIjoiNjdhNDU0ZjJkOWVjY2UxNmJlZDg2MjY5IiwiaWF0IjoxNzM4ODIyODk4LCJleHAiOjE3NDE0MTQ4OTh9.RUmWYZKH3cifivOLziztUDDzNcc8ycBHj7bcCsLJKEY\"\n    },\n    \"user\": {\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"email\": \"akpa@gmail.com\",\n        \"role\": 2,\n        \"isActive\": true,\n        \"createdAt\": \"2025-02-06T06:21:38.510Z\",\n        \"updatedAt\": \"2025-02-06T06:21:38.510Z\",\n        \"id\": \"67a454f2d9ecce16bed86265\"\n    },\n    \"profile\": {\n        \"user\": \"67a454f2d9ecce16bed86265\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-02-06T06:21:38.586Z\",\n        \"updatedAt\": \"2025-02-06T06:21:38.586Z\",\n        \"id\": \"67a454f2d9ecce16bed86267\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "login User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"if (pm.response.status === 'OK') {",
+											"    // Parse the response JSON",
+											"    const res = pm.response.json();",
+											"    // Extract the accessToken from the nested 'tokens' object",
+											"    const token = res.tokens.accessToken;",
+											"    // Log the token to the console for debugging",
+											"    console.log(\"Access Token:\", token);",
+											"    // Set the token as a collection variable",
+											"    pm.collectionVariables.set(\"TOKEN\", token);",
+											"} else {",
+											"    // Handle error cases",
+											"    console.error(\"Request failed with status:\", pm.response.status);",
+											"    console.error(\"Response body:\", pm.response.text());",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"role\":2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "invalid user credential",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"akpa1255@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/login",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"23-ot9AQO2705uqD4HilIuRA3l/Ypk\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 18:17:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"messages\": [\n        \"Invalid credential\"\n    ]\n}"
+								},
+								{
+									"name": "login user Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"role\":2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/login",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "725"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2d5-Ty19sHHTHdXPcntKFZAy4DJQXY8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 06 Feb 2025 06:22:57 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTYyZWJhYmE0NWZkMTZjZTFjMTk3ZCIsInJvbGUiOjMsInNlbGxlcklkIjoiNjc5NTRhMWE1NDBkOTM1NzhkZTg3YzBiIiwiaWF0IjoxNzM4ODIyOTc3LCJleHAiOjE3Mzk0Mjc3Nzd9.BTWdQ1RKFmuyIjxWJulQhPpV91DRCIQABwSleNwbijQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTYyZWJhYmE0NWZkMTZjZTFjMTk3ZCIsInJvbGUiOjMsInNlbGxlcklkIjoiNjc5NTRhMWE1NDBkOTM1NzhkZTg3YzBiIiwiaWF0IjoxNzM4ODIyOTc3LCJleHAiOjE3NDE0MTQ5Nzd9.8RYytBuJXmL-3pI7l-qFczqiu1k9ujw4vgVwpH2drkU\"\n    },\n    \"user\": {\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 3,\n        \"isActive\": true,\n        \"createdAt\": \"2025-01-26T12:46:50.544Z\",\n        \"updatedAt\": \"2025-01-26T12:46:50.544Z\",\n        \"id\": \"67962ebaba45fd16ce1c197d\"\n    }\n}"
+								}
+							]
 						}
 					]
 				}
