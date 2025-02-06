@@ -77,10 +77,9 @@ export const loginUser: Controller<object, any, LoginUser> = async (
   next,
 ) => {
   try {
-    const { email, password: rowPassword } = req.body;
+    const { email, password: rowPassword, role } = req.body;
     const user = await UserModel.findOne({ email });
-    const profile = await ProfileModel.findOne({ user: user?.id });
-    if (!profile || !user || !(await user.checkPassword(rowPassword))) {
+    if (!user || !(await user.checkPassword(rowPassword))) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ success: false, messages: ['Invalid credential'] });
@@ -91,11 +90,21 @@ export const loginUser: Controller<object, any, LoginUser> = async (
         .status(StatusCodes.UNAUTHORIZED)
         .json({ success: false, messages: ['user is deactivate!'] });
     }
-    let sellerId: string | undefined = undefined;
-    if (user.role === UserRole.Seller || user.role === UserRole.Admin) {
-      const seller = await SellerModel.findOne({ user: user.id });
-      sellerId = seller?.id;
+    if (user.role < role) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ success: false, messages: ['you must have higher role'] });
     }
+
+    let sellerId: string | undefined = undefined;
+    const seller = await SellerModel.findOne({ user: user.id });
+
+    if (role === UserRole.Seller && !seller) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ success: false, messages: ['you must have a shop!'] });
+    }
+    sellerId = seller?.id;
     // Generate tokens
     const tokens = user.createToken(sellerId);
 
@@ -103,7 +112,6 @@ export const loginUser: Controller<object, any, LoginUser> = async (
     return res.status(StatusCodes.OK).json({
       tokens,
       user,
-      profile,
     });
   } catch (err) {
     console.log(err);
