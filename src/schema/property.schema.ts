@@ -10,7 +10,6 @@ export const PropertySchemaZod = z.object({
   options: z
     .array(
       z.object({
-        label: z.string().min(1, 'Option label is required').trim(),
         value: z.string().min(1, 'Option value is required').trim(),
       }),
     )
@@ -30,7 +29,6 @@ export const PropertySchema = new Schema<ICategoryProperty>(
     type: { type: String, required: true, trim: true },
     options: [
       {
-        label: { type: String, required: true, trim: true },
         value: { type: String, required: true, trim: true },
       },
     ],
