@@ -4233,7 +4233,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{ADMIN_BASE_URL}}/properties?q=lcd",
+									"raw": "{{ADMIN_BASE_URL}}/properties",
 									"host": [
 										"{{ADMIN_BASE_URL}}"
 									],
@@ -4243,7 +4243,8 @@
 									"query": [
 										{
 											"key": "q",
-											"value": "lcd"
+											"value": "lcd",
+											"disabled": true
 										}
 									]
 								}
@@ -4748,72 +4749,12 @@
 									"variable": [
 										{
 											"key": "code",
-											"value": ""
+											"value": "29"
 										}
 									]
 								}
 							},
 							"response": [
-								{
-									"name": "Get Product by ID",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{BASE_URL}}/products/12345",
-											"host": [
-												"{{BASE_URL}}"
-											],
-											"path": [
-												"products",
-												"12345"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "X-Powered-By",
-											"value": "Express"
-										},
-										{
-											"key": "Access-Control-Allow-Origin",
-											"value": "http://localhost:5173"
-										},
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "797"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"31d-W1w6YZxZSnKvfaccp/jSS2B1DxM\""
-										},
-										{
-											"key": "Date",
-											"value": "Sun, 29 Dec 2024 14:51:14 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"images\": {\n        \"main\": \"https://example.com/image.jpg\",\n        \"list\": [\n            \"https://example.com/image2.jpg\"\n        ]\n    },\n    \"_id\": \"676ebe62121d7237b64b2829\",\n    \"code\": 12345,\n    \"title_fa\": \"محصول تستی\",\n    \"title_en\": \"Test Product\",\n    \"status\": \"marketable\",\n    \"colors\": [\n        \"676eba26072fccefc92efa25\"\n    ],\n    \"badges\": [\n        \"676ebe0834c01ac49f9c9fe3\"\n    ],\n    \"category\": \"676da835bcceb44dd9dd767c\",\n    \"brand\": \"676db72944910e35cd8c48f9\",\n    \"review\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282a\",\n            \"id\": \"676ebe62121d7237b64b282a\"\n        }\n    ],\n    \"specifications\": [\n        {\n            \"title\": \"وزن\",\n            \"value\": \"1 کیلوگرم\",\n            \"_id\": \"676ebe62121d7237b64b282b\",\n            \"id\": \"676ebe62121d7237b64b282b\"\n        }\n    ],\n    \"expert_reviews\": \"این یک محصول عالی است\",\n    \"createdAt\": \"2024-12-27T14:49:06.044Z\",\n    \"updatedAt\": \"2024-12-27T14:49:06.044Z\",\n    \"__v\": 0,\n    \"id\": \"676ebe62121d7237b64b2829\"\n}"
-								},
 								{
 									"name": "Get Product by ID",
 									"originalRequest": {
@@ -4873,6 +4814,72 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"message\": \"Failed to fetch product\"\n}"
+								},
+								{
+									"name": "Get Product by ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/products/:code",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"products",
+												":code"
+											],
+											"variable": [
+												{
+													"key": "code",
+													"value": "29"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "3531"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"dcb-C6Zqw8U3FJe5h2ujd8IIVyV1J2s\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 06 Feb 2025 09:11:26 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"images\": {\n        \"main\": \"http://localhost:8000/uploads/image-1738831893965-139964018.jpeg\",\n        \"list\": [\n            \"http://localhost:8000/uploads/image-1738831896616-643471003.jpeg\"\n        ]\n    },\n    \"_id\": \"67a479da2d463a66c2b10a50\",\n    \"code\": 29,\n    \"titleFa\": \"Fugit id ratione in\",\n    \"titleEn\": \"Et natus repudiandae\",\n    \"status\": \"marketable\",\n    \"badges\": [\n        {\n            \"_id\": \"6793b0a72e839b8e4934b089\",\n            \"icon\": \"http://localhost:8000/uploads/image-1737732254241-175066932.jpeg\",\n            \"title\": \"error\",\n            \"createdAt\": \"2025-01-24T15:24:23.456Z\",\n            \"updatedAt\": \"2025-01-24T15:24:23.456Z\",\n            \"__v\": 0,\n            \"id\": \"6793b0a72e839b8e4934b089\"\n        },\n        {\n            \"_id\": \"67933628a52fa1ee71dfa8dd\",\n            \"icon\": \"http://localhost:8000/uploads/image-1737700901408-118045453.png\",\n            \"title\": \"erowl\",\n            \"createdAt\": \"2025-01-24T06:41:44.722Z\",\n            \"updatedAt\": \"2025-01-24T06:41:44.722Z\",\n            \"__v\": 0,\n            \"id\": \"67933628a52fa1ee71dfa8dd\"\n        }\n    ],\n    \"colors\": [\n        {\n            \"_id\": \"678bacf64cb47ca1204e1008\",\n            \"title\": \"زرد\",\n            \"hexCode\": \"#fbff00\",\n            \"createdAt\": \"2025-01-18T13:30:30.872Z\",\n            \"updatedAt\": \"2025-01-24T15:35:20.579Z\",\n            \"__v\": 0,\n            \"id\": \"678bacf64cb47ca1204e1008\"\n        }\n    ],\n    \"category\": {\n        \"_id\": \"679359c33ac6c774a3d1c697\",\n        \"titleEn\": \"accessories\",\n        \"titleFa\": \"لوازم جانبی\",\n        \"slug\": \"accessories\",\n        \"returnReasonAlert\": \"جنسه فروخته شده پس گرفته نمیشود\",\n        \"properties\": [\n            {\n                \"_id\": \"678a146efb4980487ede0881\",\n                \"name\": \"lcd_size\",\n                \"label\": \"صفحه نمایش\",\n                \"type\": \"string\",\n                \"options\": [],\n                \"createdAt\": \"2025-01-17T08:27:26.670Z\",\n                \"updatedAt\": \"2025-01-17T08:27:26.670Z\",\n                \"__v\": 0,\n                \"id\": \"678a146efb4980487ede0881\"\n            },\n            {\n                \"_id\": \"678a1a06fb4980487ede0887\",\n                \"name\": \"OS\",\n                \"label\": \"سیستم عامل\",\n                \"type\": \"string\",\n                \"options\": [],\n                \"createdAt\": \"2025-01-17T08:51:18.221Z\",\n                \"updatedAt\": \"2025-01-17T08:51:18.221Z\",\n                \"__v\": 0,\n                \"id\": \"678a1a06fb4980487ede0887\"\n            },\n            {\n                \"_id\": \"678a8dd04cb47ca1204e0e38\",\n                \"name\": \"cat\",\n                \"label\": \"دسته \\u200cبندی\",\n                \"type\": \"string\",\n                \"options\": [\n                    {\n                        \"label\": \"eco\",\n                        \"value\": \"اقتصادی\",\n                        \"_id\": \"678a8dd04cb47ca1204e0e39\",\n                        \"id\": \"678a8dd04cb47ca1204e0e39\"\n                    },\n                    {\n                        \"label\": \"gaming\",\n                        \"value\": \"مخصوص بازی\",\n                        \"_id\": \"678a8dd04cb47ca1204e0e3a\",\n                        \"id\": \"678a8dd04cb47ca1204e0e3a\"\n                    }\n                ],\n                \"createdAt\": \"2025-01-17T17:05:20.278Z\",\n                \"updatedAt\": \"2025-01-17T17:05:20.278Z\",\n                \"__v\": 0,\n                \"id\": \"678a8dd04cb47ca1204e0e38\"\n            },\n            {\n                \"_id\": \"678a1a99fb4980487ede088d\",\n                \"name\": \"resolution\",\n                \"label\": \"رزولوشن دوربین اصلی\",\n                \"type\": \"string\",\n                \"options\": [],\n                \"createdAt\": \"2025-01-17T08:53:45.217Z\",\n                \"updatedAt\": \"2025-01-17T08:53:45.217Z\",\n                \"__v\": 0,\n                \"id\": \"678a1a99fb4980487ede088d\"\n            }\n        ],\n        \"parent\": \"6777138fc0d989811a8bcf7a\",\n        \"createdAt\": \"2025-01-24T09:13:39.708Z\",\n        \"updatedAt\": \"2025-01-24T13:00:33.729Z\",\n        \"__v\": 0,\n        \"id\": \"679359c33ac6c774a3d1c697\"\n    },\n    \"brand\": {\n        \"_id\": \"67933d59a52fa1ee71dfa908\",\n        \"titleFa\": \"سامسونگ\",\n        \"titleEn\": \"Samsung\",\n        \"slug\": \"samsung\",\n        \"logo\": \"http://localhost:8000/uploads/image-1737702744488-43517431.jpeg\",\n        \"createdAt\": \"2025-01-24T07:12:25.948Z\",\n        \"updatedAt\": \"2025-01-24T07:12:25.948Z\",\n        \"__v\": 0,\n        \"id\": \"67933d59a52fa1ee71dfa908\"\n    },\n    \"specifications\": [\n        {\n            \"name\": \"lcd_size\",\n            \"title\": \"صفحه نمایش\",\n            \"value\": \"Consequuntur animi\",\n            \"isDefault\": true,\n            \"_id\": \"67a479da2d463a66c2b10a51\",\n            \"id\": \"67a479da2d463a66c2b10a51\"\n        },\n        {\n            \"name\": \"cat\",\n            \"title\": \"دسته \\u200cبندی\",\n            \"value\": \"اقتصادی\",\n            \"isDefault\": false,\n            \"_id\": \"67a479da2d463a66c2b10a52\",\n            \"id\": \"67a479da2d463a66c2b10a52\"\n        },\n        {\n            \"name\": \"resolution\",\n            \"title\": \"رزولوشن دوربین اصلی\",\n            \"value\": \"Aperiam doloremque v\",\n            \"isDefault\": false,\n            \"_id\": \"67a479da2d463a66c2b10a53\",\n            \"id\": \"67a479da2d463a66c2b10a53\"\n        }\n    ],\n    \"review\": \"Nobis ut optio alia\",\n    \"expert_review\": \"In consectetur cons\",\n    \"createdAt\": \"2025-02-06T08:59:06.873Z\",\n    \"updatedAt\": \"2025-02-06T08:59:06.873Z\",\n    \"__v\": 0,\n    \"id\": \"67a479da2d463a66c2b10a50\",\n    \"bestSeller\": null\n}"
 								}
 							]
 						},

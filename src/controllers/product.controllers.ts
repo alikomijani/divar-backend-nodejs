@@ -13,6 +13,7 @@ export const createProduct: Controller = async (req, res) => {
     const savedProduct = await newProduct.save();
     res.status(StatusCodes.CREATED).json(savedProduct);
   } catch (error) {
+    console.log(error);
     return handleMongooseError(error, res);
   }
 };
@@ -55,7 +56,12 @@ export const getProductByCode: Controller<{ code: string }> = async (
     const product = await ProductModel.findOne({
       code: req.params.code,
     })
-      .populate('category')
+      .populate({
+        path: 'category',
+        populate: {
+          path: 'properties',
+        },
+      })
       .populate('badges')
       .populate('brand')
       .populate('colors');
