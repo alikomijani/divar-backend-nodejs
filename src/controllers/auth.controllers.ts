@@ -4,6 +4,7 @@ import type {
   ChangePasswordType,
   IUser,
   LoginUser,
+  RegisterSeller,
   RegisterUser,
   UpdateUserType,
 } from '@/schema/auth.schema';
@@ -39,6 +40,64 @@ export const registerUser: Controller<object, object, RegisterUser> = async (
   }
 };
 
+export const registerAdminUser: Controller<
+  object,
+  object,
+  RegisterUser
+> = async (req, res) => {
+  try {
+    const data = req.body;
+    const user = await UserModel.create({
+      ...data,
+      role: UserRole.Admin,
+    });
+    const userProfile = await ProfileModel.create({
+      user: user._id,
+    });
+    const tokens = user.createToken();
+    // Remove the password field from the response for security
+    return res.status(StatusCodes.CREATED).json({
+      tokens,
+      user,
+      profile: userProfile,
+    });
+  } catch (error) {
+    handleMongooseError(error, res);
+  }
+};
+
+export const registerSeller: Controller<
+  object,
+  object,
+  RegisterSeller
+> = async (req, res) => {
+  try {
+    const { shopName, shopSlug, ...data } = req.body;
+    const user = await UserModel.create({
+      ...data,
+      role: UserRole.Seller,
+    });
+    const userProfile = await ProfileModel.create({
+      user: user._id,
+    });
+
+    const shop = await SellerModel.create({
+      name: shopName,
+      slug: shopSlug,
+      user: user.id,
+    });
+
+    const tokens = user.createToken(shop.id);
+    // Remove the password field from the response for security
+    return res.status(StatusCodes.CREATED).json({
+      tokens,
+      user,
+      profile: userProfile,
+    });
+  } catch (error) {
+    handleMongooseError(error, res);
+  }
+};
 export const updateUserProfile: Controller = async (req, res, next) => {
   try {
     const profile = await ProfileModel.findOneAndUpdate(

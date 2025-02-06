@@ -5,6 +5,8 @@ import {
   getUserById,
   loginUser,
   refreshAccessToken,
+  registerAdminUser,
+  registerSeller,
   registerUser,
   updateUser,
   updateUserProfile,
@@ -16,6 +18,7 @@ import {
   LoginSchemaZod,
   RefreshTokenSchemaZod,
   RegisterSchemaZod,
+  RegisterSellerSchemaZod,
 } from '@/schema/auth.schema';
 import { profileSchemaZod } from '@/schema/profile.schema';
 import { validateIdMiddleware } from '@/middlewares/validate-id.middleware';
@@ -24,6 +27,16 @@ const authRouter = Router();
 const authAdminRouter = Router();
 
 authRouter.post('/register', validateData(RegisterSchemaZod), registerUser);
+authRouter.post(
+  '/admin/register',
+  validateData(RegisterSchemaZod),
+  registerAdminUser,
+);
+authRouter.post(
+  '/seller/register',
+  validateData(RegisterSellerSchemaZod),
+  registerSeller,
+);
 authRouter.post('/login', validateData(LoginSchemaZod), loginUser);
 authRouter.post(
   '/refresh',

@@ -98,6 +98,15 @@ export const RegisterSchemaZod = z.object({
   lastName: z.string().min(1, 'lastName is required'),
 });
 
+export const RegisterSellerSchemaZod = z.object({
+  email: z.string().email('Invalid Email').trim(),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+  firstName: z.string().min(1, 'firstName is required'),
+  lastName: z.string().min(1, 'lastName is required'),
+  shopName: z.string().min(1, 'name is required'),
+  shopSlug: z.string().min(1, 'slug is required'),
+});
+
 export const UpdateUserSchemaZod = z.object({
   email: z.string().email('Invalid Email').trim(),
   firstName: z.string().min(1, 'firstName is required'),
@@ -120,6 +129,7 @@ export const RefreshTokenSchemaZod = z.object({
 
 export type LoginUser = z.infer<typeof LoginSchemaZod>;
 export type RegisterUser = z.infer<typeof RegisterSchemaZod>;
+export type RegisterSeller = z.infer<typeof RegisterSellerSchemaZod>;
 export type UpdateUserType = z.infer<typeof UpdateUserSchemaZod>;
 export type ChangePasswordType = z.infer<typeof ChangePasswordSchemaZod>;
 export type SetPasswordType = z.infer<typeof SetPasswordSchemaZod>;
