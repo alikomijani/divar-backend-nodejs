@@ -58,5 +58,8 @@ shopRouter.use('/orders', orderShopRouter);
 shopRouter.use('/sellers', sellerShopRouter);
 shopRouter.use('/products', productShopRouter);
 shopRouter.use('/categories', categoryAdminRouter); // category permission same as admin
+shopRouter.use('/colors', colorRouter);
+shopRouter.use('/properties', propertyRouter);
+shopRouter.use('/badges', badgeAdminRouter);
 
 export { userRouter, adminRouter, shopRouter };

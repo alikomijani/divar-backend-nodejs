@@ -88,7 +88,6 @@ export const LoginSchemaZod = z.object({
     .trim()
     .or(z.string().email('Invalid Email')),
   password: z.string(),
-  role: z.nativeEnum(UserRole),
 });
 
 export const RegisterSchemaZod = z.object({

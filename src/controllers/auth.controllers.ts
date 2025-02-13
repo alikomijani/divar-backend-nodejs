@@ -136,7 +136,7 @@ export const loginUser: Controller<object, any, LoginUser> = async (
   next,
 ) => {
   try {
-    const { email, password: rowPassword, role } = req.body;
+    const { email, password: rowPassword } = req.body;
     const user = await UserModel.findOne({ email });
     if (!user || !(await user.checkPassword(rowPassword))) {
       return res
@@ -145,28 +145,15 @@ export const loginUser: Controller<object, any, LoginUser> = async (
     }
 
     if (!user.isActive) {
-      return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ success: false, messages: ['user is deactivate!'] });
-    }
-    if (user.role < role) {
-      return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ success: false, messages: ['you must have higher role'] });
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        success: false,
+        messages: ['Your account is deactivate! please contact with support'],
+      });
     }
 
-    let sellerId: string | undefined = undefined;
     const seller = await SellerModel.findOne({ user: user.id });
-
-    if (role === UserRole.Seller && !seller) {
-      return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ success: false, messages: ['you must have a shop!'] });
-    }
-    sellerId = seller?.id;
     // Generate tokens
-    const tokens = user.createToken(sellerId);
-
+    const tokens = user.createToken(seller?.id);
     // Send response with tokens
     return res.status(StatusCodes.OK).json({
       tokens,
