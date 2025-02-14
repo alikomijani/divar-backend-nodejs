@@ -4,7 +4,7 @@
 		"name": "divar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6688069",
-		"_collection_link": "https://cloudy-satellite-511532.postman.co/workspace/My-Workspace~50d9fc7b-7d21-430a-82c2-2e53d2540411/collection/6688069-2bb4e64c-5a7d-4988-bf31-19fc4bf31245?source=collection_link"
+		"_collection_link": "https://cloudy-satellite-511532.postman.co/workspace/My-Workspace~50d9fc7b-7d21-430a-82c2-2e53d2540411/collection/6688069-2bb4e64c-5a7d-4988-bf31-19fc4bf31245?action=share&source=collection_link&creator=6688069"
 	},
 	"item": [
 		{
@@ -63,7 +63,7 @@
 								},
 								{
 									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
+									"value": "http://localhost:3000"
 								},
 								{
 									"key": "Vary",
@@ -75,15 +75,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "308"
+									"value": "723"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"134-KVgBZgrdJu/6oJaqZ9NdXsxXucs\""
+									"value": "W/\"2d3-WxNyFeoELiX+Uxs0HHVnr9Kb20A\""
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 02 Jan 2025 18:22:53 GMT"
+									"value": "Mon, 10 Feb 2025 16:59:23 GMT"
 								},
 								{
 									"key": "Connection",
@@ -95,7 +95,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
+							"body": "{\n    \"user\": {\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 3,\n        \"isActive\": true,\n        \"createdAt\": \"2025-01-26T12:46:50.544Z\",\n        \"updatedAt\": \"2025-01-26T12:46:50.544Z\",\n        \"id\": \"67962ebaba45fd16ce1c197d\"\n    },\n    \"profile\": {\n        \"user\": \"67962ebaba45fd16ce1c197d\",\n        \"addressList\": [\n            {\n                \"location\": [\n                    34.0522,\n                    -118.2437\n                ],\n                \"street\": \"123 Main St\",\n                \"city\": \"Los Angeles\",\n                \"postalCode\": \"90001\",\n                \"_id\": \"67a45784c639fc758f8346e4\"\n            },\n            {\n                \"location\": [\n                    40.7128,\n                    -74.006\n                ],\n                \"street\": \"456 Park Ave\",\n                \"city\": \"New York\",\n                \"postalCode\": \"10001\",\n                \"_id\": \"67a45784c639fc758f8346e5\"\n            }\n        ],\n        \"createdAt\": \"2025-01-26T12:46:50.626Z\",\n        \"updatedAt\": \"2025-02-06T06:32:36.661Z\",\n        \"birthday\": \"1990-01-15T00:00:00.000Z\",\n        \"mobile\": \"+15551234568\",\n        \"nationCode\": \"US\",\n        \"id\": \"67962ebaba45fd16ce1c197f\"\n    }\n}"
 						}
 					]
 				},
@@ -1534,7 +1534,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+									"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa1253@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1623,75 +1623,6 @@
 									"body": "{\n    \"message\": \"invalid data\",\n    \"success\": false,\n    \"errors\": {\n        \"firstName\": [\n            \"Required\"\n        ],\n        \"lastName\": [\n            \"Required\"\n        ]\n    }\n}"
 								},
 								{
-									"name": "success user register",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{BASE_URL}}/auth/register",
-											"host": [
-												"{{BASE_URL}}"
-											],
-											"path": [
-												"auth",
-												"register"
-											]
-										}
-									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "X-Powered-By",
-											"value": "Express"
-										},
-										{
-											"key": "Access-Control-Allow-Origin",
-											"value": "http://localhost:5173"
-										},
-										{
-											"key": "Vary",
-											"value": "Origin"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Content-Length",
-											"value": "770"
-										},
-										{
-											"key": "ETag",
-											"value": "W/\"302-JA4z1S+Wx/GbSHdPkrw2Sod+JxY\""
-										},
-										{
-											"key": "Date",
-											"value": "Thu, 02 Jan 2025 18:14:24 GMT"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Keep-Alive",
-											"value": "timeout=5"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM2NDQ2NDY0fQ.z1sV5qB0tjOm_g5leHOLicRL4wLVdSKeDpNhboO-CsQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MTY2NCwiZXhwIjoxNzM4NDMzNjY0fQ.2IMI-PWm59rxp0QlmNVldlQmZAqjmZos3mVMTq9jqwQ\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"_id\": \"6776d78084cecf1edbb63495\",\n        \"__v\": 0,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"_id\": \"6776d78084cecf1edbb63497\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"__v\": 0\n    }\n}"
-								},
-								{
 									"name": "duplicate field error",
 									"originalRequest": {
 										"method": "POST",
@@ -1759,6 +1690,75 @@
 									],
 									"cookie": [],
 									"body": "{\n    \"success\": false,\n    \"message\": [\n        \"email already exists. Please use a different email.\"\n    ],\n    \"errors\": {\n        \"email\": [\n            \"email already exists. Please use a different email.\"\n        ]\n    }\n}"
+								},
+								{
+									"name": "success user register",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa1253@gmail.com\",\n    \"firstName\": \"Ali\",\n    \"lastName\": \"Komijani\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/auth/register",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "799"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"31f-cXTaOS5KuQJfRrOrVX6UHW9rgyM\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 10 Feb 2025 16:59:59 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWEzMDhmZDQ1MmNlZDM5ZDk5MjAwZSIsInJvbGUiOjEsImlhdCI6MTczOTIwNjc5OSwiZXhwIjoxNzM5ODExNTk5fQ.kPwCdhr5nHWC38vWvVqhJSQhH7AekPQCgL4_Hc5KWRY\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YWEzMDhmZDQ1MmNlZDM5ZDk5MjAwZSIsInJvbGUiOjEsImlhdCI6MTczOTIwNjc5OSwiZXhwIjoxNzQxNzk4Nzk5fQ.GxRsmxAgn95tcNPn9FHH5KTDBvhrIu_K9_XFxQHxFko\"\n    },\n    \"user\": {\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"email\": \"akpa1253@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"createdAt\": \"2025-02-10T16:59:59.258Z\",\n        \"updatedAt\": \"2025-02-10T16:59:59.258Z\",\n        \"id\": \"67aa308fd452ced39d99200e\"\n    },\n    \"profile\": {\n        \"user\": \"67aa308fd452ced39d99200e\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-02-10T16:59:59.342Z\",\n        \"updatedAt\": \"2025-02-10T16:59:59.342Z\",\n        \"id\": \"67aa308fd452ced39d992010\"\n    }\n}"
 								}
 							]
 						},
@@ -1889,7 +1889,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"email\": \"akpa125@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"raw": "{\n    \"password\": \"123456\",\n    \"email\": \"akpa125@gmail.com\",\n    \"role\":1\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1917,7 +1917,7 @@
 										},
 										{
 											"key": "Access-Control-Allow-Origin",
-											"value": "http://localhost:5173"
+											"value": "http://localhost:3000"
 										},
 										{
 											"key": "Vary",
@@ -1929,15 +1929,15 @@
 										},
 										{
 											"key": "Content-Length",
-											"value": "720"
+											"value": "725"
 										},
 										{
 											"key": "ETag",
-											"value": "W/\"2d0-eS2Nk7ulNwzQ3GE/pBVslguqRMc\""
+											"value": "W/\"2d5-ucnWsoy+VbC07SY4Bhqd974Nvq8\""
 										},
 										{
 											"key": "Date",
-											"value": "Thu, 02 Jan 2025 18:26:38 GMT"
+											"value": "Mon, 10 Feb 2025 16:58:26 GMT"
 										},
 										{
 											"key": "Connection",
@@ -1949,7 +1949,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM2NDQ3MTk4fQ.rpS2xf_ASvIkzWp5Ej8oea_copscIGWPK182UefSC3s\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzZkNzgwODRjZWNmMWVkYmI2MzQ5NSIsInJvbGUiOjEsImlhdCI6MTczNTg0MjM5OCwiZXhwIjoxNzM4NDM0Mzk4fQ.JVoFSN2oXXiR2egr5vV6KF4ue8w-sOQfOxCgbrXlros\"\n    },\n    \"user\": {\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 1,\n        \"isActive\": true,\n        \"id\": \"6776d78084cecf1edbb63495\"\n    },\n    \"profile\": {\n        \"user\": \"6776d78084cecf1edbb63495\",\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"addressList\": [],\n        \"createdAt\": \"2025-01-02T18:14:24.279Z\",\n        \"updatedAt\": \"2025-01-02T18:14:24.279Z\",\n        \"id\": \"6776d78084cecf1edbb63497\"\n    }\n}"
+									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTYyZWJhYmE0NWZkMTZjZTFjMTk3ZCIsInJvbGUiOjMsInNlbGxlcklkIjoiNjc5NTRhMWE1NDBkOTM1NzhkZTg3YzBiIiwiaWF0IjoxNzM5MjA2NzA2LCJleHAiOjE3Mzk4MTE1MDZ9.ByzXXcsIPMbI7IFSppN4JWZdWU2YtBV6lpKWGmA7iwI\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTYyZWJhYmE0NWZkMTZjZTFjMTk3ZCIsInJvbGUiOjMsInNlbGxlcklkIjoiNjc5NTRhMWE1NDBkOTM1NzhkZTg3YzBiIiwiaWF0IjoxNzM5MjA2NzA2LCJleHAiOjE3NDE3OTg3MDZ9.ucwmYQ-IDvnverz4LbvURsdE4Dxes0bcgNtHUv0SO9c\"\n    },\n    \"user\": {\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 3,\n        \"isActive\": true,\n        \"createdAt\": \"2025-01-26T12:46:50.544Z\",\n        \"updatedAt\": \"2025-01-26T12:46:50.544Z\",\n        \"id\": \"67962ebaba45fd16ce1c197d\"\n    }\n}"
 								}
 							]
 						}
@@ -5877,6 +5877,307 @@
 			"name": "SHOP",
 			"item": [
 				{
+					"name": "Properties",
+					"item": [
+						{
+							"name": "get properties",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/properties",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"properties"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "lcd",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get properties",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/properties",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"properties"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "172"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"ac-UqqTKRQOZErZdEykn0sRBQKX8LA\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 18:55:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"name\": \"lcd_size\",\n            \"label\": \"صفحه نمایش\",\n            \"type\": \"string\",\n            \"options\": [],\n            \"id\": \"676da489b7615b3d0c8792ae\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "get property",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/properties/:slug",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"properties",
+										":slug"
+									],
+									"variable": [
+										{
+											"key": "slug",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get property",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/properties/676da489b7615b3d0c8792ae",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"properties",
+												"676da489b7615b3d0c8792ae"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "110"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"6e-3B3RAyFMMLajRfb/bXu7UTRxY2A\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 18:55:54 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"lcd_size\",\n    \"label\": \"صفحه نمایش\",\n    \"type\": \"string\",\n    \"options\": [],\n    \"id\": \"676da489b7615b3d0c8792ae\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create propertiy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"lcd_size\",\n    \"label\":\"صفحه نمایش\",\n    \"type\":\"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/properties",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"properties"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "create property",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\":\"lcd_size\",\n    \"label\":\"صفحه نمایش\",\n    \"type\":\"string\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/properties",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"properties"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "110"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"6e-3B3RAyFMMLajRfb/bXu7UTRxY2A\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 26 Dec 2024 18:46:33 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"name\": \"lcd_size\",\n    \"label\": \"صفحه نمایش\",\n    \"type\": \"string\",\n    \"options\": [],\n    \"id\": \"676da489b7615b3d0c8792ae\"\n}"
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
 					"name": "Product",
 					"item": [
 						{
@@ -5886,7 +6187,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"price\":1000,\n    \"count\":10,\n    \"discount\":0\n}",
+									"raw": "{\n    \"price\":1000,\n    \"count\":10,\n    \"discount\":5\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5907,7 +6208,7 @@
 									"variable": [
 										{
 											"key": "code",
-											"value": "12345"
+											"value": "21112"
 										}
 									]
 								}
@@ -7085,6 +7386,718 @@
 									"body": "{\n    \"tokens\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTYyZWJhYmE0NWZkMTZjZTFjMTk3ZCIsInJvbGUiOjMsInNlbGxlcklkIjoiNjc5NTRhMWE1NDBkOTM1NzhkZTg3YzBiIiwiaWF0IjoxNzM4ODIyOTc3LCJleHAiOjE3Mzk0Mjc3Nzd9.BTWdQ1RKFmuyIjxWJulQhPpV91DRCIQABwSleNwbijQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OTYyZWJhYmE0NWZkMTZjZTFjMTk3ZCIsInJvbGUiOjMsInNlbGxlcklkIjoiNjc5NTRhMWE1NDBkOTM1NzhkZTg3YzBiIiwiaWF0IjoxNzM4ODIyOTc3LCJleHAiOjE3NDE0MTQ5Nzd9.8RYytBuJXmL-3pI7l-qFczqiu1k9ujw4vgVwpH2drkU\"\n    },\n    \"user\": {\n        \"firstName\": \"Ali\",\n        \"lastName\": \"Komijani\",\n        \"email\": \"akpa125@gmail.com\",\n        \"role\": 3,\n        \"isActive\": true,\n        \"createdAt\": \"2025-01-26T12:46:50.544Z\",\n        \"updatedAt\": \"2025-01-26T12:46:50.544Z\",\n        \"id\": \"67962ebaba45fd16ce1c197d\"\n    }\n}"
 								}
 							]
+						}
+					]
+				},
+				{
+					"name": "Colors",
+					"item": [
+						{
+							"name": "Create Color",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Red\",\n  \"hexCode\": \"#FF0000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/colors",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"colors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Colors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/colors",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"colors"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All Colors",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}/colors",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"colors"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "217"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"d9-+DkB5rMMhId5iCUY07o0i7E3NI0\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 27 Dec 2024 14:31:53 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"_id\": \"676eba26072fccefc92efa25\",\n            \"title\": \"Red\",\n            \"hex_code\": \"#FF0000\",\n            \"createdAt\": \"2024-12-27T14:31:03.001Z\",\n            \"updatedAt\": \"2024-12-27T14:31:03.001Z\",\n            \"__v\": 0\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Color by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/colors/:ColorID",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"colors",
+										":ColorID"
+									],
+									"variable": [
+										{
+											"key": "ColorID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Color",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Dark Red\",\n  \"hex_code\": \"#8B0000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/colors/:colorID",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"colors",
+										":colorID"
+									],
+									"variable": [
+										{
+											"key": "colorID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Color",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/colors/:colorID",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"colors",
+										":colorID"
+									],
+									"variable": [
+										{
+											"key": "colorID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Badge",
+					"item": [
+						{
+							"name": "Create Badge",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/badges",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"badges"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create Badge",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "96"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"60-0R2PUGiUFCSDg2xmPEwLrog4p/0\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 19:25:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"Error! Authorization failed. Required role: 3, but user role is: 1\"\n}"
+								},
+								{
+									"name": "Create Badge",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "179"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"b3-y3wReF3uoaZtJZDf+ZATSlfuYWs\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 19:32:32 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال فوری\",\n    \"createdAt\": \"2025-01-02T19:32:32.374Z\",\n    \"updatedAt\": \"2025-01-02T19:32:32.374Z\",\n    \"id\": \"6776e9d01f72277b1d39a267\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get all badges",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/badges",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"badges"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "241"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"f1-ZCEqGWhfCtzyoK5f3ghIeN10+4g\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 20:56:03 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"results\": [\n        {\n            \"icon\": \"https://example.com/logo.png\",\n            \"title\": \"ارسال فوری\",\n            \"createdAt\": \"2025-01-02T20:55:02.632Z\",\n            \"updatedAt\": \"2025-01-02T20:55:02.632Z\",\n            \"id\": \"6776fd26659f8d7d25da6a37\"\n        }\n    ],\n    \"total\": 1,\n    \"totalPages\": 1,\n    \"page\": 1,\n    \"pageSize\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "update badge",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"badges",
+										"6776fd26659f8d7d25da6a37"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges",
+												"6776fd26659f8d7d25da6a37"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "179"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"b3-dvtPZA5scLEa5X6yLSxW98LVIf8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 20:58:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\",\n    \"createdAt\": \"2025-01-02T20:55:02.632Z\",\n    \"updatedAt\": \"2025-01-02T20:58:27.394Z\",\n    \"id\": \"6776fd26659f8d7d25da6a37\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get badge",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"badges",
+										"6776fd26659f8d7d25da6a37"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ADMIN_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+											"host": [
+												"{{ADMIN_BASE_URL}}"
+											],
+											"path": [
+												"badges",
+												"6776fd26659f8d7d25da6a37"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:5173"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "179"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"b3-dvtPZA5scLEa5X6yLSxW98LVIf8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jan 2025 21:00:43 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"icon\": \"https://example.com/logo.png\",\n    \"title\": \"ارسال سریع\",\n    \"createdAt\": \"2025-01-02T20:55:02.632Z\",\n    \"updatedAt\": \"2025-01-02T20:58:27.394Z\",\n    \"id\": \"6776fd26659f8d7d25da6a37\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete badge",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/badges/6776fd26659f8d7d25da6a37",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"badges",
+										"6776fd26659f8d7d25da6a37"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{TOKEN}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
 						}
 					]
 				}
