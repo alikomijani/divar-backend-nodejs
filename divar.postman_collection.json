@@ -8100,6 +8100,473 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "Banner",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"banner\",\n  \"page\": \"home\",\n  \"order\": 1,\n  \"count\": 2,\n  \"images\": [\n    {\n      \"href\": \"https://example.com/product1\",\n      \"src\": \"https://example.com/images/banner1.jpg\"\n    },\n    {\n      \"href\": \"https://example.com/product2\",\n      \"src\": \"https://example.com/images/banner2.jpg\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/banners",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"banners"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Banner",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"type\": \"banner\",\n  \"page\": \"home\",\n  \"order\": 1,\n  \"count\": 2,\n  \"images\": [\n    {\n      \"href\": \"https://example.com/product1\",\n      \"src\": \"https://example.com/images/banner1.jpg\"\n    },\n    {\n      \"href\": \"https://example.com/product2\",\n      \"src\": \"https://example.com/images/banner2.jpg\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{SHOP_BASE_URL}}/banners",
+											"host": [
+												"{{SHOP_BASE_URL}}"
+											],
+											"path": [
+												"banners"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "343"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"157-/8MhvFPvEnvNB/p6EU3delXiSBA\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Feb 2025 07:04:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"type\": \"banner\",\n    \"page\": \"home\",\n    \"images\": [\n        {\n            \"href\": \"https://example.com/product1\",\n            \"src\": \"https://example.com/images/banner1.jpg\",\n            \"_id\": \"67aeeafbbc3e5f3de2f82f5b\"\n        },\n        {\n            \"href\": \"https://example.com/product2\",\n            \"src\": \"https://example.com/images/banner2.jpg\",\n            \"_id\": \"67aeeafbbc3e5f3de2f82f5c\"\n        }\n    ],\n    \"order\": 1,\n    \"count\": 2,\n    \"_id\": \"67aeeafbbc3e5f3de2f82f5a\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "slider",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"type\": \"slider\",\n  \"page\": \"about\",\n  \"images\": [\n    {\n      \"href\": \"https://example.com/blog1\",\n      \"src\": \"https://example.com/images/slider1.jpg\"\n    },\n    {\n      \"href\": \"https://example.com/blog2\",\n      \"src\": \"https://example.com/images/slider2.jpg\"\n    },\n    {\n      \"href\": \"https://example.com/blog3\",\n      \"src\": \"https://example.com/images/slider3.jpg\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{SHOP_BASE_URL}}/banners",
+											"host": [
+												"{{SHOP_BASE_URL}}"
+											],
+											"path": [
+												"banners"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "461"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1cd-WQNaKAH+lOIAlIJwcrjCRY7kAbk\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Feb 2025 07:05:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"type\": \"slider\",\n    \"page\": \"about\",\n    \"images\": [\n        {\n            \"href\": \"https://example.com/blog1\",\n            \"src\": \"https://example.com/images/slider1.jpg\",\n            \"_id\": \"67aeeb37bc3e5f3de2f82f5f\"\n        },\n        {\n            \"href\": \"https://example.com/blog2\",\n            \"src\": \"https://example.com/images/slider2.jpg\",\n            \"_id\": \"67aeeb37bc3e5f3de2f82f60\"\n        },\n        {\n            \"href\": \"https://example.com/blog3\",\n            \"src\": \"https://example.com/images/slider3.jpg\",\n            \"_id\": \"67aeeb37bc3e5f3de2f82f61\"\n        }\n    ],\n    \"order\": null,\n    \"count\": null,\n    \"_id\": \"67aeeb37bc3e5f3de2f82f5e\",\n    \"__v\": 0\n}"
+								}
+							]
+						},
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/banners",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"banners"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "home",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "slider",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{SHOP_BASE_URL}}/banners?page=home&type=slider",
+											"host": [
+												"{{SHOP_BASE_URL}}"
+											],
+											"path": [
+												"banners"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "home"
+												},
+												{
+													"key": "type",
+													"value": "slider"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "451"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1c3-qLZoj+qGdm6t0iuiDsP6puHcEvY\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Feb 2025 07:11:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"type\": \"slider\",\n        \"page\": \"about\",\n        \"images\": [\n            {\n                \"href\": \"https://example.com/blog1\",\n                \"src\": \"https://example.com/images/slider1.jpg\",\n                \"id\": \"67aeeb37bc3e5f3de2f82f5f\"\n            },\n            {\n                \"href\": \"https://example.com/blog2\",\n                \"src\": \"https://example.com/images/slider2.jpg\",\n                \"id\": \"67aeeb37bc3e5f3de2f82f60\"\n            },\n            {\n                \"href\": \"https://example.com/blog3\",\n                \"src\": \"https://example.com/images/slider3.jpg\",\n                \"id\": \"67aeeb37bc3e5f3de2f82f61\"\n            }\n        ],\n        \"order\": null,\n        \"count\": null,\n        \"id\": \"67aeeb37bc3e5f3de2f82f5e\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"type\": \"banner\",\n  \"page\": \"home\",\n  \"order\": 1,\n  \"count\": 4,\n  \"images\": [\n    {\n      \"href\": \"https://example.com/product1\",\n      \"src\": \"https://example.com/images/banner1.jpg\"\n    },\n    {\n      \"href\": \"https://example.com/product2\",\n      \"src\": \"https://example.com/images/banner2.jpg\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/banners/:id",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"banners",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "67aeeafbbc3e5f3de2f82f5a"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "create Copy",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"type\": \"banner\",\n  \"page\": \"home\",\n  \"order\": 1,\n  \"count\": 4,\n  \"images\": [\n    {\n      \"href\": \"https://example.com/product1\",\n      \"src\": \"https://example.com/images/banner1.jpg\"\n    },\n    {\n      \"href\": \"https://example.com/product2\",\n      \"src\": \"https://example.com/images/banner2.jpg\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{SHOP_BASE_URL}}/banners/:id",
+											"host": [
+												"{{SHOP_BASE_URL}}"
+											],
+											"path": [
+												"banners",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "67aeeafbbc3e5f3de2f82f5a"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "332"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"14c-ggYmCe3NlBE5LLr2LxsLYA4QmEk\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Feb 2025 07:16:06 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"type\": \"banner\",\n    \"page\": \"home\",\n    \"images\": [\n        {\n            \"href\": \"https://example.com/product1\",\n            \"src\": \"https://example.com/images/banner1.jpg\",\n            \"id\": \"67aeedb651a2ac20325756ad\"\n        },\n        {\n            \"href\": \"https://example.com/product2\",\n            \"src\": \"https://example.com/images/banner2.jpg\",\n            \"id\": \"67aeedb651a2ac20325756ae\"\n        }\n    ],\n    \"order\": 1,\n    \"count\": 4,\n    \"id\": \"67aeeafbbc3e5f3de2f82f5a\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{SHOP_BASE_URL}}/banners/:id",
+									"host": [
+										"{{SHOP_BASE_URL}}"
+									],
+									"path": [
+										"banners",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "New Request",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{SHOP_BASE_URL}}/banners/:id",
+											"host": [
+												"{{SHOP_BASE_URL}}"
+											],
+											"path": [
+												"banners",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "67aeed5c51a2ac2032575692"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "47"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2f-xYKI9b+QBjGG5yiQV76Vzy/KXd4\""
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Feb 2025 07:17:08 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"BannerSlider deleted successfully\"\n}"
+								}
+							]
+						}
+					]
 				}
 			],
 			"auth": {

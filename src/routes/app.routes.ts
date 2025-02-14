@@ -20,6 +20,10 @@ import {
 } from './seller.routes';
 import { orderRouter, orderAdminRouter, orderShopRouter } from './order.routes';
 import {
+  bannerSliderAdminRouter,
+  bannerSliderRouter,
+} from './bannerSlider.routes';
+import {
   loginMiddleware,
   roleMiddleware,
 } from '@/middlewares/authentication.middleware';
@@ -37,6 +41,7 @@ userRouter.use('/products', productRouter);
 userRouter.use(commentRouter);
 userRouter.use('/sellers', sellerRouter);
 userRouter.use('/orders', loginMiddleware, orderRouter); // all order routes need authentication
+userRouter.use('/banners', bannerSliderRouter);
 
 const adminRouter = Router();
 adminRouter.use(loginMiddleware, roleMiddleware(UserRole.Admin));
@@ -51,6 +56,7 @@ adminRouter.use('/products', productAdminRouter);
 adminRouter.use('/auth', authAdminRouter);
 adminRouter.use('/sellers', sellerAdminRouter);
 adminRouter.use('/orders', orderAdminRouter);
+adminRouter.use('/banners', bannerSliderAdminRouter);
 
 const shopRouter = Router();
 shopRouter.use(loginMiddleware, roleMiddleware(UserRole.Seller));
@@ -61,5 +67,6 @@ shopRouter.use('/categories', categoryAdminRouter); // category permission same 
 shopRouter.use('/colors', colorRouter);
 shopRouter.use('/properties', propertyRouter);
 shopRouter.use('/badges', badgeAdminRouter);
+shopRouter.use('/banners', bannerSliderAdminRouter);
 
 export { userRouter, adminRouter, shopRouter };
