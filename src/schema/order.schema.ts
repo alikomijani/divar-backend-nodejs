@@ -10,16 +10,34 @@ interface IOrderItem extends Document {
   seller: Types.ObjectId; // Add reference back to the Seller
 }
 
-const OrderItemSchema = new Schema<IOrderItem>({
-  productSeller: {
-    type: Schema.Types.ObjectId,
-    ref: 'ProductSellers',
-    required: true,
+const OrderItemSchema = new Schema<IOrderItem>(
+  {
+    productSeller: {
+      type: Schema.Types.ObjectId,
+      ref: 'ProductSellers',
+      required: true,
+    },
+    quantity: { type: Number, required: true },
+    order: { type: Schema.Types.ObjectId, ref: 'Order' }, // Reference to the Order
+    seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true }, // Make it required
   },
-  quantity: { type: Number, required: true },
-  order: { type: Schema.Types.ObjectId, ref: 'Order' }, // Reference to the Order
-  seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true }, // Make it required
-});
+  {
+    toJSON: {
+      virtuals: true, // Include virtuals in JSON output
+      transform: (_, ret) => {
+        ret.id = ret._id; // Add "id" field
+        delete ret._id; // Remove "_id"
+      },
+    },
+    toObject: {
+      virtuals: true, // Include virtuals in object output
+      transform: (_, ret) => {
+        ret.id = ret._id;
+        delete ret._id;
+      },
+    },
+  },
+);
 
 export enum OrderStatus {
   Pending = 'pending',
@@ -61,6 +79,20 @@ const OrderSchema = new Schema<IOrder>(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true, // Include virtuals in JSON output
+      transform: (_, ret) => {
+        ret.id = ret._id; // Add "id" field
+        delete ret._id; // Remove "_id"
+      },
+    },
+    toObject: {
+      virtuals: true, // Include virtuals in object output
+      transform: (_, ret) => {
+        ret.id = ret._id;
+        delete ret._id;
+      },
+    },
   },
 );
 
@@ -92,7 +124,6 @@ OrderSchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {
     delete ret.__v;
-    delete ret._id;
   },
 });
 OrderSchema.set('toObject', {
