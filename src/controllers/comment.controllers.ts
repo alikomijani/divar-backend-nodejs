@@ -87,7 +87,12 @@ export const updateComment: Controller<
         .status(StatusCodes.NOT_FOUND)
         .json({ success: false, message: 'Comment not found' });
     }
-    if (!(req.user?.role === UserRole.Admin || comment.id === req.user?.id)) {
+    if (
+      !(
+        req.user?.role === UserRole.Admin ||
+        comment.user.toString() === req.user?.id
+      )
+    ) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ success: false, message: 'Forbidden' });
