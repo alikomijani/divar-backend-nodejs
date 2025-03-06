@@ -25,7 +25,7 @@ const ImageSchemaZod = z.object({
 // Main Product Zod Schema
 export const ProductSchemaZod = z.object({
   code: z
-    .number({ message: 'ali' })
+    .number({ message: 'Code muse be number' })
     .int()
     .positive('Code must be a positive integer'),
   titleFa: z.string().min(1, 'Title (FA) is required').trim(),
